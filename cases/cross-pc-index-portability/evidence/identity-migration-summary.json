@@ -1,0 +1,46 @@
+{
+  "classification": "Reconstructed",
+  "method": "Select metadata from the two Git JSON artifacts. Derived SHA-256 values hash UTF-8 JSON.stringify arrays in stored order; nonVectorChunk removes only vector. No knowledge text or vectors are included.",
+  "artifacts": [
+    {
+      "stage": "before",
+      "ref": "4125443b5de06bea988b9776a4e85d8a5d608a1b",
+      "path": "indexes/provider=cohere/model=embed-v4.0/dimensions=1536/input=v2/1c66bbb8a28b77fe50735992339da8e43dd50f0388a71809617b2f7e68d0fe57.json",
+      "bytes": 10338795,
+      "sha256": "8ba6e3e9eb1f6443ff33b51b6e291ee1f0099c573c853d334b5f598434073d58",
+      "schemaVersion": 4,
+      "createdAt": "2026-09-30T05:44:06.336Z",
+      "fingerprint": "1c66bbb8a28b77fe50735992339da8e43dd50f0388a71809617b2f7e68d0fe57",
+      "corpusFingerprint": "2133e693c7d6f4d6571956985ebbe3b984b0d9837acafd1ea038c47ac6351d5b",
+      "embeddingProvider": "cohere",
+      "embeddingModel": "embed-v4.0",
+      "embeddingInputVersion": 2,
+      "vectorDimension": 1536,
+      "chunkCount": 505,
+      "documentCount": 44,
+      "vectorSha256": "662bf30f36c66af0a78fd294ed7dfe2346dea6182e1a5710752839fe68d68e80",
+      "nonVectorChunkSha256": "24f1841328849ed0f930b8796fb3c803f0b0aa824a71067424f73a5e1d6ed18b",
+      "documentHashesSha256": "f855dd7b7c042f8912583e9684bcabe1edbd79b4d64dacef1a383df736ec199b"
+    },
+    {
+      "stage": "after",
+      "ref": "de586719e463e324e18658c87bfe937e9506c1c0",
+      "path": "indexes/provider=cohere/model=embed-v4.0/dimensions=1536/input=v2/23601dded9d2a9722d12e9083f23061d6c53d71c5e7d8ba884df87f2e7716f61.json",
+      "bytes": 10338795,
+      "sha256": "d2d1e548f8910b77662e0ff76b243d6183a1cd460100d2bc2e1f4d46ab3bf63a",
+      "schemaVersion": 4,
+      "createdAt": "2026-09-30T05:44:06.336Z",
+      "fingerprint": "23601dded9d2a9722d12e9083f23061d6c53d71c5e7d8ba884df87f2e7716f61",
+      "corpusFingerprint": "e33efbad546d96a0d4715253cee0a3387009aec3dc7f9df6112caec74f3bc49f",
+      "embeddingProvider": "cohere",
+      "embeddingModel": "embed-v4.0",
+      "embeddingInputVersion": 2,
+      "vectorDimension": 1536,
+      "chunkCount": 505,
+      "documentCount": 44,
+      "vectorSha256": "662bf30f36c66af0a78fd294ed7dfe2346dea6182e1a5710752839fe68d68e80",
+      "nonVectorChunkSha256": "24f1841328849ed0f930b8796fb3c803f0b0aa824a71067424f73a5e1d6ed18b",
+      "documentHashesSha256": "6e38b4e4d6333ae96b8acc4b7c6c6561e006091e78da879c5ce2fdca76935411"
+    }
+  ]
+}

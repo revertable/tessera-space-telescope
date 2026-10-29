@@ -26,6 +26,7 @@ Synethos 전체 소스는 비공개로 유지하며, Tessera에는 선택한 코
 | 02 | [From GitBook MCP to Local Knowledge](docs/engineering-decisions.ko.md#02--from-gitbook-mcp-to-local-knowledge) | 2026-09-26 ~ 2026-09-28 |
 | 03 | [Cohere 도입·평가·제거](docs/engineering-decisions.ko.md#03--cohere-도입평가제거) | 2026-09-28 ~ 2026-10-17 |
 | 04 | [Provider 교체 설계와 Embedding 안정화](docs/engineering-decisions.ko.md#04--provider-교체-설계와-embedding-안정화) | 2026-09-26 ~ 2026-10-17 |
+| 05 | [Cross-PC Index Portability](docs/engineering-decisions.ko.md#05--cross-pc-index-portability) | 2026-09-28 ~ 2026-10-26 |
 
 ## Copyright
 

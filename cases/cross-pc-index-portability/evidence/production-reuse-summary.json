@@ -1,0 +1,165 @@
+{
+  "classification": "Reconstructed",
+  "method": "Select index identity, byte size, SHA-256, and source commit from retained release manifests; compare each selected index with its Git blob and the local stage when available. Verification report hashes identify retained operating reports. Narrative results are transcribed in the accompanying development record.",
+  "releases": [
+    {
+      "date": "2026-10-22",
+      "release": "20261022-033e02f-01",
+      "sourceCommit": "033e02fabe868a14cd8a4a932b50fbdba9a064fa",
+      "manifest": "tmp/synethos-deploy/release-manifest.json",
+      "manifestSha256": "657c0b5754c451be5c033a78a8a551567cb380c8257e90a9e4a6599f383eac3e",
+      "verificationReport": "tmp/synethos-deploy/final-verification.json",
+      "verificationReportSha256": "b1d6105d63585a2aa0964e0d2251262bfdc8b8d01df2fe671c25216c3f89e9c3",
+      "index": {
+        "path": "indexes/provider=gemini/model=gemini-embedding-2/dimensions=768/input=v2/30886679a306cf2ee9a3cd10532e6a7cfb5549f85baf3f595f672c9273e4b150.json",
+        "bytes": 3993421,
+        "sha256": "a0d705c70fbba84886ddae0a64c3811f69bdca4927290ae6282f69eb4c3640f6",
+        "fingerprint": "30886679a306cf2ee9a3cd10532e6a7cfb5549f85baf3f595f672c9273e4b150",
+        "corpusFingerprint": "d352089cee17f28edd44d56db5282c12875a1ad20bbcb757283736895c2c812b",
+        "provider": "gemini",
+        "model": "gemini-embedding-2",
+        "dimensions": 768,
+        "chunkCount": 373,
+        "sourceCount": 28
+      },
+      "gitMatchesManifest": true,
+      "localStageMatchesManifest": true,
+      "reportedVerification": {
+        "completedUtc": "2026-10-22T05:29:27.850183+00:00",
+        "health": true,
+        "indexCheck": {
+          "check": "index",
+          "passed": true,
+          "indexes": [
+            {
+              "target": "gemini-embedding-2-768",
+              "state": "current",
+              "chunkCount": 373,
+              "fingerprint": "30886679a306cf2ee9a3cd10532e6a7cfb5549f85baf3f595f672c9273e4b150"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "date": "2026-10-26",
+      "release": "20261026-8fa463e-01",
+      "sourceCommit": "8fa463e6df0600a237c2b94ed8b726a2999c71c4",
+      "manifest": "tmp/synethos-deploy-20261026-8fa463e/release-manifest.json",
+      "manifestSha256": "7b30943da831466b821b72a2b2adf76d472d357c643178b3ad858e1866258c82",
+      "verificationReport": "tmp/synethos-deploy-20261026-8fa463e/verification.json",
+      "verificationReportSha256": "ccf8195faebfe86c10914d85f70fc4500907fb313758d1256ebf44cf64dab039",
+      "index": {
+        "path": "indexes/provider=gemini/model=gemini-embedding-2/dimensions=768/input=v2/dfdb4bbebb7f92ba0ba4ca61cae624f0d0ebca5e91565b4de52a7bcc379faf4d.json",
+        "bytes": 4097925,
+        "sha256": "1cb34a4f657c9dfec8b601b03eb215749f144f6e9ac209079e1e62ec0dbae5ff",
+        "fingerprint": "dfdb4bbebb7f92ba0ba4ca61cae624f0d0ebca5e91565b4de52a7bcc379faf4d",
+        "corpusFingerprint": "d1e764ca501da6de52d91e00be2e15d5f61f73fb75bb10d8fd7bdd0fc65d9fd1",
+        "provider": "gemini",
+        "model": "gemini-embedding-2",
+        "dimensions": 768,
+        "chunkCount": 382,
+        "sourceCount": 28
+      },
+      "gitMatchesManifest": true,
+      "localStageMatchesManifest": true,
+      "reportedVerification": {
+        "health": true,
+        "indexFingerprint": "dfdb4bbebb7f92ba0ba4ca61cae624f0d0ebca5e91565b4de52a7bcc379faf4d",
+        "chunkCount": 382,
+        "sourceCount": 28,
+        "verifiedFiles": 111
+      }
+    },
+    {
+      "date": "2026-10-26",
+      "release": "20261026-8fa463e-01",
+      "sourceCommit": "e4aed0f3c2e64cbd94046452c13771dfae62d065",
+      "manifest": "tmp/synethos-footer-20261026-e4aed0f/release-manifest.json",
+      "manifestSha256": "9fddef2b26bed77546828711d70324c2417f255d869b4beb956ee4a6c595206b",
+      "verificationReport": "tmp/synethos-footer-20261026-e4aed0f/verification.json",
+      "verificationReportSha256": "b9b77eb5be222d4b8817d3a996f6c8eb87f22e1808e5c83ffe339253e1743d1b",
+      "index": {
+        "path": "indexes/provider=gemini/model=gemini-embedding-2/dimensions=768/input=v2/dfdb4bbebb7f92ba0ba4ca61cae624f0d0ebca5e91565b4de52a7bcc379faf4d.json",
+        "bytes": 4097925,
+        "sha256": "1cb34a4f657c9dfec8b601b03eb215749f144f6e9ac209079e1e62ec0dbae5ff",
+        "fingerprint": "dfdb4bbebb7f92ba0ba4ca61cae624f0d0ebca5e91565b4de52a7bcc379faf4d",
+        "corpusFingerprint": "d1e764ca501da6de52d91e00be2e15d5f61f73fb75bb10d8fd7bdd0fc65d9fd1",
+        "provider": "gemini",
+        "model": "gemini-embedding-2",
+        "dimensions": 768,
+        "chunkCount": 382,
+        "sourceCount": 28
+      },
+      "gitMatchesManifest": true,
+      "localStageMatchesManifest": true,
+      "reportedVerification": {
+        "health": true,
+        "indexFingerprint": "dfdb4bbebb7f92ba0ba4ca61cae624f0d0ebca5e91565b4de52a7bcc379faf4d",
+        "chunkCount": 382,
+        "sourceCount": null,
+        "verifiedFiles": 111
+      }
+    },
+    {
+      "date": "2026-10-26",
+      "release": "20261026-876ea52-01",
+      "sourceCommit": "876ea521735894f5ca30bc78279f46e58cd160f2",
+      "manifest": "tmp/release-1.0.1/release-manifest.json",
+      "manifestSha256": "d6b739977683c83a3406a7647be25c033ab538ac32ae9069d566a0bef10d10f4",
+      "verificationReport": "tmp/release-1.0.1/verification.json",
+      "verificationReportSha256": "a5e575e65ad001c92402eca854afd4c0d46ae069b82266bbf3f6d2a913545947",
+      "index": {
+        "path": "indexes/provider=gemini/model=gemini-embedding-2/dimensions=768/input=v2/dfdb4bbebb7f92ba0ba4ca61cae624f0d0ebca5e91565b4de52a7bcc379faf4d.json",
+        "bytes": 4097925,
+        "sha256": "1cb34a4f657c9dfec8b601b03eb215749f144f6e9ac209079e1e62ec0dbae5ff",
+        "fingerprint": "dfdb4bbebb7f92ba0ba4ca61cae624f0d0ebca5e91565b4de52a7bcc379faf4d",
+        "corpusFingerprint": "d1e764ca501da6de52d91e00be2e15d5f61f73fb75bb10d8fd7bdd0fc65d9fd1",
+        "provider": "gemini",
+        "model": "gemini-embedding-2",
+        "dimensions": 768,
+        "chunkCount": 382,
+        "sourceCount": 28
+      },
+      "gitMatchesManifest": true,
+      "localStageMatchesManifest": true,
+      "reportedVerification": {
+        "health": true,
+        "indexFingerprint": "dfdb4bbebb7f92ba0ba4ca61cae624f0d0ebca5e91565b4de52a7bcc379faf4d",
+        "chunkCount": 382,
+        "sourceCount": null,
+        "verifiedFiles": 111
+      }
+    },
+    {
+      "date": "2026-10-26",
+      "release": "20261026-189cf00-01",
+      "sourceCommit": "189cf0075e0a08b5c8dba3869f97e98d3797e5d9",
+      "manifest": "tmp/release-1.0.2/release-manifest.json",
+      "manifestSha256": "de8f1263c057f349d8bced77a77178504de4efd2d8a5f9f45bbd3039fed610b3",
+      "verificationReport": "tmp/release-1.0.2/verification.json",
+      "verificationReportSha256": "9bfdc0ac6fc0c7751f685f64121f8bacf5870f520135eeeaaa3b849915724855",
+      "index": {
+        "path": "indexes/provider=gemini/model=gemini-embedding-2/dimensions=768/input=v2/dfdb4bbebb7f92ba0ba4ca61cae624f0d0ebca5e91565b4de52a7bcc379faf4d.json",
+        "bytes": 4097925,
+        "sha256": "1cb34a4f657c9dfec8b601b03eb215749f144f6e9ac209079e1e62ec0dbae5ff",
+        "fingerprint": "dfdb4bbebb7f92ba0ba4ca61cae624f0d0ebca5e91565b4de52a7bcc379faf4d",
+        "corpusFingerprint": "d1e764ca501da6de52d91e00be2e15d5f61f73fb75bb10d8fd7bdd0fc65d9fd1",
+        "provider": "gemini",
+        "model": "gemini-embedding-2",
+        "dimensions": 768,
+        "chunkCount": 382,
+        "sourceCount": 28
+      },
+      "gitMatchesManifest": true,
+      "localStageMatchesManifest": true,
+      "reportedVerification": {
+        "health": true,
+        "indexFingerprint": "dfdb4bbebb7f92ba0ba4ca61cae624f0d0ebca5e91565b4de52a7bcc379faf4d",
+        "chunkCount": 382,
+        "sourceCount": null,
+        "verifiedFiles": 111
+      }
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "classification": "Reconstructed",
+  "method": "Select indexDirectory and relevant ignore patterns from the identified Git snapshots; field grouping is editorial.",
+  "snapshots": [
+    {
+      "ref": "9e96d4f87e90b505e9dfb72f842a9dc4c8560a9e",
+      "indexDirectory": "cache/index",
+      "ignorePatterns": [
+        "# Local project caches / temporary files",
+        "/cache/",
+        "/tmp/"
+      ]
+    },
+    {
+      "ref": "9123e12ec742b501d435156573d448ce77a7ef3d",
+      "indexDirectory": "indexes",
+      "ignorePatterns": [
+        "# Local project caches / temporary files",
+        "/cache/",
+        "/tmp/",
+        "/indexes/**/*.tmp"
+      ]
+    }
+  ]
+}

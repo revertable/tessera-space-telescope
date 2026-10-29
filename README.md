@@ -26,6 +26,7 @@ Read the [engineering development records](docs/engineering-decisions.md) for ea
 | 02 | [From GitBook MCP to Local Knowledge](docs/engineering-decisions.md#02--from-gitbook-mcp-to-local-knowledge) | 2026-09-26 ~ 2026-09-28 |
 | 03 | [Introducing, Evaluating, and Retiring Cohere](docs/engineering-decisions.md#03--introducing-evaluating-and-retiring-cohere) | 2026-09-28 ~ 2026-10-17 |
 | 04 | [Provider Architecture and Embedding Reliability](docs/engineering-decisions.md#04--provider-architecture-and-embedding-reliability) | 2026-09-26 ~ 2026-10-17 |
+| 05 | [Cross-PC Index Portability](docs/engineering-decisions.md#05--cross-pc-index-portability) | 2026-09-28 ~ 2026-10-26 |
 
 ## Copyright
 
