@@ -19,6 +19,7 @@ Each case includes a source ledger identifying its code snapshots and retained e
 - [03 — Introducing, Evaluating, and Retiring Cohere](#03--introducing-evaluating-and-retiring-cohere) — 2026-09-28 ~ 2026-10-17
 - [04 — Provider Architecture and Embedding Reliability](#04--provider-architecture-and-embedding-reliability) — 2026-09-26 ~ 2026-10-17
 - [05 — Cross-PC Index Portability](#05--cross-pc-index-portability) — 2026-09-28 ~ 2026-10-26
+- [06 — Model Selection: Quality and Availability](#06--model-selection-quality-and-availability) — 2026-09-26 ~ 2026-10-16
 
 ## 01 — From Local Qwen/Ollama Inference to the Gemini API
 
@@ -1119,3 +1120,254 @@ Original paths are relative to private Synethos. Ranges refer to original snapsh
 The 13 whole-file Excerpts matched their originals byte-for-byte; all nine partial Excerpts matched the declared source ranges. Syntax parsing passed for 18 TypeScript/JavaScript files, two Python files, and two PowerShell scripts. All three JSON summaries passed parsing and input-hash checks; migration digests and release-specific Git/manifest/stage comparisons were checked.
 
 English/Korean source targets and hashes match. All 522 local links passed file, heading-anchor, and line-range checks. Cases 01–04 retain their text and 87 code/evidence files. New material was reviewed for credential values, private knowledge payloads, private repository URLs, local user paths, and operational access details. Verification used local inspection, parsing, and calculations. Historical application tests, model calls, index builds, and live server inspection were not performed.
+
+## 06 — Model Selection: Quality and Availability
+
+**Development period:** 2026-09-26 ~ 2026-10-16
+
+**Code classification:** Excerpt — 15 source/test files; Reconstructed — four configuration/evidence records.
+
+**Outcome:** Generation settled on Gemini 3.5 Flash Lite primary and Groq GPT-OSS 120B fallback. The choice combined task-specific quality, observed availability, free-tier capacity, and the service's operating scope. Candidate adoption, local experiments, and committed runtime selection are dated separately below.
+
+### September 26: turn a model choice into an availability policy
+
+The Gemini API transition in 9a3df61 initially configured gemini-3.8-flash. At 14:14:51, 2e02e71 changed the lineup to gemini-3.5-flash-lite followed by gemini-3.1-flash-lite, both with the configured 1200-token output cap. The [configuration history](../cases/model-selection-quality-availability/evidence/model-selection-history.json#L1-L242) preserves successive model identities, options, and runtime order.
+
+**Initial-switch rationale from user-supplied ChatGPT history search:** on September 26 at approximately 13:39 KST, the developer judged the 20-call daily free-tier allowance unsuitable for a public service. At approximately 13:43, the developer requested switching to Gemini 3.5 Flash-Lite; at approximately 13:50, five successful live tests of 3.5 Flash-Lite were reported. These entries retain their search-report level, with the original conversation URL and full messages unavailable. The [clarification record](../cases/model-selection-quality-availability/evidence/developer-clarification-20261029.json#L1-L184) identifies the three approximate times and source scope. The 14:14:51 configuration commit records the resulting lineup. October 3's 3.8 re-evaluation remains a separate later event.
+
+The [initial Generation implementation](../cases/model-selection-quality-availability/baseline/generation.ts#L18-L126) constructed the prompt once, visited configured models in order, and advanced only on confirmed quota exhaustion. Same-model HTTP 503 retry belonged to the SDK request configuration: four attempts, with the recorded backoff settings. [Failure classification](../cases/model-selection-quality-availability/baseline/generation-fallback.ts#L23-L70) recognized machine-readable quota evidence and kept other 429 responses distinct. [Classification tests](../cases/model-selection-quality-availability/baseline/generation-fallback.test.ts#L1-L52) and [Generation tests](../cases/model-selection-quality-availability/baseline/generation.test.ts#L37-L162) preserve these early conditions, including response validation and safe diagnostics.
+
+### September 30–October 2: compare explicit candidates, then choose runtime roles
+
+On September 30 at 18:15:43, b00bf59 registered Gemini 3.5, Gemini 3.1, Cohere command-a-plus-05-2026, and Groq qwen/qwen3.8-27b as distinct targets. Runtime still used Gemini 3.5 then 3.1. Shared-evidence comparisons used explicit targets, so registering a candidate did not assign it a runtime role. [Case 03's comparison implementation](../cases/cohere-lifecycle/evaluation/shared-evidence.excerpt.ts#L45-L90) and [Case 04's registry/runtime selection](../cases/embedding-batching-retry-pacing/architecture/generation-selection.excerpt.ts#L36-L69) provide that mechanism.
+
+The retained research reports output/token-limit 429 and structured JSON 400 failures for the Groq Qwen Preview candidate. At 22:22:54, 4125443 removed that target and its adapter path, while raising Gemini/Cohere output caps to 32768. The available record establishes the model-specific failure report and committed removal; the exact original attempt ledger remains unavailable.
+
+On October 1, fixed-context question-subject experiments favored Cohere in subject retention: the reported combined stages were Cohere 54/54 and Gemini 42/54. A subsequent local Cohere-only run still showed name-format and grounding/citation issues. [Case 03's dated subject-retention record](#october-1-question-subject-and-record-speaker) preserves prompt revisions, sample sizes, and the locally applied routing scope. These observations informed candidate exploration. Commit 180cc30 on October 2 at 02:37:05 then established Gemini 3.5 primary and Cohere Command A+ fallback.
+
+### October 3: why a quality improvement did not make Gemini 3.8 usable
+
+**Observed situation and developer decision, clarified directly on October 29:** the usage history considered for the operating decision contained three successful responses and seventeen HTTP 503 failures against a free-tier allowance of 20 calls per day. A subsequent HTTP 429 indicated that the daily allowance was exhausted.
+
+| Operating observation | Result |
+|---|---|
+| Free-tier daily call allowance | 20 |
+| Successful responses | 3 |
+| HTTP 503 failures | 17 |
+| Subsequent response | HTTP 429 indicating daily-quota exhaustion |
+
+From this result, the developer concluded that 503 failures counted toward the call allowance: most of the day's capacity had been consumed while producing very few usable responses. Twenty calls per day was already insufficient for Synethos, and losing most of that allowance to failures removed the practical reason to select Gemini 3.8 for operation.
+
+The developer directly set the stop condition: retry HTTP 503, but abandon the model when a daily-limit 429 occurred. The observed result met that condition, and the developer excluded 3.8 from Synethos's operating candidates. Its quality advantage on some questions remained part of the evaluation.
+
+The developer also considered whether paid access could resolve the availability problem. The user-provided ChatGPT history-search record at approximately 03:16:17 KST described similar 503 reports from paid as well as free projects. Together with the developer's own failed requests, that information gave no basis to expect payment to provide reliably successful responses. The developer judged that the additional cost did not justify adopting 3.8.
+
+**Paired quality experiment:** the recorded re-evaluation asked whether 3.8 used evidence that 3.5 omitted. Question, evidence, order, citations, prompt, and schema were held fixed; four questions were planned. Two pairs completed:
+
+| Case | Reported quality observation |
+|---|---|
+| QB18 | 3.8 was clearly better at including the supplied OCR residence/period-parsing explanation. |
+| QB20 | The answers were judged equivalent. |
+
+[The historical report reconstruction](../cases/model-selection-quality-availability/evidence/october03-reported-results.json#L1-L101) retains this experiment's counts: 3.8 made 15 requests, with two successes, twelve HTTP 503 responses, and one HTTP 429. The two 3.5 successes bring the run total to 17 requests. QB18 took 742.410 seconds until a 3.8 success; that successful request itself took 16.564 seconds. QB20's 3.8 success took 17.222 seconds.
+
+The retained 03:20:37 developer request specified stopping and rejecting the candidate on the agreed failure condition. At 03:35:46, a daily-quota response triggered the predefined stop condition. Further requests after that 429 were zero; QB25's A request and both QB11 requests were uncalled.
+
+**Contemporaneous discussion recovered through history search:** on October 29, the developer supplied the following ChatGPT past-conversation search results. Times are KST. These are user-provided search records; the original conversation URL, identifier, and full messages remain unavailable.
+
+| October 3 time | Search-record content |
+|---|---|
+| 03:13:25 | Discussion of repeated HTTP 503 results and call limits. |
+| 03:14:41 | The developer questioned the free tier's usefulness after this volume of 503 failures. |
+| 03:15:45 | The developer requested investigation of similar overseas-community reports. |
+| 03:16:17 | ChatGPT returned similar 503 reports from Reddit and Google AI Developers Forum, including paid-project reports. |
+| 03:19:52 | The developer permitted 503 retry and specified abandoning 3.8 on a daily-limit 429. |
+| 03:35:06 | The developer reported AI Studio daily usage of 17/20 while failures accumulated. |
+| 03:49:02 | Test summary: 15 Gemini 3.8 requests, two successes, twelve 503s, one 429. |
+
+The final breakdown matches the registered experimental transcription. The 03:19:52 condition corresponds in content to the separately transcribed 03:20:37 Codex request; each source keeps its own message time. AI Studio 17/20 is a reported account-usage observation.
+
+**Additional external context:** the developer recalls searching for similar complaints after the errors and quota depletion. The original ChatGPT conversation URL/identifier is unavailable. A [Google AI Developers Forum post](https://discuss.ai.google.dev/t/gemini-api-503/183913), published September 21 and directly inspected for this publication, reports recurring 503s on the free tier in Google Apps Script, including gemini-3.8-flash among three affected models. A reply describes temporary service overload. This supplies a similar external failure observation alongside the operating results that drove the decision.
+
+The following public reports were also directly inspected for this publication:
+
+| Report | Model and environment | Author's reported observation |
+|---|---|---|
+| [September 24: free-tier failures and RPD](https://discuss.ai.google.dev/t/handling-429-503-errors-from-the-gemini-api/124640/79) | Gemini 3.7/3.8 Flash, free tier | Repeated 503s and an RPD counter increasing after failed calls; 3.8 showed 8/20 with every observed call failing. |
+| [August 28: paid-tier availability](https://discuss.ai.google.dev/t/persistent-37-unavailable-503-on-generatecontent-with-gemini-3-6-flash-paid-tier-1-zero-429s-counttokens-unaffected/179971) | Gemini 3.6 Flash, Paid Tier 1 | A 30-day GenerateContent record of 646 requests and 37.46% errors, reported as HTTP 503; zero 429s. |
+
+The paid-tier percentage belongs to the reported Gemini 3.6 Flash/Tier 1 workload. It supplied context for the developer's judgment that paying for access offered insufficient assurance of stable operation. The free-tier RPD report supplied an external observation similar to the developer's own quota-depletion experience.
+
+[The dated clarification record](../cases/model-selection-quality-availability/evidence/developer-clarification-20261029.json#L1-L184) preserves the developer judgments, search chronology, and directly inspected public references. The developer's October 29 clarification above states the inference and exclusion decision drawn from the three-success/seventeen-failure usage history.
+
+### October 3: select a different Groq model for fallback
+
+A separate fresh full40 comparison used the same saved evidence, question, prompt, and schema across three generators, with 40 successful responses each:
+
+| Model | Fully correct | Grounding failures | Contract failures | Mean Generation latency |
+|---|---:|---:|---:|---:|
+| Gemini 3.5 Flash Lite | 27/40 | 0 | 1 | 1.508s |
+| Cohere Command A+ | 22/40 | 3 | 4 | 3.042s |
+| Groq GPT-OSS 120B | 25/40 | 2 | 0 | 1.524s |
+
+This table is a previously transcribed historical report. The [same reconstruction](../cases/model-selection-quality-availability/evidence/october03-reported-results.json#L1-L101) identifies its original report and registered hash; the original directory is unavailable in this checkout. Exact archived inference options remain unavailable. The October 1 subject-retention and October 3 partial 3.8 experiments retain their separate measures and conditions.
+
+At 04:05:58, the retained developer request asked to re-evaluate GPT-OSS after the earlier Groq candidate failures. At 07:42:12, 0baebd9 changed runtime to Gemini 3.5 primary and Groq openai/gpt-oss-120b fallback, retaining Cohere for explicit evaluation. The configured caps were Gemini 32768 and GPT-OSS 4096 with medium reasoning effort. The [routing regression excerpt](../cases/model-selection-quality-availability/runtime/groq-fallback.excerpt.test.ts#L28-L93) verifies those caps, quota-triggered dispatch through the actual Groq adapter with mocked HTTP 200/429/503 responses, registry/runtime independence, and one-target explicit execution.
+
+The resulting lineup used the evaluated GPT-OSS model after the earlier Qwen candidate was removed. [Case 04's GPT-OSS adapter](../cases/embedding-batching-retry-pacing/architecture/groq/generation.ts#L1-L28) preserves the corresponding strict-schema and reasoning-option mapping.
+
+### October 6: make runtime fallback and explicit evaluation serve different purposes
+
+The September 26 and October 3 runtime versions advanced on confirmed quota exhaustion. The later 5b78e06 integration used a shared failure policy for Generation. The [preserved October 15 policy snapshot](../cases/model-selection-quality-availability/availability/failure-policy.ts#L1-L93) allows quota exhaustion, rate limiting, temporary unavailability, transport failures, and timeouts to reach an independent provider; authentication, configuration, invalid request, and invalid response end Generation without advancing. [Policy tests](../cases/model-selection-quality-availability/availability/failure-policy.test.ts#L1-L46) preserve the stage-specific conditions.
+
+Explicit model evaluation retained one-target execution with retry disabled. The [fixed-input runner](../cases/model-selection-quality-availability/evaluation/fixed-input.excerpt.ts#L46-L98) clones evidence, checks each dispatched prompt, records provider identity/options and response/validation metadata, and continues to the next explicitly selected candidate after a failure. [Selected tests](../cases/model-selection-quality-availability/evaluation/fixed-input.excerpt.test.ts#L33-L100) exercise controlled option overrides, identical inputs, failed candidates, citations, and credential boundaries. Operational fallback and comparison are therefore reproducible as their respective execution contracts.
+
+### October 15: compare Generation with fixed canonical evidence
+
+Run e8fbc67f-9950-4c9e-92f6-c341a4f6ad6e ran from 22:00:09.922 to 22:04:29.995. Its execution HEAD was 3ec5bb5fec373cc59b234197d8f838188dcd62ff, while the Generation-only implementation was still uncommitted. Commit c5d615c at 22:31:13 archived the implementation and results. The archive's integrity record identifies 43 raw artifacts and ten implementation/document files; their SHA-256 values matched during this publication.
+
+The corpus contained 27 sources and 372 chunks; question-bank canonical-portfolio content version 2 and full-40 profile version 1 fixed question membership. [Canonical snapshot construction](../cases/model-selection-quality-availability/evaluation/canonical-snapshots.ts#L36-L96) validates references against complete source chunks, preserves evidence/citation order, and hashes inputs. Expected claims and review metadata remain outside model input. [Snapshot tests](../cases/model-selection-quality-availability/evaluation/canonical-snapshots.test.ts#L1-L116) cover ambiguous/missing references, related/partial/unsupported evidence, deduplication, and rehashed drift.
+
+The [Generation-only runner](../cases/model-selection-quality-availability/evaluation/canonical-generation.ts#L81-L153) verifies the whole snapshot and both credentials before dispatch, freezes target options, and writes per-case results and completion counters. [Runner tests](../cases/model-selection-quality-availability/evaluation/canonical-generation.test.ts#L61-L149) inspect 80 explicit mock calls, identical input, malformed/unavailable responses, credential preflight, and target drift.
+
+Both models received identical question, ordered records, system instruction, and response schema. Gemini's output cap was 32768; Groq's was 4096 with medium reasoning effort. The run used zero query embeddings, vector searches, classifier calls, retries, and runtime fallbacks.
+
+| Observation | Gemini 3.5 | Groq GPT-OSS |
+|---|---:|---:|
+| Generation attempts | 40 | 40 |
+| Successful responses | 40 | 12 |
+| Failed responses | 0 | 28, all HTTP 429 rate_limit |
+| Successful-response JSON/schema/citation structural checks | 40/40 | 12/12 |
+| Successful-response median latency | 3064ms, n=40 | 1855ms, n=12 |
+| Successful-response mean latency | 5759.875ms, n=40 | 2098.833ms, n=12 |
+| Manual semantic review | 32 pass / 6 minor issue / 2 strict fail | Not performed |
+
+The [observed-results reconstruction](../cases/model-selection-quality-availability/evidence/october15-observed-results.json#L1-L2302) preserves every case's counters, input hashes, validation, latency, normalized failures, and source identities. Latency aggregates above were calculated from successful original results during publication. The October 15 run used its own evidence policy, options, prompt, and review rubric.
+
+The [Groq client](../cases/model-selection-quality-availability/availability/groq-client.ts#L9-L40) classifies 429 and retains projected diagnostics; its [tests](../cases/model-selection-quality-availability/availability/groq-client.test.ts#L1-L44) cover request construction and error categories. Recorded Retry-After values ranged from 2–30 seconds; resetAfterMs ranged from 172800–1036800ms. The [projection](../cases/model-selection-quality-availability/availability/failure-policy.ts#L24-L93) stores the maximum of request/token reset headers. Original raw headers and error bodies were discarded. The exact exhausted limit remains unconfirmed; these retained values describe the recorded failure diagnostics.
+
+### Accept the primary within the product's operating scope
+
+The semantic rubric assessed question-level meaning, grounding, required claims, language, naming, basis, and citation alignment. Unsupported/related-evidence handling was correct in 8/8 cases; false-premise handling passed 3/3. The two strict failures were:
+
+- QB22: source evidence supported absence of a mobile design, while the answer asserted that mobile verification had not occurred. Whether verification occurred was unconfirmed.
+- QB35: the content and citations were supported, but the model answered in Korean despite an explicit Japanese-language request.
+
+The recorded product decision retained Gemini primary and accepted the result without additional production-prompt changes. The developer treated QB22's stronger negative wording as an acceptable error for the present product, and Japanese instruction-following as outside the core quality priorities of a Korean-centered service. Benchmark ratings remained 32/6/2. The [reconstruction](../cases/model-selection-quality-availability/evidence/october15-observed-results.json#L1-L2302) preserves the actual two answers, review reasons, and the recorded product decision.
+
+Groq semantic evaluation and failed-only resume were deferred after the incomplete comparison.
+
+**October 16 operating judgment, preserved through user-supplied ChatGPT history search:** the developer reviewed whether to retain Gemini+Groq for the free public service, considering the earlier full40 quality comparison and the October 15 rate-limit results. ChatGPT described call capacity, rather than model eligibility, as the free-operation concern and cited limits including 8K TPM. That value is retained as information discussed at the time; its exact account/model applicability was not independently established. The precise limiting quota behind the October 15 429 responses remains unconfirmed.
+
+The developer distinguished Groq calls after a Gemini primary failure from using Groq as the main generator. On that operating basis, the developer retained Gemini 3.5 primary → Groq GPT-OSS 120B fallback. The [clarification record](../cases/model-selection-quality-availability/evidence/developer-clarification-20261029.json#L1-L184) separates this search-based operating judgment from both experiments and their original conditions. The original conversation URL and full messages remain unavailable.
+
+On October 16 at 21:32:34, e700717 removed Cohere's evaluation/support paths while retaining the Gemini 3.5/Groq pair. [Case 03's retirement judgment](#retirement-decision-benefit-relative-to-scale-and-operating-cost) supplies the scale, substitutability, and cost context; Case 06 ends with the selected Generation lineup.
+
+### Source levels, publication choices, and remaining questions
+
+Configuration changes and published historical source are code-confirmed. October 3 quality/request counts retain their earlier research transcription level. October 15 results and archive hashes were inspected directly; semantic ratings and product acceptance are preserved manual-review records. The developer-provided ChatGPT search records preserve the initial September 26 switch rationale and five-test report, October 3 discussion/stop condition/usage report, and October 16 fallback-retention judgment at their search-evidence level. The October 29 capacity rationale, recalled quota depletion, and broader external-reaction memory are explicitly attributed later statements.
+
+Remaining gaps are original October 3 response/attempt files and exact options, correspondence between the separately recorded request histories, independent provider-side request accounting, the original Qwen failure ledger, and the original ChatGPT conversation and other external posts recalled by the developer. Groq's October 15 semantic quality and the exact limiting quota remain unconfirmed. Historical limits are dated to their records.
+
+Whole-file Excerpts keep small, coherent implementation/test units: baseline quota handling, canonical evidence/runner contracts, and transport/diagnostic behavior. Partial Excerpts isolate fixed-input comparison and the adopted runtime's regressions, preserving original statements, imports, and references. The common policy is retained whole because its fallback eligibility, header/body parsing, and safe projection work together. Reconstructed JSON selects original settings/results and labels editorial grouping, aggregate calculations, earlier transcriptions, and later developer testimony. The two selected generated answers preserve actual failure evidence; full knowledge payloads and credentials remain private. No Mixed source was needed.
+
+<details>
+<summary>Source snapshots, excerpt ranges, hashes, and reconstruction inputs</summary>
+
+Original paths are relative to private Synethos. Ranges identify original snapshot lines; public links use public-file lines. SHA-256 values hash file bytes.
+
+| Public file / form | Original commit / path / lines | Original SHA-256 → public SHA-256 |
+|---|---|---|
+| [baseline/generation.ts](../cases/model-selection-quality-availability/baseline/generation.ts#L1-L126)<br>Excerpt · whole original | `2e02e710421abfda880339d7692654e7c69178de`<br>`sveltekit/src/lib/server/gemini/generation.ts`<br>1–126 | `2fa335e96fa837c7d93c4b0172737c705bc42c216598d571ab9fca137928a881` → `2fa335e96fa837c7d93c4b0172737c705bc42c216598d571ab9fca137928a881` |
+| [baseline/generation.test.ts](../cases/model-selection-quality-availability/baseline/generation.test.ts#L1-L163)<br>Excerpt · whole original | `2e02e710421abfda880339d7692654e7c69178de`<br>`sveltekit/src/lib/server/gemini/generation.test.ts`<br>1–163 | `93138049a1cb84db68a04d34a08dafc8c41433d7911757963c615f6d06c88d9f` → `93138049a1cb84db68a04d34a08dafc8c41433d7911757963c615f6d06c88d9f` |
+| [baseline/generation-fallback.ts](../cases/model-selection-quality-availability/baseline/generation-fallback.ts#L1-L70)<br>Excerpt · whole original | `2e02e710421abfda880339d7692654e7c69178de`<br>`sveltekit/src/lib/server/gemini/generation-fallback.ts`<br>1–70 | `310aaf1b28ec988a48ddf7d52d53017ee9f7866b4952dc2ef5c7d68b3437403c` → `310aaf1b28ec988a48ddf7d52d53017ee9f7866b4952dc2ef5c7d68b3437403c` |
+| [baseline/generation-fallback.test.ts](../cases/model-selection-quality-availability/baseline/generation-fallback.test.ts#L1-L52)<br>Excerpt · whole original | `2e02e710421abfda880339d7692654e7c69178de`<br>`sveltekit/src/lib/server/gemini/generation-fallback.test.ts`<br>1–52 | `e8f5f9ccc76cd484b719cac157b6f0e20cc4698b979928f859d35bec0dfe055d` → `e8f5f9ccc76cd484b719cac157b6f0e20cc4698b979928f859d35bec0dfe055d` |
+| [evaluation/canonical-snapshots.ts](../cases/model-selection-quality-availability/evaluation/canonical-snapshots.ts#L1-L96)<br>Excerpt · whole original | `c5d615c6d4068a14daaa841c15dc8992ffda2fdc`<br>`sveltekit/src/lib/server/retrieval/evaluation/canonical-snapshots.ts`<br>1–96 | `25dc842bad7e7497950536b98662a9a8151d9d2096552c2d2758faf8d3182af2` → `25dc842bad7e7497950536b98662a9a8151d9d2096552c2d2758faf8d3182af2` |
+| [evaluation/canonical-snapshots.test.ts](../cases/model-selection-quality-availability/evaluation/canonical-snapshots.test.ts#L1-L116)<br>Excerpt · whole original | `c5d615c6d4068a14daaa841c15dc8992ffda2fdc`<br>`sveltekit/src/lib/server/retrieval/evaluation/canonical-snapshots.test.ts`<br>1–116 | `5b105c81336a52d9b587e217d6e8184a229cc19dc87baf605e4cb9031f0d0f1d` → `5b105c81336a52d9b587e217d6e8184a229cc19dc87baf605e4cb9031f0d0f1d` |
+| [evaluation/canonical-generation.ts](../cases/model-selection-quality-availability/evaluation/canonical-generation.ts#L1-L153)<br>Excerpt · whole original | `c5d615c6d4068a14daaa841c15dc8992ffda2fdc`<br>`sveltekit/src/lib/server/retrieval/evaluation/canonical-generation.ts`<br>1–153 | `5258541cd9a440f233daf4a97de3928d9160bf7544e0b425a46d46c1dd2697d6` → `5258541cd9a440f233daf4a97de3928d9160bf7544e0b425a46d46c1dd2697d6` |
+| [evaluation/canonical-generation.test.ts](../cases/model-selection-quality-availability/evaluation/canonical-generation.test.ts#L1-L150)<br>Excerpt · whole original | `c5d615c6d4068a14daaa841c15dc8992ffda2fdc`<br>`sveltekit/src/lib/server/retrieval/evaluation/canonical-generation.test.ts`<br>1–150 | `12676305deb43720e288736e24a5a8fce5b22299f469578ab86f1228588a3d01` → `12676305deb43720e288736e24a5a8fce5b22299f469578ab86f1228588a3d01` |
+| [evaluation/fixed-input.excerpt.ts](../cases/model-selection-quality-availability/evaluation/fixed-input.excerpt.ts#L1-L98)<br>Excerpt · selected ranges | `c5d615c6d4068a14daaa841c15dc8992ffda2fdc`<br>`sveltekit/src/lib/server/retrieval/evaluation/run.ts`<br>1–33, 46–56, 70–121 | `2a3a27ff55ee3c44bfd665d1719b2d4f7fa78bb7a2dc3f98b2319383de52c89c` → `b10cf9a10fa62ecfd12b83331a8c61b1001d22a76deff7e6513900fe6c035de5` |
+| [evaluation/fixed-input.excerpt.test.ts](../cases/model-selection-quality-availability/evaluation/fixed-input.excerpt.test.ts#L1-L100)<br>Excerpt · selected ranges | `c5d615c6d4068a14daaa841c15dc8992ffda2fdc`<br>`sveltekit/src/lib/server/retrieval/evaluation/run.test.ts`<br>1–31, 34–73, 86–112 | `76de31ab091cc434102466920931857aff7d5e11e95fb636c54399a9a62610c6` → `86822df00bbe40fef8549fb9547138eadc2c1ec093e432b1178bb6e4826de536` |
+| [availability/groq-client.ts](../cases/model-selection-quality-availability/availability/groq-client.ts#L1-L40)<br>Excerpt · whole original | `c5d615c6d4068a14daaa841c15dc8992ffda2fdc`<br>`sveltekit/src/lib/server/providers/groq/client.ts`<br>1–40 | `fb8e094bd542acdbedd6898a04c12c74601a84ca9f868bf3f4669997c8e5fe9b` → `fb8e094bd542acdbedd6898a04c12c74601a84ca9f868bf3f4669997c8e5fe9b` |
+| [availability/groq-client.test.ts](../cases/model-selection-quality-availability/availability/groq-client.test.ts#L1-L44)<br>Excerpt · whole original | `c5d615c6d4068a14daaa841c15dc8992ffda2fdc`<br>`sveltekit/src/lib/server/providers/groq/client.test.ts`<br>1–44 | `c8188ed8c687101a23fbfd5bf600e83d3901d6b49b88e89bba9d782678ff1edf` → `c8188ed8c687101a23fbfd5bf600e83d3901d6b49b88e89bba9d782678ff1edf` |
+| [availability/failure-policy.ts](../cases/model-selection-quality-availability/availability/failure-policy.ts#L1-L93)<br>Excerpt · whole original | `c5d615c6d4068a14daaa841c15dc8992ffda2fdc`<br>`sveltekit/src/lib/server/providers/failure-policy.ts`<br>1–93 | `a9d15fa419fa650f396050a879085398141152088397df5284d4966bf6560af2` → `a9d15fa419fa650f396050a879085398141152088397df5284d4966bf6560af2` |
+| [availability/failure-policy.test.ts](../cases/model-selection-quality-availability/availability/failure-policy.test.ts#L1-L46)<br>Excerpt · whole original | `c5d615c6d4068a14daaa841c15dc8992ffda2fdc`<br>`sveltekit/src/lib/server/providers/failure-policy.test.ts`<br>1–46 | `20484a0a6bd6dbc11079b434c2b817250a24ef105fe160db546214d1a94101b3` → `20484a0a6bd6dbc11079b434c2b817250a24ef105fe160db546214d1a94101b3` |
+| [runtime/groq-fallback.excerpt.test.ts](../cases/model-selection-quality-availability/runtime/groq-fallback.excerpt.test.ts#L1-L93)<br>Excerpt · selected ranges | `0baebd9f242d88ffa15ef1953204c391ae97e623`<br>`sveltekit/src/lib/server/generation/orchestrator.test.ts`<br>1–26, 29–94 | `b14c3609ddc9b572f5d30caf2b1748bc9904166ffbf0380bf162448e5dbf5024` → `605f8bfae3d99425f5ad72d7330a9313a69297df277fbb65413e2ef5baff9092` |
+| [evidence/model-selection-history.json](../cases/model-selection-quality-availability/evidence/model-selection-history.json#L1-L242)<br>Reconstructed | Reconstructed; inputs below | `c63e9034f76e2e24b41cb0f5fd20b2bab45badf7558bb39abfff598bc33e5223` |
+| [evidence/october03-reported-results.json](../cases/model-selection-quality-availability/evidence/october03-reported-results.json#L1-L101)<br>Reconstructed | Reconstructed; inputs below | `b2d4572b8eb1bd0274382ceddfe7e8d301515457694b6ada4f6640a9321c6fe8` |
+| [evidence/developer-clarification-20261029.json](../cases/model-selection-quality-availability/evidence/developer-clarification-20261029.json#L1-L184)<br>Reconstructed | Reconstructed; inputs below | `d209fd34242c8932f6488f187a56f37bfbffa77e90f78ef032887c261c0f3069` |
+| [evidence/october15-observed-results.json](../cases/model-selection-quality-availability/evidence/october15-observed-results.json#L1-L2302)<br>Reconstructed | Reconstructed; inputs below | `927ed5e3880e8915d0865cbdb44d6cb834f89b67c137a7df3b4b248e2ae910e8` |
+
+| Reconstructed file | Input / verification |
+|---|---|
+| `evidence/model-selection-history.json` | `9a3df6134f3a68c012d98afa9fdc5f7f7cf5b264` / `config/mosaic.json`<br>`f07359812518b6b75962f60e1f179856dc4d091602b123e96b9d2737b7ec6c6a` |
+| `evidence/model-selection-history.json` | `2e02e710421abfda880339d7692654e7c69178de` / `config/mosaic.json`<br>`fc69844b39f33334e553633d73cf7ed9fd3ca8d7c94aac59d316552967b42f8c` |
+| `evidence/model-selection-history.json` | `b00bf595439bd71540ace4e34d6f56a803eb5719` / `config/mosaic.json`<br>`19976e438024e926ccdf1453c7d4145d9bdf1f52677b0fad4a1aa798f4061488` |
+| `evidence/model-selection-history.json` | `4125443b5de06bea988b9776a4e85d8a5d608a1b` / `config/mosaic.json`<br>`15c76f86c442b6e34f53d6c95e6daea4634efd983558e6fe890703188010dbab` |
+| `evidence/model-selection-history.json` | `180cc306fafc191a21ea4f6886b48c0d1913b882` / `config/mosaic.json`<br>`637b4dbb6c73ef341e549dd44d0b2338dfe7bee938797bb0a6a666b54a08e63c` |
+| `evidence/model-selection-history.json` | `0baebd9f242d88ffa15ef1953204c391ae97e623` / `config/mosaic.json`<br>`6184230713d6717c9c702f39b75f4de77b7a90f1e81654922e59dc3210fb6b27` |
+| `evidence/model-selection-history.json` | `5b78e06e889eb888aa8a92ccb6f9e0a05c0004e3` / `config/mosaic.json`<br>`efb42607955c7ff9f1ac55c79d4e0df3a88eb791897402940ae7e2168bb587b8` |
+| `evidence/model-selection-history.json` | `e7007172cc7a5171948659c4f1ceb6fd65dd1332` / `config/mosaic.json`<br>`fade19dc3b7d4080c23a66518e4716b9419f6af70e377e573958216bf65dee20` |
+| `evidence/october03-reported-results.json` | `3a6e2e477fa5a66fe67656b802c4bf9bdaf59218` / `docs/research/synethos-development-history.md`<br>`31c98a7c6b2fe222ca9b116130a857c316008b8cb79550425aba50e491ebd2a3` |
+| `evidence/october03-reported-results.json` | `3a6e2e477fa5a66fe67656b802c4bf9bdaf59218` / `docs/research/synethos-evidence-register.md`<br>`6f173ba83687e68daaa115623404e159af8efa37fc454c0e42559e761303bdf7` |
+| `evidence/developer-clarification-20261029.json` | `Tessera case 06 user statements and ChatGPT history-search results supplied on 2026-10-29`<br>Direct statements and user-delivered search results in this task; original ChatGPT messages unavailable, no Git object or file hash. |
+| `evidence/developer-clarification-20261029.json` | `https://discuss.ai.google.dev/t/handling-429-503-errors-from-the-gemini-api/124640/79`<br>Public forum user report directly inspected on 2026-10-29; model/tier/sample identified in the record. |
+| `evidence/developer-clarification-20261029.json` | `https://discuss.ai.google.dev/t/persistent-37-unavailable-503-on-generatecontent-with-gemini-3-6-flash-paid-tier-1-zero-429s-counttokens-unaffected/179971`<br>Public forum user report directly inspected on 2026-10-29; model/tier/sample identified in the record. |
+| `evidence/developer-clarification-20261029.json` | `https://discuss.ai.google.dev/t/gemini-api-503/183913`<br>Public forum post dated 2026-09-21 directly read on 2026-10-29; user report and reply. |
+| `evidence/october15-observed-results.json` | `c5d615c6d4068a14daaa841c15dc8992ffda2fdc` / `docs/evaluation/generation/2026-10-15/manifest.json`<br>`beefae97c6d92daa61cf630567eab26ea03f7b531f0303c7694f652d36f25cc8` |
+| `evidence/october15-observed-results.json` | `c5d615c6d4068a14daaa841c15dc8992ffda2fdc` / `docs/evaluation/generation/2026-10-15/snapshot.json`<br>`0aef25fe6b4226db4dbac75d903fa85c3b3a37a1886ac04e0ecb9a2b17bed36b` |
+| `evidence/october15-observed-results.json` | `c5d615c6d4068a14daaa841c15dc8992ffda2fdc` / `docs/evaluation/generation/2026-10-15/completion.json`<br>`ac5cd3763ee762907373eb7a074683dd3b4333d16a9f280003645a9f249b2fd9` |
+| `evidence/october15-observed-results.json` | `c5d615c6d4068a14daaa841c15dc8992ffda2fdc` / `docs/evaluation/generation/2026-10-15/integrity.json`<br>`a5c41d1f91e86a4f6d8290b8cf16775dd4b0d545ecc80cc1c46fbcf8bcac4030` |
+| `evidence/october15-observed-results.json` | `c5d615c6d4068a14daaa841c15dc8992ffda2fdc` / `docs/evaluation/generation/2026-10-15/gemini-semantic-review.json`<br>`af58f37e7f5019919a14445fc9a3ed30390060914e6d5e7720d0c6c509b9c23b` |
+| `evidence/october15-observed-results.json` | `c5d615c6d4068a14daaa841c15dc8992ffda2fdc` / `docs/evaluation/generation/2026-10-15/groq-rate-limit-diagnostics.json`<br>`44ce34e99d43ef5eadfcef44196c4772202fb5e1b80d34a526b9cb34bcd29e5b` |
+| `evidence/october15-observed-results.json` | `c5d615c6d4068a14daaa841c15dc8992ffda2fdc` / `docs/evaluation/generation/2026-10-15/report.md`<br>`1f302132c301dc642338846b8de05bef3aa75bd2e950a8a60c40884c6c627aa0` |
+| `evidence/october15-observed-results.json` | `c5d615c6d4068a14daaa841c15dc8992ffda2fdc` / `docs/evaluation/generation/2026-10-15/results/QB01.json`<br>`1ef7e0d3c919214e0724c6900fd859236c7595cf9a7913da9518e66bfa5aa9db` |
+| `evidence/october15-observed-results.json` | `c5d615c6d4068a14daaa841c15dc8992ffda2fdc` / `docs/evaluation/generation/2026-10-15/results/QB02.json`<br>`31121ebe05fbcab075f629d745011f505af85251a048831de8669eeb27271fee` |
+| `evidence/october15-observed-results.json` | `c5d615c6d4068a14daaa841c15dc8992ffda2fdc` / `docs/evaluation/generation/2026-10-15/results/QB03.json`<br>`52ecffbe064d5f38f5be34859d41b24ebc202360c4e291dd9ab72e8fa99ac02f` |
+| `evidence/october15-observed-results.json` | `c5d615c6d4068a14daaa841c15dc8992ffda2fdc` / `docs/evaluation/generation/2026-10-15/results/QB04.json`<br>`6eae76b6b6b94c4b99e710f560f2bfa5504a708cb54c7a7ea89aa181b5eb2380` |
+| `evidence/october15-observed-results.json` | `c5d615c6d4068a14daaa841c15dc8992ffda2fdc` / `docs/evaluation/generation/2026-10-15/results/QB05.json`<br>`e1d5e354fce99deb18fce53ce2b560365d1d004d14bd6f04b14381b8c4830349` |
+| `evidence/october15-observed-results.json` | `c5d615c6d4068a14daaa841c15dc8992ffda2fdc` / `docs/evaluation/generation/2026-10-15/results/QB06.json`<br>`0cdb98f322bff08f4aeb4829600bbf0e8de564eb15b7ff18d6dd2ec8800b3c23` |
+| `evidence/october15-observed-results.json` | `c5d615c6d4068a14daaa841c15dc8992ffda2fdc` / `docs/evaluation/generation/2026-10-15/results/QB07.json`<br>`b14f85300369fe5133f2dd5a43a671e65e288dabe9295e9fcaf696478ca512d4` |
+| `evidence/october15-observed-results.json` | `c5d615c6d4068a14daaa841c15dc8992ffda2fdc` / `docs/evaluation/generation/2026-10-15/results/QB08.json`<br>`10159c5698b88b60ce4379ae5535761efda3871c707cc27caff986db0d0a458f` |
+| `evidence/october15-observed-results.json` | `c5d615c6d4068a14daaa841c15dc8992ffda2fdc` / `docs/evaluation/generation/2026-10-15/results/QB09.json`<br>`8b6cc09b43dcc532ee8c98561d7a7e48a0cf7a6eb65ae0b636b1899693dfa7ae` |
+| `evidence/october15-observed-results.json` | `c5d615c6d4068a14daaa841c15dc8992ffda2fdc` / `docs/evaluation/generation/2026-10-15/results/QB10.json`<br>`a936fafb7a32ce42c40c7b7ea18cda848fde0636fa750d3893c0d01230e5e852` |
+| `evidence/october15-observed-results.json` | `c5d615c6d4068a14daaa841c15dc8992ffda2fdc` / `docs/evaluation/generation/2026-10-15/results/QB11.json`<br>`d5f90c4a6197536ebd2db7256dd2dcb8be9d060f4d5a3fce9532d50ee6e4222e` |
+| `evidence/october15-observed-results.json` | `c5d615c6d4068a14daaa841c15dc8992ffda2fdc` / `docs/evaluation/generation/2026-10-15/results/QB12.json`<br>`6fda35b810c5ae84373938f898296608b0ffa9a2f363d7272d5212818025a6e5` |
+| `evidence/october15-observed-results.json` | `c5d615c6d4068a14daaa841c15dc8992ffda2fdc` / `docs/evaluation/generation/2026-10-15/results/QB13.json`<br>`f1e5019d9f046b50341d177d6f7132e3de506fd5753f75d93a3c0232fe601ed5` |
+| `evidence/october15-observed-results.json` | `c5d615c6d4068a14daaa841c15dc8992ffda2fdc` / `docs/evaluation/generation/2026-10-15/results/QB14.json`<br>`ab6b9b8c21bef767c911d4858b9ce85f427c7e20c1283fc2e41c5c617028386c` |
+| `evidence/october15-observed-results.json` | `c5d615c6d4068a14daaa841c15dc8992ffda2fdc` / `docs/evaluation/generation/2026-10-15/results/QB15.json`<br>`9ebd07f19053ad0d5ff0019a77ac059f75e8257a6fd35e247f40f0cfec5c15ea` |
+| `evidence/october15-observed-results.json` | `c5d615c6d4068a14daaa841c15dc8992ffda2fdc` / `docs/evaluation/generation/2026-10-15/results/QB16.json`<br>`e04ab0e22834f23c9aa1260a54a54c35752c6693afe2d60125db2e28f4bbf350` |
+| `evidence/october15-observed-results.json` | `c5d615c6d4068a14daaa841c15dc8992ffda2fdc` / `docs/evaluation/generation/2026-10-15/results/QB17.json`<br>`e26fbfe77888b76f88566bd414276754ff952c4b39b67372ab235d9b2de6e88e` |
+| `evidence/october15-observed-results.json` | `c5d615c6d4068a14daaa841c15dc8992ffda2fdc` / `docs/evaluation/generation/2026-10-15/results/QB18.json`<br>`4de94eab427c464fbf0491c8dae67e6308d9f24ac8aa32942c9667f8cbb3bd15` |
+| `evidence/october15-observed-results.json` | `c5d615c6d4068a14daaa841c15dc8992ffda2fdc` / `docs/evaluation/generation/2026-10-15/results/QB19.json`<br>`bed812cf9a90a34e2363bb4d5182174e9ea711e2b614107991118b9f70dcc6e7` |
+| `evidence/october15-observed-results.json` | `c5d615c6d4068a14daaa841c15dc8992ffda2fdc` / `docs/evaluation/generation/2026-10-15/results/QB20.json`<br>`a0c91cb32fa46dbca88e1fb7136084db67631537edda3454204d94eb0051d690` |
+| `evidence/october15-observed-results.json` | `c5d615c6d4068a14daaa841c15dc8992ffda2fdc` / `docs/evaluation/generation/2026-10-15/results/QB21.json`<br>`9173b5113747352d379727d425c89a915b61323ff1c92b13859f7eff5395e6ca` |
+| `evidence/october15-observed-results.json` | `c5d615c6d4068a14daaa841c15dc8992ffda2fdc` / `docs/evaluation/generation/2026-10-15/results/QB22.json`<br>`73fedfc7b2a6e55889ded8aefb0f38a5327f87280d8b5281e7ac34a106014416` |
+| `evidence/october15-observed-results.json` | `c5d615c6d4068a14daaa841c15dc8992ffda2fdc` / `docs/evaluation/generation/2026-10-15/results/QB23.json`<br>`768f4ce6b8b84a884c736446bc98f05c8846a187e74a09045394f9cfc114345e` |
+| `evidence/october15-observed-results.json` | `c5d615c6d4068a14daaa841c15dc8992ffda2fdc` / `docs/evaluation/generation/2026-10-15/results/QB24.json`<br>`2fb72b2e9750cd1782b1513ab18ad8f8126e2e94ee8ba55c33d80fe03ea315d2` |
+| `evidence/october15-observed-results.json` | `c5d615c6d4068a14daaa841c15dc8992ffda2fdc` / `docs/evaluation/generation/2026-10-15/results/QB25.json`<br>`d92bb1aaead13e640acd8b03a7875fe18872dc86d5adffb69d4ce1b1334e47ed` |
+| `evidence/october15-observed-results.json` | `c5d615c6d4068a14daaa841c15dc8992ffda2fdc` / `docs/evaluation/generation/2026-10-15/results/QB26.json`<br>`7102c08cac927be9ea9ee523482def55e0725b20a0c2457085dfddbc57c72b21` |
+| `evidence/october15-observed-results.json` | `c5d615c6d4068a14daaa841c15dc8992ffda2fdc` / `docs/evaluation/generation/2026-10-15/results/QB27.json`<br>`f02a9acd4d9d204f9185a0498191a26b48f6bb1a8da86bb9c3f29f5abd3f83dc` |
+| `evidence/october15-observed-results.json` | `c5d615c6d4068a14daaa841c15dc8992ffda2fdc` / `docs/evaluation/generation/2026-10-15/results/QB28.json`<br>`fa7985728576bf70fbd75171ac18a874deda0c785b09e74811e14ae35501bb4c` |
+| `evidence/october15-observed-results.json` | `c5d615c6d4068a14daaa841c15dc8992ffda2fdc` / `docs/evaluation/generation/2026-10-15/results/QB29.json`<br>`cf3e8a641a38d245fe34f8e0685417ed59e31a0d46e2d3a92aaf5987dcaf9964` |
+| `evidence/october15-observed-results.json` | `c5d615c6d4068a14daaa841c15dc8992ffda2fdc` / `docs/evaluation/generation/2026-10-15/results/QB30.json`<br>`a886534af60796d7c91f69f5d9286c2317407c6a78d23f11b55d476447896a1a` |
+| `evidence/october15-observed-results.json` | `c5d615c6d4068a14daaa841c15dc8992ffda2fdc` / `docs/evaluation/generation/2026-10-15/results/QB31.json`<br>`d98386d20c968ad0e7c0bf362a16fdfe2ef448ee4a37eb9a5ae6e68cb754241b` |
+| `evidence/october15-observed-results.json` | `c5d615c6d4068a14daaa841c15dc8992ffda2fdc` / `docs/evaluation/generation/2026-10-15/results/QB32.json`<br>`62c2d73adec91771cb5fb51e48af546b4610e483797413b00f87d777cc74dc71` |
+| `evidence/october15-observed-results.json` | `c5d615c6d4068a14daaa841c15dc8992ffda2fdc` / `docs/evaluation/generation/2026-10-15/results/QB33.json`<br>`f85847675aca4bc4f13c555473cc25056c40bb5478e7e90ef6870f7ffcbaec8f` |
+| `evidence/october15-observed-results.json` | `c5d615c6d4068a14daaa841c15dc8992ffda2fdc` / `docs/evaluation/generation/2026-10-15/results/QB34.json`<br>`a156242bc05316348ce98350039486f74be5da7f29aa577fcb47c397484b3139` |
+| `evidence/october15-observed-results.json` | `c5d615c6d4068a14daaa841c15dc8992ffda2fdc` / `docs/evaluation/generation/2026-10-15/results/QB35.json`<br>`1cce041ee0d479a04377df807fad617469ce11d6a40295289bc4fbb0c7d844d7` |
+| `evidence/october15-observed-results.json` | `c5d615c6d4068a14daaa841c15dc8992ffda2fdc` / `docs/evaluation/generation/2026-10-15/results/QB36.json`<br>`bdc9dbd6ed0ae6f018a5ae22768ce6327b84b985100333369a6c12415576b726` |
+| `evidence/october15-observed-results.json` | `c5d615c6d4068a14daaa841c15dc8992ffda2fdc` / `docs/evaluation/generation/2026-10-15/results/QB37.json`<br>`abfd533b39111cc80a1355908487eba8df4eadaca89d1f866947e32f042f5d09` |
+| `evidence/october15-observed-results.json` | `c5d615c6d4068a14daaa841c15dc8992ffda2fdc` / `docs/evaluation/generation/2026-10-15/results/QB38.json`<br>`e81ff2a49578a4087e481359bbac72e97a98109c2650a83838872d691b138ce5` |
+| `evidence/october15-observed-results.json` | `c5d615c6d4068a14daaa841c15dc8992ffda2fdc` / `docs/evaluation/generation/2026-10-15/results/QB39.json`<br>`7e08a96ab034ae1e444e611908ebc0fb2a49c24e3dc07f3c578cbc6773a9032c` |
+| `evidence/october15-observed-results.json` | `c5d615c6d4068a14daaa841c15dc8992ffda2fdc` / `docs/evaluation/generation/2026-10-15/results/QB40.json`<br>`cf5b2a0f0580870e1b8b81b8d847bd132200a61342c948c1d05dbffa3ecae113` |
+
+</details>
+
+### Publication checks
+
+Twelve whole-file Excerpts matched their Git source bytes; three partial Excerpts matched every declared source range. All 15 TypeScript files passed syntax parsing. The four JSON reconstructions passed parsing, 57 hashed-input comparisons, configuration projection, original-result aggregation, representative-response comparison, and source-linkage checks. The October 15 archive’s 43 raw files and ten implementation/document files matched their recorded SHA-256 values.
+
+The reconstructed counts were checked against all 40 case results, including 80 single Generation dispatches, 52 successful structural results, 28 rate-limit failures, success-only latency statistics, and the manual 32/6/2 ratings. The seven October 3 search times, three approximate September 26 times, October 16 operating judgment, AI Studio 17/20 report, and developer quota inference were checked for consistent attribution. The 8K TPM discussion and unresolved October 15 quota cause retain separate scopes. English/Korean code and external-reference targets and hashes match. All 622 local links passed file, heading, and line-range validation. Cases 01–05 retain their text and 112 published files.
+
+New code, selected responses, and document sections were reviewed for credential values, private knowledge payloads, private repository URLs, local user paths, and operational access details. Verification used historical source inspection, local parsing/calculation, and direct reading of the linked public forum post. Historical application tests, model calls, index builds, and live server access were not performed.

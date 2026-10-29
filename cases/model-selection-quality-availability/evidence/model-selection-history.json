@@ -1,0 +1,242 @@
+{
+  "classification": "Reconstructed",
+  "method": "Select generation settings from each historical config/mosaic.json; grouping is editorial. Credential values and unrelated configuration are omitted.",
+  "snapshots": [
+    {
+      "commit": "9a3df6134f3a68c012d98afa9fdc5f7f7cf5b264",
+      "committedAt": "2026-09-26T12:05:45+09:00",
+      "generation": {
+        "model": "gemini-3.8-flash",
+        "maxOutputTokens": 1200
+      }
+    },
+    {
+      "commit": "2e02e710421abfda880339d7692654e7c69178de",
+      "committedAt": "2026-09-26T14:14:51+09:00",
+      "generation": {
+        "model": "gemini-3.5-flash-lite",
+        "fallbackModels": [
+          "gemini-3.1-flash-lite"
+        ],
+        "maxOutputTokens": 1200
+      }
+    },
+    {
+      "commit": "b00bf595439bd71540ace4e34d6f56a803eb5719",
+      "committedAt": "2026-09-30T18:15:43+09:00",
+      "generation": {
+        "targets": [
+          {
+            "id": "gemini-3-5-flash-lite",
+            "provider": "gemini",
+            "model": "gemini-3.5-flash-lite",
+            "options": {
+              "maxOutputTokens": 1200
+            }
+          },
+          {
+            "id": "gemini-3-1-flash-lite",
+            "provider": "gemini",
+            "model": "gemini-3.1-flash-lite",
+            "options": {
+              "maxOutputTokens": 1200
+            }
+          },
+          {
+            "id": "cohere-command-a-plus",
+            "provider": "cohere",
+            "model": "command-a-plus-05-2026",
+            "options": {
+              "maxOutputTokens": 1200,
+              "thinking": "provider-default"
+            }
+          },
+          {
+            "id": "groq-qwen3-8-27b",
+            "provider": "groq",
+            "model": "qwen/qwen3.8-27b",
+            "options": {
+              "maxOutputTokens": 1200,
+              "reasoningEffort": "none"
+            }
+          }
+        ],
+        "runtimeTargetIds": [
+          "gemini-3-5-flash-lite",
+          "gemini-3-1-flash-lite"
+        ]
+      }
+    },
+    {
+      "commit": "4125443b5de06bea988b9776a4e85d8a5d608a1b",
+      "committedAt": "2026-09-30T22:22:54+09:00",
+      "generation": {
+        "targets": [
+          {
+            "id": "gemini-3-5-flash-lite",
+            "provider": "gemini",
+            "model": "gemini-3.5-flash-lite",
+            "options": {
+              "maxOutputTokens": 32768
+            }
+          },
+          {
+            "id": "gemini-3-1-flash-lite",
+            "provider": "gemini",
+            "model": "gemini-3.1-flash-lite",
+            "options": {
+              "maxOutputTokens": 32768
+            }
+          },
+          {
+            "id": "cohere-command-a-plus",
+            "provider": "cohere",
+            "model": "command-a-plus-05-2026",
+            "options": {
+              "maxOutputTokens": 32768,
+              "thinking": "provider-default"
+            }
+          }
+        ],
+        "runtimeTargetIds": [
+          "gemini-3-5-flash-lite",
+          "gemini-3-1-flash-lite"
+        ]
+      }
+    },
+    {
+      "commit": "180cc306fafc191a21ea4f6886b48c0d1913b882",
+      "committedAt": "2026-10-02T02:37:05+09:00",
+      "generation": {
+        "targets": [
+          {
+            "id": "gemini-3-5-flash-lite",
+            "provider": "gemini",
+            "model": "gemini-3.5-flash-lite",
+            "options": {
+              "maxOutputTokens": 32768
+            }
+          },
+          {
+            "id": "cohere-command-a-plus",
+            "provider": "cohere",
+            "model": "command-a-plus-05-2026",
+            "options": {
+              "maxOutputTokens": 32768,
+              "thinking": "provider-default"
+            }
+          }
+        ],
+        "runtimeTargetIds": [
+          "gemini-3-5-flash-lite",
+          "cohere-command-a-plus"
+        ]
+      }
+    },
+    {
+      "commit": "0baebd9f242d88ffa15ef1953204c391ae97e623",
+      "committedAt": "2026-10-03T07:42:12+09:00",
+      "generation": {
+        "targets": [
+          {
+            "id": "gemini-3-5-flash-lite",
+            "provider": "gemini",
+            "model": "gemini-3.5-flash-lite",
+            "options": {
+              "maxOutputTokens": 32768
+            }
+          },
+          {
+            "id": "groq-gpt-oss-120b",
+            "provider": "groq",
+            "model": "openai/gpt-oss-120b",
+            "options": {
+              "maxOutputTokens": 4096,
+              "reasoningEffort": "medium"
+            }
+          },
+          {
+            "id": "cohere-command-a-plus",
+            "provider": "cohere",
+            "model": "command-a-plus-05-2026",
+            "options": {
+              "maxOutputTokens": 32768,
+              "thinking": "provider-default"
+            }
+          }
+        ],
+        "runtimeTargetIds": [
+          "gemini-3-5-flash-lite",
+          "groq-gpt-oss-120b"
+        ]
+      }
+    },
+    {
+      "commit": "5b78e06e889eb888aa8a92ccb6f9e0a05c0004e3",
+      "committedAt": "2026-10-06T20:42:47+09:00",
+      "generation": {
+        "targets": [
+          {
+            "id": "gemini-3-5-flash-lite",
+            "provider": "gemini",
+            "model": "gemini-3.5-flash-lite",
+            "options": {
+              "maxOutputTokens": 32768
+            }
+          },
+          {
+            "id": "groq-gpt-oss-120b",
+            "provider": "groq",
+            "model": "openai/gpt-oss-120b",
+            "options": {
+              "maxOutputTokens": 4096,
+              "reasoningEffort": "medium"
+            }
+          },
+          {
+            "id": "cohere-command-a-plus",
+            "provider": "cohere",
+            "model": "command-a-plus-05-2026",
+            "options": {
+              "maxOutputTokens": 32768,
+              "thinking": "provider-default"
+            }
+          }
+        ],
+        "runtimeTargetIds": [
+          "gemini-3-5-flash-lite",
+          "groq-gpt-oss-120b"
+        ]
+      }
+    },
+    {
+      "commit": "e7007172cc7a5171948659c4f1ceb6fd65dd1332",
+      "committedAt": "2026-10-16T21:32:34+09:00",
+      "generation": {
+        "targets": [
+          {
+            "id": "gemini-3-5-flash-lite",
+            "provider": "gemini",
+            "model": "gemini-3.5-flash-lite",
+            "options": {
+              "maxOutputTokens": 32768
+            }
+          },
+          {
+            "id": "groq-gpt-oss-120b",
+            "provider": "groq",
+            "model": "openai/gpt-oss-120b",
+            "options": {
+              "maxOutputTokens": 4096,
+              "reasoningEffort": "medium"
+            }
+          }
+        ],
+        "runtimeTargetIds": [
+          "gemini-3-5-flash-lite",
+          "groq-gpt-oss-120b"
+        ]
+      }
+    }
+  ]
+}

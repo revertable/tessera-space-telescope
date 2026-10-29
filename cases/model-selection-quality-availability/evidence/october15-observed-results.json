@@ -1,0 +1,2302 @@
+{
+  "classification": "Reconstructed",
+  "method": "Select identity, counters, normalized failures and manual-review fields from the committed archive. Aggregate results and success-only latency means/medians are calculated from all 40 result files. Representative cases select two actual responses and review reasons; full evidence text is omitted.",
+  "archiveCommit": "c5d615c6d4068a14daaa841c15dc8992ffda2fdc",
+  "execution": {
+    "gitHead": "3ec5bb5fec373cc59b234197d8f838188dcd62ff",
+    "implementationState": "generation-only code was uncommitted at execution; archived alongside its implementation. No code changes were made during archival.",
+    "runId": "e8fbc67f-9950-4c9e-92f6-c341a4f6ad6e",
+    "createdAt": "2026-10-15T13:00:09.922Z",
+    "finishedAt": "2026-10-15T13:04:29.995Z",
+    "questionBank": {
+      "questionBankId": "canonical-portfolio",
+      "questionBankVersion": "2",
+      "questionBankHash": "d1bc768a7cfaa451e34e55b17d19bcd526da20207e66585b62f6eeb798084b52"
+    },
+    "profile": {
+      "profileId": "full-40",
+      "profileVersion": "1",
+      "profileHash": "9bc25ca64ad6ac87345cb9b1a658c7eebeb8c7004d38d4273c51bb26a9b8aaf6",
+      "questionIds": [
+        "QB01",
+        "QB02",
+        "QB03",
+        "QB04",
+        "QB05",
+        "QB06",
+        "QB07",
+        "QB08",
+        "QB09",
+        "QB10",
+        "QB11",
+        "QB12",
+        "QB13",
+        "QB14",
+        "QB15",
+        "QB16",
+        "QB17",
+        "QB18",
+        "QB19",
+        "QB20",
+        "QB21",
+        "QB22",
+        "QB23",
+        "QB24",
+        "QB25",
+        "QB26",
+        "QB27",
+        "QB28",
+        "QB29",
+        "QB30",
+        "QB31",
+        "QB32",
+        "QB33",
+        "QB34",
+        "QB35",
+        "QB36",
+        "QB37",
+        "QB38",
+        "QB39",
+        "QB40"
+      ]
+    },
+    "corpus": {
+      "fingerprint": "19674659cd60da28a5e28ce5cb2ccfdc27e1103fa3863ba62ece74f21ec5bbbd",
+      "sourceCount": 27,
+      "chunkCount": 372
+    },
+    "snapshotHash": "f5172ec64d4e0bae5c016a56f5bfec699912de6b64982cf301ee249b838dc918",
+    "manifestHash": "8a3d2ce13c08f6ce43fb4e892886be3d351e73edd8e0056853c653a648f0a6b9",
+    "systemPromptHash": "a98cbdd1b75b563dcfc3a22a09ff44d158eb9c790756cec092f80eb8f6e2fb2c",
+    "schemaHash": "a94fab47811013328820ae481096cbd4fbc720b331c36fa180acd19cb0357b62",
+    "targets": [
+      {
+        "id": "gemini-3-5-flash-lite",
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "options": {
+          "maxOutputTokens": 32768
+        }
+      },
+      {
+        "id": "groq-gpt-oss-120b",
+        "provider": "groq",
+        "model": "openai/gpt-oss-120b",
+        "options": {
+          "maxOutputTokens": 4096,
+          "reasoningEffort": "medium"
+        }
+      }
+    ],
+    "evidencePolicy": "qb-single-alternative-full-chunk-v1"
+  },
+  "completion": {
+    "status": "completed-with-failures",
+    "runId": "e8fbc67f-9950-4c9e-92f6-c341a4f6ad6e",
+    "manifestHash": "8a3d2ce13c08f6ce43fb4e892886be3d351e73edd8e0056853c653a648f0a6b9",
+    "completedCases": 40,
+    "successfulResults": 52,
+    "failedResults": 28,
+    "generationAttempts": 80,
+    "finishedAt": "2026-10-15T13:04:29.995Z"
+  },
+  "aggregate": [
+    {
+      "targetId": "gemini-3-5-flash-lite",
+      "attempts": 40,
+      "success": 40,
+      "failure": 0,
+      "successfulStructuralChecks": 40,
+      "meanSuccessfulLatencyMs": 5759.875,
+      "medianSuccessfulLatencyMs": 3064
+    },
+    {
+      "targetId": "groq-gpt-oss-120b",
+      "attempts": 40,
+      "success": 12,
+      "failure": 28,
+      "successfulStructuralChecks": 12,
+      "meanSuccessfulLatencyMs": 2098.8333333333335,
+      "medianSuccessfulLatencyMs": 1855
+    }
+  ],
+  "manualReview": {
+    "counts": {
+      "pass": 32,
+      "minor issue": 6,
+      "fail": 2
+    },
+    "unsupportedAndRelated": {
+      "groundingHandledCorrectly": 8,
+      "total": 8,
+      "overallRatings": {
+        "pass": 7,
+        "minor issue": 1,
+        "fail": 0
+      }
+    },
+    "falsePremise": {
+      "pass": 3,
+      "total": 3
+    },
+    "rubric": {
+      "pass": "질문 핵심과 required claim의 의미를 충족하고 사실·근거·화자 경계를 지켰다.",
+      "minor issue": "핵심 답변은 맞지만 세부 생략, 표기, 기술 분류, 기본 언어 또는 basis/citation 선택의 경미한 문제가 있다.",
+      "fail": "근거 없는 사실 단정 또는 명시적 응답 언어 요청 불이행. fail은 strict fail로 유지한다.",
+      "claimGranularity": "질문의 핵심을 답하는 의미 단위로 평가하며 required claim 문장을 그대로 반복하거나 질문과 무관한 모든 세부를 나열할 것을 요구하지 않는다."
+    },
+    "productDecision": {
+      "primary": "gemini-3-5-flash-lite",
+      "decision": "retain-primary-and-accept-without-additional-prompt-changes",
+      "benchmarkRatingsUnchanged": true,
+      "rationale": "반복적인 hallucination이나 화자 혼동은 확인되지 않았다. 두 strict fail은 별도 제품 판단으로 수용하며 재분류하지 않는다.",
+      "groqSemanticReview": "not-performed",
+      "failedOnlyResume": "deferred",
+      "additionalProviderCalls": 0
+    }
+  },
+  "cases": [
+    {
+      "caseId": "QB01",
+      "questionHash": "8c1ad3ecab4a9f3195c5f8406220e6dee9461e5369229ccb8569ebb75faae6f3",
+      "snapshotHash": "cf3ab06c8f696db7c327a04cecd3bc28e18c1d83444154a2b967b27d6b94af7f",
+      "promptHash": "07186c8cab5c8408c9dc63dfcd2c325959f0f6b4410f70f9b38d3cd2ecdeec53",
+      "sharedInputVerified": true,
+      "results": [
+        {
+          "targetId": "gemini-3-5-flash-lite",
+          "status": "success",
+          "latencyMs": 1336,
+          "generationAttempts": 1,
+          "validation": {
+            "json": true,
+            "schema": true,
+            "citations": true
+          },
+          "failureCategory": null,
+          "providerError": null,
+          "promptHash": "07186c8cab5c8408c9dc63dfcd2c325959f0f6b4410f70f9b38d3cd2ecdeec53",
+          "evidenceHash": "315fd8d2a51a962934fbeed4c66aee9af2d192fc0e4d7ba8d0d2bb1bb6876ed5",
+          "citationOrder": [
+            "S1"
+          ]
+        },
+        {
+          "targetId": "groq-gpt-oss-120b",
+          "status": "success",
+          "latencyMs": 1848,
+          "generationAttempts": 1,
+          "validation": {
+            "json": true,
+            "schema": true,
+            "citations": true
+          },
+          "failureCategory": null,
+          "providerError": null,
+          "promptHash": "07186c8cab5c8408c9dc63dfcd2c325959f0f6b4410f70f9b38d3cd2ecdeec53",
+          "evidenceHash": "315fd8d2a51a962934fbeed4c66aee9af2d192fc0e4d7ba8d0d2bb1bb6876ed5",
+          "citationOrder": [
+            "S1"
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "QB02",
+      "questionHash": "76acb38aa8973ef9efa672e870872dd4745bee741720b8b4e63e5d54e8bdf829",
+      "snapshotHash": "53ff26aa40ba47bf0fb73d76267118e18c52ca8b4942cf8c08c445386b0fc9fe",
+      "promptHash": "9276ee54c0c6a7b40cf04fc0482430d79ebe719973c7de41e82967b4699df36f",
+      "sharedInputVerified": true,
+      "results": [
+        {
+          "targetId": "gemini-3-5-flash-lite",
+          "status": "success",
+          "latencyMs": 5636,
+          "generationAttempts": 1,
+          "validation": {
+            "json": true,
+            "schema": true,
+            "citations": true
+          },
+          "failureCategory": null,
+          "providerError": null,
+          "promptHash": "9276ee54c0c6a7b40cf04fc0482430d79ebe719973c7de41e82967b4699df36f",
+          "evidenceHash": "373d6ef6c0662a8ebef2801e173260f532aa2ebfd294c26be500b27c695285de",
+          "citationOrder": [
+            "S1"
+          ]
+        },
+        {
+          "targetId": "groq-gpt-oss-120b",
+          "status": "success",
+          "latencyMs": 1468,
+          "generationAttempts": 1,
+          "validation": {
+            "json": true,
+            "schema": true,
+            "citations": true
+          },
+          "failureCategory": null,
+          "providerError": null,
+          "promptHash": "9276ee54c0c6a7b40cf04fc0482430d79ebe719973c7de41e82967b4699df36f",
+          "evidenceHash": "373d6ef6c0662a8ebef2801e173260f532aa2ebfd294c26be500b27c695285de",
+          "citationOrder": [
+            "S1"
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "QB03",
+      "questionHash": "a436c4de6faf4e1f1c8bc78dda26a093c1d7f2c1cb42db4ee6cf5fd581e06125",
+      "snapshotHash": "1d6cb30caea2144a0ea0f55927390c240618c17c1acfc81b46e12a765583a03f",
+      "promptHash": "2dc54ca8ef4ba673d8f919e4489797eb3cd6c6c74924c84ea0b0dca37fd91bac",
+      "sharedInputVerified": true,
+      "results": [
+        {
+          "targetId": "gemini-3-5-flash-lite",
+          "status": "success",
+          "latencyMs": 11011,
+          "generationAttempts": 1,
+          "validation": {
+            "json": true,
+            "schema": true,
+            "citations": true
+          },
+          "failureCategory": null,
+          "providerError": null,
+          "promptHash": "2dc54ca8ef4ba673d8f919e4489797eb3cd6c6c74924c84ea0b0dca37fd91bac",
+          "evidenceHash": "5a9ae473966a3feade2ecbf40540f6fcd30ef985c99be4533b65278f1f832413",
+          "citationOrder": [
+            "S1"
+          ]
+        },
+        {
+          "targetId": "groq-gpt-oss-120b",
+          "status": "failure",
+          "latencyMs": 172,
+          "generationAttempts": 1,
+          "validation": {
+            "json": null,
+            "schema": null,
+            "citations": null
+          },
+          "failureCategory": "rate_limit",
+          "providerError": {
+            "category": "rate_limit",
+            "httpStatus": 429
+          },
+          "promptHash": "2dc54ca8ef4ba673d8f919e4489797eb3cd6c6c74924c84ea0b0dca37fd91bac",
+          "evidenceHash": "5a9ae473966a3feade2ecbf40540f6fcd30ef985c99be4533b65278f1f832413",
+          "citationOrder": [
+            "S1"
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "QB04",
+      "questionHash": "b751af85f2697b502bd454d2e5170a1d0dcbda0739ac95d27cd59ffe10b4ec32",
+      "snapshotHash": "7b006d6f97ab26adea9624fa2580920bd8eea1238a6d82bfebf52ca3edce5c57",
+      "promptHash": "5ff8d824eb400f143b7dac0aab2fa0cf2a3e0d1d20ac1b9051bfa5d17fc0bfd2",
+      "sharedInputVerified": true,
+      "results": [
+        {
+          "targetId": "gemini-3-5-flash-lite",
+          "status": "success",
+          "latencyMs": 2050,
+          "generationAttempts": 1,
+          "validation": {
+            "json": true,
+            "schema": true,
+            "citations": true
+          },
+          "failureCategory": null,
+          "providerError": null,
+          "promptHash": "5ff8d824eb400f143b7dac0aab2fa0cf2a3e0d1d20ac1b9051bfa5d17fc0bfd2",
+          "evidenceHash": "4d93cac55d9b5286333cb75e566a56a76ebd89970adc60e1fed01e296a9ea02d",
+          "citationOrder": [
+            "S1"
+          ]
+        },
+        {
+          "targetId": "groq-gpt-oss-120b",
+          "status": "failure",
+          "latencyMs": 147,
+          "generationAttempts": 1,
+          "validation": {
+            "json": null,
+            "schema": null,
+            "citations": null
+          },
+          "failureCategory": "rate_limit",
+          "providerError": {
+            "category": "rate_limit",
+            "httpStatus": 429
+          },
+          "promptHash": "5ff8d824eb400f143b7dac0aab2fa0cf2a3e0d1d20ac1b9051bfa5d17fc0bfd2",
+          "evidenceHash": "4d93cac55d9b5286333cb75e566a56a76ebd89970adc60e1fed01e296a9ea02d",
+          "citationOrder": [
+            "S1"
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "QB05",
+      "questionHash": "7f08464f4a43ee3f6df341e1ddc7fc921563cfd62bdb541ea200525ca92d9200",
+      "snapshotHash": "a32d93f40d887660e7b21a6b2bb40dee2d14228f2428970d25d6a65d4af5d191",
+      "promptHash": "eeb7b4337bb744fd982c3e49261c0f431bf3d95d634755fa57c1301f7a7ebbf1",
+      "sharedInputVerified": true,
+      "results": [
+        {
+          "targetId": "gemini-3-5-flash-lite",
+          "status": "success",
+          "latencyMs": 1919,
+          "generationAttempts": 1,
+          "validation": {
+            "json": true,
+            "schema": true,
+            "citations": true
+          },
+          "failureCategory": null,
+          "providerError": null,
+          "promptHash": "eeb7b4337bb744fd982c3e49261c0f431bf3d95d634755fa57c1301f7a7ebbf1",
+          "evidenceHash": "8747b10a0f4b4ce11c53d0d8b53fcbbfe10ee68141b0d08288fa331b364af761",
+          "citationOrder": [
+            "S1"
+          ]
+        },
+        {
+          "targetId": "groq-gpt-oss-120b",
+          "status": "failure",
+          "latencyMs": 165,
+          "generationAttempts": 1,
+          "validation": {
+            "json": null,
+            "schema": null,
+            "citations": null
+          },
+          "failureCategory": "rate_limit",
+          "providerError": {
+            "category": "rate_limit",
+            "httpStatus": 429
+          },
+          "promptHash": "eeb7b4337bb744fd982c3e49261c0f431bf3d95d634755fa57c1301f7a7ebbf1",
+          "evidenceHash": "8747b10a0f4b4ce11c53d0d8b53fcbbfe10ee68141b0d08288fa331b364af761",
+          "citationOrder": [
+            "S1"
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "QB06",
+      "questionHash": "d0bad31d24a7862c95d378d2841bb834e9050d0df1bedff33489a56e4a0f4af8",
+      "snapshotHash": "1d65af7872d45d25628f70ecb4991b289001db8630e2b4a0a9c4b866b822477b",
+      "promptHash": "5e88b60415beb95023aef935e3402644347d0e570f9445b3fd515067c6903818",
+      "sharedInputVerified": true,
+      "results": [
+        {
+          "targetId": "gemini-3-5-flash-lite",
+          "status": "success",
+          "latencyMs": 20769,
+          "generationAttempts": 1,
+          "validation": {
+            "json": true,
+            "schema": true,
+            "citations": true
+          },
+          "failureCategory": null,
+          "providerError": null,
+          "promptHash": "5e88b60415beb95023aef935e3402644347d0e570f9445b3fd515067c6903818",
+          "evidenceHash": "24cc030aa2107cc626e298950d3250ae311864641cfa93a348efc32d5da59db8",
+          "citationOrder": [
+            "S1"
+          ]
+        },
+        {
+          "targetId": "groq-gpt-oss-120b",
+          "status": "success",
+          "latencyMs": 1862,
+          "generationAttempts": 1,
+          "validation": {
+            "json": true,
+            "schema": true,
+            "citations": true
+          },
+          "failureCategory": null,
+          "providerError": null,
+          "promptHash": "5e88b60415beb95023aef935e3402644347d0e570f9445b3fd515067c6903818",
+          "evidenceHash": "24cc030aa2107cc626e298950d3250ae311864641cfa93a348efc32d5da59db8",
+          "citationOrder": [
+            "S1"
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "QB07",
+      "questionHash": "c038804b8e5ba80a0b4d95b30047ae9c68394372b5b753ad4fbfc4d860c79243",
+      "snapshotHash": "6d7e7d3948572f357c73d5a0254e96460fb591c7238266177f213fe035e34d5e",
+      "promptHash": "c305b1c36dd6b63ebde906350c0120f2fe097616d44b9ae853a6f72af04f7d99",
+      "sharedInputVerified": true,
+      "results": [
+        {
+          "targetId": "gemini-3-5-flash-lite",
+          "status": "success",
+          "latencyMs": 1243,
+          "generationAttempts": 1,
+          "validation": {
+            "json": true,
+            "schema": true,
+            "citations": true
+          },
+          "failureCategory": null,
+          "providerError": null,
+          "promptHash": "c305b1c36dd6b63ebde906350c0120f2fe097616d44b9ae853a6f72af04f7d99",
+          "evidenceHash": "7daa06334744e1ba6787618cca2c708232458a208826100fee1923f629090412",
+          "citationOrder": [
+            "S1"
+          ]
+        },
+        {
+          "targetId": "groq-gpt-oss-120b",
+          "status": "failure",
+          "latencyMs": 155,
+          "generationAttempts": 1,
+          "validation": {
+            "json": null,
+            "schema": null,
+            "citations": null
+          },
+          "failureCategory": "rate_limit",
+          "providerError": {
+            "category": "rate_limit",
+            "httpStatus": 429
+          },
+          "promptHash": "c305b1c36dd6b63ebde906350c0120f2fe097616d44b9ae853a6f72af04f7d99",
+          "evidenceHash": "7daa06334744e1ba6787618cca2c708232458a208826100fee1923f629090412",
+          "citationOrder": [
+            "S1"
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "QB08",
+      "questionHash": "622f384bfffdc6dc67a3d84cc3d65297ed8e800b4610ee935de061700d802f42",
+      "snapshotHash": "adc6bb00167d23c6e000a6ca50dd8c97e2df82d453ba72b9f6423083d4b0337e",
+      "promptHash": "cf201edb1c261f07fa36186495970a3e43780c5b46ce25ff1258e2a34e8ae2f3",
+      "sharedInputVerified": true,
+      "results": [
+        {
+          "targetId": "gemini-3-5-flash-lite",
+          "status": "success",
+          "latencyMs": 1367,
+          "generationAttempts": 1,
+          "validation": {
+            "json": true,
+            "schema": true,
+            "citations": true
+          },
+          "failureCategory": null,
+          "providerError": null,
+          "promptHash": "cf201edb1c261f07fa36186495970a3e43780c5b46ce25ff1258e2a34e8ae2f3",
+          "evidenceHash": "37fa1af33775ec2456900446f919afc9a6adeff01d2f0e740dc3d8342bf5660d",
+          "citationOrder": [
+            "S1"
+          ]
+        },
+        {
+          "targetId": "groq-gpt-oss-120b",
+          "status": "failure",
+          "latencyMs": 152,
+          "generationAttempts": 1,
+          "validation": {
+            "json": null,
+            "schema": null,
+            "citations": null
+          },
+          "failureCategory": "rate_limit",
+          "providerError": {
+            "category": "rate_limit",
+            "httpStatus": 429
+          },
+          "promptHash": "cf201edb1c261f07fa36186495970a3e43780c5b46ce25ff1258e2a34e8ae2f3",
+          "evidenceHash": "37fa1af33775ec2456900446f919afc9a6adeff01d2f0e740dc3d8342bf5660d",
+          "citationOrder": [
+            "S1"
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "QB09",
+      "questionHash": "6d6df3badf72dac107d125d2cc813d9bd9d3608f55e24a4df44ffca3d2e17b33",
+      "snapshotHash": "b948d12cc81b74485be09c673814b849a07fb6ba2c643fce716c198f146a5dd9",
+      "promptHash": "c14e85dc76b71fd984cf46f30671fb0ebcd5d7cb65862a712e6a08bebb32d832",
+      "sharedInputVerified": true,
+      "results": [
+        {
+          "targetId": "gemini-3-5-flash-lite",
+          "status": "success",
+          "latencyMs": 1218,
+          "generationAttempts": 1,
+          "validation": {
+            "json": true,
+            "schema": true,
+            "citations": true
+          },
+          "failureCategory": null,
+          "providerError": null,
+          "promptHash": "c14e85dc76b71fd984cf46f30671fb0ebcd5d7cb65862a712e6a08bebb32d832",
+          "evidenceHash": "1ea05cf808f75c919f2c94f442fba961d28c0afe8fd0eea3a879c8370b16c1dd",
+          "citationOrder": [
+            "S1"
+          ]
+        },
+        {
+          "targetId": "groq-gpt-oss-120b",
+          "status": "failure",
+          "latencyMs": 152,
+          "generationAttempts": 1,
+          "validation": {
+            "json": null,
+            "schema": null,
+            "citations": null
+          },
+          "failureCategory": "rate_limit",
+          "providerError": {
+            "category": "rate_limit",
+            "httpStatus": 429
+          },
+          "promptHash": "c14e85dc76b71fd984cf46f30671fb0ebcd5d7cb65862a712e6a08bebb32d832",
+          "evidenceHash": "1ea05cf808f75c919f2c94f442fba961d28c0afe8fd0eea3a879c8370b16c1dd",
+          "citationOrder": [
+            "S1"
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "QB10",
+      "questionHash": "bf5ffe1409676ff3a499c6f7e3dc325f1a1827bef02e89a2cd0b182b8eed5704",
+      "snapshotHash": "f36b19fb7d6df59b6b8aa2a58aecc2a1cd6f0e6bfe0e5f7eca098b4b86c3a1d0",
+      "promptHash": "af00018faaa46f8bc24b007ca9839ad72fed8e2ac69c665e07b8edf3b49135b9",
+      "sharedInputVerified": true,
+      "results": [
+        {
+          "targetId": "gemini-3-5-flash-lite",
+          "status": "success",
+          "latencyMs": 10488,
+          "generationAttempts": 1,
+          "validation": {
+            "json": true,
+            "schema": true,
+            "citations": true
+          },
+          "failureCategory": null,
+          "providerError": null,
+          "promptHash": "af00018faaa46f8bc24b007ca9839ad72fed8e2ac69c665e07b8edf3b49135b9",
+          "evidenceHash": "763a1ef7faa58132c4bc0a4701ba9e568f012d0ae7099971ed2cfa873ec2d2ec",
+          "citationOrder": [
+            "S1",
+            "S2"
+          ]
+        },
+        {
+          "targetId": "groq-gpt-oss-120b",
+          "status": "success",
+          "latencyMs": 3570,
+          "generationAttempts": 1,
+          "validation": {
+            "json": true,
+            "schema": true,
+            "citations": true
+          },
+          "failureCategory": null,
+          "providerError": null,
+          "promptHash": "af00018faaa46f8bc24b007ca9839ad72fed8e2ac69c665e07b8edf3b49135b9",
+          "evidenceHash": "763a1ef7faa58132c4bc0a4701ba9e568f012d0ae7099971ed2cfa873ec2d2ec",
+          "citationOrder": [
+            "S1",
+            "S2"
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "QB11",
+      "questionHash": "072679d8ef63d087a567580ed326181e1c70f82502c7f2fa655a1b024edb5500",
+      "snapshotHash": "efda4cc517b3f02c066aa0370f50350701dda4794fd785e659c3d3e0bbb5aaad",
+      "promptHash": "eb86389aa78988c3aff32b7550a9af2ba7eda568139f75fcf907e634ace995e6",
+      "sharedInputVerified": true,
+      "results": [
+        {
+          "targetId": "gemini-3-5-flash-lite",
+          "status": "success",
+          "latencyMs": 1721,
+          "generationAttempts": 1,
+          "validation": {
+            "json": true,
+            "schema": true,
+            "citations": true
+          },
+          "failureCategory": null,
+          "providerError": null,
+          "promptHash": "eb86389aa78988c3aff32b7550a9af2ba7eda568139f75fcf907e634ace995e6",
+          "evidenceHash": "f5ae94b857946d4d373e3921a2d6b36d4730047c24fda7f1b003df103e4a82c2",
+          "citationOrder": [
+            "S1",
+            "S2"
+          ]
+        },
+        {
+          "targetId": "groq-gpt-oss-120b",
+          "status": "failure",
+          "latencyMs": 147,
+          "generationAttempts": 1,
+          "validation": {
+            "json": null,
+            "schema": null,
+            "citations": null
+          },
+          "failureCategory": "rate_limit",
+          "providerError": {
+            "category": "rate_limit",
+            "httpStatus": 429
+          },
+          "promptHash": "eb86389aa78988c3aff32b7550a9af2ba7eda568139f75fcf907e634ace995e6",
+          "evidenceHash": "f5ae94b857946d4d373e3921a2d6b36d4730047c24fda7f1b003df103e4a82c2",
+          "citationOrder": [
+            "S1",
+            "S2"
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "QB12",
+      "questionHash": "919bb43f487742a5af0fd86d6ff946c183e57572ec628ef50f36b2f172be7424",
+      "snapshotHash": "0447c5e4de688edfb0c2142ca46210efbc283b1e0b56e841296aeb2e54890628",
+      "promptHash": "a10c5174449ea78e156e9bff5002d36e584088496750f477ea9a3e14312a49a7",
+      "sharedInputVerified": true,
+      "results": [
+        {
+          "targetId": "gemini-3-5-flash-lite",
+          "status": "success",
+          "latencyMs": 14503,
+          "generationAttempts": 1,
+          "validation": {
+            "json": true,
+            "schema": true,
+            "citations": true
+          },
+          "failureCategory": null,
+          "providerError": null,
+          "promptHash": "a10c5174449ea78e156e9bff5002d36e584088496750f477ea9a3e14312a49a7",
+          "evidenceHash": "3e74adbaad2552d2f2a35f5350db39fbddb0ac4ee3d0254153c7f6a21ddb4d3f",
+          "citationOrder": [
+            "S1"
+          ]
+        },
+        {
+          "targetId": "groq-gpt-oss-120b",
+          "status": "failure",
+          "latencyMs": 158,
+          "generationAttempts": 1,
+          "validation": {
+            "json": null,
+            "schema": null,
+            "citations": null
+          },
+          "failureCategory": "rate_limit",
+          "providerError": {
+            "category": "rate_limit",
+            "httpStatus": 429
+          },
+          "promptHash": "a10c5174449ea78e156e9bff5002d36e584088496750f477ea9a3e14312a49a7",
+          "evidenceHash": "3e74adbaad2552d2f2a35f5350db39fbddb0ac4ee3d0254153c7f6a21ddb4d3f",
+          "citationOrder": [
+            "S1"
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "QB13",
+      "questionHash": "7c9012d3c8cfad5bc7530601f052a3bf89dfd52c6253bc235621cdd070ef33a0",
+      "snapshotHash": "e3bb2b802c2e607c926cc5a1fff61f06437df318efb1a2fdd64d8522bf59d9ca",
+      "promptHash": "38e84e151a8744778b81d2bf5ac068728c630f3ef612a0f320252e9cc9c4758a",
+      "sharedInputVerified": true,
+      "results": [
+        {
+          "targetId": "gemini-3-5-flash-lite",
+          "status": "success",
+          "latencyMs": 1472,
+          "generationAttempts": 1,
+          "validation": {
+            "json": true,
+            "schema": true,
+            "citations": true
+          },
+          "failureCategory": null,
+          "providerError": null,
+          "promptHash": "38e84e151a8744778b81d2bf5ac068728c630f3ef612a0f320252e9cc9c4758a",
+          "evidenceHash": "191cb67d633ddbcf6e49187a43be7ea7a1a9d915e1f6703d0ffd0faad2fc9eaa",
+          "citationOrder": [
+            "S1",
+            "S2"
+          ]
+        },
+        {
+          "targetId": "groq-gpt-oss-120b",
+          "status": "failure",
+          "latencyMs": 159,
+          "generationAttempts": 1,
+          "validation": {
+            "json": null,
+            "schema": null,
+            "citations": null
+          },
+          "failureCategory": "rate_limit",
+          "providerError": {
+            "category": "rate_limit",
+            "httpStatus": 429
+          },
+          "promptHash": "38e84e151a8744778b81d2bf5ac068728c630f3ef612a0f320252e9cc9c4758a",
+          "evidenceHash": "191cb67d633ddbcf6e49187a43be7ea7a1a9d915e1f6703d0ffd0faad2fc9eaa",
+          "citationOrder": [
+            "S1",
+            "S2"
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "QB14",
+      "questionHash": "8cffba178ab1eab470d52c4765ffb944ae6f75651fd3060c71c53afeccaa7c82",
+      "snapshotHash": "87c8e0a48c8d9190fa1ef6f9e6c0e00f2bd6daa20a8e64f730bc7e8b71f107a1",
+      "promptHash": "e6c1078117258c9964d44b368a24612bf82a455ed5ec26bbb669621323396c03",
+      "sharedInputVerified": true,
+      "results": [
+        {
+          "targetId": "gemini-3-5-flash-lite",
+          "status": "success",
+          "latencyMs": 4449,
+          "generationAttempts": 1,
+          "validation": {
+            "json": true,
+            "schema": true,
+            "citations": true
+          },
+          "failureCategory": null,
+          "providerError": null,
+          "promptHash": "e6c1078117258c9964d44b368a24612bf82a455ed5ec26bbb669621323396c03",
+          "evidenceHash": "2609a8bb4be6a209708d647ae0ee25a7c6ecf83f81e4243be5b96e0bc82b91a5",
+          "citationOrder": [
+            "S1",
+            "S2"
+          ]
+        },
+        {
+          "targetId": "groq-gpt-oss-120b",
+          "status": "failure",
+          "latencyMs": 167,
+          "generationAttempts": 1,
+          "validation": {
+            "json": null,
+            "schema": null,
+            "citations": null
+          },
+          "failureCategory": "rate_limit",
+          "providerError": {
+            "category": "rate_limit",
+            "httpStatus": 429
+          },
+          "promptHash": "e6c1078117258c9964d44b368a24612bf82a455ed5ec26bbb669621323396c03",
+          "evidenceHash": "2609a8bb4be6a209708d647ae0ee25a7c6ecf83f81e4243be5b96e0bc82b91a5",
+          "citationOrder": [
+            "S1",
+            "S2"
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "QB15",
+      "questionHash": "cc44a2c70cb6e4b25c4f2ef636efae2cce5adcb05eaf5bd93476db71f60910e9",
+      "snapshotHash": "557ffac01a0fdd89b00363a87e5e87ec74008f3f4a73100cf4eb97e10d4fec8f",
+      "promptHash": "f25aeaded3a423fcd97be255fa013221aa928f85441f37982355ceed4a838221",
+      "sharedInputVerified": true,
+      "results": [
+        {
+          "targetId": "gemini-3-5-flash-lite",
+          "status": "success",
+          "latencyMs": 1634,
+          "generationAttempts": 1,
+          "validation": {
+            "json": true,
+            "schema": true,
+            "citations": true
+          },
+          "failureCategory": null,
+          "providerError": null,
+          "promptHash": "f25aeaded3a423fcd97be255fa013221aa928f85441f37982355ceed4a838221",
+          "evidenceHash": "157c9dfd38b7318c2c1dd099499fef6a5e4ca7c2637d40b8ae0f224703ec7e06",
+          "citationOrder": [
+            "S1"
+          ]
+        },
+        {
+          "targetId": "groq-gpt-oss-120b",
+          "status": "failure",
+          "latencyMs": 174,
+          "generationAttempts": 1,
+          "validation": {
+            "json": null,
+            "schema": null,
+            "citations": null
+          },
+          "failureCategory": "rate_limit",
+          "providerError": {
+            "category": "rate_limit",
+            "httpStatus": 429
+          },
+          "promptHash": "f25aeaded3a423fcd97be255fa013221aa928f85441f37982355ceed4a838221",
+          "evidenceHash": "157c9dfd38b7318c2c1dd099499fef6a5e4ca7c2637d40b8ae0f224703ec7e06",
+          "citationOrder": [
+            "S1"
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "QB16",
+      "questionHash": "d819ec57dae2eebd2cf61a567fa1833522b69bc92c757ef7c3c096bb16018014",
+      "snapshotHash": "9664ba2877d448fc88187786db019694e8cd1de2cc2d1182f9315a8e65a7f881",
+      "promptHash": "0e9eef6ee4caeed260912950717a2c8d38528365336f59fd30f5c005c55f1e02",
+      "sharedInputVerified": true,
+      "results": [
+        {
+          "targetId": "gemini-3-5-flash-lite",
+          "status": "success",
+          "latencyMs": 1623,
+          "generationAttempts": 1,
+          "validation": {
+            "json": true,
+            "schema": true,
+            "citations": true
+          },
+          "failureCategory": null,
+          "providerError": null,
+          "promptHash": "0e9eef6ee4caeed260912950717a2c8d38528365336f59fd30f5c005c55f1e02",
+          "evidenceHash": "da00a73ce2812ea315f59ce4012e51d04a48328d7ef175abf2a69660b8f7fa4a",
+          "citationOrder": [
+            "S1",
+            "S2"
+          ]
+        },
+        {
+          "targetId": "groq-gpt-oss-120b",
+          "status": "failure",
+          "latencyMs": 148,
+          "generationAttempts": 1,
+          "validation": {
+            "json": null,
+            "schema": null,
+            "citations": null
+          },
+          "failureCategory": "rate_limit",
+          "providerError": {
+            "category": "rate_limit",
+            "httpStatus": 429
+          },
+          "promptHash": "0e9eef6ee4caeed260912950717a2c8d38528365336f59fd30f5c005c55f1e02",
+          "evidenceHash": "da00a73ce2812ea315f59ce4012e51d04a48328d7ef175abf2a69660b8f7fa4a",
+          "citationOrder": [
+            "S1",
+            "S2"
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "QB17",
+      "questionHash": "bf02d78730a7e289fc0322b9fadb8e47567cd9d65a9961ace5144e7093920451",
+      "snapshotHash": "7226f0530760d1458874ca8c0dc76d17dd57fefc39010f6c805ed157a882ce2e",
+      "promptHash": "fdc848f24df30c91387f09727ef3f36a1ba9effcaee63c0cbe18496e2c125937",
+      "sharedInputVerified": true,
+      "results": [
+        {
+          "targetId": "gemini-3-5-flash-lite",
+          "status": "success",
+          "latencyMs": 16032,
+          "generationAttempts": 1,
+          "validation": {
+            "json": true,
+            "schema": true,
+            "citations": true
+          },
+          "failureCategory": null,
+          "providerError": null,
+          "promptHash": "fdc848f24df30c91387f09727ef3f36a1ba9effcaee63c0cbe18496e2c125937",
+          "evidenceHash": "1ea05cf808f75c919f2c94f442fba961d28c0afe8fd0eea3a879c8370b16c1dd",
+          "citationOrder": [
+            "S1"
+          ]
+        },
+        {
+          "targetId": "groq-gpt-oss-120b",
+          "status": "success",
+          "latencyMs": 2310,
+          "generationAttempts": 1,
+          "validation": {
+            "json": true,
+            "schema": true,
+            "citations": true
+          },
+          "failureCategory": null,
+          "providerError": null,
+          "promptHash": "fdc848f24df30c91387f09727ef3f36a1ba9effcaee63c0cbe18496e2c125937",
+          "evidenceHash": "1ea05cf808f75c919f2c94f442fba961d28c0afe8fd0eea3a879c8370b16c1dd",
+          "citationOrder": [
+            "S1"
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "QB18",
+      "questionHash": "aa6ca160c67459c99529cd616dec7af308f0479b58e7d0b6ee1cf3f03406c008",
+      "snapshotHash": "acf8e7761ea03c2b1cf7a72ea1b55ecf9617bd0a1a6d3e29ed470b03f2d65774",
+      "promptHash": "ddcb72fb66ba1b1c41a24573d3a05807e22613c6537610e3ad045d9d9708af49",
+      "sharedInputVerified": true,
+      "results": [
+        {
+          "targetId": "gemini-3-5-flash-lite",
+          "status": "success",
+          "latencyMs": 9319,
+          "generationAttempts": 1,
+          "validation": {
+            "json": true,
+            "schema": true,
+            "citations": true
+          },
+          "failureCategory": null,
+          "providerError": null,
+          "promptHash": "ddcb72fb66ba1b1c41a24573d3a05807e22613c6537610e3ad045d9d9708af49",
+          "evidenceHash": "315fd8d2a51a962934fbeed4c66aee9af2d192fc0e4d7ba8d0d2bb1bb6876ed5",
+          "citationOrder": [
+            "S1"
+          ]
+        },
+        {
+          "targetId": "groq-gpt-oss-120b",
+          "status": "failure",
+          "latencyMs": 158,
+          "generationAttempts": 1,
+          "validation": {
+            "json": null,
+            "schema": null,
+            "citations": null
+          },
+          "failureCategory": "rate_limit",
+          "providerError": {
+            "category": "rate_limit",
+            "httpStatus": 429
+          },
+          "promptHash": "ddcb72fb66ba1b1c41a24573d3a05807e22613c6537610e3ad045d9d9708af49",
+          "evidenceHash": "315fd8d2a51a962934fbeed4c66aee9af2d192fc0e4d7ba8d0d2bb1bb6876ed5",
+          "citationOrder": [
+            "S1"
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "QB19",
+      "questionHash": "2cac2b5e1c87a263cf01f2cc437aae1565a3bb53cd28655f6e898f304e2893ed",
+      "snapshotHash": "c2f51a0564b4942c605359f57dd0ad8b1562d71e50e98f3aca3e76fa9dc4843a",
+      "promptHash": "54242b2ab1c72c82abaf32cf9ed967b9584927b6de52e8209d4a32c5f2018fdf",
+      "sharedInputVerified": true,
+      "results": [
+        {
+          "targetId": "gemini-3-5-flash-lite",
+          "status": "success",
+          "latencyMs": 24131,
+          "generationAttempts": 1,
+          "validation": {
+            "json": true,
+            "schema": true,
+            "citations": true
+          },
+          "failureCategory": null,
+          "providerError": null,
+          "promptHash": "54242b2ab1c72c82abaf32cf9ed967b9584927b6de52e8209d4a32c5f2018fdf",
+          "evidenceHash": "8c7631d06e853428fc41cf26a8a4941c22d78d2c1feb316112bfd28a85cb6a67",
+          "citationOrder": [
+            "S1"
+          ]
+        },
+        {
+          "targetId": "groq-gpt-oss-120b",
+          "status": "success",
+          "latencyMs": 3744,
+          "generationAttempts": 1,
+          "validation": {
+            "json": true,
+            "schema": true,
+            "citations": true
+          },
+          "failureCategory": null,
+          "providerError": null,
+          "promptHash": "54242b2ab1c72c82abaf32cf9ed967b9584927b6de52e8209d4a32c5f2018fdf",
+          "evidenceHash": "8c7631d06e853428fc41cf26a8a4941c22d78d2c1feb316112bfd28a85cb6a67",
+          "citationOrder": [
+            "S1"
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "QB20",
+      "questionHash": "fd70859d4068b9f28bb9af3ab34fb6a88b1c72fa1626801b7366e974db4ad84c",
+      "snapshotHash": "fc942a3a2d632e342ff53007c70f463c07ff905b9aed5e5dd300c150a468bb83",
+      "promptHash": "2bc49fd5531d411a3240a71720fc78a293baca1dac31da33e1679c73120c6c23",
+      "sharedInputVerified": true,
+      "results": [
+        {
+          "targetId": "gemini-3-5-flash-lite",
+          "status": "success",
+          "latencyMs": 1308,
+          "generationAttempts": 1,
+          "validation": {
+            "json": true,
+            "schema": true,
+            "citations": true
+          },
+          "failureCategory": null,
+          "providerError": null,
+          "promptHash": "2bc49fd5531d411a3240a71720fc78a293baca1dac31da33e1679c73120c6c23",
+          "evidenceHash": "8747b10a0f4b4ce11c53d0d8b53fcbbfe10ee68141b0d08288fa331b364af761",
+          "citationOrder": [
+            "S1"
+          ]
+        },
+        {
+          "targetId": "groq-gpt-oss-120b",
+          "status": "success",
+          "latencyMs": 1958,
+          "generationAttempts": 1,
+          "validation": {
+            "json": true,
+            "schema": true,
+            "citations": true
+          },
+          "failureCategory": null,
+          "providerError": null,
+          "promptHash": "2bc49fd5531d411a3240a71720fc78a293baca1dac31da33e1679c73120c6c23",
+          "evidenceHash": "8747b10a0f4b4ce11c53d0d8b53fcbbfe10ee68141b0d08288fa331b364af761",
+          "citationOrder": [
+            "S1"
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "QB21",
+      "questionHash": "748ba95a3e4ee608671fd24491f8de8a5c51cecfdc4a2b78542cf09b0651af57",
+      "snapshotHash": "8e38c6a687f57f9c9747b8dd25da73a691a9868a26bcd311a67edce9761ec11d",
+      "promptHash": "ea428e1cec1eceb9f15b0740868551be395a538c5a098b460a430649a17ab538",
+      "sharedInputVerified": true,
+      "results": [
+        {
+          "targetId": "gemini-3-5-flash-lite",
+          "status": "success",
+          "latencyMs": 2571,
+          "generationAttempts": 1,
+          "validation": {
+            "json": true,
+            "schema": true,
+            "citations": true
+          },
+          "failureCategory": null,
+          "providerError": null,
+          "promptHash": "ea428e1cec1eceb9f15b0740868551be395a538c5a098b460a430649a17ab538",
+          "evidenceHash": "0fc73e82d5c1132e35aecde8f454c0203507d5d5a8ead661a6fab5165acf7082",
+          "citationOrder": [
+            "S1"
+          ]
+        },
+        {
+          "targetId": "groq-gpt-oss-120b",
+          "status": "failure",
+          "latencyMs": 144,
+          "generationAttempts": 1,
+          "validation": {
+            "json": null,
+            "schema": null,
+            "citations": null
+          },
+          "failureCategory": "rate_limit",
+          "providerError": {
+            "category": "rate_limit",
+            "httpStatus": 429
+          },
+          "promptHash": "ea428e1cec1eceb9f15b0740868551be395a538c5a098b460a430649a17ab538",
+          "evidenceHash": "0fc73e82d5c1132e35aecde8f454c0203507d5d5a8ead661a6fab5165acf7082",
+          "citationOrder": [
+            "S1"
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "QB22",
+      "questionHash": "e62f3144725fb868d64a36a5ef9877c30baf592b9f47c7b8612bd8d5e0db2fdf",
+      "snapshotHash": "775e525f9ba6c04e716919e667b97c90d82de255fe8cabb47e31833cf9f12481",
+      "promptHash": "94101486c4c80031d7b6a57247f51f81722c7e9e586c0f0ed9ca15fdfb4c8ba1",
+      "sharedInputVerified": true,
+      "results": [
+        {
+          "targetId": "gemini-3-5-flash-lite",
+          "status": "success",
+          "latencyMs": 18284,
+          "generationAttempts": 1,
+          "validation": {
+            "json": true,
+            "schema": true,
+            "citations": true
+          },
+          "failureCategory": null,
+          "providerError": null,
+          "promptHash": "94101486c4c80031d7b6a57247f51f81722c7e9e586c0f0ed9ca15fdfb4c8ba1",
+          "evidenceHash": "026175ff59039a6d12c83c678947e2801ef3a1c8bd9cbf75d7e9c804ba08aad6",
+          "citationOrder": [
+            "S1",
+            "S2"
+          ]
+        },
+        {
+          "targetId": "groq-gpt-oss-120b",
+          "status": "success",
+          "latencyMs": 1456,
+          "generationAttempts": 1,
+          "validation": {
+            "json": true,
+            "schema": true,
+            "citations": true
+          },
+          "failureCategory": null,
+          "providerError": null,
+          "promptHash": "94101486c4c80031d7b6a57247f51f81722c7e9e586c0f0ed9ca15fdfb4c8ba1",
+          "evidenceHash": "026175ff59039a6d12c83c678947e2801ef3a1c8bd9cbf75d7e9c804ba08aad6",
+          "citationOrder": [
+            "S1",
+            "S2"
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "QB23",
+      "questionHash": "08b41224ba80c4f01700e23b5d94a77feb036dd956dc9723e300fdb46a206f5f",
+      "snapshotHash": "9ef27f5824e43d45e17e37a064a04046541da56217f06f98443db5ea9704e015",
+      "promptHash": "8adba834cc02dfe38f1b5961f33a5be6b7c6868a5e878c70d5291b2c29465be0",
+      "sharedInputVerified": true,
+      "results": [
+        {
+          "targetId": "gemini-3-5-flash-lite",
+          "status": "success",
+          "latencyMs": 1141,
+          "generationAttempts": 1,
+          "validation": {
+            "json": true,
+            "schema": true,
+            "citations": true
+          },
+          "failureCategory": null,
+          "providerError": null,
+          "promptHash": "8adba834cc02dfe38f1b5961f33a5be6b7c6868a5e878c70d5291b2c29465be0",
+          "evidenceHash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "citationOrder": []
+        },
+        {
+          "targetId": "groq-gpt-oss-120b",
+          "status": "failure",
+          "latencyMs": 151,
+          "generationAttempts": 1,
+          "validation": {
+            "json": null,
+            "schema": null,
+            "citations": null
+          },
+          "failureCategory": "rate_limit",
+          "providerError": {
+            "category": "rate_limit",
+            "httpStatus": 429
+          },
+          "promptHash": "8adba834cc02dfe38f1b5961f33a5be6b7c6868a5e878c70d5291b2c29465be0",
+          "evidenceHash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "citationOrder": []
+        }
+      ]
+    },
+    {
+      "caseId": "QB24",
+      "questionHash": "aa66ee10703d3421b974d4df936dba3d00ef8337ddb016527db0a1851f72799b",
+      "snapshotHash": "ff55f60b9076f13c2db21762f6014353fcf46c87940e5651d8324c05a6300a74",
+      "promptHash": "deee7f9e7d1f3a1a625ac84732b94c0d4b395bde7e42750ba7608f60aec3d242",
+      "sharedInputVerified": true,
+      "results": [
+        {
+          "targetId": "gemini-3-5-flash-lite",
+          "status": "success",
+          "latencyMs": 1975,
+          "generationAttempts": 1,
+          "validation": {
+            "json": true,
+            "schema": true,
+            "citations": true
+          },
+          "failureCategory": null,
+          "providerError": null,
+          "promptHash": "deee7f9e7d1f3a1a625ac84732b94c0d4b395bde7e42750ba7608f60aec3d242",
+          "evidenceHash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "citationOrder": []
+        },
+        {
+          "targetId": "groq-gpt-oss-120b",
+          "status": "failure",
+          "latencyMs": 146,
+          "generationAttempts": 1,
+          "validation": {
+            "json": null,
+            "schema": null,
+            "citations": null
+          },
+          "failureCategory": "rate_limit",
+          "providerError": {
+            "category": "rate_limit",
+            "httpStatus": 429
+          },
+          "promptHash": "deee7f9e7d1f3a1a625ac84732b94c0d4b395bde7e42750ba7608f60aec3d242",
+          "evidenceHash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "citationOrder": []
+        }
+      ]
+    },
+    {
+      "caseId": "QB25",
+      "questionHash": "658a8121ba4d846d32d9d09bf49cf046d14c5aff86010fbbec559bbc59cdc44f",
+      "snapshotHash": "3e7b89c5f324a8ed2df46a06c9d9f5205ef1807373d6cf0b417c8e5a862442c5",
+      "promptHash": "c8b70b8e7632501cd5a0ca356e323d6705d3ad086211f7b727541e9034ab56bc",
+      "sharedInputVerified": true,
+      "results": [
+        {
+          "targetId": "gemini-3-5-flash-lite",
+          "status": "success",
+          "latencyMs": 2669,
+          "generationAttempts": 1,
+          "validation": {
+            "json": true,
+            "schema": true,
+            "citations": true
+          },
+          "failureCategory": null,
+          "providerError": null,
+          "promptHash": "c8b70b8e7632501cd5a0ca356e323d6705d3ad086211f7b727541e9034ab56bc",
+          "evidenceHash": "0dd796c68d348af18c8d9d9f61804a0111c12a8294c5c98fc8550741633c9e5f",
+          "citationOrder": [
+            "S1",
+            "S2"
+          ]
+        },
+        {
+          "targetId": "groq-gpt-oss-120b",
+          "status": "failure",
+          "latencyMs": 143,
+          "generationAttempts": 1,
+          "validation": {
+            "json": null,
+            "schema": null,
+            "citations": null
+          },
+          "failureCategory": "rate_limit",
+          "providerError": {
+            "category": "rate_limit",
+            "httpStatus": 429
+          },
+          "promptHash": "c8b70b8e7632501cd5a0ca356e323d6705d3ad086211f7b727541e9034ab56bc",
+          "evidenceHash": "0dd796c68d348af18c8d9d9f61804a0111c12a8294c5c98fc8550741633c9e5f",
+          "citationOrder": [
+            "S1",
+            "S2"
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "QB26",
+      "questionHash": "741da6175336af39af0c952c9e3aad32a56ad439dd8e139f0631fc895454e90b",
+      "snapshotHash": "e610518d8cc0fe27e12232ef1238a8e11874642ff401146b82913f04d270a278",
+      "promptHash": "41aa1d18027c7e57a97f595c45408d630e2e238d49de0d023f2329f2e0574317",
+      "sharedInputVerified": true,
+      "results": [
+        {
+          "targetId": "gemini-3-5-flash-lite",
+          "status": "success",
+          "latencyMs": 1312,
+          "generationAttempts": 1,
+          "validation": {
+            "json": true,
+            "schema": true,
+            "citations": true
+          },
+          "failureCategory": null,
+          "providerError": null,
+          "promptHash": "41aa1d18027c7e57a97f595c45408d630e2e238d49de0d023f2329f2e0574317",
+          "evidenceHash": "e5a2ab030a247696f7df7457b9cf0af8c51488f9c7f83a4991447df92797e6d1",
+          "citationOrder": [
+            "S1",
+            "S2"
+          ]
+        },
+        {
+          "targetId": "groq-gpt-oss-120b",
+          "status": "failure",
+          "latencyMs": 157,
+          "generationAttempts": 1,
+          "validation": {
+            "json": null,
+            "schema": null,
+            "citations": null
+          },
+          "failureCategory": "rate_limit",
+          "providerError": {
+            "category": "rate_limit",
+            "httpStatus": 429
+          },
+          "promptHash": "41aa1d18027c7e57a97f595c45408d630e2e238d49de0d023f2329f2e0574317",
+          "evidenceHash": "e5a2ab030a247696f7df7457b9cf0af8c51488f9c7f83a4991447df92797e6d1",
+          "citationOrder": [
+            "S1",
+            "S2"
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "QB27",
+      "questionHash": "f097c7ca71f6a83b08e825ca9665935e72505dbf6f74fe86faf4a13410bab150",
+      "snapshotHash": "9aefd02a08e4e30a6d28ec3b54dadcc2f5523adada769ddfbb60fd2172acd53f",
+      "promptHash": "7646823719f933d6132742268f700dfe1ba93e460c70192f191ff64bcb766a54",
+      "sharedInputVerified": true,
+      "results": [
+        {
+          "targetId": "gemini-3-5-flash-lite",
+          "status": "success",
+          "latencyMs": 3320,
+          "generationAttempts": 1,
+          "validation": {
+            "json": true,
+            "schema": true,
+            "citations": true
+          },
+          "failureCategory": null,
+          "providerError": null,
+          "promptHash": "7646823719f933d6132742268f700dfe1ba93e460c70192f191ff64bcb766a54",
+          "evidenceHash": "092cee74054c61ec23088d602239bbac49db1265b4379d0a48114d25c973a166",
+          "citationOrder": [
+            "S1"
+          ]
+        },
+        {
+          "targetId": "groq-gpt-oss-120b",
+          "status": "failure",
+          "latencyMs": 147,
+          "generationAttempts": 1,
+          "validation": {
+            "json": null,
+            "schema": null,
+            "citations": null
+          },
+          "failureCategory": "rate_limit",
+          "providerError": {
+            "category": "rate_limit",
+            "httpStatus": 429
+          },
+          "promptHash": "7646823719f933d6132742268f700dfe1ba93e460c70192f191ff64bcb766a54",
+          "evidenceHash": "092cee74054c61ec23088d602239bbac49db1265b4379d0a48114d25c973a166",
+          "citationOrder": [
+            "S1"
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "QB28",
+      "questionHash": "e15661ae0d6204997e306b111e8fd27dc828c271283f5a9c76e9d4901a327832",
+      "snapshotHash": "5a18f45445897fa01f530a55a43af4c0169e4ced02284fb0cd0f9586760c3e43",
+      "promptHash": "a2cb2b879a66db501bfb1f94fd213291bddd050f528b1fde08a68edb3685222b",
+      "sharedInputVerified": true,
+      "results": [
+        {
+          "targetId": "gemini-3-5-flash-lite",
+          "status": "success",
+          "latencyMs": 3077,
+          "generationAttempts": 1,
+          "validation": {
+            "json": true,
+            "schema": true,
+            "citations": true
+          },
+          "failureCategory": null,
+          "providerError": null,
+          "promptHash": "a2cb2b879a66db501bfb1f94fd213291bddd050f528b1fde08a68edb3685222b",
+          "evidenceHash": "8765be2081b9372542655735ae6e360f0e856410dfd69c88cf45475f96624d9c",
+          "citationOrder": [
+            "S1"
+          ]
+        },
+        {
+          "targetId": "groq-gpt-oss-120b",
+          "status": "failure",
+          "latencyMs": 142,
+          "generationAttempts": 1,
+          "validation": {
+            "json": null,
+            "schema": null,
+            "citations": null
+          },
+          "failureCategory": "rate_limit",
+          "providerError": {
+            "category": "rate_limit",
+            "httpStatus": 429
+          },
+          "promptHash": "a2cb2b879a66db501bfb1f94fd213291bddd050f528b1fde08a68edb3685222b",
+          "evidenceHash": "8765be2081b9372542655735ae6e360f0e856410dfd69c88cf45475f96624d9c",
+          "citationOrder": [
+            "S1"
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "QB29",
+      "questionHash": "541a2871925d8b9d2dd935bdaf337be876c63583bbe491b82097f09e0991553f",
+      "snapshotHash": "6c5ce413b998baebb1f45c80b93128ba6245f51823e4c303248c3905331fc23c",
+      "promptHash": "9aa618e0bc3b305cc492d23b52b0d533b616e1371c79edaa1b9dba5f4e3fd3a3",
+      "sharedInputVerified": true,
+      "results": [
+        {
+          "targetId": "gemini-3-5-flash-lite",
+          "status": "success",
+          "latencyMs": 4146,
+          "generationAttempts": 1,
+          "validation": {
+            "json": true,
+            "schema": true,
+            "citations": true
+          },
+          "failureCategory": null,
+          "providerError": null,
+          "promptHash": "9aa618e0bc3b305cc492d23b52b0d533b616e1371c79edaa1b9dba5f4e3fd3a3",
+          "evidenceHash": "315fd8d2a51a962934fbeed4c66aee9af2d192fc0e4d7ba8d0d2bb1bb6876ed5",
+          "citationOrder": [
+            "S1"
+          ]
+        },
+        {
+          "targetId": "groq-gpt-oss-120b",
+          "status": "failure",
+          "latencyMs": 169,
+          "generationAttempts": 1,
+          "validation": {
+            "json": null,
+            "schema": null,
+            "citations": null
+          },
+          "failureCategory": "rate_limit",
+          "providerError": {
+            "category": "rate_limit",
+            "httpStatus": 429
+          },
+          "promptHash": "9aa618e0bc3b305cc492d23b52b0d533b616e1371c79edaa1b9dba5f4e3fd3a3",
+          "evidenceHash": "315fd8d2a51a962934fbeed4c66aee9af2d192fc0e4d7ba8d0d2bb1bb6876ed5",
+          "citationOrder": [
+            "S1"
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "QB30",
+      "questionHash": "2d3bd96700ed16fd26bcad943fee9b30e036fa018d51fde6d54ede10aba8235a",
+      "snapshotHash": "008f63b06e258bece695a36ad84439f37e797de25b03d9adb8864f2d95bc1745",
+      "promptHash": "f7b44ef0f7ceb58eb72fcfebbbf293412e021feffefcefe669bba54b19a1621a",
+      "sharedInputVerified": true,
+      "results": [
+        {
+          "targetId": "gemini-3-5-flash-lite",
+          "status": "success",
+          "latencyMs": 1557,
+          "generationAttempts": 1,
+          "validation": {
+            "json": true,
+            "schema": true,
+            "citations": true
+          },
+          "failureCategory": null,
+          "providerError": null,
+          "promptHash": "f7b44ef0f7ceb58eb72fcfebbbf293412e021feffefcefe669bba54b19a1621a",
+          "evidenceHash": "315fd8d2a51a962934fbeed4c66aee9af2d192fc0e4d7ba8d0d2bb1bb6876ed5",
+          "citationOrder": [
+            "S1"
+          ]
+        },
+        {
+          "targetId": "groq-gpt-oss-120b",
+          "status": "success",
+          "latencyMs": 1518,
+          "generationAttempts": 1,
+          "validation": {
+            "json": true,
+            "schema": true,
+            "citations": true
+          },
+          "failureCategory": null,
+          "providerError": null,
+          "promptHash": "f7b44ef0f7ceb58eb72fcfebbbf293412e021feffefcefe669bba54b19a1621a",
+          "evidenceHash": "315fd8d2a51a962934fbeed4c66aee9af2d192fc0e4d7ba8d0d2bb1bb6876ed5",
+          "citationOrder": [
+            "S1"
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "QB31",
+      "questionHash": "eebdc231f06874a0761102039bee157f2265664af3174727a16d437b96f03974",
+      "snapshotHash": "f6afc2e056511347c9d2bfa3c8a3fdf68296960b49f829c7c7c2020eaf3d6132",
+      "promptHash": "ca7b76ae8c1c4ceff0d9c10d54c6db6d3bc41abe0fde3ec821cc3794b153f930",
+      "sharedInputVerified": true,
+      "results": [
+        {
+          "targetId": "gemini-3-5-flash-lite",
+          "status": "success",
+          "latencyMs": 7768,
+          "generationAttempts": 1,
+          "validation": {
+            "json": true,
+            "schema": true,
+            "citations": true
+          },
+          "failureCategory": null,
+          "providerError": null,
+          "promptHash": "ca7b76ae8c1c4ceff0d9c10d54c6db6d3bc41abe0fde3ec821cc3794b153f930",
+          "evidenceHash": "8747b10a0f4b4ce11c53d0d8b53fcbbfe10ee68141b0d08288fa331b364af761",
+          "citationOrder": [
+            "S1"
+          ]
+        },
+        {
+          "targetId": "groq-gpt-oss-120b",
+          "status": "success",
+          "latencyMs": 1680,
+          "generationAttempts": 1,
+          "validation": {
+            "json": true,
+            "schema": true,
+            "citations": true
+          },
+          "failureCategory": null,
+          "providerError": null,
+          "promptHash": "ca7b76ae8c1c4ceff0d9c10d54c6db6d3bc41abe0fde3ec821cc3794b153f930",
+          "evidenceHash": "8747b10a0f4b4ce11c53d0d8b53fcbbfe10ee68141b0d08288fa331b364af761",
+          "citationOrder": [
+            "S1"
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "QB32",
+      "questionHash": "392a0d6d80abf06387409a630293a780b3b9189ccfd8dd602539ae1b4a923275",
+      "snapshotHash": "8f70d3c19c88de0ad841839ca42a258550c2d4ff332e9ab4afc29123210085b5",
+      "promptHash": "a3cacb470af329f7e5920b93257bee65fb6c587005eeccecf9d2b7814835bbe1",
+      "sharedInputVerified": true,
+      "results": [
+        {
+          "targetId": "gemini-3-5-flash-lite",
+          "status": "success",
+          "latencyMs": 1057,
+          "generationAttempts": 1,
+          "validation": {
+            "json": true,
+            "schema": true,
+            "citations": true
+          },
+          "failureCategory": null,
+          "providerError": null,
+          "promptHash": "a3cacb470af329f7e5920b93257bee65fb6c587005eeccecf9d2b7814835bbe1",
+          "evidenceHash": "8747b10a0f4b4ce11c53d0d8b53fcbbfe10ee68141b0d08288fa331b364af761",
+          "citationOrder": [
+            "S1"
+          ]
+        },
+        {
+          "targetId": "groq-gpt-oss-120b",
+          "status": "failure",
+          "latencyMs": 146,
+          "generationAttempts": 1,
+          "validation": {
+            "json": null,
+            "schema": null,
+            "citations": null
+          },
+          "failureCategory": "rate_limit",
+          "providerError": {
+            "category": "rate_limit",
+            "httpStatus": 429
+          },
+          "promptHash": "a3cacb470af329f7e5920b93257bee65fb6c587005eeccecf9d2b7814835bbe1",
+          "evidenceHash": "8747b10a0f4b4ce11c53d0d8b53fcbbfe10ee68141b0d08288fa331b364af761",
+          "citationOrder": [
+            "S1"
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "QB33",
+      "questionHash": "984fc0934519f3480157117e964ed30d2c79523be1c42ef50feac048447493ea",
+      "snapshotHash": "beda3dcd9b571ca784896633e65d37c0bd08cd7ebf5c6d35ee7efef5e95a9a18",
+      "promptHash": "90269991aa4316ef241f48c2c02108d368dc0aeeeaa8d3bff0693628c76e2e2f",
+      "sharedInputVerified": true,
+      "results": [
+        {
+          "targetId": "gemini-3-5-flash-lite",
+          "status": "success",
+          "latencyMs": 10852,
+          "generationAttempts": 1,
+          "validation": {
+            "json": true,
+            "schema": true,
+            "citations": true
+          },
+          "failureCategory": null,
+          "providerError": null,
+          "promptHash": "90269991aa4316ef241f48c2c02108d368dc0aeeeaa8d3bff0693628c76e2e2f",
+          "evidenceHash": "51f14f2849e0662ab0ac2625572a1470ed5c261dadb824c2d84617546449d185",
+          "citationOrder": [
+            "S1"
+          ]
+        },
+        {
+          "targetId": "groq-gpt-oss-120b",
+          "status": "failure",
+          "latencyMs": 154,
+          "generationAttempts": 1,
+          "validation": {
+            "json": null,
+            "schema": null,
+            "citations": null
+          },
+          "failureCategory": "rate_limit",
+          "providerError": {
+            "category": "rate_limit",
+            "httpStatus": 429
+          },
+          "promptHash": "90269991aa4316ef241f48c2c02108d368dc0aeeeaa8d3bff0693628c76e2e2f",
+          "evidenceHash": "51f14f2849e0662ab0ac2625572a1470ed5c261dadb824c2d84617546449d185",
+          "citationOrder": [
+            "S1"
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "QB34",
+      "questionHash": "2c8cb4dd10ffbcebf56998ea6a4932f1b5ecda643333dfdb272f383edc9cefdb",
+      "snapshotHash": "8582a4d256ef1cb02c720fe0006d90e5b94c6aba98ee6eb8c57a3d73155521f8",
+      "promptHash": "0c54824ffef7f6f311f6cb9ac25d02ab511726c633169117bc2c0b50e8d001d2",
+      "sharedInputVerified": true,
+      "results": [
+        {
+          "targetId": "gemini-3-5-flash-lite",
+          "status": "success",
+          "latencyMs": 4122,
+          "generationAttempts": 1,
+          "validation": {
+            "json": true,
+            "schema": true,
+            "citations": true
+          },
+          "failureCategory": null,
+          "providerError": null,
+          "promptHash": "0c54824ffef7f6f311f6cb9ac25d02ab511726c633169117bc2c0b50e8d001d2",
+          "evidenceHash": "51f14f2849e0662ab0ac2625572a1470ed5c261dadb824c2d84617546449d185",
+          "citationOrder": [
+            "S1"
+          ]
+        },
+        {
+          "targetId": "groq-gpt-oss-120b",
+          "status": "failure",
+          "latencyMs": 172,
+          "generationAttempts": 1,
+          "validation": {
+            "json": null,
+            "schema": null,
+            "citations": null
+          },
+          "failureCategory": "rate_limit",
+          "providerError": {
+            "category": "rate_limit",
+            "httpStatus": 429
+          },
+          "promptHash": "0c54824ffef7f6f311f6cb9ac25d02ab511726c633169117bc2c0b50e8d001d2",
+          "evidenceHash": "51f14f2849e0662ab0ac2625572a1470ed5c261dadb824c2d84617546449d185",
+          "citationOrder": [
+            "S1"
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "QB35",
+      "questionHash": "97a29c24251ea3b32a061f40044f2bcc4818811230219025ea2803ae5178d151",
+      "snapshotHash": "21fddee65f3c087d1b8ec5af6d9a38d3bd7a1a8e55e8f3f8c9c616d8950530e4",
+      "promptHash": "780f0bdf7cf07b56fac06bd2e3482965ee67a0fe0e392436af3b51b006d4246f",
+      "sharedInputVerified": true,
+      "results": [
+        {
+          "targetId": "gemini-3-5-flash-lite",
+          "status": "success",
+          "latencyMs": 4039,
+          "generationAttempts": 1,
+          "validation": {
+            "json": true,
+            "schema": true,
+            "citations": true
+          },
+          "failureCategory": null,
+          "providerError": null,
+          "promptHash": "780f0bdf7cf07b56fac06bd2e3482965ee67a0fe0e392436af3b51b006d4246f",
+          "evidenceHash": "7bcce2fd717fc8b7ce2bc7e00c15b6f279153e01002ed0d733fe8f7b32110ac3",
+          "citationOrder": [
+            "S1"
+          ]
+        },
+        {
+          "targetId": "groq-gpt-oss-120b",
+          "status": "failure",
+          "latencyMs": 181,
+          "generationAttempts": 1,
+          "validation": {
+            "json": null,
+            "schema": null,
+            "citations": null
+          },
+          "failureCategory": "rate_limit",
+          "providerError": {
+            "category": "rate_limit",
+            "httpStatus": 429
+          },
+          "promptHash": "780f0bdf7cf07b56fac06bd2e3482965ee67a0fe0e392436af3b51b006d4246f",
+          "evidenceHash": "7bcce2fd717fc8b7ce2bc7e00c15b6f279153e01002ed0d733fe8f7b32110ac3",
+          "citationOrder": [
+            "S1"
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "QB36",
+      "questionHash": "4432d807c8bc7fa53d4c39153be35e69ac176d08c9d8d350eee354cd31b5adaf",
+      "snapshotHash": "8fdafe0a84669dbe586360ae0d944680574ae06c793c34959f9c33d8ea70228e",
+      "promptHash": "a5a483e4e017ca3001f0933586632a62565f22622f1cb55ff72790e4e5476326",
+      "sharedInputVerified": true,
+      "results": [
+        {
+          "targetId": "gemini-3-5-flash-lite",
+          "status": "success",
+          "latencyMs": 2039,
+          "generationAttempts": 1,
+          "validation": {
+            "json": true,
+            "schema": true,
+            "citations": true
+          },
+          "failureCategory": null,
+          "providerError": null,
+          "promptHash": "a5a483e4e017ca3001f0933586632a62565f22622f1cb55ff72790e4e5476326",
+          "evidenceHash": "7bcce2fd717fc8b7ce2bc7e00c15b6f279153e01002ed0d733fe8f7b32110ac3",
+          "citationOrder": [
+            "S1"
+          ]
+        },
+        {
+          "targetId": "groq-gpt-oss-120b",
+          "status": "failure",
+          "latencyMs": 153,
+          "generationAttempts": 1,
+          "validation": {
+            "json": null,
+            "schema": null,
+            "citations": null
+          },
+          "failureCategory": "rate_limit",
+          "providerError": {
+            "category": "rate_limit",
+            "httpStatus": 429
+          },
+          "promptHash": "a5a483e4e017ca3001f0933586632a62565f22622f1cb55ff72790e4e5476326",
+          "evidenceHash": "7bcce2fd717fc8b7ce2bc7e00c15b6f279153e01002ed0d733fe8f7b32110ac3",
+          "citationOrder": [
+            "S1"
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "QB37",
+      "questionHash": "950cf91657ae120dcbc4cb409a4d958d5497992a4e93b5f6f5e3a6f232461728",
+      "snapshotHash": "375416c3f3b4a3676aac1f5fa9f415e935be8f6e84620751bda3c27ce104dbeb",
+      "promptHash": "42c1b369ac305659e5e32f6ffcb78c11d12adb71ba0cce894570d86e96d54255",
+      "sharedInputVerified": true,
+      "results": [
+        {
+          "targetId": "gemini-3-5-flash-lite",
+          "status": "success",
+          "latencyMs": 3051,
+          "generationAttempts": 1,
+          "validation": {
+            "json": true,
+            "schema": true,
+            "citations": true
+          },
+          "failureCategory": null,
+          "providerError": null,
+          "promptHash": "42c1b369ac305659e5e32f6ffcb78c11d12adb71ba0cce894570d86e96d54255",
+          "evidenceHash": "6f21474be8d7dfe282a92cbe9d506eecb26b1a6e33904e91e068ef957d973688",
+          "citationOrder": [
+            "S1",
+            "S2"
+          ]
+        },
+        {
+          "targetId": "groq-gpt-oss-120b",
+          "status": "failure",
+          "latencyMs": 154,
+          "generationAttempts": 1,
+          "validation": {
+            "json": null,
+            "schema": null,
+            "citations": null
+          },
+          "failureCategory": "rate_limit",
+          "providerError": {
+            "category": "rate_limit",
+            "httpStatus": 429
+          },
+          "promptHash": "42c1b369ac305659e5e32f6ffcb78c11d12adb71ba0cce894570d86e96d54255",
+          "evidenceHash": "6f21474be8d7dfe282a92cbe9d506eecb26b1a6e33904e91e068ef957d973688",
+          "citationOrder": [
+            "S1",
+            "S2"
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "QB38",
+      "questionHash": "8c4a4f525d8599fff26762d39d5ddfb9275988b09536dc6e03595c0396b358d9",
+      "snapshotHash": "00a08da7ff5f3894e4f03b71767746b13b136d04c402c5fafa1be9e8aff22ad5",
+      "promptHash": "117dd0dc2a373b6c4e3b9c363075bd2e2e0cd21e3135c3386245ac9560dac713",
+      "sharedInputVerified": true,
+      "results": [
+        {
+          "targetId": "gemini-3-5-flash-lite",
+          "status": "success",
+          "latencyMs": 9167,
+          "generationAttempts": 1,
+          "validation": {
+            "json": true,
+            "schema": true,
+            "citations": true
+          },
+          "failureCategory": null,
+          "providerError": null,
+          "promptHash": "117dd0dc2a373b6c4e3b9c363075bd2e2e0cd21e3135c3386245ac9560dac713",
+          "evidenceHash": "b82c7b8887aa82d78b38e942973818191c0f0b98193bc069f5ea9f5bf0d347b8",
+          "citationOrder": [
+            "S1"
+          ]
+        },
+        {
+          "targetId": "groq-gpt-oss-120b",
+          "status": "success",
+          "latencyMs": 1975,
+          "generationAttempts": 1,
+          "validation": {
+            "json": true,
+            "schema": true,
+            "citations": true
+          },
+          "failureCategory": null,
+          "providerError": null,
+          "promptHash": "117dd0dc2a373b6c4e3b9c363075bd2e2e0cd21e3135c3386245ac9560dac713",
+          "evidenceHash": "b82c7b8887aa82d78b38e942973818191c0f0b98193bc069f5ea9f5bf0d347b8",
+          "citationOrder": [
+            "S1"
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "QB39",
+      "questionHash": "af60196c8049511f0000616cf03a9531f6d28c8b27a717019d551c10187ac288",
+      "snapshotHash": "dc935bd6670bb837cf677b16d1401afbf8f47262041a607a507d470e3df3ad0a",
+      "promptHash": "54f8c494a166f3650c17e59b6a77f4580c3c46c1d225650235f4bacaba9477ff",
+      "sharedInputVerified": true,
+      "results": [
+        {
+          "targetId": "gemini-3-5-flash-lite",
+          "status": "success",
+          "latencyMs": 9657,
+          "generationAttempts": 1,
+          "validation": {
+            "json": true,
+            "schema": true,
+            "citations": true
+          },
+          "failureCategory": null,
+          "providerError": null,
+          "promptHash": "54f8c494a166f3650c17e59b6a77f4580c3c46c1d225650235f4bacaba9477ff",
+          "evidenceHash": "ac531d31c300543b97ef276c20899e49f5ccdae3defe39b5a25405dfb13bca53",
+          "citationOrder": [
+            "S1",
+            "S2"
+          ]
+        },
+        {
+          "targetId": "groq-gpt-oss-120b",
+          "status": "success",
+          "latencyMs": 1797,
+          "generationAttempts": 1,
+          "validation": {
+            "json": true,
+            "schema": true,
+            "citations": true
+          },
+          "failureCategory": null,
+          "providerError": null,
+          "promptHash": "54f8c494a166f3650c17e59b6a77f4580c3c46c1d225650235f4bacaba9477ff",
+          "evidenceHash": "ac531d31c300543b97ef276c20899e49f5ccdae3defe39b5a25405dfb13bca53",
+          "citationOrder": [
+            "S1",
+            "S2"
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "QB40",
+      "questionHash": "c037c39bac143362d0d9ffbcb878c8b4c94abda5b053c22593a018291f6e9a17",
+      "snapshotHash": "ab62cb8520578cf2bf1ab146a3526618fb1e37a4489e7433b2a4a0c6c7238c7b",
+      "promptHash": "d558234552e22f716a30478960f7e8ba4704f68a67935f8aab822bf888535be3",
+      "sharedInputVerified": true,
+      "results": [
+        {
+          "targetId": "gemini-3-5-flash-lite",
+          "status": "success",
+          "latencyMs": 5362,
+          "generationAttempts": 1,
+          "validation": {
+            "json": true,
+            "schema": true,
+            "citations": true
+          },
+          "failureCategory": null,
+          "providerError": null,
+          "promptHash": "d558234552e22f716a30478960f7e8ba4704f68a67935f8aab822bf888535be3",
+          "evidenceHash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "citationOrder": []
+        },
+        {
+          "targetId": "groq-gpt-oss-120b",
+          "status": "failure",
+          "latencyMs": 217,
+          "generationAttempts": 1,
+          "validation": {
+            "json": null,
+            "schema": null,
+            "citations": null
+          },
+          "failureCategory": "rate_limit",
+          "providerError": {
+            "category": "rate_limit",
+            "httpStatus": 429
+          },
+          "promptHash": "d558234552e22f716a30478960f7e8ba4704f68a67935f8aab822bf888535be3",
+          "evidenceHash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "citationOrder": []
+        }
+      ]
+    }
+  ],
+  "rateLimitDiagnostics": {
+    "schemaVersion": 1,
+    "runId": "e8fbc67f-9950-4c9e-92f6-c341a4f6ad6e",
+    "interpretation": "원본 error body와 raw headers는 저장되지 않았다. Retry-After 파생값과 requests/tokens reset 중 최댓값만 보존돼 RPM/TPM/기타 quota를 확정할 수 없다.",
+    "semanticReview": "not-performed",
+    "rerun": "not-performed",
+    "cases": [
+      {
+        "caseId": "QB03",
+        "httpStatus": 429,
+        "failureCategory": "rate_limit",
+        "retryDelayMs": 9000,
+        "resetAfterMs": 172800
+      },
+      {
+        "caseId": "QB04",
+        "httpStatus": 429,
+        "failureCategory": "rate_limit",
+        "retryDelayMs": 8000,
+        "resetAfterMs": 172800
+      },
+      {
+        "caseId": "QB05",
+        "httpStatus": 429,
+        "failureCategory": "rate_limit",
+        "retryDelayMs": 5000,
+        "resetAfterMs": 172800
+      },
+      {
+        "caseId": "QB07",
+        "httpStatus": 429,
+        "failureCategory": "rate_limit",
+        "retryDelayMs": 13000,
+        "resetAfterMs": 259200
+      },
+      {
+        "caseId": "QB08",
+        "httpStatus": 429,
+        "failureCategory": "rate_limit",
+        "retryDelayMs": 10000,
+        "resetAfterMs": 259200
+      },
+      {
+        "caseId": "QB09",
+        "httpStatus": 429,
+        "failureCategory": "rate_limit",
+        "retryDelayMs": 9000,
+        "resetAfterMs": 259200
+      },
+      {
+        "caseId": "QB11",
+        "httpStatus": 429,
+        "failureCategory": "rate_limit",
+        "retryDelayMs": 30000,
+        "resetAfterMs": 345600
+      },
+      {
+        "caseId": "QB12",
+        "httpStatus": 429,
+        "failureCategory": "rate_limit",
+        "retryDelayMs": 13000,
+        "resetAfterMs": 345600
+      },
+      {
+        "caseId": "QB13",
+        "httpStatus": 429,
+        "failureCategory": "rate_limit",
+        "retryDelayMs": 13000,
+        "resetAfterMs": 345600
+      },
+      {
+        "caseId": "QB14",
+        "httpStatus": 429,
+        "failureCategory": "rate_limit",
+        "retryDelayMs": 8000,
+        "resetAfterMs": 345600
+      },
+      {
+        "caseId": "QB15",
+        "httpStatus": 429,
+        "failureCategory": "rate_limit",
+        "retryDelayMs": 3000,
+        "resetAfterMs": 345600
+      },
+      {
+        "caseId": "QB16",
+        "httpStatus": 429,
+        "failureCategory": "rate_limit",
+        "retryDelayMs": 5000,
+        "resetAfterMs": 345600
+      },
+      {
+        "caseId": "QB18",
+        "httpStatus": 429,
+        "failureCategory": "rate_limit",
+        "retryDelayMs": 6000,
+        "resetAfterMs": 432000
+      },
+      {
+        "caseId": "QB21",
+        "httpStatus": 429,
+        "failureCategory": "rate_limit",
+        "retryDelayMs": 8000,
+        "resetAfterMs": 604800
+      },
+      {
+        "caseId": "QB23",
+        "httpStatus": 429,
+        "failureCategory": "rate_limit",
+        "retryDelayMs": 16000,
+        "resetAfterMs": 691200
+      },
+      {
+        "caseId": "QB24",
+        "httpStatus": 429,
+        "failureCategory": "rate_limit",
+        "retryDelayMs": 15000,
+        "resetAfterMs": 691200
+      },
+      {
+        "caseId": "QB25",
+        "httpStatus": 429,
+        "failureCategory": "rate_limit",
+        "retryDelayMs": 15000,
+        "resetAfterMs": 691200
+      },
+      {
+        "caseId": "QB26",
+        "httpStatus": 429,
+        "failureCategory": "rate_limit",
+        "retryDelayMs": 16000,
+        "resetAfterMs": 691200
+      },
+      {
+        "caseId": "QB27",
+        "httpStatus": 429,
+        "failureCategory": "rate_limit",
+        "retryDelayMs": 9000,
+        "resetAfterMs": 691200
+      },
+      {
+        "caseId": "QB28",
+        "httpStatus": 429,
+        "failureCategory": "rate_limit",
+        "retryDelayMs": 9000,
+        "resetAfterMs": 691200
+      },
+      {
+        "caseId": "QB29",
+        "httpStatus": 429,
+        "failureCategory": "rate_limit",
+        "retryDelayMs": 2000,
+        "resetAfterMs": 691200
+      },
+      {
+        "caseId": "QB32",
+        "httpStatus": 429,
+        "failureCategory": "rate_limit",
+        "retryDelayMs": 24000,
+        "resetAfterMs": 864000
+      },
+      {
+        "caseId": "QB33",
+        "httpStatus": 429,
+        "failureCategory": "rate_limit",
+        "retryDelayMs": 12000,
+        "resetAfterMs": 864000
+      },
+      {
+        "caseId": "QB34",
+        "httpStatus": 429,
+        "failureCategory": "rate_limit",
+        "retryDelayMs": 8000,
+        "resetAfterMs": 864000
+      },
+      {
+        "caseId": "QB35",
+        "httpStatus": 429,
+        "failureCategory": "rate_limit",
+        "retryDelayMs": 4000,
+        "resetAfterMs": 864000
+      },
+      {
+        "caseId": "QB36",
+        "httpStatus": 429,
+        "failureCategory": "rate_limit",
+        "retryDelayMs": 2000,
+        "resetAfterMs": 864000
+      },
+      {
+        "caseId": "QB37",
+        "httpStatus": 429,
+        "failureCategory": "rate_limit",
+        "retryDelayMs": 3000,
+        "resetAfterMs": 864000
+      },
+      {
+        "caseId": "QB40",
+        "httpStatus": 429,
+        "failureCategory": "rate_limit",
+        "retryDelayMs": 9000,
+        "resetAfterMs": 1036800
+      }
+    ]
+  },
+  "representativeCases": [
+    {
+      "caseId": "QB22",
+      "question": "Ivory 화면 실험에서는 기존 시스템의 어느 부분을 보존했고 모바일 화면까지 검증했나요?",
+      "rating": "fail",
+      "strictFail": true,
+      "reason": "모바일 도면 부재에서 검증 미수행을 단정했다. 검증 수행 여부는 미확인이다.",
+      "evidenceReason": "S1은 보존 영역, S2는 모바일 도면 부재만 직접 지원하며 검증 미수행을 확정하지 않는다.",
+      "sourceResult": "results/QB22.json",
+      "sourceResultSha256": "73fedfc7b2a6e55889ded8aefb0f38a5327f87280d8b5281e7ac34a106014416",
+      "caseHash": "775e525f9ba6c04e716919e667b97c90d82de255fe8cabb47e31833cf9f12481",
+      "evidenceHash": "026175ff59039a6d12c83c678947e2801ef3a1c8bd9cbf75d7e9c804ba08aad6",
+      "promptHash": "94101486c4c80031d7b6a57247f51f81722c7e9e586c0f0ed9ca15fdfb4c8ba1",
+      "expectedAnswerLanguage": "ko",
+      "generated": {
+        "basis": "records",
+        "answer": "류승원(Riu Salze)의 Ivory 화면 실험(Why My Ship Is Ivory)에서는 API, DB, 인증, 기존 서비스 흐름을 그대로 보존했습니다. 모바일 화면 검증과 관련해서는, 원본 도면에 mobile responsive design이 없어 모바일 반응형 디자인은 검증되지 않았습니다.",
+        "citations": [
+          "S1",
+          "S2"
+        ]
+      }
+    },
+    {
+      "caseId": "QB35",
+      "question": "Cosmic Horizon에서 Stargazer 모델은 어떤 방식으로 작업을 시작하나요? 일본어로 답해 주세요.",
+      "rating": "fail",
+      "strictFail": true,
+      "reason": "설명과 인용은 맞지만 명시적인 일본어 응답 요청을 따르지 않고 한국어로 답했다.",
+      "evidenceReason": "Stargazer Model은 내용을 지원하나 question과 expectedAnswerLanguage=ja의 명시적 언어 계약을 위반했다.",
+      "sourceResult": "results/QB35.json",
+      "sourceResultSha256": "1cce041ee0d479a04377df807fad617469ce11d6a40295289bc4fbb0c7d844d7",
+      "caseHash": "21fddee65f3c087d1b8ec5af6d9a38d3bd7a1a8e55e8f3f8c9c616d8950530e4",
+      "evidenceHash": "7bcce2fd717fc8b7ce2bc7e00c15b6f279153e01002ed0d733fe8f7b32110ac3",
+      "promptHash": "780f0bdf7cf07b56fac06bd2e3482965ee67a0fe0e392436af3b51b006d4246f",
+      "expectedAnswerLanguage": "ja",
+      "generated": {
+        "basis": "records",
+        "answer": "Cosmic Horizon에서 Stargazer 모델은 처음부터 요구사항과 구조를 완전히 정의하기 어려울 때 AI가 먼저 눈에 보이는 형태를 만들고, 사람이 그 결과를 보며 방향을 구체화하는 방식으로 작업을 시작합니다.",
+        "citations": [
+          "S1"
+        ]
+      }
+    }
+  ]
+}

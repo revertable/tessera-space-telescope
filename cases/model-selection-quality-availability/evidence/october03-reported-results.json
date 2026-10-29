@@ -1,0 +1,101 @@
+{
+  "classification": "Reconstructed",
+  "evidenceLevel": "Previously transcribed historical reports; registered originals unavailable in this checkout.",
+  "registeredReports": [
+    {
+      "path": "tmp/evaluation/generation-model-comparison/2026-10-03-full40-3way-1/final-report.md",
+      "registeredSha256": "a82073631b743462c5a31051071ba994f9339b346849e29bbe171375ace7c231"
+    },
+    {
+      "path": "tmp/evaluation/generation-model-comparison/2026-10-03-retry-primary-1/report.md",
+      "registeredSha256": "9e29fbbe0540b6a90aa138b1b8754143dfa0f71c2da1f22f8bc055e7f8a9602e"
+    },
+    {
+      "path": "tmp/evaluation/generation-model-comparison/2026-10-03-retry-primary-1/production-candidate-decision.json",
+      "registeredSha256": "d3f9dadf3cbec2e6b7a182731a6963a8f3c68ab9efdb1d272ca3b37e9422db1b"
+    }
+  ],
+  "threeWay": {
+    "condition": "Same saved evidence, question, prompt and schema; fresh full40; 40 successful responses per model. Exact archived model options are unavailable.",
+    "successfulRequests": 120,
+    "results": [
+      {
+        "model": "gemini-3.5-flash-lite",
+        "fullyCorrect": 27,
+        "total": 40,
+        "groundingFailures": 0,
+        "contractFailures": 1,
+        "meanGenerationLatencyMs": 1508
+      },
+      {
+        "model": "command-a-plus-05-2026",
+        "fullyCorrect": 22,
+        "total": 40,
+        "groundingFailures": 3,
+        "contractFailures": 4,
+        "meanGenerationLatencyMs": 3042
+      },
+      {
+        "model": "openai/gpt-oss-120b",
+        "fullyCorrect": 25,
+        "total": 40,
+        "groundingFailures": 2,
+        "contractFailures": 0,
+        "meanGenerationLatencyMs": 1524
+      }
+    ]
+  },
+  "retryPrimary": {
+    "condition": "Same question, evidence, order, citations, prompt and schema; four questions planned; two pairs completed.",
+    "plannedCases": [
+      "QB18",
+      "QB20",
+      "QB25",
+      "QB11"
+    ],
+    "completedPairs": [
+      {
+        "caseId": "QB18",
+        "reportedPreference": "gemini-3.8-flash"
+      },
+      {
+        "caseId": "QB20",
+        "reportedPreference": "equivalent"
+      }
+    ],
+    "gemini38": {
+      "requests": 15,
+      "success": 2,
+      "http503": 12,
+      "http429": 1,
+      "qb18ElapsedUntilSuccessMs": 742410,
+      "qb18SuccessfulRequestMs": 16564,
+      "qb20SuccessfulRequestMs": 17222
+    },
+    "gemini35": {
+      "requests": 2,
+      "success": 2
+    },
+    "totalRequests": 17,
+    "stoppedAtKst": "2026-10-03T03:35:46+09:00",
+    "requestsAfterDaily429": 0,
+    "separateKnownHistory": {
+      "requests": 20,
+      "success": 3,
+      "http503": 17,
+      "relationToThisRun": "Exact attempt-level correspondence remains unconfirmed."
+    },
+    "unconfirmed": [
+      "Per-request provider-side quota accounting",
+      "Other account activity",
+      "Monetary billing"
+    ]
+  },
+  "method": "Select facts already transcribed in the consolidated history and evidence register. Registered report hashes are identifiers from that record, not hashes newly checked against the unavailable files.",
+  "transcribedUserRequests": {
+    "sessionId": "01a0fc21-8175-77b2-9d49-087fa07ff6b8",
+    "gemini38StopAndRejectionConditionsKst": "2026-10-03T03:20:37+09:00",
+    "groqGptOssReevaluationRequestKst": "2026-10-03T04:05:58+09:00",
+    "originalSessionAvailability": "Registered original unavailable in this checkout; request times preserved in the evidence register."
+  }
+}

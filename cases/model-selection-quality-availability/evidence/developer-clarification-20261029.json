@@ -1,0 +1,184 @@
+{
+  "classification": "Reconstructed",
+  "source": "Direct Korean user clarification and user-supplied ChatGPT history-search results in the Tessera case 06 conversation on 2026-10-29; editorial paraphrase. Original ChatGPT messages were not directly inspected.",
+  "historicalRecordPriority": [
+    "Registered October 3 retry-primary report and production-candidate decision, as transcribed in the consolidated history/evidence register",
+    "Committed model configuration changes"
+  ],
+  "decisionRationaleKo": "무료 티어 하루 20회 한도에서 정상 응답 3회·HTTP 503 실패 17회 뒤 일일 quota 소진을 나타내는 HTTP 429를 관찰했다. 사용자는 이 결과로 503 실패 요청도 호출 한도에 포함된다고 판단했다. 하루 20회 자체도 Synethos 운영에 부족했고, 대부분 실패로 소진되는 상황에서는 3.8을 채택할 이유가 없었다. 503 retry는 허용하되 일일 한도 429에서 포기한다는 중단 조건을 직접 정하고 결과에 따라 제외했다.",
+  "observedSequenceKo": "운영 판단의 사용량 이력은 정상 3·503 실패 17회 후 429였다. 별도 품질 비교의 3.8 요청은 15회로 성공 2·503 12·429 1이며, Gemini 3.5 성공 2회를 포함하면 전체 17회다. AI Studio 17/20도 당시 사용자 보고로 보존한다. 각 집계의 요청별 대응은 미확인이다.",
+  "quotaAccounting": "The developer concluded from the observed failures and daily-quota exhaustion that 503 requests counted toward the allowance. Independent provider-side per-request accounting remains unconfirmed.",
+  "externalSearchRecollectionKo": "당시 인터넷에서 관련 문제를 검색했고, 기억으로는 비슷한 불만을 제기하는 사용자들이 많았다. 원본 ChatGPT 대화 URL과 식별자는 확보되지 않았다.",
+  "chatgptSourceStatus": "Original ChatGPT conversation URLs, identifiers, and full messages remain unavailable. Retained search evidence includes seven precise October 3 times, three approximate September 26 times, and the October 16 operating decision. These keep their user-provided search-evidence level.",
+  "editorialPolicy": "Distinguish observed execution counts, developer judgments, user-supplied history-search reports, and directly inspected public forum posts. Keep the initial September 26 switch, October 3 re-evaluation, and October 16 fallback-retention decision separate. Preserve original experiment scopes and unresolved raw-source limits.",
+  "historySearchEvidence": {
+    "suppliedDate": "2026-10-29",
+    "evidenceLevel": "User-supplied ChatGPT past-conversation search results; original messages not directly inspected.",
+    "timezone": "Asia/Seoul (UTC+09:00)",
+    "events": [
+      {
+        "timeKst": "2026-10-03T03:13:25+09:00",
+        "kind": "Discussion",
+        "summaryKo": "반복적인 HTTP 503 오류와 호출 한도에 관한 테스트 결과 논의."
+      },
+      {
+        "timeKst": "2026-10-03T03:14:41+09:00",
+        "kind": "User statement",
+        "summaryKo": "503이 이 정도면 사실상 쓰지 말라는 것 같다며 무료 티어의 실효성에 의문을 제기."
+      },
+      {
+        "timeKst": "2026-10-03T03:15:45+09:00",
+        "kind": "User request",
+        "summaryKo": "해외 커뮤니티의 유사 사례 조사 요청."
+      },
+      {
+        "timeKst": "2026-10-03T03:16:17+09:00",
+        "kind": "ChatGPT response",
+        "summaryKo": "Reddit과 Google AI Developers Forum의 유사한 503 사례를 조사해 전달했으며 유료 프로젝트의 보고도 포함했다."
+      },
+      {
+        "timeKst": "2026-10-03T03:19:52+09:00",
+        "kind": "User condition",
+        "summaryKo": "503은 재시도하되 일일 한도 429가 발생하면 Gemini 3.8을 포기하도록 지정."
+      },
+      {
+        "timeKst": "2026-10-03T03:35:06+09:00",
+        "kind": "User observation",
+        "summaryKo": "AI Studio 일일 사용량 17/20을 확인하고 반복 실패 중 사용량 소진을 지적."
+      },
+      {
+        "timeKst": "2026-10-03T03:49:02+09:00",
+        "kind": "Test summary",
+        "summaryKo": "Gemini 3.8 요청 15회: 성공 2회, HTTP 503 12회, HTTP 429 1회."
+      }
+    ],
+    "crossCheck": "The 15-request breakdown matches the registered October 3 experiment transcription. The retry/stop condition corresponds in content to the separately transcribed 03:20:37 Codex request. AI Studio 17/20 is a separately reported account-usage observation; individual request deductions and one-to-one correspondence to the 17-request experiment remain unconfirmed."
+  },
+  "decisionRationaleEn": "Against a free-tier daily allowance of 20 calls, the developer observed three successful responses, seventeen HTTP 503 failures, and then HTTP 429 indicating daily-quota exhaustion. From this result, the developer concluded that 503 failures counted toward the allowance. Twenty calls were already insufficient for Synethos, and losing most of them to failures removed the practical reason to adopt 3.8. The developer permitted 503 retry, set daily-limit 429 as the abandonment condition, and excluded the model when that condition was met.",
+  "operatingObservation": {
+    "dailyCallAllowance": 20,
+    "successfulResponses": 3,
+    "http503Failures": 17,
+    "subsequentResponse": "HTTP 429 indicating daily-quota exhaustion",
+    "sourceLevel": "Direct developer clarification supplied on 2026-10-29; known usage history also retained in the earlier research transcription.",
+    "relationToPairedExperiment": "The 20-request usage history and 15-request Gemini 3.8 paired experiment keep separate scopes; exact attempt-level correspondence remains unconfirmed."
+  },
+  "paidAccessDecision": {
+    "sourceLevel": "Developer explanation and user-supplied ChatGPT history-search record, supplemented on 2026-10-29; original messages unavailable.",
+    "searchRecordTimeKst": "2026-10-03T03:16:17+09:00",
+    "consideredAlternative": "Paid access to resolve availability problems.",
+    "informationConsidered": "Reports described 503 failures in paid as well as free projects.",
+    "developerJudgmentKo": "사용자는 유료 전환으로 해결할 수 있을지도 검토했지만 유료 환경의 유사한 503 사례를 보고 과금으로 안정적인 응답을 기대할 근거가 부족하다고 판단했다. 추가 비용을 들여 3.8을 채택할 이유가 없다고 결정했다.",
+    "developerJudgmentEn": "The developer considered paid access, but similar 503 reports in paid environments gave insufficient assurance of stable responses. The additional cost did not justify adopting 3.8.",
+    "paidReportScope": "The measured paid-tier report concerns Gemini 3.6 Flash, Paid Tier 1, rather than a measured paid-tier Gemini 3.8 run."
+  },
+  "externalReferences": [
+    {
+      "url": "https://discuss.ai.google.dev/t/gemini-api-503/183913",
+      "title": "Multiple models returning 503 on Gemini API",
+      "publishedDate": "2026-09-21",
+      "checkedDate": "2026-10-29",
+      "evidenceLevel": "Public forum post and reply directly inspected during publication.",
+      "reportedEnvironment": "Google Apps Script / Free tier",
+      "affectedModels": [
+        "gemini-3.7-flash",
+        "gemini-3.8-flash",
+        "gemini-3.6-flash"
+      ],
+      "postObservation": "The author reported recurring 503 responses despite retries and model changes.",
+      "replyObservation": "A reply attributed 503 responses to temporary service overload.",
+      "scope": "A dated external user report of similar 503 failures. The 20-call operating constraint is attributed separately to the developer and historical quota record."
+    },
+    {
+      "url": "https://discuss.ai.google.dev/t/handling-429-503-errors-from-the-gemini-api/124640/79",
+      "title": "Handling 429 / 503 errors from the Gemini API — post 79",
+      "publishedDate": "2026-09-24",
+      "checkedDate": "2026-10-29",
+      "evidenceLevel": "Public forum user report directly inspected during publication.",
+      "models": [
+        "gemini-3.7-flash",
+        "gemini-3.8-flash"
+      ],
+      "environment": "Free tier",
+      "reportedObservation": "The author reported repeated 503 failures and an RPD counter increasing after failed calls. Gemini 3.8 showed 8/20 with every observed call failing."
+    },
+    {
+      "url": "https://discuss.ai.google.dev/t/persistent-37-unavailable-503-on-generatecontent-with-gemini-3-6-flash-paid-tier-1-zero-429s-counttokens-unaffected/179971",
+      "title": "Persistent 37% UNAVAILABLE (503) on GenerateContent with gemini-3.6-flash — Paid Tier 1",
+      "publishedDate": "2026-08-28",
+      "checkedDate": "2026-10-29",
+      "evidenceLevel": "Public forum user report directly inspected during publication.",
+      "model": "gemini-3.6-flash",
+      "environment": "Paid Tier 1",
+      "reportedWindowDays": 30,
+      "reportedGenerateContentRequests": 646,
+      "reportedErrorPercent": 37.46,
+      "reportedFailureStatus": 503,
+      "reportedHttp429Count": 0,
+      "scope": "Reported values belong to this Gemini 3.6 Flash/Tier 1 workload."
+    }
+  ],
+  "initialTransitionSearchEvidence": {
+    "suppliedDate": "2026-10-29",
+    "evidenceLevel": "User-supplied ChatGPT past-conversation search results; original conversation URL/full messages unavailable.",
+    "timezone": "Asia/Seoul (UTC+09:00)",
+    "events": [
+      {
+        "timeKst": "2026-09-26 13:39 KST",
+        "precision": "Approximate minute",
+        "kind": "User judgment",
+        "summaryKo": "Gemini 3.8 무료 티어 하루 20회 제한은 공개 서비스 운영에 부적합하다고 판단.",
+        "summaryEn": "The developer judged the Gemini 3.8 free-tier allowance of 20 daily calls unsuitable for a public service."
+      },
+      {
+        "timeKst": "2026-09-26 13:43 KST",
+        "precision": "Approximate minute",
+        "kind": "User request",
+        "summaryKo": "Gemini 3.5 Flash-Lite 전환 요청.",
+        "summaryEn": "The developer requested switching to Gemini 3.5 Flash-Lite."
+      },
+      {
+        "timeKst": "2026-09-26 13:50 KST",
+        "precision": "Approximate minute",
+        "kind": "Test report",
+        "summaryKo": "3.5 Flash-Lite 실제 테스트 5건 성공 보고.",
+        "summaryEn": "Five successful live tests of 3.5 Flash-Lite were reported."
+      }
+    ],
+    "crossCheck": "Commit 2e02e71 at 2026-09-26 14:14:51 KST records Gemini 3.5 primary and 3.1 fallback. The five-test outcome retains its search-report level; no original responses were inspected. This initial switch and the October 3 re-evaluation are separate events."
+  },
+  "groqRetentionSearchEvidence": {
+    "suppliedDate": "2026-10-29",
+    "eventDate": "2026-10-16",
+    "evidenceLevel": "User-supplied ChatGPT past-conversation search results; original conversation URL/full messages unavailable.",
+    "priorEvaluations": {
+      "october03": {
+        "gemini35FullyCorrect": 27,
+        "groqGptOssFullyCorrect": 25,
+        "questionsPerModel": 40,
+        "sourceLevel": "Earlier transcribed full-40 report."
+      },
+      "october15": {
+        "groqAttempts": 40,
+        "groqSuccesses": 12,
+        "groqHttp429Failures": 28,
+        "sourceLevel": "Directly inspected archived results."
+      }
+    },
+    "reportedChatgptAdvice": {
+      "topic": "Free-operation capacity versus model eligibility",
+      "summaryKo": "ChatGPT는 모델 사용 자격보다 호출 용량이 문제라고 설명하며 8K TPM 등을 제시했다.",
+      "summaryEn": "ChatGPT described call capacity, rather than model eligibility, as the free-operation concern and cited limits including 8K TPM.",
+      "citedCapacity": "8K TPM",
+      "verification": "Historical discussion information from the search record; the exact applicable account/model limit was not independently established."
+    },
+    "developerJudgmentKo": "Gemini가 primary이고 Groq는 장애 시 호출하는 fallback이므로 Groq를 주력으로 사용하는 것과 운영 조건이 다르다고 판단했다. 무료 공개 서비스에서 Gemini 3.5 → Groq GPT-OSS-120B 구성을 유지했다.",
+    "developerJudgmentEn": "The developer distinguished Groq calls after a Gemini primary failure from using Groq as the main generator, and retained Gemini 3.5 → Groq GPT-OSS-120B for the free public service.",
+    "finalRuntimeTargetIds": [
+      "gemini-3-5-flash-lite",
+      "groq-gpt-oss-120b"
+    ],
+    "crossCheck": "The earlier evaluation summaries retain their own conditions. Committed configuration retains the Gemini/Groq pair after Cohere removal.",
+    "quotaCause": "The exact cause of the October 15 HTTP 429 responses remains unconfirmed; the 8K TPM discussion does not establish that all failures were TPM exhaustion."
+  }
+}
