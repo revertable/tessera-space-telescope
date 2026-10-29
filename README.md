@@ -18,16 +18,11 @@ Code is classified by its relationship to the private implementation:
 
 ## Engineering Decisions
 
-No public cases have been selected yet.
+Read the [engineering development records](docs/engineering-decisions.md) for each decision's problem, judgment, implementation, verification, and code provenance.
 
-Each case will briefly describe:
-
-- **Problem:** the issue and constraints being addressed.
-- **Decision:** the engineering judgment, alternatives, and reasons for the choice.
-- **Implementation:** how the choice appears in code, with links to the exact source files and lines.
-- **Verification:** the observed results and limits of the verification.
-
-Each code item will carry its **Excerpt**, **Reconstructed**, or **Mixed** classification. Reconstructed sections in Mixed files will be marked in source-code comments.
+| No. | Case | Development date |
+|---|---|---|
+| 01 | [From Local Qwen/Ollama Inference to the Gemini API](docs/engineering-decisions.md#01--from-local-qwenollama-inference-to-the-gemini-api) | 2026-09-26 |
 
 ## Copyright
 

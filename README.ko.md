@@ -18,16 +18,11 @@ Synethos 전체 소스는 비공개로 유지하며, Tessera에는 선택한 코
 
 ## Engineering Decisions
 
-아직 공개할 사례를 선정하지 않았습니다.
+[엔지니어링 개발 기록](docs/engineering-decisions.ko.md)에서 각 선택의 문제·판단·구현·검증과 코드 출처를 읽을 수 있습니다.
 
-각 사례는 다음 내용을 간결하게 설명합니다.
-
-- **문제:** 해결하려던 문제와 제약.
-- **판단:** 엔지니어링적 판단, 검토한 대안과 선택 이유.
-- **구현:** 선택을 코드로 구현한 방식과 정확한 소스 파일·라인 링크.
-- **검증:** 관찰한 결과와 검증의 한계.
-
-각 코드에는 **Excerpt**, **Reconstructed**, **Mixed** 분류를 표시합니다. Mixed 파일에서 재구성한 부분은 소스 코드 주석으로 표시합니다.
+| 번호 | 사례 | 개발 날짜 |
+|---|---|---|
+| 01 | [From Local Qwen/Ollama Inference to the Gemini API](docs/engineering-decisions.ko.md#01--from-local-qwenollama-inference-to-the-gemini-api) | 2026-09-26 |
 
 ## Copyright
 
