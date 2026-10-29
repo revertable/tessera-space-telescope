@@ -22,6 +22,7 @@
 - [04 — Provider 교체 설계와 Embedding 안정화](#04--provider-교체-설계와-embedding-안정화) — 2026-09-26 ~ 2026-10-17
 - [05 — Cross-PC Index Portability](#05--cross-pc-index-portability) — 2026-09-28 ~ 2026-10-26
 - [06 — Model Selection: Quality and Availability](#06--model-selection-quality-and-availability) — 2026-09-26 ~ 2026-10-16
+- [07 — HTTP 소켓 응답 경계와 API 책임 분리](#07--http-소켓-응답-경계와-api-책임-분리) — 2026-10-06
 
 ## 01 — From Local Qwen/Ollama Inference to the Gemini API
 
@@ -1414,3 +1415,134 @@ Corpus는 27 sources·372 chunks였다. Question bank canonical-portfolio conten
 Full40의 요청·응답·결과·당시 수동 판정 각 120개, 직전/재시도 ledger 24건과 reasoning 요청 77건을 대조했다. 요청 본문 hash와 응답 대응·분류 집계·성공 지연을 확인했으며 reasoning 요청은 baseline과 공통 입력이 같고 reasoning 옵션만 달랐다. GPT-OSS high의 품질 분모는 성공 36문항·required claim 44개·양성 질문 33개로 확인하고, 실패 QB37을 포함한 시도 전체 집계와 분리했다.
 
 공개 JSON 14개가 파싱됐고 영문·한글의 파일/외부 링크와 SHA-256 집합이 일치했다. README 2개와 개발 기록 2개의 로컬 링크 656개는 파일·헤딩·라인 범위 검증을 통과했다. 기존 소스·테스트 119개와 Synethos 원본을 보존했으며 Synethos working tree는 clean이었다. 변경한 기존 파일은 개발 기록 2개와 근거 JSON 2개이고, reasoning 근거 JSON과 공통 복구 근거 등록부를 추가했다. 공개 대상에서 credential 값·로컬 사용자 경로·비공개 저장소 URL·Knowledge 전체 payload를 점검했다. 검증은 원본 열람과 로컬 계산으로 수행했으며 새 모델 호출·과거 실험 재실행·애플리케이션 테스트·index build·서버 접근은 수행하지 않았다.
+
+## 07 — HTTP 소켓 응답 경계와 API 책임 분리
+
+**개발 날짜:** 2026-10-06
+
+**코드 분류:** Excerpt — 전체 원본 소스·테스트 12개; Reconstructed — 근거 기록 2개.
+
+**결과:** 본문 크기·읽기 deadline을 넘긴 요청에 413/408 JSON을 전송한 뒤 연결을 닫도록 수정했다. 실제 소켓 회귀와 production build 검증 후, 공개 HTTP 응답 정책과 safe diagnostics를 별도 모듈로 분리했다.
+
+### P0 보호 계약과 초기 검증
+
+Synethos의 /api/ask P0 보호는 provider 작업 전에 admission과 입력 경계를 적용했다. 본문은 JSON·공백을 포함해 8192bytes, body 읽기는 전체 5초, 질문은 trim 후 2~1000 UTF-16 code units였다. 주소당 rolling 60초 10회·프로세스 전체 30회와 주소당 동시 1개·프로세스 전체 2개의 lease를 사용했다. 입력 오류에서도 lease를 반환하도록 했다. 이 사례는 그중 본문 거부 응답과 후속 API 책임 분리를 다룬다.
+
+당시 보고서는 초기 48개 파일·429개 테스트, static check와 production build 통과를 기록한다. 메모리의 Request·ReadableStream과 mocked transport로 입력·deadline·호출 제한 계약을 확인했고, 초기 loopback smoke는 invalid-question과 rate-limit 경로를 사용했다. 이 검증 뒤 실제 chunked upload와 미완료 body를 보낸 HTTP 검증에서 응답 결함이 드러났다.
+
+### 실제 HTTP에서 관찰한 ECONNRESET
+
+실행 환경은 Windows, Node.js 24.16.0 x64, SvelteKit 2.70.3, adapter-node 5.5.7, @google/genai 2.24.0으로 보고됐다. 다섯 automated HTTP 그룹의 70 assertions 중 66개가 통과하고 4개가 실패했다. 실패 4개는 아래 두 결함의 반복 관찰이다.
+
+| 입력 | 기대한 계약 | 당시 실제 관측 |
+|---|---|---|
+| 8193-byte chunked body | 413 REQUEST_TOO_LARGE JSON | ECONNRESET; upstream dispatch 0회 |
+| 미완료 body | 5초 후 408 REQUEST_TIMEOUT JSON | 약 5초 후 ECONNRESET; 같은 주소의 후속 요청은 admission 성공 |
+
+크기·deadline 거부와 작업 차단은 수행됐지만 클라이언트가 받을 JSON 응답은 완료되지 않았다. [당시 관측 요약](../cases/http-socket-response-boundaries/evidence/observed-results.json#L1-L199)은 검증 분모와 각 실행의 조건을 보존한다.
+
+초기 정상 cloud 질문 2건은 embedding 2회·generation 2회, 모두 HTTP 200으로 보고됐다. Fault profile은 합성 credential과 실제 local HTTP upstream을 사용했다. Sandbox transport EACCES로 거부된 embedding 시도 4회와 초기 batchEmbedContents 계측 누락은 harness 준비 실패로 별도 기록됐으며 위 애플리케이션 결과에서 제외됐다.
+
+### 원인: 입력 취소가 응답 소켓을 먼저 종료
+
+당시 보고서는 readAskBody의 무조건적인 reader.cancel()이 SvelteKit get_raw_body().cancel(reason)을 통해 req.destroy(reason)에 도달했다고 기록한다. 거부된 body가 미완료인 동안 요청 소켓을 파괴해 route의 JSON이 전달되기 전에 연결이 종료됐다. 집 PC에 설치된 같은 SvelteKit 버전의 node 구현에서도 이 cancel→destroy 경로를 직접 확인했다.
+
+메모리 Request 테스트의 stream 취소는 실제 IncomingMessage 소켓에 연결되지 않았다. 이후 [소켓 회귀 테스트](../cases/http-socket-response-boundaries/socket/body-socket.test.ts#L1-L33)는 Node HTTP server와 설치된 getRequest/setResponse를 함께 사용해 route 반환값이 실제 wire 응답으로 완료되는 경계를 검사했다. Answer service와 config는 mock으로 격리했다.
+
+최초 reader.cancel() 구현은 커밋 전 상태였으며 정확한 source snapshot은 확보되지 않았다. 아래 P0 발췌는 이미 소켓 수정이 포함된 e37bca4 기준이다. 실패 경로는 보존된 당시 보고서로, 수정 동작은 코드와 회귀 테스트로 추적한다.
+
+### 수정: reader 정리와 응답 후 연결 종료
+
+[Body reader](../cases/http-socket-response-boundaries/p0/ask-protection.ts#L46-L75)는 Content-Length와 실제 streamed bytes를 검사하고 Promise.race로 body deadline을 적용한다. finally에서는 timer를 정리하고 reader.releaseLock()으로 lock을 해제한다. 남은 body를 읽는 background loop나 drain 작업은 추가하지 않았다.
+
+[수정 후 route](../cases/http-socket-response-boundaries/p0/ask-route.ts#L24-L37)는 413/408에 Connection: close를 지정했다. JSON 응답이 완료된 뒤 미완료 입력 연결을 닫고, 일반 응답의 keep-alive는 유지하는 선택이다. [메모리 stream 회귀](../cases/http-socket-response-boundaries/p0/ask-protection.test.ts#L28-L51)는 cancel 미호출·lock 해제·정확한 byte 경계·multibyte chunk decoding을 확인한다.
+
+입력 오류 경로는 config loading·retrieval·generation 전에 종료된다. [Lease 소유와 반환](../cases/http-socket-response-boundaries/p0/ask-route.ts#L12-L66)는 admission 이후 작업을 소유하고 finally에서 release한다. Generation timeout으로 실제 작업이 늦게 끝나는 별도 경로는 settled 뒤 lease를 반환하는 정책을 유지했다.
+
+### 소켓 회귀와 수정 후 production build 검증
+
+[실제 소켓 테스트](../cases/http-socket-response-boundaries/socket/body-socket.test.ts#L54-L88)의 다섯 case는 종료된/미완료 chunked 초과 2건, 미완료 body timeout, Content-Length 과대 입력, 정확한 byte 경계와 정상 keep-alive를 검사한다. 응답 status·JSON·complete·header, provider 경로 미진입과 후속 요청의 lease 회복을 확인한다.
+
+당시 보고서는 소켓 테스트 5개, 전체 49개 파일·434개 테스트, static check 오류·경고 0개와 production build 통과를 기록한다. 이어 새 production adapter-node build에 실제 HTTP 요청을 보낸 10개 검사가 모두 통과했다.
+
+| 수정 후 입력·검사 | 당시 보고된 결과 | Provider 작업 |
+|---|---|---|
+| 종료된 8193-byte chunked body | 완전한 413 JSON 후 연결 종료 | 0회 |
+| client가 끝내지 않은 8193-byte body | 업로드 중 4ms에 완전한 413 JSON 후 연결 종료 | 0회 |
+| Content-Length 9000, 여는 중괄호만 전송 | 나머지 입력을 기다리지 않고 완전한 413 JSON | 0회 |
+| partial body를 열린 상태로 유지 | 5010ms에 완전한 408 JSON 후 연결 종료 | 0회 |
+| 각 거부 후 같은 주소의 후속 요청 | 예상한 400 INVALID_QUESTION; lease 회복 | 0회 |
+| 정확히 8192-byte 유효 입력과 정상 후속 요청 | 둘 다 200; 같은 keep-alive socket/local port 재사용 | Local upstream만 사용 |
+
+거부 응답은 Cache-Control: no-store를 유지했다. 마지막 정상 요청 2건은 local embedding 2회·local generation 2회를 만들었으며 수정 후 검증의 외부 cloud 호출은 0회였다. 이 표는 당시 보고의 그룹별 요약이다. 원시 요청별 ledger는 확보되지 않았다.
+
+### 수정 완료와 후속 책임 분리의 순서
+
+| 시점 KST | 사건 | 근거 수준 |
+|---|---|---|
+| 10월 6일, 10:32 커밋 이전 | 초기 구현 검증 → 실제 HTTP 실패 → cancel/destroy 추적 → 최소 수정 → 소켓·production build 검증 | 당시 커밋에 보존된 보고; 실행 시작·종료 시각 미확인 |
+| 10:19:39 / 10:28:06 / 10:30:07 | 계약·결함 대조 / 수정 완료 보고 / 근거에 따른 구조 변경 판단 | 사용자 제공 ChatGPT 검색 전사 CG08; 원문 맥락 미확인 |
+| 10:32:17 | e37bca4: P0 보호·소켓 수정·테스트·보고서를 함께 커밋 | Git 직접 확인 |
+| 10:57:44 | 8aca7d6: 공개 응답 정책·safe diagnostics 분리 | Git 직접 확인; e37bca4의 바로 다음 커밋 |
+
+두 Git snapshot의 비교는 소켓 수정 완료 후의 책임 분리 전후를 보여준다. e37bca4의 부모에는 P0 body reader가 없다. 커밋 시각은 구현의 보존 시점이며, 개별 검증 실행 시각과 구분한다.
+
+### 공개 응답 정책과 safe diagnostics의 책임
+
+P0 기준 [route](../cases/http-socket-response-boundaries/p0/ask-route.ts#L1-L66)에는 공개 JSON·header 정책이 있고 [service-failure](../cases/http-socket-response-boundaries/p0/service-failure.ts#L1-L79)에는 고정 service failure와 진단 projection이 함께 있었다. 8aca7d6은 아래 경계로 나눴다.
+
+| 구성 요소 | 분리 후 책임 |
+|---|---|
+| [route](../cases/http-socket-response-boundaries/separated/ask-route.ts#L1-L53) | Admission, 입력·작업 순서, config와 answer 호출, lease 소유·반환 |
+| [askResponses](../cases/http-socket-response-boundaries/separated/ask-response.ts#L1-L42) | 공개 status·body·header, no-store, Retry-After, 413/408 Connection: close, 성공 payload credential 검사 |
+| [safe diagnostics](../cases/http-socket-response-boundaries/separated/safe-diagnostics.ts#L1-L50) | 허용 name/category/status/code 추출, 최대 4개·cycle 방지 cause 순회 |
+| [serviceFailure](../cases/http-socket-response-boundaries/separated/service-failure.ts#L1-L31) | Safe diagnostic logging과 고정 provider-neutral service failure 반환 |
+
+진단 allowlist와 함수 로직은 기존 구현에서 이동했다. Generation orchestrator의 safeDiagnosticIdentifier import도 api/service-failure에서 observability/safe-diagnostics로 바뀌었다. 공개 응답 정책이 route에서 분리되고 generation이 공통 진단을 API 모듈 경유 없이 참조하게 됐다.
+
+[응답 정책 테스트](../cases/http-socket-response-boundaries/separated/ask-response.test.ts#L1-L65)는 status·body·no-store·Retry-After·413/408의 선택적 close와 JSON-escaped credential에 대한 fail-closed 동작을 검사한다. [진단 테스트](../cases/http-socket-response-boundaries/separated/safe-diagnostics.test.ts#L1-L55)는 허용 필드, 임의 문자열 제거, 정규화 provider identifier 우선, 깊고 순환하는 cause와 non-Error 입력을 검사한다. [service failure 테스트](../cases/http-socket-response-boundaries/separated/service-failure.test.ts#L1-L28)는 안전한 logging과 고정 공개 실패 계약을 검사한다. 이 테스트들은 당시 구현 근거이며, 앞선 434개 통과 보고는 소켓 수정 단계의 결과로 유지한다.
+
+### 사용자 판단·승인 기록과 남은 근거
+
+기존 연구 C04/U04와 사용자 제공 CG08은 같은 실소켓 사건을 다룬다. CG08은 10:30:07에 작업 직후 일괄 리팩토링하기보다 실제 근거가 확인될 때 구조 변경을 검토한다는 사용자 판단을 전사한다. 이후 책임 분리 구현은 별도 Git 커밋으로 직접 확인된다. 구체적인 제안·승인 대화는 검색 전사 이상의 원본을 확보하지 못했다.
+
+당시 기술 문서는 수정을 approved fix로 기술하지만, 명시적 사용자 승인 문장·시각을 확인할 전체 Codex 세션은 집 PC에서 확보되지 않았다. 검색 전사의 U 역할 표기와 시각은 제공된 형식으로 보존하며, 완료 보고의 원래 화자·메시지 맥락도 미확인으로 표시한다. [사례별 근거 등록부](../cases/http-socket-response-boundaries/evidence/source-register.json#L1-L333)는 코드·당시 보고·검색 전사·미확인을 구분한다.
+
+집 PC checkout과 관련 날짜의 압축 세션·사용자 입력 이력·세션 메타데이터·추가 보관 경로를 조사했다. 당시 문서가 식별한 tmp/p0-live-verification/report.json, streamed-body-fix-results.json, streamed-body-fix-metrics.json과 streamed-body-fix.mjs는 확보되지 않았다. 정확한 미커밋 수정 전 source, 계측 원본, 전체 승인 대화와 실행 시각이 남은 공백이다. 수치·실행 결과는 보존된 당시 보고의 수준과 조건을 유지한다.
+
+### 출처 추적과 공개 범위
+
+발췌본 12개는 아래 Git 전체 파일과 bytes를 보존한다. 원래 import·식별자·애플리케이션 참조를 유지한다. 소켓 테스트는 합성 질문·mock 답변을 사용한다. 근거 JSON 2개는 보고서의 관측과 source identity를 선택해 새 편집 구조로 구성했다. Private Knowledge·불필요한 QB 원문·credential·계측 payload·전체 대화·운영 접근 정보는 공개하지 않는다. 공개 코드는 두 10월 6일 snapshot의 동작이며 후속 runtime·보안 변경은 각각의 이력을 따른다.
+
+<details>
+<summary>원본 snapshot·행·SHA-256</summary>
+
+| 공개 Excerpt | 원본 commit / 경로 / 행 | 원본 = 공개 SHA-256 |
+|---|---|---|
+| [p0/ask-protection.ts](../cases/http-socket-response-boundaries/p0/ask-protection.ts#L1-L75) | `e37bca4739f5fec64c767d20b54f51c5f303388b`<br>`sveltekit/src/lib/server/api/ask-protection.ts`<br>1–75 | `dafc37680bdec4924f72087d62a96cc04b4cff9c154fb77dfd56e6ea484dd20b` |
+| [p0/ask-protection.test.ts](../cases/http-socket-response-boundaries/p0/ask-protection.test.ts#L1-L52) | `e37bca4739f5fec64c767d20b54f51c5f303388b`<br>`sveltekit/src/lib/server/api/ask-protection.test.ts`<br>1–52 | `e275b80e9a1fdf061db3359b364b2a6546b3018143b1849cf2d4d56ad6398487` |
+| [p0/ask-route.ts](../cases/http-socket-response-boundaries/p0/ask-route.ts#L1-L66) | `e37bca4739f5fec64c767d20b54f51c5f303388b`<br>`sveltekit/src/routes/api/ask/+server.ts`<br>1–66 | `c417e0de7c9ec9ede71c56e0534b84810f1de403fcb93099edaf1c9c7badb7b3` |
+| [p0/service-failure.ts](../cases/http-socket-response-boundaries/p0/service-failure.ts#L1-L79) | `e37bca4739f5fec64c767d20b54f51c5f303388b`<br>`sveltekit/src/lib/server/api/service-failure.ts`<br>1–79 | `469ce502486224dd03c8f5fee97a17d7c750e7231f96670e169fd80fbef40b50` |
+| [socket/body-socket.test.ts](../cases/http-socket-response-boundaries/socket/body-socket.test.ts#L1-L88) | `e37bca4739f5fec64c767d20b54f51c5f303388b`<br>`sveltekit/src/routes/api/ask/body-socket.test.ts`<br>1–88 | `faa071b7b1fa2ed9fd71d95717c83e12467e821cf7419d700fa66e06163e0a91` |
+| [separated/ask-route.ts](../cases/http-socket-response-boundaries/separated/ask-route.ts#L1-L53) | `8aca7d655c35813ac3d6d5fb29b356296d324bc6`<br>`sveltekit/src/routes/api/ask/+server.ts`<br>1–53 | `d75bb01021ff4b9572e4eb7a2c95838e8a39743e70e506ee1eb7c2dcb6008fb0` |
+| [separated/ask-response.ts](../cases/http-socket-response-boundaries/separated/ask-response.ts#L1-L42) | `8aca7d655c35813ac3d6d5fb29b356296d324bc6`<br>`sveltekit/src/lib/server/api/ask-response.ts`<br>1–42 | `76243506b15921a0304a82a2d2122086090bc8fbd817ecca336f983b9f155b25` |
+| [separated/ask-response.test.ts](../cases/http-socket-response-boundaries/separated/ask-response.test.ts#L1-L65) | `8aca7d655c35813ac3d6d5fb29b356296d324bc6`<br>`sveltekit/src/lib/server/api/ask-response.test.ts`<br>1–65 | `b5e0f686d039e00999de11911aafe49c61b26a7fa312fa82a6aa692a268de203` |
+| [separated/service-failure.ts](../cases/http-socket-response-boundaries/separated/service-failure.ts#L1-L31) | `8aca7d655c35813ac3d6d5fb29b356296d324bc6`<br>`sveltekit/src/lib/server/api/service-failure.ts`<br>1–31 | `d6b4bbe6124867d14e5ab5ac43f57f21ad32e532cbacd7db557aee370a25835a` |
+| [separated/service-failure.test.ts](../cases/http-socket-response-boundaries/separated/service-failure.test.ts#L1-L28) | `8aca7d655c35813ac3d6d5fb29b356296d324bc6`<br>`sveltekit/src/lib/server/api/service-failure.test.ts`<br>1–28 | `0916171b5b1a8bfbe089c8e42fe0423281cd09e63b5bea8baddfead919050c18` |
+| [separated/safe-diagnostics.ts](../cases/http-socket-response-boundaries/separated/safe-diagnostics.ts#L1-L50) | `8aca7d655c35813ac3d6d5fb29b356296d324bc6`<br>`sveltekit/src/lib/server/observability/safe-diagnostics.ts`<br>1–50 | `330445d4083f90f1417c19d4c46d63df2c6a402b75d7d04be4914a7eb5ec70aa` |
+| [separated/safe-diagnostics.test.ts](../cases/http-socket-response-boundaries/separated/safe-diagnostics.test.ts#L1-L55) | `8aca7d655c35813ac3d6d5fb29b356296d324bc6`<br>`sveltekit/src/lib/server/observability/safe-diagnostics.test.ts`<br>1–55 | `e577510c377d3150cfa68fb07815e0ebf1d25badaf5a0e6887be0d3e6d8ea5a6` |
+
+| 공개 근거 | 분류 | SHA-256 |
+|---|---|---|
+| [evidence/observed-results.json](../cases/http-socket-response-boundaries/evidence/observed-results.json#L1-L199) | Reconstructed | `fd37b0bc833d23f02bce123532ea64690931a217e517d8d48225f3c3e7821be2` |
+| [evidence/source-register.json](../cases/http-socket-response-boundaries/evidence/source-register.json#L1-L333) | Reconstructed | `df10919fc92100013dff1e84786f0ad38767b1f730a46b253ca69422bfcf5204` |
+
+당시 검증 문서: e37bca4739f5fec64c767d20b54f51c5f303388b의 docs/api-ask-protection.md, 초기 구현 50–64행·실소켓 실패 66–104행·수정 검증 106–125행. 전체 원본 SHA-256은 3219eec400cfb8302487736c4c761750fc795613cc263d6ef4e143071393bb95다. 연구 C04/U04와 CG08의 Git 기준본·hash·출처 범위는 source-register.json에 보존한다. 파일 경로는 비공개 Synethos 저장소 상대경로로 식별한다.
+
+</details>
+
+### 공개 준비 검증
+
+전체 파일 Excerpt 12개는 선언한 Git 원본 bytes·SHA-256과 일치했고 TypeScript 구문 파싱을 통과했다. 근거 JSON 2개가 파싱됐고 원본 검증 문서·연구 자료 3개의 hash와 당시 보고 수치를 대조했다. 소켓 수정 후 body reader·소켓 회귀 파일은 책임 분리 커밋 전후 동일했고, 진단 allowlist·함수 로직의 이동을 확인했다. 영문·한글의 파일/외부 링크와 SHA-256 집합이 일치했으며 README 2개·개발 기록 2개의 로컬 링크 722개는 파일·헤딩·행 범위 검증을 통과했다.
+
+사례 01~06의 본문·공개 파일과 Synethos 원본을 보존했다. 공개 대상의 credential 값·로컬 사용자 경로·비공개 저장소 URL·QB 원문 포함 여부를 점검했고 diff 공백 검사를 통과했다. 검증은 Git 원본·보존 문서 열람과 로컬 파싱·계산으로 수행했다. 당시 애플리케이션 테스트·소켓 실험을 재실행하거나 모델 호출·index build·서버 접근을 수행하지 않았다. 당시 수치와 승인 기록의 근거 공백은 위 범위로 유지한다.

@@ -22,6 +22,7 @@ Retained originals on the home PC were additionally inspected on October 29, 202
 - [04 — Provider Architecture and Embedding Reliability](#04--provider-architecture-and-embedding-reliability) — 2026-09-26 ~ 2026-10-17
 - [05 — Cross-PC Index Portability](#05--cross-pc-index-portability) — 2026-09-28 ~ 2026-10-26
 - [06 — Model Selection: Quality and Availability](#06--model-selection-quality-and-availability) — 2026-09-26 ~ 2026-10-16
+- [07 — HTTP Socket Response Boundaries and API Responsibilities](#07--http-socket-response-boundaries-and-api-responsibilities) — 2026-10-06
 
 ## 01 — From Local Qwen/Ollama Inference to the Gemini API
 
@@ -1414,3 +1415,134 @@ Nineteen representative originals and all 1146 files across five experiment dire
 All 120 full40 requests, responses, results, and historical manual reviews, 24 prior/retry ledger entries, and 77 reasoning requests were cross-checked. Request-body hashes, response correspondence, classification counts, and successful-request latency were verified. Reasoning requests matched baseline shared inputs and differed only in the reasoning option. GPT-OSS high quality denominators were verified as 36 successful questions, 44 required claims, and 33 positive questions, separate from attempted-review totals that include failed QB37.
 
 All fourteen public JSON files parsed. English/Korean file/external links and SHA-256 multisets matched. The two READMEs and two development records passed validation of all 656 local file, heading, and line-range links. The existing 119 source/test files and Synethos originals were preserved; the Synethos working tree was clean. Existing-file changes cover two development records and two evidence JSON files; a reasoning-evidence JSON and shared recovered-source register were added. Published material was checked for credential values, local user paths, private repository URLs, and full knowledge payloads. Verification used original-record inspection and local computation; no new model call, historical experiment rerun, application test, index build, or server access was performed.
+
+## 07 — HTTP Socket Response Boundaries and API Responsibilities
+
+**Development date:** 2026-10-06
+
+**Code classification:** Excerpt — twelve whole original source/test files; Reconstructed — two evidence records.
+
+**Outcome:** oversized and unfinished bodies receive complete 413/408 JSON before connection closure. After real-socket regressions and production-build verification, public HTTP response policy and safe diagnostics were separated into dedicated modules.
+
+### P0 protection contracts and initial verification
+
+Synethos /api/ask P0 protection applied admission and input boundaries before provider work. Bodies were limited to 8192 bytes including JSON/whitespace, body reading to five seconds total, and trimmed questions to 2–1000 UTF-16 code units. Rolling limits were ten requests per address and thirty per process over sixty seconds; concurrent leases were one per address and two per process. Input errors released leases. This case follows rejected-body responses and the subsequent API responsibility separation.
+
+The historical report records 48 files/429 tests, static checks, and a production build passing initially. In-memory Request/ReadableStream and mocked transports exercised input, deadline, and dispatch-budget contracts; the initial loopback smoke covered invalid-question and rate-limit paths. Subsequent HTTP verification with actual chunked uploads and unfinished bodies exposed the response defect.
+
+### ECONNRESET observed through actual HTTP
+
+The reported environment was Windows, Node.js 24.16.0 x64, SvelteKit 2.70.3, adapter-node 5.5.7, and @google/genai 2.24.0. Five automated HTTP groups recorded seventy assertions: sixty-six passed and four failed. The four failures were repeated observations of two defects.
+
+| Input | Expected contract | Historical observation |
+|---|---|---|
+| 8193-byte chunked body | 413 REQUEST_TOO_LARGE JSON | ECONNRESET; zero upstream dispatches |
+| Unfinished body | 408 REQUEST_TIMEOUT JSON after five seconds | ECONNRESET at approximately five seconds; a following same-address request was admitted |
+
+Size/deadline rejection and work blocking occurred, but the client’s JSON response did not complete. The [historical observation summary](../cases/http-socket-response-boundaries/evidence/observed-results.json#L1-L199) retains verification denominators and each run’s conditions.
+
+Two initial normal cloud questions reportedly made two embedding and two generation requests, all HTTP 200. Fault profiles used synthetic credentials and a real local HTTP upstream. Four embedding attempts denied by sandbox transport EACCES and initial missing batchEmbedContents instrumentation were recorded separately as harness-preparation failures and excluded from the application results above.
+
+### Cause: cancelling input closed the response socket first
+
+The historical report traces unconditional reader.cancel() in readAskBody through SvelteKit get_raw_body().cancel(reason) to req.destroy(reason). While rejected input remained unfinished, this destroyed the request socket before the route’s JSON could be delivered. The same cancel-to-destroy path was directly inspected in the home PC’s installed node implementation of the same SvelteKit version.
+
+Stream cancellation in an in-memory Request test was disconnected from a real IncomingMessage socket. The subsequent [socket regression](../cases/http-socket-response-boundaries/socket/body-socket.test.ts#L1-L33) combines a Node HTTP server with installed getRequest/setResponse to inspect the route result’s completion as an actual wire response. Answer-service and configuration work are mocked.
+
+The initial reader.cancel() implementation was uncommitted, and its exact source snapshot was not recovered. The P0 excerpts below use e37bca4, which already includes the socket fix. The retained historical report identifies the failure path; code and regressions identify the fixed behavior.
+
+### Fix: reader cleanup and closure after the response
+
+The [body reader](../cases/http-socket-response-boundaries/p0/ask-protection.ts#L46-L75) checks Content-Length and actual streamed bytes and applies the body deadline with Promise.race. Its finally block clears the timer and releases the reader lock with reader.releaseLock(). No background reader or remaining-body drain was added.
+
+The [fixed route](../cases/http-socket-response-boundaries/p0/ask-route.ts#L24-L37) sets Connection: close for 413/408. The selected behavior completes JSON before closing the potentially unfinished input connection and retains keep-alive for normal responses. The [in-memory stream regression](../cases/http-socket-response-boundaries/p0/ask-protection.test.ts#L28-L51) checks cancellation avoidance, lock release, the exact byte boundary, and multibyte decoding across chunks.
+
+Input errors finish before configuration loading, retrieval, and generation. [Lease ownership and release](../cases/http-socket-response-boundaries/p0/ask-route.ts#L12-L66) stay with the route after admission, with release in finally. The separate generation-timeout path preserves the policy of holding the lease until late work settles.
+
+### Socket regressions and fixed production-build verification
+
+The five cases in the [actual-socket tests](../cases/http-socket-response-boundaries/socket/body-socket.test.ts#L54-L88) cover ended/unfinished chunked overflow twice, unfinished-body timeout, oversized Content-Length, and the exact byte boundary with normal keep-alive. They inspect status, JSON, completion, headers, exclusion of provider work, and lease recovery on a follow-up request.
+
+The historical report records five passing socket tests, a full suite of 49 files/434 passing tests, zero static-check errors/warnings, and a successful production build. Ten subsequent actual HTTP checks against that new production adapter-node build all passed.
+
+| Fixed input/check | Historical result | Provider work |
+|---|---|---|
+| Ended 8193-byte chunked body | Complete 413 JSON, then connection close | Zero |
+| 8193-byte body left unfinished by client | Complete 413 JSON in 4ms during upload, then close | Zero |
+| Content-Length 9000, opening brace only | Complete 413 JSON without waiting for remaining input | Zero |
+| Partial body left open | Complete 408 JSON in 5010ms, then close | Zero |
+| Same-address follow-up after each rejection | Expected 400 INVALID_QUESTION; lease recovered | Zero |
+| Exact 8192-byte valid body and normal follow-up | Both 200; same keep-alive socket/local port reused | Local upstream only |
+
+Rejected responses retained Cache-Control: no-store. The final two normal requests produced two local embedding and two local generation calls; fixed verification made zero external cloud calls. This table groups observations from the historical report; the raw per-request ledger was not recovered.
+
+### Sequence of completed fix and later responsibility separation
+
+| KST point | Event | Evidence level |
+|---|---|---|
+| October 6, before the 10:32 commit | Initial verification → actual HTTP failure → cancel/destroy investigation → minimal fix → socket/production-build verification | Historical report retained in the commit; exact execution start/end times unconfirmed |
+| 10:19:39 / 10:28:06 / 10:30:07 | Contract/defect comparison / fix-completion report / evidence-based structural-change judgment | Developer-supplied ChatGPT search transcription CG08; original context unconfirmed |
+| 10:32:17 | e37bca4 commits P0 guards, socket fix, tests, and report together | Git directly inspected |
+| 10:57:44 | 8aca7d6 separates public response policy and safe diagnostics | Git directly inspected; immediate successor to e37bca4 |
+
+The two Git snapshots show responsibility separation after the socket fix. The parent of e37bca4 contains no P0 body reader. Commit times identify implementation preservation points, separately from individual verification execution times.
+
+### Responsibilities of public responses and safe diagnostics
+
+At the P0 snapshot, the [route](../cases/http-socket-response-boundaries/p0/ask-route.ts#L1-L66) held public JSON/header policy, while [service-failure](../cases/http-socket-response-boundaries/p0/service-failure.ts#L1-L79) combined fixed service failures and diagnostic projection. Commit 8aca7d6 introduced the following boundaries.
+
+| Component | Responsibility after separation |
+|---|---|
+| [Route](../cases/http-socket-response-boundaries/separated/ask-route.ts#L1-L53) | Admission, input/work sequencing, config/answer calls, lease ownership/release |
+| [askResponses](../cases/http-socket-response-boundaries/separated/ask-response.ts#L1-L42) | Public status/body/headers, no-store, Retry-After, 413/408 Connection: close, successful-payload credential check |
+| [Safe diagnostics](../cases/http-socket-response-boundaries/separated/safe-diagnostics.ts#L1-L50) | Allowlisted name/category/status/code projection, at most four cause entries with cycle protection |
+| [serviceFailure](../cases/http-socket-response-boundaries/separated/service-failure.ts#L1-L31) | Safe-diagnostic logging and fixed provider-neutral service failures |
+
+Diagnostic allowlists and function logic moved from the earlier implementation. The generation orchestrator’s safeDiagnosticIdentifier import also changed from api/service-failure to observability/safe-diagnostics. Public response policy moved out of the route, and generation referenced common diagnostics through the observability module.
+
+[Response-policy tests](../cases/http-socket-response-boundaries/separated/ask-response.test.ts#L1-L65) inspect status/body/no-store/Retry-After, selective 413/408 close, and fail-closed handling of JSON-escaped credentials. [Diagnostic tests](../cases/http-socket-response-boundaries/separated/safe-diagnostics.test.ts#L1-L55) inspect allowed fields, arbitrary-string exclusion, normalized provider-identifier priority, deep/cyclic causes, and non-Error input. [Service-failure tests](../cases/http-socket-response-boundaries/separated/service-failure.test.ts#L1-L28) inspect safe logging and fixed public failures. These tests are historical implementation evidence; the earlier 434-test pass remains attributed to the socket-fix stage.
+
+### Developer judgment, approval records, and remaining evidence
+
+Research C04/U04 and developer-supplied CG08 describe the same socket incident. CG08 transcribes a developer preference at 10:30:07 to consider structural changes when concrete evidence warrants them, rather than automatically refactor immediately after the task. The later responsibility separation is directly established by its separate Git commit. The specific proposal/approval conversation was not recovered beyond search transcription.
+
+The historical technical document calls the change an approved fix, but the complete Codex session needed to establish explicit developer approval text/time was not recovered on the home PC. The search record’s U role labels and timestamps are retained as supplied; the completion report’s original speaker/message context remains unconfirmed. The [case source register](../cases/http-socket-response-boundaries/evidence/source-register.json#L1-L333) separates code, historical reports, history search, and unconfirmed evidence.
+
+The home checkout, relevant dated compressed sessions, user-input history, session metadata, and additional archival locations were inspected. Identified artifacts tmp/p0-live-verification/report.json, streamed-body-fix-results.json, streamed-body-fix-metrics.json, and streamed-body-fix.mjs were not recovered. Remaining gaps are the exact uncommitted pre-fix source, raw measurements, complete approval conversation, and execution timestamps. Quantities and execution outcomes retain the preserved historical report’s evidence level and conditions.
+
+### Source traceability and publication scope
+
+The twelve Excerpts preserve the bytes of the complete Git files below, including original imports, identifiers, and application references. Socket tests use synthetic questions and mock answers. Two evidence JSON files select report observations and source identities into editorial envelopes. Private knowledge, unnecessary question-bank text, credentials, measurement payloads, complete conversations, and operational access details remain private. Code describes the two October 6 snapshots; later runtime/security revisions retain their own histories.
+
+<details>
+<summary>Original snapshots, lines, and SHA-256</summary>
+
+| Public Excerpt | Original commit / path / lines | Original = public SHA-256 |
+|---|---|---|
+| [p0/ask-protection.ts](../cases/http-socket-response-boundaries/p0/ask-protection.ts#L1-L75) | `e37bca4739f5fec64c767d20b54f51c5f303388b`<br>`sveltekit/src/lib/server/api/ask-protection.ts`<br>1–75 | `dafc37680bdec4924f72087d62a96cc04b4cff9c154fb77dfd56e6ea484dd20b` |
+| [p0/ask-protection.test.ts](../cases/http-socket-response-boundaries/p0/ask-protection.test.ts#L1-L52) | `e37bca4739f5fec64c767d20b54f51c5f303388b`<br>`sveltekit/src/lib/server/api/ask-protection.test.ts`<br>1–52 | `e275b80e9a1fdf061db3359b364b2a6546b3018143b1849cf2d4d56ad6398487` |
+| [p0/ask-route.ts](../cases/http-socket-response-boundaries/p0/ask-route.ts#L1-L66) | `e37bca4739f5fec64c767d20b54f51c5f303388b`<br>`sveltekit/src/routes/api/ask/+server.ts`<br>1–66 | `c417e0de7c9ec9ede71c56e0534b84810f1de403fcb93099edaf1c9c7badb7b3` |
+| [p0/service-failure.ts](../cases/http-socket-response-boundaries/p0/service-failure.ts#L1-L79) | `e37bca4739f5fec64c767d20b54f51c5f303388b`<br>`sveltekit/src/lib/server/api/service-failure.ts`<br>1–79 | `469ce502486224dd03c8f5fee97a17d7c750e7231f96670e169fd80fbef40b50` |
+| [socket/body-socket.test.ts](../cases/http-socket-response-boundaries/socket/body-socket.test.ts#L1-L88) | `e37bca4739f5fec64c767d20b54f51c5f303388b`<br>`sveltekit/src/routes/api/ask/body-socket.test.ts`<br>1–88 | `faa071b7b1fa2ed9fd71d95717c83e12467e821cf7419d700fa66e06163e0a91` |
+| [separated/ask-route.ts](../cases/http-socket-response-boundaries/separated/ask-route.ts#L1-L53) | `8aca7d655c35813ac3d6d5fb29b356296d324bc6`<br>`sveltekit/src/routes/api/ask/+server.ts`<br>1–53 | `d75bb01021ff4b9572e4eb7a2c95838e8a39743e70e506ee1eb7c2dcb6008fb0` |
+| [separated/ask-response.ts](../cases/http-socket-response-boundaries/separated/ask-response.ts#L1-L42) | `8aca7d655c35813ac3d6d5fb29b356296d324bc6`<br>`sveltekit/src/lib/server/api/ask-response.ts`<br>1–42 | `76243506b15921a0304a82a2d2122086090bc8fbd817ecca336f983b9f155b25` |
+| [separated/ask-response.test.ts](../cases/http-socket-response-boundaries/separated/ask-response.test.ts#L1-L65) | `8aca7d655c35813ac3d6d5fb29b356296d324bc6`<br>`sveltekit/src/lib/server/api/ask-response.test.ts`<br>1–65 | `b5e0f686d039e00999de11911aafe49c61b26a7fa312fa82a6aa692a268de203` |
+| [separated/service-failure.ts](../cases/http-socket-response-boundaries/separated/service-failure.ts#L1-L31) | `8aca7d655c35813ac3d6d5fb29b356296d324bc6`<br>`sveltekit/src/lib/server/api/service-failure.ts`<br>1–31 | `d6b4bbe6124867d14e5ab5ac43f57f21ad32e532cbacd7db557aee370a25835a` |
+| [separated/service-failure.test.ts](../cases/http-socket-response-boundaries/separated/service-failure.test.ts#L1-L28) | `8aca7d655c35813ac3d6d5fb29b356296d324bc6`<br>`sveltekit/src/lib/server/api/service-failure.test.ts`<br>1–28 | `0916171b5b1a8bfbe089c8e42fe0423281cd09e63b5bea8baddfead919050c18` |
+| [separated/safe-diagnostics.ts](../cases/http-socket-response-boundaries/separated/safe-diagnostics.ts#L1-L50) | `8aca7d655c35813ac3d6d5fb29b356296d324bc6`<br>`sveltekit/src/lib/server/observability/safe-diagnostics.ts`<br>1–50 | `330445d4083f90f1417c19d4c46d63df2c6a402b75d7d04be4914a7eb5ec70aa` |
+| [separated/safe-diagnostics.test.ts](../cases/http-socket-response-boundaries/separated/safe-diagnostics.test.ts#L1-L55) | `8aca7d655c35813ac3d6d5fb29b356296d324bc6`<br>`sveltekit/src/lib/server/observability/safe-diagnostics.test.ts`<br>1–55 | `e577510c377d3150cfa68fb07815e0ebf1d25badaf5a0e6887be0d3e6d8ea5a6` |
+
+| Public evidence | Classification | SHA-256 |
+|---|---|---|
+| [evidence/observed-results.json](../cases/http-socket-response-boundaries/evidence/observed-results.json#L1-L199) | Reconstructed | `fd37b0bc833d23f02bce123532ea64690931a217e517d8d48225f3c3e7821be2` |
+| [evidence/source-register.json](../cases/http-socket-response-boundaries/evidence/source-register.json#L1-L333) | Reconstructed | `df10919fc92100013dff1e84786f0ad38767b1f730a46b253ca69422bfcf5204` |
+
+Historical verification document: docs/api-ask-protection.md at e37bca4739f5fec64c767d20b54f51c5f303388b, initial implementation lines 50–64, failed actual HTTP lines 66–104, fixed verification lines 106–125. Whole-original SHA-256: 3219eec400cfb8302487736c4c761750fc795613cc263d6ef4e143071393bb95. Git snapshots, hashes, and evidence scopes for research C04/U04 and CG08 are retained in source-register.json. Source paths identify private Synethos repository-relative files.
+
+</details>
+
+### Publication checks
+
+All twelve whole-file Excerpts matched their declared Git source bytes/SHA-256 and passed TypeScript syntax parsing. Both evidence JSON files parsed; three original report/research hashes and the historical reported quantities were checked. The fixed body reader and socket regression were unchanged across the responsibility-separation commit, and the diagnostic allowlists/function logic were confirmed as moved. English/Korean file/external links and SHA-256 multisets matched; all 722 local file, heading, and line-range links in the two READMEs/two development records passed validation.
+
+Case 01–06 text/published files and Synethos originals were preserved. Published material was checked for credential values, local user paths, private repository URLs, and question-bank text, and the diff whitespace check passed. Verification used Git-source/retained-document inspection and local parsing/calculation. Historical application tests/socket experiments were not rerun, and no model calls, index builds, or server access occurred. Historical quantities and approval-record gaps retain the scopes described above.

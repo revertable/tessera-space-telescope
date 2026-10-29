@@ -28,6 +28,7 @@ Read the [engineering development records](docs/engineering-decisions.md) for ea
 | 04 | [Provider Architecture and Embedding Reliability](docs/engineering-decisions.md#04--provider-architecture-and-embedding-reliability) | 2026-09-26 ~ 2026-10-17 |
 | 05 | [Cross-PC Index Portability](docs/engineering-decisions.md#05--cross-pc-index-portability) | 2026-09-28 ~ 2026-10-26 |
 | 06 | [Model Selection: Quality and Availability](docs/engineering-decisions.md#06--model-selection-quality-and-availability) | 2026-09-26 ~ 2026-10-16 |
+| 07 | [HTTP Socket Response Boundaries and API Responsibilities](docs/engineering-decisions.md#07--http-socket-response-boundaries-and-api-responsibilities) | 2026-10-06 |
 
 ## Copyright
 

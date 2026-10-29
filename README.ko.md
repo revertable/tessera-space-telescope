@@ -28,6 +28,7 @@ Synethos 전체 소스는 비공개로 유지하며, Tessera에는 선택한 코
 | 04 | [Provider 교체 설계와 Embedding 안정화](docs/engineering-decisions.ko.md#04--provider-교체-설계와-embedding-안정화) | 2026-09-26 ~ 2026-10-17 |
 | 05 | [Cross-PC Index Portability](docs/engineering-decisions.ko.md#05--cross-pc-index-portability) | 2026-09-28 ~ 2026-10-26 |
 | 06 | [Model Selection: Quality and Availability](docs/engineering-decisions.ko.md#06--model-selection-quality-and-availability) | 2026-09-26 ~ 2026-10-16 |
+| 07 | [HTTP 소켓 응답 경계와 API 책임 분리](docs/engineering-decisions.ko.md#07--http-소켓-응답-경계와-api-책임-분리) | 2026-10-06 |
 
 ## Copyright
 
