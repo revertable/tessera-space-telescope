@@ -7,7 +7,7 @@ These records connect implementation code to the problems, experiments, and deci
 ## Reading the evidence
 
 - **Code confirmed:** behavior visible in the identified historical source snapshot, or the byte-for-byte source comparison used to prepare these excerpts.
-- **Reported at the time:** a retained development request, experiment artifact, or verification report describes the observation. Publishing the record does not reproduce the experiment.
+- **Reported at the time:** a retained development request, experiment artifact, or verification report describes the observation. These observations retain their original execution conditions and verification scope.
 - **Unconfirmed:** the available records do not establish the cause, correspondence, or broader effect.
 
 Each case includes a source ledger identifying its code snapshots and retained evidence. Historical tests are published as implementation evidence; this repository does not provide their dependencies or a test runner.
@@ -27,11 +27,11 @@ Each case includes a source ledger identifying its code snapshots and retained e
 
 ### Problem and constraints
 
-Synethos initially pursued free, self-hosted inference with project-local Ollama. The committed baseline used `qwen3:0.6b` for generation and `qwen3-embedding:0.6b` for embeddings. It configured a 4096-token generation context, a 120000ms local request timeout, and embedding batches of 16. Runtime/model storage stayed within the project, and provisioning explicitly disabled cloud use through `OLLAMA_NO_CLOUD=1`. These settings describe the historical baseline, not an installation guide.
+Synethos initially pursued free, self-hosted inference with project-local Ollama. The committed baseline used `qwen3:0.6b` for generation and `qwen3-embedding:0.6b` for embeddings. It configured a 4096-token generation context, a 120000ms local request timeout, and embedding batches of 16. Runtime/model storage stayed within the project, and provisioning explicitly disabled cloud use through `OLLAMA_NO_CLOUD=1`. These settings describe the historical baseline.
 
 At 02:16:28, the developer reported that Korean questions could produce English answers when the retrieved material was an English GitHub profile. The proposed comparison changed only the generation model to `qwen3:8b`, preserving embeddings, retrieval, chunking, prompts, approved knowledge, and the existing index. The intended language behavior was to follow an explicit language request first and otherwise answer in the question's language.
 
-The relevant machine ran Windows with a Ryzen 5 5600X, Radeon RX 6800 XT with 16GiB VRAM, roughly 16GiB system RAM, and the Vulkan backend. These hardware and backend conditions matter to the resource experiment; they are not evidence of a particular failure mechanism.
+The relevant machine ran Windows with a Ryzen 5 5600X, Radeon RX 6800 XT with 16GiB VRAM, roughly 16GiB system RAM, and the Vulkan backend. These hardware and backend conditions describe the resource experiment's environment.
 
 ### Experiments and the option that was retired
 
@@ -51,7 +51,7 @@ At approximately 03:06, the developer explored reducing instantaneous GPU load t
 | Configured memory stop threshold | 3221225472bytes, 3GiB |
 | Completion | `completed`, `abortReason=null`, no remaining listening ports reported |
 
-The run completed within its recorded memory threshold. Layer offload is not a measurement or guarantee of a 50% power limit. The single English response did not establish improved Korean response quality, sustained stability, or resolution of the earlier power incident. The completed response and the limits of that result were both retained.
+The run completed within its recorded memory threshold, with 18 of 37 generation layers on the GPU. Korean response quality, sustained stability, and resolution of the earlier power incident remain unconfirmed after this single English response.
 
 ### Decision
 
@@ -59,19 +59,19 @@ At 03:50:47, the developer judged execution stability, resource demands, and res
 
 The decision also narrowed implementation scope: remove the local inference path rather than maintain a selectable local/API compatibility layer. Approved knowledge, retrieval, record-grounding rules, and citation checks were to remain. Existing Qwen embeddings were not to be reused as Gemini embeddings.
 
-This was a product-scope decision based on the observed constraints. The records do not show that every possible local optimization was exhausted. The free-tier choice is a historical decision, not a statement about present-day provider pricing or terms.
+This was a product-scope decision based on the observed constraints and the experiments recorded above. The developer selected the Gemini API free tier available on September 26, 2026.
 
 ### Implementation: local HTTP calls to a server-side API client
 
 The baseline snapshot is `cb299ce7f96888ab9ed4e49d69bfb3f6d59b30dc`, committed at 02:15:03. Its relevant code and configuration match the earlier prototype snapshot `801633a`. The transition snapshot is `9a3df6134f3a68c012d98afa9fdc5f7f7cf5b264`, committed at 12:05:45 with the message `Replace local Ollama inference with Gemini API`.
 
-The baseline still names the **0.6B model**. It precedes the 8B experiment request; the published baseline must not be read as the experiment's exact low-load configuration. No missing experiment controls have been reconstructed into these files.
+The published baseline uses the **0.6B model** and precedes the 8B experiment request. The excerpts preserve this committed baseline; the low-load experiment's settings are recorded in the experiment table.
 
 **Before:** [the local POST client](../cases/local-inference-to-gemini/before/ollama/client.ts#L10-L37) applies an AbortController timeout and sends JSON to Ollama. [Generation](../cases/local-inference-to-gemini/before/ollama/generation.ts#L39-L53) uses `/api/chat`, disables streaming, supplies a JSON response schema, and passes temperature/context options. [Embedding](../cases/local-inference-to-gemini/before/ollama/embeddings.ts#L13-L32) batches `/api/embed` calls and checks vector counts, consistent dimensions, and finite values.
 
 **After:** [the Gemini client](../cases/local-inference-to-gemini/after/gemini/client.ts#L11-L16) requires a server-side API key and constructs `GoogleGenAI`. [Generation](../cases/local-inference-to-gemini/after/gemini/generation.ts#L40-L68) calls `generateContent`, requests JSON with the response schema, applies the output limit, and validates the returned answer/citation shape. The key value is not part of the excerpt.
 
-The transition's generation model was **`gemini-3.8-flash`**, with `maxOutputTokens=1200`; embeddings used **`gemini-embedding-2`**, with 768 output dimensions. These are the models in that commit, not later Synethos defaults. The implementation did not retain a local/provider fallback path.
+The transition's generation model was **`gemini-3.8-flash`**, with `maxOutputTokens=1200`; embeddings used **`gemini-embedding-2`**, with 768 output dimensions. These model settings belong to the transition commit. The implementation did not retain a local/provider fallback path.
 
 ### Implementation: preserve grounding while changing the provider
 
@@ -79,13 +79,13 @@ The [Ollama prompt and record construction](../cases/local-inference-to-gemini/b
 
 The provider request mechanism changes, while that grounding intent remains. The Gemini response schema additionally sets `additionalProperties: false`; compare [the earlier schema](../cases/local-inference-to-gemini/before/ollama/generation.ts#L14-L21) with [the later schema](../cases/local-inference-to-gemini/after/gemini/generation.ts#L13-L21). The response-shape checks and citation deduplication are visible in both implementations. Shape validation alone does not prove that each statement is supported by its citation.
 
-The [historical generation test](../cases/local-inference-to-gemini/verification/generation.test.ts#L5-L31) uses a synthetic record containing an instruction-like string. It checks the outgoing prompt and structured response contract using a mock model. It does not establish live resistance to every prompt injection or semantic grounding error.
+The [historical generation test](../cases/local-inference-to-gemini/verification/generation.test.ts#L5-L31) uses a synthetic record containing an instruction-like string. It checks the outgoing prompt and structured response contract using a mock model. Live prompt-injection resistance and semantic grounding accuracy were outside this mock test's verification scope.
 
 ### Implementation: a new embedding contract requires a new index
 
 The Gemini adapter separates [query input](../cases/local-inference-to-gemini/after/gemini/embeddings.ts#L32-L38) from [document-chunk input](../cases/local-inference-to-gemini/after/gemini/embeddings.ts#L40-L50). Each chunk is embedded independently with its title and text. [Vector validation](../cases/local-inference-to-gemini/after/gemini/embeddings.ts#L8-L30) requires one returned vector for one input, the configured dimension, numeric elements, and finite values.
 
-This version embeds document chunks sequentially; it does not implement the later document-batching or pacing policies. The [embedding tests](../cases/local-inference-to-gemini/verification/embeddings.test.ts#L10-L47) record the intended per-chunk order and query prefix using mock responses.
+This version embeds document chunks sequentially. The [embedding tests](../cases/local-inference-to-gemini/verification/embeddings.test.ts#L10-L47) record the intended per-chunk order and query prefix using mock responses.
 
 The migration also changes index compatibility:
 
@@ -94,7 +94,7 @@ The migration also changes index compatibility:
 - [The index reader](../cases/local-inference-to-gemini/after/indexing/store.ts#L20-L26) rejects a fingerprint/schema mismatch with a rebuild error.
 - [The fingerprint tests](../cases/local-inference-to-gemini/verification/corpus.test.ts#L5-L26) distinguish generation-model changes from embedding-model/dimension changes: only the latter invalidate this fingerprint.
 
-The original indexer, retrieval, and answer path imports were switched from Ollama to Gemini in the transition commit. The excerpt set shows the relevant provider and index mechanisms; it does not reproduce the entire application wiring.
+The original indexer, retrieval, and answer path imports were switched from Ollama to Gemini in the transition commit. The excerpt set covers the provider and index mechanisms.
 
 ### Verification results and their limits
 
@@ -109,7 +109,7 @@ The transition commit's development report records a separate Gemini check:
 | Timing | Index creation approximately4.96seconds; complete `/api/ask` request approximately4.96seconds |
 | Further calls | No retry, fallback, or additional question used |
 
-The two approximately4.96second measurements concern different operations in the report and are not added together. This Korean question and the low-load Qwen English question used different conditions. **They are not a controlled speed or quality comparison.** The Gemini check supports a successful index-and-answer path for that one corpus/question, not broad quality, quota sustainability, or production reliability.
+The report records approximately4.96seconds for index creation and approximately4.96seconds for the complete answer request as separate operations. The Gemini check verified the index-and-answer path for one profile document and one Korean question. The Qwen low-load run used a different English question and execution conditions, so a controlled speed/quality comparison remains unavailable. Broader quality, quota sustainability, and production reliability remain unverified.
 
 The evidence supports the following boundaries:
 
@@ -121,9 +121,9 @@ The evidence supports the following boundaries:
 
 ### Source traceability
 
-All published code is **Excerpt**. The files preserve the original bytes, including imports and references to application files that are not published here. No names, control flow, placeholders, or dependency scaffolding were rewritten. The source table identifies the meaningful line span of each full-file excerpt; trailing blank lines remain preserved in the file hashes.
+All published code is **Excerpt**. The files preserve the original bytes, including imports and references to application files that are not published here. Names, control flow, and dependency references remain as originally implemented. The source table identifies the meaningful line span of each full-file excerpt; trailing blank lines remain preserved in the file hashes.
 
-The private Synethos source is identified by commit and repository-relative path. Private repository URLs, private research transcripts, raw runtime logs, local user paths, and API key values are not published. The ledger below records evidence identities and verification limits without making inaccessible private URLs appear to be public references.
+The private Synethos source is identified by commit and repository-relative path. Private repository URLs, private research transcripts, raw runtime logs, local user paths, and API key values are not published. The ledger below records evidence identities and verification limits.
 
 
 #### Before snapshot
@@ -199,7 +199,7 @@ Publication checks: the 12 Excerpts were checked against their originals, along 
 
 **Development period:** 2026-09-26 ~ 2026-09-28
 
-**Code classification:** 14 Excerpts and one Reconstructed manifest sample; no Mixed files.
+**Code classification:** 14 Excerpts and one Reconstructed manifest sample.
 
 **Outcome:** the remote documentation candidate path was retired, approved Markdown became the only knowledge retrieval source, and intent-coverage evaluation was retained. Importing the documents and preparing the corpus did not complete the full index build.
 
@@ -217,9 +217,9 @@ Three records describe different observations:
 
 | Observation | Retained evidence and scope |
 |---|---|
-| September 26 Single-Space probe | The historical probe report identifies a raw observation of the earlier Single-Space layout. It is not a record of the later Site variants. |
+| September 26 Single-Space probe | The historical probe report identifies a raw observation of the earlier Single-Space layout. |
 | September 27 Two-Space/Site observation | A tracked report describes Cosmic Horizon Global and Korean Spaces combined as Site variants. It reports independent checks of the Global and Korean MCP endpoints. No new raw topology-probe file was written for that check. |
-| September 28 09:44:31.093 Site-root probe | A separately retained JSON artifact records four searches, each with ten text blocks and two page results: 40 search blocks and eight page results in total. Its timestamp is 2026-09-28T00:44:31.093Z. It does not substitute for the September 27 two-endpoint comparison. |
+| September 28 09:44:31.093 Site-root probe | A separately retained JSON artifact records four searches, each with ten text blocks and two page results: 40 search blocks and eight page results in total. Its timestamp is 2026-09-28T00:44:31.093Z. The September 27 two-endpoint comparison and this Site-root run are separate observations. |
 
 The September 27 report says the Global endpoint and the endpoint under /kr/ returned the same server identity, tool schemas, capabilities, search corpus, distributions, and URLs. For each endpoint, the returned page-URL variants had the following distribution:
 
@@ -228,35 +228,35 @@ The September 27 report says the Global endpoint and the endpoint under /kr/ ret
 | Why We Study | 9 | 1 |
 | 왜 우리는 공부하는가? | 0 | 10 |
 
-These columns describe the languages/variants of returned URLs, not separate endpoint success counts. Registering both endpoints as independent knowledge sources would query the same multilingual corpus twice.
+These columns distinguish the languages/variants of returned URLs. Registering both endpoints as independent knowledge sources would query the same multilingual corpus twice.
 
-Search responses contained text blocks with Title, Link, and Content lines. The report found no structuredContent, typed locale, Space identity, page/section ID, translation-pair relationship, or search score; only array order was available. Both language versions of Why We Study could have the same title, so title equality was insufficient to identify locale. A reviewed 16-to-16 document-pair matrix came from repository inspection, not from an MCP pairing guarantee. The /kr/ URL path was the observed locale signal.
+Search responses contained text blocks with Title, Link, and Content lines. The report found no structuredContent, typed locale, Space identity, page/section ID, translation-pair relationship, or search score; only array order was available. Both language versions of Why We Study could have the same title, so title equality was insufficient to identify locale. Repository inspection established a reviewed 16-to-16 document-pair matrix. The /kr/ URL path was the observed locale signal.
 
-The September 28 artifact independently records server version 0.27.2, the four advertised tools, and search responses without structuredContent or reported tool errors. It is a saved observation read during publication preparation, not a new MCP call. Raw page contents are not published here.
+The September 28 artifact independently records server version 0.27.2, the four advertised tools, and search responses without structuredContent or reported tool errors. The saved observation was reviewed during publication preparation. Raw page contents are not published here.
 
 ### Implementing a defensive evidence boundary
 
 The [adapter](../cases/gitbook-mcp-to-local-knowledge/foundation/gitbook-mcp-source.ts#L67-L109) validates its HTTPS endpoint, refuses disabled-source use, limits page reads to the documentation origin, and exposes the two allowed operations. The [probe excerpt](../cases/gitbook-mcp-to-local-knowledge/foundation/gitbook-probe.excerpt.ts#L7-L54) preserves the original question set, result types, per-query page limit, and search/page orchestration. The file-writing CLI and raw-report persistence code are omitted from this excerpt.
 
-The later [search-result parser](../cases/gitbook-mcp-to-local-knowledge/multi-source/gitbook-search-results.ts#L15-L75), committed in 26a5409, extracts text fields and rejects unsuitable URLs rather than inventing missing metadata. Its URL checks cover origin and Site path, credentials, query/fragment components, encoded path separators/traversal, and the MCP endpoint itself. It retains the original resultIndex; it does not assign a provider score or infer a typed locale/pair identity. Empty results and nonempty results with no usable entries are different outcomes.
+The later [search-result parser](../cases/gitbook-mcp-to-local-knowledge/multi-source/gitbook-search-results.ts#L15-L75), committed in 26a5409, extracts text fields and rejects unsuitable URLs. Its URL checks cover origin and Site path, credentials, query/fragment components, encoded path separators/traversal, and the MCP endpoint itself. It retains the original resultIndex; it does not assign a provider score or infer a typed locale/pair identity. Empty results and nonempty results with no usable entries are different outcomes.
 
-The [historical adapter tests](../cases/gitbook-mcp-to-local-knowledge/verification/gitbook-mcp-source.test.ts#L27-L104) use a synthetic client to check tool restrictions, capability observation without execution, disabled sources, and cross-origin page rejection. These are contract tests, not fresh live-tool verification.
+The [historical adapter tests](../cases/gitbook-mcp-to-local-knowledge/verification/gitbook-mcp-source.test.ts#L27-L104) use a synthetic client to check tool restrictions, capability observation without execution, disabled sources, and cross-origin page rejection. The tests verify the adapter contract with a synthetic client.
 
 ### Combining sources revealed a different class of problems
 
-The September 27 sequence separated Local candidates from final answer evidence, added multi-source collection, and then ranking. In the later multi-source snapshot, [collection](../cases/gitbook-mcp-to-local-knowledge/multi-source/source-candidates.ts#L23-L58) preserves each configured knowledgeSourceId and keeps Local candidates separate from parsed GitBook hits. GitBook clients are closed in finally. Candidate collection does not itself create final citations.
+The September 27 sequence separated Local candidates from final answer evidence, added multi-source collection, and then ranking. In the later multi-source snapshot, [collection](../cases/gitbook-mcp-to-local-knowledge/multi-source/source-candidates.ts#L23-L58) preserves each configured knowledgeSourceId and keeps Local candidates separate from parsed GitBook hits. GitBook clients are closed in finally. Final citation assignment occurs at evidence selection.
 
-[Ranking](../cases/gitbook-mcp-to-local-knowledge/multi-source/relevance.ts#L23-L64) retains Local cosine scores and embeds the GitBook query and document hits to derive cosine-based relevance scores. It does not equate MCP result position with a Local similarity score. This creates a common ranking mechanism; the code alone does not establish that the scores are perfectly calibrated across sources.
+[Ranking](../cases/gitbook-mcp-to-local-knowledge/multi-source/relevance.ts#L23-L64) retains Local cosine scores and embeds the GitBook query and document hits to derive cosine-based relevance scores. The original MCP result position is retained as metadata. Cross-source score calibration remains unverified.
 
-The [multi-source intent excerpt](../cases/gitbook-mcp-to-local-knowledge/multi-source/intent-orchestration.excerpt.ts#L1-L22) shows the next layer: plan original/derived queries, collect and rank for each query, and delegate merging. Identity includes both the configured source and the document identity or public URL. Merely pointing two differently named sources at the same corpus does not create a cross-source translation-pair deduplication policy.
+The [multi-source intent excerpt](../cases/gitbook-mcp-to-local-knowledge/multi-source/intent-orchestration.excerpt.ts#L1-L22) shows the next layer: plan original/derived queries, collect and rank for each query, and delegate merging. Identity includes both the configured source and the document identity or public URL. With this identity rule, the same URL under two configured source IDs has distinct candidate identities; cross-source translation-pair deduplication is absent from this implementation.
 
 At 10:38:04 on September 28, a retained developer message reported that derived queries brought Verification Philosophy from rank 25 to 2 and Human Auditor from 9 to 2. However, the initial full round-robin merge pushed an existing AI-role result from 4 to 9, leaving the mixed question's recall@5 at 0.5. Total live-harness time rose from approximately 19.3 seconds to 34.3 seconds, and an embedding-provider error was observed. The developer asked to reconsider merge placement using actual lane order and candidate identity rather than discard the decomposition improvement.
 
-That message's UTC timestamp is 2026-09-28T01:38:04.008Z. The published later snapshot is the revised orchestration, not a reconstruction of the earlier failing working tree. Its retained merge policy used a holistic seed, top intent anchors, and an original-query backbone before derived tails.
+That message's UTC timestamp is 2026-09-28T01:38:04.008Z. The published snapshot contains the revised orchestration. Its retained merge policy used a holistic seed, top intent anchors, and an original-query backbone before derived tails.
 
-At 11:45:32, a further request recorded roughly six embedding calls and three GitBook searches for a two-intent question, along with a 100 RPM free-tier 429 observation. This prompted investigation of fan-out and duplicated embedding work. These are contemporaneous reports, not new measurements made for Tessera. They do not by themselves prove the complete or highest-priority reason for retiring MCP.
+At 11:45:32, a further request recorded roughly six embedding calls and three GitBook searches for a two-intent question, along with a 100 RPM free-tier 429 observation. This prompted investigation of fan-out and duplicated embedding work. These observations come from contemporaneous reports. Their relative weight in the MCP retirement decision remains unconfirmed.
 
-The [collection test](../cases/gitbook-mcp-to-local-knowledge/verification/source-candidates.test.ts#L6-L85) expresses provenance and original ranking-signal preservation with synthetic fixtures. The multi-source and intent work was exercised by evaluation; the production answer/search routes still used their existing single-query Local retrieval path. The publication does not describe an MCP-backed production answer service being replaced.
+The [collection test](../cases/gitbook-mcp-to-local-knowledge/verification/source-candidates.test.ts#L6-L85) expresses provenance and original ranking-signal preservation with synthetic fixtures. The multi-source and intent work was exercised by evaluation; the production answer/search routes still used their existing single-query Local retrieval path.
 
 ### Decision: import first, then remove the remote source
 
@@ -264,19 +264,19 @@ At 12:07:16.238 on September 28, the developer explicitly chose to incorporate t
 
 At 12:45:49.898, the developer reported 42 documents/475 chunks imported but index rebuilding blocked by the daily embedding quota, and requested the MCP-removal scope analysis. At 13:50:33, a subsequent request described the import and MCP-removal changes as existing uncommitted work to preserve while beginning the next embedding-target task. The combined implementation was committed at 14:50:04 as5f71fbe.
 
-The source simplification and phased scope are recorded user choices. The records do not establish whether metadata limitations, duplicate corpus access, request cost, reproducibility, or manual approval boundaries were the dominant motivation. Those observations and design pressures are reported without turning their coexistence into an invented causal ranking.
+The source simplification and phased scope are recorded user choices. The records do not establish whether metadata limitations, duplicate corpus access, request cost, reproducibility, or manual approval boundaries were the dominant motivation.
 
 ### Implementation: approved local files with public citation provenance
 
 The transition removed the GitBook adapter, parser, probe, source factory/contracts, common remote-result relevance layer, and MCP dependency. The runtime retrieval source became approved Markdown registered in knowledge/sources.json; public documentation URLs remained citation metadata rather than live retrieval endpoints. Knowledge import remained manual, with no automatic remote synchronization introduced.
 
-The [approved-source loader](../cases/gitbook-mcp-to-local-knowledge/local-knowledge/manifest.ts#L16-L49) checks the manifest shape, IDs and duplicates, file/title fields, path containment, Markdown extensions, and allowed publicUrl protocols, then reads the registered files. It does not treat the existence of a file as automatic registration.
+The [approved-source loader](../cases/gitbook-mcp-to-local-knowledge/local-knowledge/manifest.ts#L16-L49) checks the manifest shape, IDs and duplicates, file/title fields, path containment, Markdown extensions, and allowed publicUrl protocols, then reads the registered files. Registration is controlled by the manifest.
 
-The [Reconstructed manifest sample](../cases/gitbook-mcp-to-local-knowledge/local-knowledge/approved-sources.sample.json#L1-L17) contains only the two Why We Study entries, taken from the transition manifest and placed in a newly assembled two-entry document. They have distinct IDs, local file paths, and public URLs despite sharing a title. This sample is not the complete 42 document manifest, an added runtime configuration, or evidence of automated translation pairing. The full private manifest and document contents are not copied.
+The [Reconstructed manifest sample](../cases/gitbook-mcp-to-local-knowledge/local-knowledge/approved-sources.sample.json#L1-L17) contains only the two Why We Study entries, taken from the transition manifest and placed in a newly assembled two-entry document. They have distinct IDs, local file paths, and public URLs despite sharing a title. The sample is selected from the 42-document manifest; the full manifest and document contents remain private.
 
 The [Local search path](../cases/gitbook-mcp-to-local-knowledge/local-knowledge/search.ts#L47-L121) requires a matching usable target index, embeds the question, ranks Local chunks, and selects evidence. [Evidence selection](../cases/gitbook-mcp-to-local-knowledge/local-knowledge/search.ts#L99-L113) retains sourceId, title, section, content, and publicUrl, then assigns citation IDs to selected records. Local-only refers to the knowledge retrieval source: query embedding can still call an external provider.
 
-The [Local intent excerpt](../cases/gitbook-mcp-to-local-knowledge/local-knowledge/intent-orchestration.excerpt.ts#L1-L25) retains planning and merge delegation while replacing remote-source collection/ranking with Local candidate searches. Its default path executes the query bundle on one embedding target, returning that target with the runs. Source identity becomes a Local chunk identity. The same transition also added embedding-provider fallback; this is separate from retaining an MCP knowledge source. Provider adapters and their broader implementation are outside this excerpt set.
+The [Local intent excerpt](../cases/gitbook-mcp-to-local-knowledge/local-knowledge/intent-orchestration.excerpt.ts#L1-L25) retains planning and merge delegation while replacing remote-source collection/ranking with Local candidate searches. Its default path executes the query bundle on one embedding target, returning that target with the runs. Source identity becomes a Local chunk identity. The same transition also added embedding-provider fallback for query embeddings. Provider adapters and their broader implementation are outside this excerpt set.
 
 The [Local-query test excerpt](../cases/gitbook-mcp-to-local-knowledge/verification/local-query-search.excerpt.test.ts#L13-L42) uses an injected search function to check one Local search per planned query. It does not exercise a real target index, provider fallback, or live answer quality.
 
@@ -291,7 +291,7 @@ The transition report distinguishes these states:
 | Earlier Gemini build | 50 successful chunk embeddings, then HTTP 429 RESOURCE_EXHAUSTED. No partial index was written. |
 | Prior singleton artifact | The old 55 chunk index was invalid for the current corpus and target-specific storage schema. |
 | Full target indexes at5f71fbe | Builds deferred until document-embedding batching was addressed. Live relevance/API retrieval verification still had to wait. |
-| Later report atdadffe3,23:59:41 | Provider-owned batching was implemented, but a full live build remained deferred pending separate approval. This is a later snapshot, not the 14:50 transition state. |
+| Later report atdadffe3,23:59:41 | Provider-owned batching was implemented, but a full live build remained deferred pending separate approval. This report records the subsequent 23:59 state. |
 | Disposable provider smoke in that later report | Two synthetic documents and one query per target, at 768/1536 dimensions; relevant document ranked first; temporary mini-index removed. This did not create a production index. |
 
 The implementation and prepared corpus support the Local Knowledge direction, but the retained records within this case do not establish a completed full 475 chunk production index. The planned architecture, successful small smoke, full-corpus build, and production retrieval quality have different completion conditions.
@@ -300,13 +300,13 @@ The implementation and prepared corpus support the Local Knowledge direction, bu
 
 The remote documentation source was removed, while approved document registration, vector retrieval, public citation provenance, deterministic intent planning, and evaluation of coverage were retained or adapted. The priorities behind retirement and full-index retrieval quality remain unconfirmed as listed below.
 
-Still unconfirmed are the relative weight of the final retirement motivations, the complete correspondence of earlier raw probe runs, and end-to-end retrieval quality with a finished full index at the transition point. The initial round-robin regression remains a reported failure; the later published code must not be presented as that exact failing implementation. No MCP probe, embedding request, index build, or application test was rerun for this publication.
+Still unconfirmed are the relative weight of the final retirement motivations, the complete correspondence of earlier raw probe runs, and end-to-end retrieval quality with a finished full index at the transition point. The initial round-robin regression remains a reported failure, and the published code records the subsequent revision. No MCP probe, embedding request, index build, or application test was rerun for this publication.
 
 ### Source traceability and publication form
 
-Whole-file Excerpts preserve original bytes. Partial Excerpts preserve the listed source ranges without renaming or rewriting their statements; blank separators join selected declarations. Original imports and references to omitted application types/helpers are retained where selected. The partial tests omit the enclosing suite while preserving the selected imports, fixture helper, and test body. These are readable excerpts, not standalone modules.
+Whole-file Excerpts preserve original bytes. Partial Excerpts preserve the listed source ranges without renaming or rewriting their statements; blank separators join selected declarations. Original imports and references to omitted application types/helpers are retained where selected. The partial tests omit the enclosing suite while preserving the selected imports, fixture helper, and test body. These excerpts retain references to the surrounding application.
 
-The only Reconstructed file is the two-entry JSON sample. Its version and entry fields are copied from the identified manifest, but selection and the new envelope are editorial assembly; no in-source comment syntax is introduced into JSON. There are no Mixed files requiring reconstructed-block comments. Private raw responses, private repository URLs, secrets, local user paths, and unrelated approved-source entries are excluded.
+The only Reconstructed file is the two-entry JSON sample. Its version and entry fields are copied from the identified manifest, while selection and the new envelope are editorial assembly. Private raw responses, private repository URLs, secrets, local user paths, and unrelated approved-source entries are excluded.
 
 The commits below identify private source snapshots. Times are KST (UTC+09:00) unless explicitly marked UTC; commit times and development-event times are distinct.
 
@@ -356,7 +356,7 @@ JSON selection:
 | Retained Site-root probe | `gitbook-2026-09-28T00-44-31.093Z.json`; SHA-256 `8989e48c4fc7b5422290c7c3d8d87af871768bb35090679726725fdc73b24f43`. Used only for the September 28 run distinguished above. |
 | Retained developer requests | September 26 initial probe scope; September 28 10:38:04.008 merge regression, 11:45:32 fan-out, 12:07:16.238 import decision, 12:45:49.898 import/index status, and 13:50:33 preservation of existing changes. Original messages remain private. |
 
-The original UTC timestamp for 10:38:04.008 is `2026-09-28T01:38:04.008Z`. The integrated research document's 11:38 rendering was corrected against that original for this publication. Evidence discovery time is not used as development-event time.
+The original UTC timestamp for 10:38:04.008 is `2026-09-28T01:38:04.008Z`. The integrated research document's 11:38 rendering was corrected against that original for this publication. Development events are dated by their original records.
 
 <details>
 <summary>Original and public code SHA-256</summary>
