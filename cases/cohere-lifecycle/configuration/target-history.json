@@ -1,0 +1,227 @@
+{
+  "classification": "Reconstructed",
+  "snapshots": [
+    {
+      "stage": "initial-fallback",
+      "sourceCommit": "5f71fbece8a7d7caa28d01d655d8b02d614472cf",
+      "generation": {
+        "credentialSlot": "primary",
+        "targets": [
+          {
+            "provider": "gemini",
+            "model": "gemini-3.5-flash-lite"
+          },
+          {
+            "provider": "gemini",
+            "model": "gemini-3.1-flash-lite"
+          }
+        ],
+        "maxOutputTokens": 1200
+      },
+      "embedding": {
+        "targets": [
+          {
+            "id": "gemini-primary",
+            "provider": "gemini",
+            "model": "gemini-embedding-2",
+            "dimensions": 768,
+            "credentialSlot": "primary"
+          },
+          {
+            "id": "cohere-fallback",
+            "provider": "cohere",
+            "model": "embed-v4.0",
+            "dimensions": 1536,
+            "credentialSlot": "fallback"
+          }
+        ]
+      }
+    },
+    {
+      "stage": "cohere-only-embedding",
+      "sourceCommit": "1c0f28e58c6499f1bd107b9767ef9801e59f56e5",
+      "generation": {
+        "credentialSlot": "generation",
+        "targets": [
+          {
+            "provider": "gemini",
+            "model": "gemini-3.5-flash-lite"
+          },
+          {
+            "provider": "gemini",
+            "model": "gemini-3.1-flash-lite"
+          }
+        ],
+        "maxOutputTokens": 1200
+      },
+      "embedding": {
+        "targets": [
+          {
+            "id": "cohere-embed-v4",
+            "provider": "cohere",
+            "model": "embed-v4.0",
+            "dimensions": 1536
+          },
+          {
+            "id": "gemini-primary",
+            "provider": "gemini",
+            "model": "gemini-embedding-2",
+            "dimensions": 768
+          }
+        ],
+        "runtimeTargetIds": [
+          "cohere-embed-v4"
+        ]
+      }
+    },
+    {
+      "stage": "independent-primary-fallback",
+      "sourceCommit": "180cc306fafc191a21ea4f6886b48c0d1913b882",
+      "generation": {
+        "targets": [
+          {
+            "id": "gemini-3-5-flash-lite",
+            "provider": "gemini",
+            "model": "gemini-3.5-flash-lite",
+            "options": {
+              "maxOutputTokens": 32768
+            }
+          },
+          {
+            "id": "cohere-command-a-plus",
+            "provider": "cohere",
+            "model": "command-a-plus-05-2026",
+            "options": {
+              "maxOutputTokens": 32768,
+              "thinking": "provider-default"
+            }
+          }
+        ],
+        "runtimeTargetIds": [
+          "gemini-3-5-flash-lite",
+          "cohere-command-a-plus"
+        ]
+      },
+      "embedding": {
+        "targets": [
+          {
+            "id": "cohere-embed-v4-1536",
+            "provider": "cohere",
+            "model": "embed-v4.0",
+            "dimensions": 1536
+          },
+          {
+            "id": "gemini-embedding-2-768",
+            "provider": "gemini",
+            "model": "gemini-embedding-2",
+            "dimensions": 768
+          }
+        ],
+        "runtimeTargetIds": [
+          "gemini-embedding-2-768",
+          "cohere-embed-v4-1536"
+        ]
+      }
+    },
+    {
+      "stage": "groq-generation-fallback",
+      "sourceCommit": "0baebd9f242d88ffa15ef1953204c391ae97e623",
+      "generation": {
+        "targets": [
+          {
+            "id": "gemini-3-5-flash-lite",
+            "provider": "gemini",
+            "model": "gemini-3.5-flash-lite",
+            "options": {
+              "maxOutputTokens": 32768
+            }
+          },
+          {
+            "id": "groq-gpt-oss-120b",
+            "provider": "groq",
+            "model": "openai/gpt-oss-120b",
+            "options": {
+              "maxOutputTokens": 4096,
+              "reasoningEffort": "medium"
+            }
+          },
+          {
+            "id": "cohere-command-a-plus",
+            "provider": "cohere",
+            "model": "command-a-plus-05-2026",
+            "options": {
+              "maxOutputTokens": 32768,
+              "thinking": "provider-default"
+            }
+          }
+        ],
+        "runtimeTargetIds": [
+          "gemini-3-5-flash-lite",
+          "groq-gpt-oss-120b"
+        ]
+      },
+      "embedding": {
+        "targets": [
+          {
+            "id": "cohere-embed-v4-1536",
+            "provider": "cohere",
+            "model": "embed-v4.0",
+            "dimensions": 1536
+          },
+          {
+            "id": "gemini-embedding-2-768",
+            "provider": "gemini",
+            "model": "gemini-embedding-2",
+            "dimensions": 768
+          }
+        ],
+        "runtimeTargetIds": [
+          "gemini-embedding-2-768",
+          "cohere-embed-v4-1536"
+        ]
+      }
+    },
+    {
+      "stage": "cohere-removed",
+      "sourceCommit": "e7007172cc7a5171948659c4f1ceb6fd65dd1332",
+      "generation": {
+        "targets": [
+          {
+            "id": "gemini-3-5-flash-lite",
+            "provider": "gemini",
+            "model": "gemini-3.5-flash-lite",
+            "options": {
+              "maxOutputTokens": 32768
+            }
+          },
+          {
+            "id": "groq-gpt-oss-120b",
+            "provider": "groq",
+            "model": "openai/gpt-oss-120b",
+            "options": {
+              "maxOutputTokens": 4096,
+              "reasoningEffort": "medium"
+            }
+          }
+        ],
+        "runtimeTargetIds": [
+          "gemini-3-5-flash-lite",
+          "groq-gpt-oss-120b"
+        ]
+      },
+      "embedding": {
+        "targets": [
+          {
+            "id": "gemini-embedding-2-768",
+            "provider": "gemini",
+            "model": "gemini-embedding-2",
+            "dimensions": 768
+          }
+        ],
+        "runtimeTargetIds": [
+          "gemini-embedding-2-768"
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,138 @@
+{
+  "classification": "Reconstructed",
+  "classifier": {
+    "startedAt": "2026-10-06T07:05:37.753Z",
+    "finishedAt": "2026-10-06T07:05:47.618Z",
+    "model": "command-a-plus-05-2026",
+    "summary": {
+      "executed": 20,
+      "labeledExecuted": 18,
+      "labeledExpected": 18,
+      "intentCorrect": 13,
+      "completeCorrect": 14,
+      "jsonValid": 17,
+      "apiFailures": 0,
+      "essentialPassed": true,
+      "lookupAggregateErrors": 1,
+      "compareSynthesisCorrect": 5,
+      "compareSynthesisExpected": 7,
+      "confusionMatrix": {
+        "lookup": {
+          "lookup": 3,
+          "compare": 0,
+          "synthesis": 0,
+          "aggregate": 0,
+          "invalid": 2
+        },
+        "compare": {
+          "lookup": 0,
+          "compare": 3,
+          "synthesis": 0,
+          "aggregate": 0,
+          "invalid": 0
+        },
+        "synthesis": {
+          "lookup": 0,
+          "compare": 1,
+          "synthesis": 2,
+          "aggregate": 0,
+          "invalid": 1
+        },
+        "aggregate": {
+          "lookup": 1,
+          "compare": 0,
+          "synthesis": 0,
+          "aggregate": 5,
+          "invalid": 0
+        }
+      },
+      "latencyMs": {
+        "median": 409,
+        "max": 972,
+        "min": 327
+      },
+      "passed": false
+    },
+    "callsByPhase": {
+      "classifier": 20,
+      "embedding": 0,
+      "generation": 0
+    },
+    "actualTotalApiCalls": 20,
+    "dynamicSkippedReason": "Predeclared classifier gate not met",
+    "retry": false,
+    "providerFallback": false
+  },
+  "retrieval": [
+    {
+      "observedAt": "2026-10-15T12:23:15.785Z",
+      "embedding": {
+        "targetId": "gemini-embedding-2-768",
+        "provider": "gemini",
+        "model": "gemini-embedding-2",
+        "dimensions": 768
+      },
+      "retrieval": {
+        "kind": "local-index",
+        "mode": "intent-coverage-diagnostic"
+      },
+      "questionBank": {
+        "questionBankId": "canonical-portfolio",
+        "questionBankVersion": "2",
+        "questionBankHash": "d1bc768a7cfaa451e34e55b17d19bcd526da20207e66585b62f6eeb798084b52"
+      },
+      "profile": {
+        "profileId": "full-40",
+        "profileVersion": "1",
+        "profileHash": "9bc25ca64ad6ac87345cb9b1a658c7eebeb8c7004d38d4273c51bb26a9b8aaf6"
+      },
+      "executedCases": 40,
+      "supportedCases": 32,
+      "unsupportedCases": 8,
+      "evidenceGroups": 41,
+      "originalMacroRecallAt5": 0.859375,
+      "originalMacroRecallAt10": 0.921875,
+      "mergedMacroRecallAt5": 0.90625,
+      "mergedMacroRecallAt10": 0.921875,
+      "mergedGroupHitsAt5": 35,
+      "mergedGroupHitsAt10": 36,
+      "completeCasesAt5": 27,
+      "completeCasesAt10": 27
+    },
+    {
+      "observedAt": "2026-10-15T12:23:59.601Z",
+      "embedding": {
+        "targetId": "cohere-embed-v4-1536",
+        "provider": "cohere",
+        "model": "embed-v4.0",
+        "dimensions": 1536
+      },
+      "retrieval": {
+        "kind": "local-index",
+        "mode": "intent-coverage-diagnostic"
+      },
+      "questionBank": {
+        "questionBankId": "canonical-portfolio",
+        "questionBankVersion": "2",
+        "questionBankHash": "d1bc768a7cfaa451e34e55b17d19bcd526da20207e66585b62f6eeb798084b52"
+      },
+      "profile": {
+        "profileId": "full-40",
+        "profileVersion": "1",
+        "profileHash": "9bc25ca64ad6ac87345cb9b1a658c7eebeb8c7004d38d4273c51bb26a9b8aaf6"
+      },
+      "executedCases": 40,
+      "supportedCases": 32,
+      "unsupportedCases": 8,
+      "evidenceGroups": 41,
+      "originalMacroRecallAt5": 0.890625,
+      "originalMacroRecallAt10": 0.921875,
+      "mergedMacroRecallAt5": 0.90625,
+      "mergedMacroRecallAt10": 0.953125,
+      "mergedGroupHitsAt5": 36,
+      "mergedGroupHitsAt10": 38,
+      "completeCasesAt5": 27,
+      "completeCasesAt10": 29
+    }
+  ]
+}

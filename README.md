@@ -24,6 +24,7 @@ Read the [engineering development records](docs/engineering-decisions.md) for ea
 |---|---|---|
 | 01 | [From Local Qwen/Ollama Inference to the Gemini API](docs/engineering-decisions.md#01--from-local-qwenollama-inference-to-the-gemini-api) | 2026-09-26 |
 | 02 | [From GitBook MCP to Local Knowledge](docs/engineering-decisions.md#02--from-gitbook-mcp-to-local-knowledge) | 2026-09-26 ~ 2026-09-28 |
+| 03 | [Introducing, Evaluating, and Retiring Cohere](docs/engineering-decisions.md#03--introducing-evaluating-and-retiring-cohere) | 2026-09-28 ~ 2026-10-17 |
 
 ## Copyright
 
