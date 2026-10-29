@@ -22,7 +22,7 @@ Retained originals on the home PC were additionally inspected on October 29, 202
 - [04 — Provider Architecture and Embedding Reliability](#04--provider-architecture-and-embedding-reliability) — 2026-09-26 ~ 2026-10-17
 - [05 — Cross-PC Index Portability](#05--cross-pc-index-portability) — 2026-09-28 ~ 2026-10-26
 - [06 — Model Selection: Quality and Availability](#06--model-selection-quality-and-availability) — 2026-09-26 ~ 2026-10-16
-- [07 — HTTP Socket Response Boundaries and API Responsibilities](#07--http-socket-response-boundaries-and-api-responsibilities) — 2026-10-06
+- [07 — Knowledge–Index Consistency and Recoverable Deployment](#07--knowledgeindex-consistency-and-recoverable-deployment) — 2026-10-22 ~ 2026-10-26
 
 ## 01 — From Local Qwen/Ollama Inference to the Gemini API
 
@@ -1416,133 +1416,133 @@ All 120 full40 requests, responses, results, and historical manual reviews, 24 p
 
 All fourteen public JSON files parsed. English/Korean file/external links and SHA-256 multisets matched. The two READMEs and two development records passed validation of all 656 local file, heading, and line-range links. The existing 119 source/test files and Synethos originals were preserved; the Synethos working tree was clean. Existing-file changes cover two development records and two evidence JSON files; a reasoning-evidence JSON and shared recovered-source register were added. Published material was checked for credential values, local user paths, private repository URLs, and full knowledge payloads. Verification used original-record inspection and local computation; no new model call, historical experiment rerun, application test, index build, or server access was performed.
 
-## 07 — HTTP Socket Response Boundaries and API Responsibilities
+## 07 — Knowledge–Index Consistency and Recoverable Deployment
 
-**Development date:** 2026-10-06
+**Development period:** 2026-10-22 ~ 2026-10-26. The developer directly clarified operating constraints, retention choice, and design delegation on 2026-10-29.
 
-**Code classification:** Excerpt — twelve whole original source/test files; Reconstructed — two evidence records.
+**Code classification:** Excerpt — one whole original file and three partial selections; Reconstructed — three evidence records.
 
-**Outcome:** oversized and unfinished bodies receive complete 413/408 JSON before connection closure. After real-socket regressions and production-build verification, public HTTP response policy and safe diagnostics were separated into dedicated modules.
+**Outcome:** operations retained a total of three releases within limited server space, switching/restoring application code, Knowledge, and Index together. The developer provided the environment, materials, constraints, and retention policy and delegated detailed deployment design/implementation to AI. The approved October 26 deployment activated a new release and verified readiness to restore the previous version.
 
-### P0 protection contracts and initial verification
+### Operating environment and usable space
 
-Synethos /api/ask P0 protection applied admission and input boundaries before provider work. Bodies were limited to 8192 bytes including JSON/whitespace, body reading to five seconds total, and trimmed questions to 2–1000 UTF-16 code units. Rolling limits were ten requests per address and thirty per process over sixty seconds; concurrent leases were one per address and two per process. Input errors released leases. This case follows rejected-body responses and the subsequent API responsibility separation.
+Synethos ran on a Naver Cloud free-tier Ubuntu server with Cloudflare Tunnel already in use. October 22 Git documentation records systemd operation, separately prepared Linux production dependencies, and the existing Tunnel’s Ubuntu connector/public-service verification. The observed October 26 environment was Ubuntu 24.04.1 and Node v24.22.1.
 
-The historical report records 48 files/429 tests, static checks, and a production build passing initially. In-memory Request/ReadableStream and mocked transports exercised input, deadline, and dispatch-budget contracts; the initial loopback smoke covered invalid-question and rate-limit paths. Subsequent HTTP verification with actual chunked uploads and unfinished bodies exposed the response defect.
+**Operating experience directly clarified by the developer on October 29:** the nominal 10GB initially seemed fully usable. After the operating system and accumulated security updates, available space was approximately 3–4GB. The provisioned environment’s security patches were also out of date.
 
-### ECONNRESET observed through actual HTTP
-
-The reported environment was Windows, Node.js 24.16.0 x64, SvelteKit 2.70.3, adapter-node 5.5.7, and @google/genai 2.24.0. Five automated HTTP groups recorded seventy assertions: sixty-six passed and four failed. The four failures were repeated observations of two defects.
-
-| Input | Expected contract | Historical observation |
-|---|---|---|
-| 8193-byte chunked body | 413 REQUEST_TOO_LARGE JSON | ECONNRESET; zero upstream dispatches |
-| Unfinished body | 408 REQUEST_TIMEOUT JSON after five seconds | ECONNRESET at approximately five seconds; a following same-address request was admitted |
-
-Size/deadline rejection and work blocking occurred, but the client’s JSON response did not complete. The [historical observation summary](../cases/http-socket-response-boundaries/evidence/observed-results.json#L1-L199) retains verification denominators and each run’s conditions.
-
-Two initial normal cloud questions reportedly made two embedding and two generation requests, all HTTP 200. Fault profiles used synthetic credentials and a real local HTTP upstream. Four embedding attempts denied by sandbox transport EACCES and initial missing batchEmbedContents instrumentation were recorded separately as harness-preparation failures and excluded from the application results above.
-
-### Cause: cancelling input closed the response socket first
-
-The historical report traces unconditional reader.cancel() in readAskBody through SvelteKit get_raw_body().cancel(reason) to req.destroy(reason). While rejected input remained unfinished, this destroyed the request socket before the route’s JSON could be delivered. The same cancel-to-destroy path was directly inspected in the home PC’s installed node implementation of the same SvelteKit version.
-
-Stream cancellation in an in-memory Request test was disconnected from a real IncomingMessage socket. The subsequent [socket regression](../cases/http-socket-response-boundaries/socket/body-socket.test.ts#L1-L33) combines a Node HTTP server with installed getRequest/setResponse to inspect the route result’s completion as an actual wire response. Answer-service and configuration work are mocked.
-
-The initial reader.cancel() implementation was uncommitted, and its exact source snapshot was not recovered. The P0 excerpts below use e37bca4, which already includes the socket fix. The retained historical report identifies the failure path; code and regressions identify the fixed behavior.
-
-### Fix: reader cleanup and closure after the response
-
-The [body reader](../cases/http-socket-response-boundaries/p0/ask-protection.ts#L46-L75) checks Content-Length and actual streamed bytes and applies the body deadline with Promise.race. Its finally block clears the timer and releases the reader lock with reader.releaseLock(). No background reader or remaining-body drain was added.
-
-The [fixed route](../cases/http-socket-response-boundaries/p0/ask-route.ts#L24-L37) sets Connection: close for 413/408. The selected behavior completes JSON before closing the potentially unfinished input connection and retains keep-alive for normal responses. The [in-memory stream regression](../cases/http-socket-response-boundaries/p0/ask-protection.test.ts#L28-L51) checks cancellation avoidance, lock release, the exact byte boundary, and multibyte decoding across chunks.
-
-Input errors finish before configuration loading, retrieval, and generation. [Lease ownership and release](../cases/http-socket-response-boundaries/p0/ask-route.ts#L12-L66) stay with the route after admission, with release in finally. The separate generation-timeout path preserves the policy of holding the lease until late work settles.
-
-### Socket regressions and fixed production-build verification
-
-The five cases in the [actual-socket tests](../cases/http-socket-response-boundaries/socket/body-socket.test.ts#L54-L88) cover ended/unfinished chunked overflow twice, unfinished-body timeout, oversized Content-Length, and the exact byte boundary with normal keep-alive. They inspect status, JSON, completion, headers, exclusion of provider work, and lease recovery on a follow-up request.
-
-The historical report records five passing socket tests, a full suite of 49 files/434 passing tests, zero static-check errors/warnings, and a successful production build. Ten subsequent actual HTTP checks against that new production adapter-node build all passed.
-
-| Fixed input/check | Historical result | Provider work |
-|---|---|---|
-| Ended 8193-byte chunked body | Complete 413 JSON, then connection close | Zero |
-| 8193-byte body left unfinished by client | Complete 413 JSON in 4ms during upload, then close | Zero |
-| Content-Length 9000, opening brace only | Complete 413 JSON without waiting for remaining input | Zero |
-| Partial body left open | Complete 408 JSON in 5010ms, then close | Zero |
-| Same-address follow-up after each rejection | Expected 400 INVALID_QUESTION; lease recovered | Zero |
-| Exact 8192-byte valid body and normal follow-up | Both 200; same keep-alive socket/local port reused | Local upstream only |
-
-Rejected responses retained Cache-Control: no-store. The final two normal requests produced two local embedding and two local generation calls; fixed verification made zero external cloud calls. This table groups observations from the historical report; the raw per-request ledger was not recovered.
-
-### Sequence of completed fix and later responsibility separation
-
-| KST point | Event | Evidence level |
-|---|---|---|
-| October 6, before the 10:32 commit | Initial verification → actual HTTP failure → cancel/destroy investigation → minimal fix → socket/production-build verification | Historical report retained in the commit; exact execution start/end times unconfirmed |
-| 10:19:39 / 10:28:06 / 10:30:07 | Contract/defect comparison / fix-completion report / evidence-based structural-change judgment | Developer-supplied ChatGPT search transcription CG08; original context unconfirmed |
-| 10:32:17 | e37bca4 commits P0 guards, socket fix, tests, and report together | Git directly inspected |
-| 10:57:44 | 8aca7d6 separates public response policy and safe diagnostics | Git directly inspected; immediate successor to e37bca4 |
-
-The two Git snapshots show responsibility separation after the socket fix. The parent of e37bca4 contains no P0 body reader. Commit times identify implementation preservation points, separately from individual verification execution times.
-
-### Responsibilities of public responses and safe diagnostics
-
-At the P0 snapshot, the [route](../cases/http-socket-response-boundaries/p0/ask-route.ts#L1-L66) held public JSON/header policy, while [service-failure](../cases/http-socket-response-boundaries/p0/service-failure.ts#L1-L79) combined fixed service failures and diagnostic projection. Commit 8aca7d6 introduced the following boundaries.
-
-| Component | Responsibility after separation |
+| Historical source | Recorded space |
 |---|---|
-| [Route](../cases/http-socket-response-boundaries/separated/ask-route.ts#L1-L53) | Admission, input/work sequencing, config/answer calls, lease ownership/release |
-| [askResponses](../cases/http-socket-response-boundaries/separated/ask-response.ts#L1-L42) | Public status/body/headers, no-store, Retry-After, 413/408 Connection: close, successful-payload credential check |
-| [Safe diagnostics](../cases/http-socket-response-boundaries/separated/safe-diagnostics.ts#L1-L50) | Allowlisted name/category/status/code projection, at most four cause entries with cycle protection |
-| [serviceFailure](../cases/http-socket-response-boundaries/separated/service-failure.ts#L1-L31) | Safe-diagnostic logging and fixed provider-neutral service failures |
+| Original tool output, October 26 21:04:59.201 | Filesystem 9.8G, used 6.0G, available 3.3G, 65% usage |
+| Same-day predeployment report | 3,516,506,112 available bytes, approximately 3.28GiB; existing releases approximately 38MiB each |
 
-Diagnostic allowlists and function logic moved from the earlier implementation. The generation orchestrator’s safeDiagnosticIdentifier import also changed from api/service-failure to observability/safe-diagnostics. Public response policy moved out of the route, and generation referenced common diagnostics through the observability module.
+This measurement corroborates available space within the developer’s stated range. Per-OS/update byte attribution and initial before/after measurements were not recovered. The [constraints and decisions evidence](../cases/knowledge-index-release-consistency/evidence/decisions-and-constraints.json#L1-L119) separates historical measurements from the later developer account.
 
-[Response-policy tests](../cases/http-socket-response-boundaries/separated/ask-response.test.ts#L1-L65) inspect status/body/no-store/Retry-After, selective 413/408 close, and fail-closed handling of JSON-escaped credentials. [Diagnostic tests](../cases/http-socket-response-boundaries/separated/safe-diagnostics.test.ts#L1-L55) inspect allowed fields, arbitrary-string exclusion, normalized provider-identifier priority, deep/cyclic causes, and non-Error input. [Service-failure tests](../cases/http-socket-response-boundaries/separated/service-failure.test.ts#L1-L28) inspect safe logging and fixed public failures. These tests are historical implementation evidence; the earlier 434-test pass remains attributed to the socket-fix stage.
+### Total three releases: developer choice and AI design
 
-### Developer judgment, approval records, and remaining evidence
+The developer explained choosing a total of three releases, adding one to the initially considered total of two under the space constraint. Three was an operating choice, rather than the result of a detailed optimization calculation. The approximately 38MiB release measurement is not used to derive that choice.
 
-Research C04/U04 and developer-supplied CG08 describe the same socket incident. CG08 transcribes a developer preference at 10:30:07 to consider structural changes when concrete evidence warrants them, rather than automatically refactor immediately after the task. The later responsibility separation is directly established by its separate Git commit. The specific proposal/approval conversation was not recovered beyond search transcription.
+The earlier October 26 server script already contained a three-release policy; the original 21:22:05.529 developer request explicitly retained the latest three after success. The original two-to-three conversation was not recovered. Its rationale and design delegation are attributed to the October 29 direct clarification at that later date.
 
-The historical technical document calls the change an approved fix, but the complete Codex session needed to establish explicit developer approval text/time was not recovered on the home PC. The search record’s U role labels and timestamps are retained as supplied; the completion report’s original speaker/message context remains unconfirmed. The [case source register](../cases/http-socket-response-boundaries/evidence/source-register.json#L1-L333) separates code, historical reports, history search, and unconfirmed evidence.
+| Actor/source | Established role |
+|---|---|
+| Developer direct clarification | Provided environment/materials/constraints, chose total three, delegated detailed design/implementation to AI |
+| October 26 developer request | Retain the existing release structure, switch/restore Knowledge and Index together, check Linux dependencies, preserve environment/Tunnel |
+| AI design/implementation | Specify manifest/hash checks, candidate preparation, service-account checks, atomic activation/failure recovery, retention ordering and deletion safety |
 
-The home checkout, relevant dated compressed sessions, user-input history, session metadata, and additional archival locations were inspected. Identified artifacts tmp/p0-live-verification/report.json, streamed-body-fix-results.json, streamed-body-fix-metrics.json, and streamed-body-fix.mjs were not recovered. Remaining gaps are the exact uncommitted pre-fix source, raw measurements, complete approval conversation, and execution timestamps. Quantities and execution outcomes retain the preserved historical report’s evidence level and conditions.
+Adopting an existing structure as a later requirement is distinguished from first devising it. The release count is attributed to the developer; the checks and switching procedure implementing those conditions are attributed to AI’s detailed design.
 
-### Source traceability and publication scope
+### Earlier deployment issues and the new candidate
 
-The twelve Excerpts preserve the bytes of the complete Git files below, including original imports, identifiers, and application references. Socket tests use synthetic questions and mock answers. Two evidence JSON files select report observations and source identities into editorial envelopes. Private knowledge, unnecessary question-bank text, credentials, measurement payloads, complete conversations, and operational access details remain private. Code describes the two October 6 snapshots; later runtime/security revisions retain their own histories.
+The original October 26 developer request required preserving earlier fixes to Linux production dependency file/directory access and the active Knowledge/Index root. The prior server script also contained post-install permission normalization, service-account dotenv/@google/genai imports, and current-root checks. The first exception, exact occurrence time, and repair-approval text were not recovered.
+
+The requirement to avoid copying Windows dependencies directly to Linux is in the October 29 developer account. The actual archive contained no node_modules, and Ubuntu prepared/checked Linux production dependencies. The Windows-copy constraint and the confirmed Linux permission issue retain their respective evidence.
+
+The previous deployment script was fixed to a particular release, commit, index, and 382 chunks. The new candidate changed approved documents and index to 28 sources/381 chunks. Its old same-content conditions could not simply be reused; the developer requested a reusable procedure independent of one candidate.
+
+### Bundle code, Knowledge, and Index into one release
+
+The [bundle implementation](../cases/knowledge-index-release-consistency/release/bundle.py#L1-L82) packages approved-manifest Knowledge, Index, configuration, application build, package, and lockfile into one candidate. Its manifest connects sourceCommit, release, file sizes/SHA-256, and index identity. Credentials and Windows node_modules are excluded. Candidate verification and activation use this release unit.
+
+| Stage | AI-implemented behavior |
+|---|---|
+| Preparation | Check expected existing release, archive/manifest/payload/source commit, Node compatibility, available space, and protected configuration |
+| Linux preflight | Normalize permissions after production dependency installation; check imports and compiled index loading with the service account/actual environment |
+| Activation | Atomically replace current, restart service, check actual root/cwd/loaded index/internal and external health/homepage |
+| Activation/verification failure | Restore previous link, restart, and reverify the previous release and its Knowledge/Index |
+| Post-success retention | Keep active, previous, and newest other; check deletion paths and process use before removing others |
+
+The [permissions/activation/recovery excerpt](../cases/knowledge-index-release-consistency/release/activation.excerpt.py#L1-L40) normalizes installed access permissions after a restrictive umask. switch uses a temporary symlink and os.replace; activate restores the previous link and runs restart/rollback_verify when post-switch restart/verify fails. Preparation failure leaves the active release in place.
+
+The [retention/deletion-safety excerpt](../cases/knowledge-index-release-consistency/release/retention.excerpt.py#L1-L30) implements total three as active/previous/newest other. Cleanup follows successful verification and checks paths outside the release root, symlinks, and in-use process cwd/executables. Cleanup failure leaves the verified active release running and requires follow-up.
+
+Index identity and loader contracts connect to case 05’s [manifest verification](../cases/cross-pc-index-portability/production/verify-manifest.excerpt.py#L23-L56) and [runtime probe](../cases/cross-pc-index-portability/production/probe.mjs#L1-L43). This case focuses on binding those materials into one operating release and switching/restoring them under the selected space/retention conditions.
+
+### Original requests, declarations, approvals, and execution
+
+| KST time | Event/actor |
+|---|---|
+| October 22 | Git operating document reports Ubuntu/systemd, separate Linux dependencies, and existing Tunnel operation |
+| October 26 around 21:10 | Tool output reads the prior server script’s permission checks, active-root checks, and three-release policy |
+| 21:22:05.529 | Developer requests reusable deployment, preservation of earlier fixes, Knowledge/Index consistency, Linux preflight, and total three |
+| 21:28:01.646 → 21:28:25.746 | AI implementation/verification/candidate declaration → developer approval |
+| 21:39:59.309 / 21:42:03.125 | Original Linux deployment safety outputs each show eight passing tests |
+| 21:44:39.175 → 21:48:38.896 | AI candidate results/Git declaration → developer commit/push approval |
+| 21:49:10 | 4fddd61 commits reusable deployment implementation and records |
+| 21:51:33–21:51:48 → 21:52:55.532 | AI declares exact switch/verification/recovery/retention scope → developer production approval |
+| 21:59:22.934 | AI completion report: new release, actual index/health, total three, and restoration readiness |
+
+Requests, declarations, and approvals were directly read in original session 01a177b0-1d84-7cc0-aedb-4a06f6d9c661. The [source register](../cases/knowledge-index-release-consistency/evidence/source-register.json#L1-L385) preserves UTC/KST timestamps, roles, and message-text hashes. Other test changes in 4fddd61 belong to their separate scope; this case selects deployment design and operating results.
+
+### Actual operation and restoration verified in tests
+
+The [observed-results projection](../cases/knowledge-index-release-consistency/evidence/deployment-observed-results.json#L1-L78) compares original deployment JSON, logs, completion report, and archive. The retained approved deployment script matches the Git original bytes/SHA-256.
+
+| Actual October 26 observation | Result |
+|---|---|
+| Active release/source commit | 20261026-4fddd61-01 / 4fddd619640fbbf77fbc58f2a80e8aaa2065f231 |
+| Actual loaded data | 28 sources/381 chunks; candidate index/corpus identities match |
+| Linux dependency imports/active root/process cwd | Checks passed |
+| Internal/external health/homepage | HTTP 200/200/200; application/existing Tunnel reported healthy |
+| Actual retention | New/189cf00/876ea52, total three; 8fa463e removed after successful verification |
+| Restoration readiness | Previous 189cf00 loader/import preflight and rollbackReady confirmed |
+| Production rollback/provider calls | Rollback unnecessary/zero calls |
+
+During publication preparation, the retained archive was read in memory and its archive/manifest hashes and all 112 payload file sizes/SHA-256 compared. All matched, with zero node_modules/evaluation-fixture entries. Ordinary 1033-pass/4-skip tests and passing static checks/build remain historical candidate-code verification. Health/loader success and semantic answer quality concern different verification targets.
+
+The [rollback/retention test excerpt](../cases/knowledge-index-release-consistency/verification/rollback-retention.excerpt.test.py#L1-L65) injects failure while using an actual POSIX symlink and synthetic Knowledge/Index files, checking restoration of both old contents. Separate assertions check retention ordering. The historical eight-test Linux pass includes these checks. The production deployment succeeded, so automatic rollback was unnecessary. Operating evidence establishes new-release consistency and readiness to restore the previous release.
+
+During the October 26 deployment, Cloudflare returned HTTP 403 for default Python urllib User-Agent requests. The same health checks returned 200 with an explicit deployment client identity. Existing security settings, health checks, and the approved archive/manifest/deployment-script hashes were preserved.
+
+### Evidence scope and remaining questions
+
+Operating constraints, the two-to-three rationale, and design delegation are the October 29 direct developer account; October 26 requirements/approvals are original messages; detailed design is the historical AI declaration/code; operating state is historical tool output/verification JSON. Initial server-provisioning/security-update logs and before/after space measurements, the original two-to-three conversation, the early Windows-copy requirement, and original Linux/root failures/repair approvals remain unavailable.
+
+Code selections explain the mechanisms behind the constraints and results. Partial excerpts join declared ranges with one blank line, preserving original statements, identifiers, and references. Original application references remain, including retention’s ROOT and the tests’ deploy.py import. Private Knowledge, question-bank text, credentials, access information, protected-setting contents, full operating commands, and complete conversations remain outside publication.
 
 <details>
-<summary>Original snapshots, lines, and SHA-256</summary>
+<summary>Original sources, ranges, and SHA-256</summary>
 
-| Public Excerpt | Original commit / path / lines | Original = public SHA-256 |
+| Public Excerpt | Original commit/path/original lines → public lines | Original SHA-256 → public SHA-256 |
 |---|---|---|
-| [p0/ask-protection.ts](../cases/http-socket-response-boundaries/p0/ask-protection.ts#L1-L75) | `e37bca4739f5fec64c767d20b54f51c5f303388b`<br>`sveltekit/src/lib/server/api/ask-protection.ts`<br>1–75 | `dafc37680bdec4924f72087d62a96cc04b4cff9c154fb77dfd56e6ea484dd20b` |
-| [p0/ask-protection.test.ts](../cases/http-socket-response-boundaries/p0/ask-protection.test.ts#L1-L52) | `e37bca4739f5fec64c767d20b54f51c5f303388b`<br>`sveltekit/src/lib/server/api/ask-protection.test.ts`<br>1–52 | `e275b80e9a1fdf061db3359b364b2a6546b3018143b1849cf2d4d56ad6398487` |
-| [p0/ask-route.ts](../cases/http-socket-response-boundaries/p0/ask-route.ts#L1-L66) | `e37bca4739f5fec64c767d20b54f51c5f303388b`<br>`sveltekit/src/routes/api/ask/+server.ts`<br>1–66 | `c417e0de7c9ec9ede71c56e0534b84810f1de403fcb93099edaf1c9c7badb7b3` |
-| [p0/service-failure.ts](../cases/http-socket-response-boundaries/p0/service-failure.ts#L1-L79) | `e37bca4739f5fec64c767d20b54f51c5f303388b`<br>`sveltekit/src/lib/server/api/service-failure.ts`<br>1–79 | `469ce502486224dd03c8f5fee97a17d7c750e7231f96670e169fd80fbef40b50` |
-| [socket/body-socket.test.ts](../cases/http-socket-response-boundaries/socket/body-socket.test.ts#L1-L88) | `e37bca4739f5fec64c767d20b54f51c5f303388b`<br>`sveltekit/src/routes/api/ask/body-socket.test.ts`<br>1–88 | `faa071b7b1fa2ed9fd71d95717c83e12467e821cf7419d700fa66e06163e0a91` |
-| [separated/ask-route.ts](../cases/http-socket-response-boundaries/separated/ask-route.ts#L1-L53) | `8aca7d655c35813ac3d6d5fb29b356296d324bc6`<br>`sveltekit/src/routes/api/ask/+server.ts`<br>1–53 | `d75bb01021ff4b9572e4eb7a2c95838e8a39743e70e506ee1eb7c2dcb6008fb0` |
-| [separated/ask-response.ts](../cases/http-socket-response-boundaries/separated/ask-response.ts#L1-L42) | `8aca7d655c35813ac3d6d5fb29b356296d324bc6`<br>`sveltekit/src/lib/server/api/ask-response.ts`<br>1–42 | `76243506b15921a0304a82a2d2122086090bc8fbd817ecca336f983b9f155b25` |
-| [separated/ask-response.test.ts](../cases/http-socket-response-boundaries/separated/ask-response.test.ts#L1-L65) | `8aca7d655c35813ac3d6d5fb29b356296d324bc6`<br>`sveltekit/src/lib/server/api/ask-response.test.ts`<br>1–65 | `b5e0f686d039e00999de11911aafe49c61b26a7fa312fa82a6aa692a268de203` |
-| [separated/service-failure.ts](../cases/http-socket-response-boundaries/separated/service-failure.ts#L1-L31) | `8aca7d655c35813ac3d6d5fb29b356296d324bc6`<br>`sveltekit/src/lib/server/api/service-failure.ts`<br>1–31 | `d6b4bbe6124867d14e5ab5ac43f57f21ad32e532cbacd7db557aee370a25835a` |
-| [separated/service-failure.test.ts](../cases/http-socket-response-boundaries/separated/service-failure.test.ts#L1-L28) | `8aca7d655c35813ac3d6d5fb29b356296d324bc6`<br>`sveltekit/src/lib/server/api/service-failure.test.ts`<br>1–28 | `0916171b5b1a8bfbe089c8e42fe0423281cd09e63b5bea8baddfead919050c18` |
-| [separated/safe-diagnostics.ts](../cases/http-socket-response-boundaries/separated/safe-diagnostics.ts#L1-L50) | `8aca7d655c35813ac3d6d5fb29b356296d324bc6`<br>`sveltekit/src/lib/server/observability/safe-diagnostics.ts`<br>1–50 | `330445d4083f90f1417c19d4c46d63df2c6a402b75d7d04be4914a7eb5ec70aa` |
-| [separated/safe-diagnostics.test.ts](../cases/http-socket-response-boundaries/separated/safe-diagnostics.test.ts#L1-L55) | `8aca7d655c35813ac3d6d5fb29b356296d324bc6`<br>`sveltekit/src/lib/server/observability/safe-diagnostics.test.ts`<br>1–55 | `e577510c377d3150cfa68fb07815e0ebf1d25badaf5a0e6887be0d3e6d8ea5a6` |
+| [release/bundle.py](../cases/knowledge-index-release-consistency/release/bundle.py#L1-L82) | `4fddd619640fbbf77fbc58f2a80e8aaa2065f231`<br>`scripts/deployment/bundle.py`<br>1–82 → 1–82 | `d0e38d5162f8309eecd6f44673aed6f0d8e9425e0292d342f42f62f1c37af33e` → `d0e38d5162f8309eecd6f44673aed6f0d8e9425e0292d342f42f62f1c37af33e` |
+| [release/activation.excerpt.py](../cases/knowledge-index-release-consistency/release/activation.excerpt.py#L1-L40) | `4fddd619640fbbf77fbc58f2a80e8aaa2065f231`<br>`scripts/deployment/deploy.py`<br>6–6 → 1–1; 22–24 → 3–5; 98–131 → 7–40 | `8ec2db16cac2a5c77b46662ade526e779eca51c9c47fee517c4e1cb595a230ad` → `11fdfdc060ffe222fbbf2e821d7a6d1e308471840805f9129bbd22ef445aea8e` |
+| [release/retention.excerpt.py](../cases/knowledge-index-release-consistency/release/retention.excerpt.py#L1-L30) | `4fddd619640fbbf77fbc58f2a80e8aaa2065f231`<br>`scripts/deployment/deploy.py`<br>7–7 → 1–1; 22–24 → 3–5; 173–196 → 7–30 | `8ec2db16cac2a5c77b46662ade526e779eca51c9c47fee517c4e1cb595a230ad` → `77723432da30fa2382dae6a97ce48d972e388c6f2078683e66041db613138f82` |
+| [verification/rollback-retention.excerpt.test.py](../cases/knowledge-index-release-consistency/verification/rollback-retention.excerpt.test.py#L1-L65) | `4fddd619640fbbf77fbc58f2a80e8aaa2065f231`<br>`scripts/deployment/test_deploy.py`<br>1–28 → 1–28; 122–157 → 30–65 | `07ceb585168a3e8a717fd6b520850a56bd7a748617323139f578481596548914` → `525e2fe3a8d94b32c1fabe0f65032427f4268a3df17c76194984572c6a6c96a1` |
 
 | Public evidence | Classification | SHA-256 |
 |---|---|---|
-| [evidence/observed-results.json](../cases/http-socket-response-boundaries/evidence/observed-results.json#L1-L199) | Reconstructed | `fd37b0bc833d23f02bce123532ea64690931a217e517d8d48225f3c3e7821be2` |
-| [evidence/source-register.json](../cases/http-socket-response-boundaries/evidence/source-register.json#L1-L333) | Reconstructed | `df10919fc92100013dff1e84786f0ad38767b1f730a46b253ca69422bfcf5204` |
+| [evidence/decisions-and-constraints.json](../cases/knowledge-index-release-consistency/evidence/decisions-and-constraints.json#L1-L119) | Reconstructed | `ccd5b7bd9c248ea3fdb3a61a1fd44b0512128e46d37ded2349bd5ffe584dfcbc` |
+| [evidence/deployment-observed-results.json](../cases/knowledge-index-release-consistency/evidence/deployment-observed-results.json#L1-L78) | Reconstructed | `4d6ec007c67cfd014471053f9bd02761417a82c2ffc3c8e1b5e96aaf5146a899` |
+| [evidence/source-register.json](../cases/knowledge-index-release-consistency/evidence/source-register.json#L1-L385) | Reconstructed | `0195a7c968cd0f7224c3cee20b5b21b6913da297f55f92ce4fe617fb425b67e2` |
 
-Historical verification document: docs/api-ask-protection.md at e37bca4739f5fec64c767d20b54f51c5f303388b, initial implementation lines 50–64, failed actual HTTP lines 66–104, fixed verification lines 106–125. Whole-original SHA-256: 3219eec400cfb8302487736c4c761750fc795613cc263d6ef4e143071393bb95. Git snapshots, hashes, and evidence scopes for research C04/U04 and CG08 are retained in source-register.json. Source paths identify private Synethos repository-relative files.
+Original paths are private Synethos repository-relative paths. The source register links 4fddd61 documents/deployment code, retained preflight/approval/execution/completion hashes, the full-session identity, and selected message hashes. Original materials containing server access/operating details remain private.
 
 </details>
 
 ### Publication checks
 
-All twelve whole-file Excerpts matched their declared Git source bytes/SHA-256 and passed TypeScript syntax parsing. Both evidence JSON files parsed; three original report/research hashes and the historical reported quantities were checked. The fixed body reader and socket regression were unchanged across the responsibility-separation commit, and the diagnostic allowlists/function logic were confirmed as moved. English/Korean file/external links and SHA-256 multisets matched; all 722 local file, heading, and line-range links in the two READMEs/two development records passed validation.
+All four complete/selected code extracts matched their originals; four Python syntax parses and three public JSON parses passed. Seven Git document/code/research hashes, eight retained-artifact hashes, the full-session hash, and ten selected message text hashes matched. All 112 archived payloads matched their sizes and SHA-256 values; runtime index identity and counts also matched the manifest.
 
-Case 01–06 text/published files and Synethos originals were preserved. Published material was checked for credential values, local user paths, private repository URLs, and question-bank text, and the diff whitespace check passed. Verification used Git-source/retained-document inspection and local parsing/calculation. Historical application tests/socket experiments were not rerun, and no model calls, index builds, or server access occurred. Historical quantities and approval-record gaps retain the scopes described above.
+The two READMEs and two engineering records passed file, heading, and line-range checks for 692 local links. English/Korean file and external-link targets and SHA-256 sets match. Cases 01–06 prose and 132 public files retain their baseline content. File comparisons normalized Windows checkout line endings.
+
+Published code, evidence projections, and case 07 prose were reviewed for credential values, private Knowledge/QB payloads, private repository URLs, local user paths, and server access details. Verification used original inspection and local parsing/hash calculations. No new application tests, model calls, index builds, server access, or deployment were performed. The Synethos working tree remains clean and its originals are preserved.

@@ -1,0 +1,119 @@
+{
+  "classification": "Reconstructed",
+  "sourceRegister": "source-register.json",
+  "developerClarification": {
+    "source": "Direct developer clarification in this Tessera replacement task on 2026-10-29",
+    "threadId": "01a18747-2717-7783-94ba-2125239f8f15",
+    "atUtc": "2026-10-29T12:40:29.139Z",
+    "atKst": "2026-10-29T21:40:29.139+09:00",
+    "textSha256": "38f3f8b1bff969fac82374bc06e3ddf00a1d1eb428e9bf9d2a8b7916a8d5c654"
+  },
+  "constraints": [
+    {
+      "id": "capacity",
+      "source": "October 29 direct developer clarification",
+      "account": "Initially treated the nominal 10GB as available capacity; operating system and accumulated security updates left approximately 3–4GB. The provisioned environment was not up to date with security patches.",
+      "historicalCorroboration": {
+        "source": "C07-S01 / 2026-10-26T12:04:59.201Z and C07-L08",
+        "filesystemTotalReported": "9.8G",
+        "usedReported": "6.0G",
+        "availableReported": "3.3G",
+        "availableBytes": 3516506112,
+        "availableGiBApprox": 3.28,
+        "scope": "Corroborates available capacity; does not attribute consumed bytes to individual OS/update operations."
+      }
+    },
+    {
+      "id": "environment",
+      "source": "October 29 direct developer clarification; historical Git documentation, C07-S01 and operating results",
+      "account": "Naver Cloud free-tier Ubuntu service; Cloudflare Tunnel already in use. October 26 environment was Ubuntu 24.04.1 and Node v24.22.1."
+    },
+    {
+      "id": "retention",
+      "source": "October 29 direct developer clarification; October 26 request and earlier-script/runtime observations",
+      "account": "Changed the initially considered total of two releases to a total of three as an operating choice under limited disk space.",
+      "meaning": "Total three, including active and previous releases; no optimization calculation is attributed to the developer.",
+      "historicalCorroboration": "Three-release policy already present in the earlier October 26 server script, explicitly retained in user request and actual deployment."
+    },
+    {
+      "id": "platform-dependencies",
+      "source": "October 29 direct developer clarification; historical request and bundle/install results",
+      "account": "Do not copy Windows dependencies onto Linux. Prepare production dependencies for the operating environment.",
+      "historicalCorroboration": "Release archive contains zero node_modules entries; Linux npm ci/import/permission checks recorded."
+    }
+  ],
+  "responsibility": {
+    "developer": [
+      "Provided operating environment, materials and constraints",
+      "Chose total three retained releases",
+      "Delegated detailed deployment design and implementation",
+      "Adopted the existing release structure as a constraint in the later October 26 reusable-script request",
+      "Approved implementation, Git and production deployment separately"
+    ],
+    "ai": [
+      "Detailed manifest/hash and candidate checks",
+      "Permission normalization and service-account import/compiled-loader checks",
+      "Atomic activation and rollback verification sequence",
+      "Retention ordering and deletion safety",
+      "Implementation and verification within approved scopes"
+    ]
+  },
+  "chronology": [
+    {
+      "at": "2026-10-22",
+      "source": "Git 59cb3dd docs/development-status.md",
+      "event": "Ubuntu/systemd production, Linux dependencies prepared separately and existing Tunnel on Ubuntu reported."
+    },
+    {
+      "at": "Before October 26 21:22 KST",
+      "source": "C07-S01 original request and previous-script reading",
+      "event": "Earlier Linux dependency permissions and active-root fixes were already in operation; exact original failure event not recovered."
+    },
+    {
+      "at": "2026-10-26T21:04:59.201+09:00",
+      "source": "C07-S01 tool output",
+      "event": "Available filesystem space recorded as 3.3G."
+    },
+    {
+      "at": "2026-10-26T21:22:05.529+09:00",
+      "source": "C07-S01 user",
+      "event": "Reusable deployment, Knowledge/Index consistency, Linux preflight, preserved environment/Tunnel and three-release requirements."
+    },
+    {
+      "at": "2026-10-26T21:28:25.746+09:00",
+      "source": "C07-S01 user",
+      "event": "Approve AI implementation/verification/candidate preparation scope."
+    },
+    {
+      "at": "2026-10-26T21:39:59.309+09:00",
+      "source": "C07-S01 tool output",
+      "event": "Eight Linux deployment safety tests passed; another eight-test pass recorded at 21:42:03.125."
+    },
+    {
+      "at": "2026-10-26T21:48:38.896+09:00",
+      "source": "C07-S01 user",
+      "event": "Approve declared Git commit/push scope."
+    },
+    {
+      "at": "2026-10-26T21:49:10+09:00",
+      "source": "Git 4fddd619640fbbf77fbc58f2a80e8aaa2065f231",
+      "event": "Reusable deployment implementation and records committed."
+    },
+    {
+      "at": "2026-10-26T21:52:55.532+09:00",
+      "source": "C07-S01 user",
+      "event": "Approve exact production switch/verification/rollback/retention scope."
+    },
+    {
+      "at": "2026-10-26T21:59:22.934+09:00",
+      "source": "C07-S01 completion report",
+      "event": "Successful operating deployment and total three-release retention reported."
+    }
+  ],
+  "initialProblems": {
+    "established": "Historical user request identifies earlier Linux dependency-access and active Knowledge/Index root issues; prior script and later checks retain the fixes.",
+    "unconfirmed": "Exact initial exception, original timestamp and repair approval not recovered.",
+    "laterPreflight": "Previous script was tied to a specific commit/index/chunk count; changed Knowledge/Index required a reusable candidate-aware procedure."
+  },
+  "scope": "Developer reasons/delegation and historical implementation/results retain their own sources and dates."
+}

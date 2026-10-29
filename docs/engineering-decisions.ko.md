@@ -22,7 +22,7 @@
 - [04 — Provider 교체 설계와 Embedding 안정화](#04--provider-교체-설계와-embedding-안정화) — 2026-09-26 ~ 2026-10-17
 - [05 — Cross-PC Index Portability](#05--cross-pc-index-portability) — 2026-09-28 ~ 2026-10-26
 - [06 — Model Selection: Quality and Availability](#06--model-selection-quality-and-availability) — 2026-09-26 ~ 2026-10-16
-- [07 — HTTP 소켓 응답 경계와 API 책임 분리](#07--http-소켓-응답-경계와-api-책임-분리) — 2026-10-06
+- [07 — Knowledge·Index 일관성과 복원 가능한 배포](#07--knowledgeindex-일관성과-복원-가능한-배포) — 2026-10-22 ~ 2026-10-26
 
 ## 01 — From Local Qwen/Ollama Inference to the Gemini API
 
@@ -1416,133 +1416,133 @@ Full40의 요청·응답·결과·당시 수동 판정 각 120개, 직전/재시
 
 공개 JSON 14개가 파싱됐고 영문·한글의 파일/외부 링크와 SHA-256 집합이 일치했다. README 2개와 개발 기록 2개의 로컬 링크 656개는 파일·헤딩·라인 범위 검증을 통과했다. 기존 소스·테스트 119개와 Synethos 원본을 보존했으며 Synethos working tree는 clean이었다. 변경한 기존 파일은 개발 기록 2개와 근거 JSON 2개이고, reasoning 근거 JSON과 공통 복구 근거 등록부를 추가했다. 공개 대상에서 credential 값·로컬 사용자 경로·비공개 저장소 URL·Knowledge 전체 payload를 점검했다. 검증은 원본 열람과 로컬 계산으로 수행했으며 새 모델 호출·과거 실험 재실행·애플리케이션 테스트·index build·서버 접근은 수행하지 않았다.
 
-## 07 — HTTP 소켓 응답 경계와 API 책임 분리
+## 07 — Knowledge·Index 일관성과 복원 가능한 배포
 
-**개발 날짜:** 2026-10-06
+**개발 기간:** 2026-10-22 ~ 2026-10-26. 운영 배경·보관 선택·설계 위임에 대한 개발자 설명은 2026-10-29에 직접 보충했다.
 
-**코드 분류:** Excerpt — 전체 원본 소스·테스트 12개; Reconstructed — 근거 기록 2개.
+**코드 분류:** Excerpt — 전체 원본 1개·부분 발췌 3개; Reconstructed — 근거 기록 3개.
 
-**결과:** 본문 크기·읽기 deadline을 넘긴 요청에 413/408 JSON을 전송한 뒤 연결을 닫도록 수정했다. 실제 소켓 회귀와 production build 검증 후, 공개 HTTP 응답 정책과 safe diagnostics를 별도 모듈로 분리했다.
+**결과:** 제한된 서버 공간에서 총 3개 릴리스를 유지하고, 실행 코드·Knowledge·Index를 함께 전환·복원하는 구조로 운영했다. 사용자는 환경·재료·제약과 보관 정책을 제공하고 세부 배포 설계·구현을 AI에 위임했다. 10월 26일의 승인된 배포는 새 릴리스를 활성화하고 이전 버전의 복원 준비 상태를 확인했다.
 
-### P0 보호 계약과 초기 검증
+### 운영 환경과 실제 사용할 수 있었던 공간
 
-Synethos의 /api/ask P0 보호는 provider 작업 전에 admission과 입력 경계를 적용했다. 본문은 JSON·공백을 포함해 8192bytes, body 읽기는 전체 5초, 질문은 trim 후 2~1000 UTF-16 code units였다. 주소당 rolling 60초 10회·프로세스 전체 30회와 주소당 동시 1개·프로세스 전체 2개의 lease를 사용했다. 입력 오류에서도 lease를 반환하도록 했다. 이 사례는 그중 본문 거부 응답과 후속 API 책임 분리를 다룬다.
+Synethos는 네이버클라우드 무료 티어 Ubuntu 서버에서 운영됐고 Cloudflare Tunnel을 이미 사용하고 있었다. 10월 22일 Git 문서는 systemd 운영, Linux production 의존성의 별도 준비, 기존 Tunnel의 Ubuntu connector와 공개 서비스 검증을 기록한다. 26일 실제 환경은 Ubuntu 24.04.1·Node v24.22.1이었다.
 
-당시 보고서는 초기 48개 파일·429개 테스트, static check와 production build 통과를 기록한다. 메모리의 Request·ReadableStream과 mocked transport로 입력·deadline·호출 제한 계약을 확인했고, 초기 loopback smoke는 invalid-question과 rate-limit 경로를 사용했다. 이 검증 뒤 실제 chunked upload와 미완료 body를 보낸 HTTP 검증에서 응답 결함이 드러났다.
+**개발자가 10월 29일 직접 설명한 당시 경험:** 처음에는 서버의 명목상 10GB를 모두 사용할 수 있다고 생각했다. 운영체제와 누적 보안 패치 등을 처리한 뒤 실제 가용 공간은 약 3~4GB였다. 제공받은 환경의 보안 패치 상태도 최신이 아니었다.
 
-### 실제 HTTP에서 관찰한 ECONNRESET
-
-실행 환경은 Windows, Node.js 24.16.0 x64, SvelteKit 2.70.3, adapter-node 5.5.7, @google/genai 2.24.0으로 보고됐다. 다섯 automated HTTP 그룹의 70 assertions 중 66개가 통과하고 4개가 실패했다. 실패 4개는 아래 두 결함의 반복 관찰이다.
-
-| 입력 | 기대한 계약 | 당시 실제 관측 |
-|---|---|---|
-| 8193-byte chunked body | 413 REQUEST_TOO_LARGE JSON | ECONNRESET; upstream dispatch 0회 |
-| 미완료 body | 5초 후 408 REQUEST_TIMEOUT JSON | 약 5초 후 ECONNRESET; 같은 주소의 후속 요청은 admission 성공 |
-
-크기·deadline 거부와 작업 차단은 수행됐지만 클라이언트가 받을 JSON 응답은 완료되지 않았다. [당시 관측 요약](../cases/http-socket-response-boundaries/evidence/observed-results.json#L1-L199)은 검증 분모와 각 실행의 조건을 보존한다.
-
-초기 정상 cloud 질문 2건은 embedding 2회·generation 2회, 모두 HTTP 200으로 보고됐다. Fault profile은 합성 credential과 실제 local HTTP upstream을 사용했다. Sandbox transport EACCES로 거부된 embedding 시도 4회와 초기 batchEmbedContents 계측 누락은 harness 준비 실패로 별도 기록됐으며 위 애플리케이션 결과에서 제외됐다.
-
-### 원인: 입력 취소가 응답 소켓을 먼저 종료
-
-당시 보고서는 readAskBody의 무조건적인 reader.cancel()이 SvelteKit get_raw_body().cancel(reason)을 통해 req.destroy(reason)에 도달했다고 기록한다. 거부된 body가 미완료인 동안 요청 소켓을 파괴해 route의 JSON이 전달되기 전에 연결이 종료됐다. 집 PC에 설치된 같은 SvelteKit 버전의 node 구현에서도 이 cancel→destroy 경로를 직접 확인했다.
-
-메모리 Request 테스트의 stream 취소는 실제 IncomingMessage 소켓에 연결되지 않았다. 이후 [소켓 회귀 테스트](../cases/http-socket-response-boundaries/socket/body-socket.test.ts#L1-L33)는 Node HTTP server와 설치된 getRequest/setResponse를 함께 사용해 route 반환값이 실제 wire 응답으로 완료되는 경계를 검사했다. Answer service와 config는 mock으로 격리했다.
-
-최초 reader.cancel() 구현은 커밋 전 상태였으며 정확한 source snapshot은 확보되지 않았다. 아래 P0 발췌는 이미 소켓 수정이 포함된 e37bca4 기준이다. 실패 경로는 보존된 당시 보고서로, 수정 동작은 코드와 회귀 테스트로 추적한다.
-
-### 수정: reader 정리와 응답 후 연결 종료
-
-[Body reader](../cases/http-socket-response-boundaries/p0/ask-protection.ts#L46-L75)는 Content-Length와 실제 streamed bytes를 검사하고 Promise.race로 body deadline을 적용한다. finally에서는 timer를 정리하고 reader.releaseLock()으로 lock을 해제한다. 남은 body를 읽는 background loop나 drain 작업은 추가하지 않았다.
-
-[수정 후 route](../cases/http-socket-response-boundaries/p0/ask-route.ts#L24-L37)는 413/408에 Connection: close를 지정했다. JSON 응답이 완료된 뒤 미완료 입력 연결을 닫고, 일반 응답의 keep-alive는 유지하는 선택이다. [메모리 stream 회귀](../cases/http-socket-response-boundaries/p0/ask-protection.test.ts#L28-L51)는 cancel 미호출·lock 해제·정확한 byte 경계·multibyte chunk decoding을 확인한다.
-
-입력 오류 경로는 config loading·retrieval·generation 전에 종료된다. [Lease 소유와 반환](../cases/http-socket-response-boundaries/p0/ask-route.ts#L12-L66)는 admission 이후 작업을 소유하고 finally에서 release한다. Generation timeout으로 실제 작업이 늦게 끝나는 별도 경로는 settled 뒤 lease를 반환하는 정책을 유지했다.
-
-### 소켓 회귀와 수정 후 production build 검증
-
-[실제 소켓 테스트](../cases/http-socket-response-boundaries/socket/body-socket.test.ts#L54-L88)의 다섯 case는 종료된/미완료 chunked 초과 2건, 미완료 body timeout, Content-Length 과대 입력, 정확한 byte 경계와 정상 keep-alive를 검사한다. 응답 status·JSON·complete·header, provider 경로 미진입과 후속 요청의 lease 회복을 확인한다.
-
-당시 보고서는 소켓 테스트 5개, 전체 49개 파일·434개 테스트, static check 오류·경고 0개와 production build 통과를 기록한다. 이어 새 production adapter-node build에 실제 HTTP 요청을 보낸 10개 검사가 모두 통과했다.
-
-| 수정 후 입력·검사 | 당시 보고된 결과 | Provider 작업 |
-|---|---|---|
-| 종료된 8193-byte chunked body | 완전한 413 JSON 후 연결 종료 | 0회 |
-| client가 끝내지 않은 8193-byte body | 업로드 중 4ms에 완전한 413 JSON 후 연결 종료 | 0회 |
-| Content-Length 9000, 여는 중괄호만 전송 | 나머지 입력을 기다리지 않고 완전한 413 JSON | 0회 |
-| partial body를 열린 상태로 유지 | 5010ms에 완전한 408 JSON 후 연결 종료 | 0회 |
-| 각 거부 후 같은 주소의 후속 요청 | 예상한 400 INVALID_QUESTION; lease 회복 | 0회 |
-| 정확히 8192-byte 유효 입력과 정상 후속 요청 | 둘 다 200; 같은 keep-alive socket/local port 재사용 | Local upstream만 사용 |
-
-거부 응답은 Cache-Control: no-store를 유지했다. 마지막 정상 요청 2건은 local embedding 2회·local generation 2회를 만들었으며 수정 후 검증의 외부 cloud 호출은 0회였다. 이 표는 당시 보고의 그룹별 요약이다. 원시 요청별 ledger는 확보되지 않았다.
-
-### 수정 완료와 후속 책임 분리의 순서
-
-| 시점 KST | 사건 | 근거 수준 |
-|---|---|---|
-| 10월 6일, 10:32 커밋 이전 | 초기 구현 검증 → 실제 HTTP 실패 → cancel/destroy 추적 → 최소 수정 → 소켓·production build 검증 | 당시 커밋에 보존된 보고; 실행 시작·종료 시각 미확인 |
-| 10:19:39 / 10:28:06 / 10:30:07 | 계약·결함 대조 / 수정 완료 보고 / 근거에 따른 구조 변경 판단 | 사용자 제공 ChatGPT 검색 전사 CG08; 원문 맥락 미확인 |
-| 10:32:17 | e37bca4: P0 보호·소켓 수정·테스트·보고서를 함께 커밋 | Git 직접 확인 |
-| 10:57:44 | 8aca7d6: 공개 응답 정책·safe diagnostics 분리 | Git 직접 확인; e37bca4의 바로 다음 커밋 |
-
-두 Git snapshot의 비교는 소켓 수정 완료 후의 책임 분리 전후를 보여준다. e37bca4의 부모에는 P0 body reader가 없다. 커밋 시각은 구현의 보존 시점이며, 개별 검증 실행 시각과 구분한다.
-
-### 공개 응답 정책과 safe diagnostics의 책임
-
-P0 기준 [route](../cases/http-socket-response-boundaries/p0/ask-route.ts#L1-L66)에는 공개 JSON·header 정책이 있고 [service-failure](../cases/http-socket-response-boundaries/p0/service-failure.ts#L1-L79)에는 고정 service failure와 진단 projection이 함께 있었다. 8aca7d6은 아래 경계로 나눴다.
-
-| 구성 요소 | 분리 후 책임 |
+| 당시 자료 | 기록된 공간 |
 |---|---|
-| [route](../cases/http-socket-response-boundaries/separated/ask-route.ts#L1-L53) | Admission, 입력·작업 순서, config와 answer 호출, lease 소유·반환 |
-| [askResponses](../cases/http-socket-response-boundaries/separated/ask-response.ts#L1-L42) | 공개 status·body·header, no-store, Retry-After, 413/408 Connection: close, 성공 payload credential 검사 |
-| [safe diagnostics](../cases/http-socket-response-boundaries/separated/safe-diagnostics.ts#L1-L50) | 허용 name/category/status/code 추출, 최대 4개·cycle 방지 cause 순회 |
-| [serviceFailure](../cases/http-socket-response-boundaries/separated/service-failure.ts#L1-L31) | Safe diagnostic logging과 고정 provider-neutral service failure 반환 |
+| 10월 26일 21:04:59.201 원본 도구 출력 | 파일시스템 9.8G, 사용 6.0G, 가용 3.3G, 사용률 65% |
+| 같은 날 배포 전 점검 보고 | 가용 3,516,506,112bytes, 약 3.28GiB; 기존 릴리스별 약 38MiB |
 
-진단 allowlist와 함수 로직은 기존 구현에서 이동했다. Generation orchestrator의 safeDiagnosticIdentifier import도 api/service-failure에서 observability/safe-diagnostics로 바뀌었다. 공개 응답 정책이 route에서 분리되고 generation이 공통 진단을 API 모듈 경유 없이 참조하게 됐다.
+이 측정은 실제 여유 공간이 사용자 설명의 범위였음을 확인한다. 운영체제·개별 패치가 사용한 bytes의 분해와 최초 설치 전후 측정은 확보되지 않았다. [환경·판단 근거](../cases/knowledge-index-release-consistency/evidence/decisions-and-constraints.json#L1-L119)에 당시 측정과 후속 사용자 설명의 출처를 나눠 보존한다.
 
-[응답 정책 테스트](../cases/http-socket-response-boundaries/separated/ask-response.test.ts#L1-L65)는 status·body·no-store·Retry-After·413/408의 선택적 close와 JSON-escaped credential에 대한 fail-closed 동작을 검사한다. [진단 테스트](../cases/http-socket-response-boundaries/separated/safe-diagnostics.test.ts#L1-L55)는 허용 필드, 임의 문자열 제거, 정규화 provider identifier 우선, 깊고 순환하는 cause와 non-Error 입력을 검사한다. [service failure 테스트](../cases/http-socket-response-boundaries/separated/service-failure.test.ts#L1-L28)는 안전한 logging과 고정 공개 실패 계약을 검사한다. 이 테스트들은 당시 구현 근거이며, 앞선 434개 통과 보고는 소켓 수정 단계의 결과로 유지한다.
+### 총 3개 보관: 사용자 선택과 AI 설계의 경계
 
-### 사용자 판단·승인 기록과 남은 근거
+개발자는 제한된 공간을 고려해 처음 검토한 총 2개에서 하나를 늘려 **총 3개 릴리스**를 유지하기로 했다고 설명했다. 3개는 정교한 최적화 계산으로 구한 값이 아니라 사용자의 운영상 선택이다. 릴리스별 약 38MiB 측정을 보관 개수의 산정식으로 사용하지 않는다.
 
-기존 연구 C04/U04와 사용자 제공 CG08은 같은 실소켓 사건을 다룬다. CG08은 10:30:07에 작업 직후 일괄 리팩토링하기보다 실제 근거가 확인될 때 구조 변경을 검토한다는 사용자 판단을 전사한다. 이후 책임 분리 구현은 별도 Git 커밋으로 직접 확인된다. 구체적인 제안·승인 대화는 검색 전사 이상의 원본을 확보하지 못했다.
+당시 26일의 기존 서버 스크립트에는 이미 3개 정책이 있었고, 21:22:05.529 사용자 요청은 성공 후 최신 3개 유지를 명시했다. 원래 2개에서 3개로 바꾼 대화는 미확보이며, 변경 이유와 설계 위임은 29일 직접 설명을 그 날짜로 기록한다.
 
-당시 기술 문서는 수정을 approved fix로 기술하지만, 명시적 사용자 승인 문장·시각을 확인할 전체 Codex 세션은 집 PC에서 확보되지 않았다. 검색 전사의 U 역할 표기와 시각은 제공된 형식으로 보존하며, 완료 보고의 원래 화자·메시지 맥락도 미확인으로 표시한다. [사례별 근거 등록부](../cases/http-socket-response-boundaries/evidence/source-register.json#L1-L333)는 코드·당시 보고·검색 전사·미확인을 구분한다.
+| 주체·기록 | 확인한 역할 |
+|---|---|
+| 사용자 직접 설명 | 운영 환경·필요한 재료·제약 제공, 총 3개 보관 선택, 세부 설계·구현을 AI에 위임 |
+| 26일 사용자 요청 | 이미 운영 중인 릴리스 구조를 계승하고 Knowledge·Index 동시 전환·복원, Linux 의존성 검증, 기존 환경·Tunnel 유지 요구 |
+| AI 설계·구현 | Manifest/hash 검사, candidate 준비, 서비스 계정 검증, 원자적 전환·실패 복원, 보관 순서·삭제 안전 검사 구체화 |
 
-집 PC checkout과 관련 날짜의 압축 세션·사용자 입력 이력·세션 메타데이터·추가 보관 경로를 조사했다. 당시 문서가 식별한 tmp/p0-live-verification/report.json, streamed-body-fix-results.json, streamed-body-fix-metrics.json과 streamed-body-fix.mjs는 확보되지 않았다. 정확한 미커밋 수정 전 source, 계측 원본, 전체 승인 대화와 실행 시각이 남은 공백이다. 수치·실행 결과는 보존된 당시 보고의 수준과 조건을 유지한다.
+26일 요청에서 기존 구조를 유지 조건으로 채택한 사실과 그 구조의 최초 설계 주체를 구분한다. 보관 개수는 사용자 선택으로, 그 조건을 구현한 검사·전환 절차는 AI의 세부 설계로 기록한다.
 
-### 출처 추적과 공개 범위
+### 이전 배포에서 해결한 문제와 새 후보의 요구
 
-발췌본 12개는 아래 Git 전체 파일과 bytes를 보존한다. 원래 import·식별자·애플리케이션 참조를 유지한다. 소켓 테스트는 합성 질문·mock 답변을 사용한다. 근거 JSON 2개는 보고서의 관측과 source identity를 선택해 새 편집 구조로 구성했다. Private Knowledge·불필요한 QB 원문·credential·계측 payload·전체 대화·운영 접근 정보는 공개하지 않는다. 공개 코드는 두 10월 6일 snapshot의 동작이며 후속 runtime·보안 변경은 각각의 이력을 따른다.
+26일 원본 사용자 요청은 앞선 배포에서 수정한 Linux production 의존성의 파일·디렉터리 접근 권한과 활성 Knowledge·Index root를 반드시 계승하도록 했다. 기존 서버 스크립트도 설치 후 권한 보정, 실제 서비스 계정의 dotenv·@google/genai import, current 기준 root 검사를 포함했다. 최초 예외 메시지·발생 시각·수정 승인 전문은 확보되지 않았다.
+
+Windows 의존성을 Linux로 그대로 복사하지 않도록 한 요구는 29일 사용자 설명에 있다. 실제 번들에는 node_modules가 없었고, Ubuntu에서 Linux production 의존성을 설치·검증했다. Windows 복사 금지 요구와 실제 확인된 Linux 권한 문제를 각각의 근거로 설명한다.
+
+당시 이전 배포 스크립트는 특정 릴리스·커밋·인덱스·382 chunks에 고정돼 있었다. 새 후보는 승인 문서와 인덱스가 바뀌어 28 sources·381 chunks였다. 같은 스크립트의 기존 내용 일치 조건을 그대로 적용할 수 없어, 사용자는 특정 후보에 고정되지 않는 재사용 배포 구조를 요청했다.
+
+### 코드·Knowledge·Index를 하나의 릴리스로 묶기
+
+[Bundle 구성 코드](../cases/knowledge-index-release-consistency/release/bundle.py#L1-L82)는 승인 manifest의 Knowledge, Index, config, 실행 build, package와 lockfile을 같은 후보에 넣고 sourceCommit·릴리스·파일 크기·SHA-256·index identity를 manifest로 연결한다. 자격증명과 Windows node_modules는 묶지 않는다. 후보 검증과 활성화는 이 단위를 기준으로 한다.
+
+| 단계 | AI가 구현한 동작 |
+|---|---|
+| 준비 | 예상한 기존 릴리스, archive·manifest·payload·source commit·Node 호환성·가용 공간·보호 설정 확인 |
+| Linux 사전 검증 | Production 의존성 설치 후 권한 보정; 서비스 계정·실제 환경으로 import와 compiled index loader 검사 |
+| 활성화 | current 링크 원자적 교체, 서비스 재시작, 실제 root·cwd·로드 인덱스·내부/외부 health·홈페이지 검증 |
+| 활성화·검증 실패 | 이전 링크로 복원하고 재시작한 뒤 이전 릴리스와 그 Knowledge·Index 재검증 |
+| 성공 후 보관 | 활성·직전·나머지 중 최신 하나 유지; 삭제 경로와 프로세스 사용 여부 확인 후 나머지 정리 |
+
+[권한·전환·복원 발췌](../cases/knowledge-index-release-consistency/release/activation.excerpt.py#L1-L40)의 normalize_permissions는 설치 중 restrictive umask를 고려해 접근 권한을 보정한다. switch는 임시 링크와 os.replace로 current를 바꾼다. activate는 전환 후 restart·verify가 실패하면 이전 링크로 돌아가 restart·rollback_verify를 수행한다. 준비 단계가 실패하면 활성 릴리스는 유지한다.
+
+[보관·삭제 안전 발췌](../cases/knowledge-index-release-consistency/release/retention.excerpt.py#L1-L30)는 총 3개 선택을 active·previous·newest other로 구현한다. 성공 검증 뒤에만 삭제하며 릴리스 root 밖의 경로·symlink·사용 중인 process cwd/executable을 검사한다. 정리 실패는 검증된 활성 릴리스를 유지하면서 후속 처리가 필요한 상태로 다룬다.
+
+인덱스 identity와 loader 계약은 사례 05의 [manifest 검증](../cases/cross-pc-index-portability/production/verify-manifest.excerpt.py#L23-L56)·[runtime probe](../cases/cross-pc-index-portability/production/probe.mjs#L1-L43)와 연결된다. 이 사례의 중심은 그 자료를 같은 운영 릴리스에 묶고 선택한 공간·보관 조건 안에서 전환·복원한 과정이다.
+
+### 원본 요구·선언·승인과 실행 순서
+
+| 시각 KST | 사건·주체 |
+|---|---|
+| 10월 22일 | Git 운영 문서: Ubuntu/systemd·Linux 의존성 별도 준비·기존 Tunnel 운영 보고 |
+| 10월 26일 21:10경 | 도구 출력: 기존 서버 스크립트의 권한·root·3개 보관 정책 읽기 |
+| 21:22:05.529 | 사용자: 재사용 배포·기존 수정 계승·Knowledge/Index 일관성·Linux 사전 검증·3개 보관 요구 |
+| 21:28:01.646 → 21:28:25.746 | AI 구현·검증·후보 준비 선언 → 사용자 승인 |
+| 21:39:59.309 / 21:42:03.125 | Linux 배포 안전 테스트 각각 8개 통과 원본 출력 |
+| 21:44:39.175 → 21:48:38.896 | AI 후보 결과·Git 범위 선언 → 사용자 커밋·푸시 승인 |
+| 21:49:10 | 4fddd61: 재사용 배포 구현·운영 기록 커밋 |
+| 21:51:33~21:51:48 → 21:52:55.532 | AI 정확한 운영 전환·검증·복원·보관 범위 선언 → 사용자 운영 배포 승인 |
+| 21:59:22.934 | AI 완료 보고: 새 릴리스·실제 index·health·3개 보관·복원 준비 상태 |
+
+전체 원본 session 01a177b0-1d84-7cc0-aedb-4a06f6d9c661에서 요구와 선언·승인을 직접 읽었다. [출처 등록부](../cases/knowledge-index-release-consistency/evidence/source-register.json#L1-L385)에 UTC/KST 시각·역할·메시지 text hash를 보존한다. 4fddd61의 다른 테스트 변경은 그 커밋의 별도 작업 범위이며, 이 사례의 근거는 배포 설계와 운영 결과를 선택한다.
+
+### 실제 운영 결과와 테스트에서 확인한 복원
+
+[관측 결과](../cases/knowledge-index-release-consistency/evidence/deployment-observed-results.json#L1-L78)는 실배포 JSON·원본 로그·완료 보고·번들을 대조한 projection이다. 승인된 배포 스크립트의 보관 사본은 Git 원본과 bytes·SHA-256이 일치한다.
+
+| 실제 26일 배포 관측 | 결과 |
+|---|---|
+| 활성 릴리스 / source commit | 20261026-4fddd61-01 / 4fddd619640fbbf77fbc58f2a80e8aaa2065f231 |
+| 실제 로드 자료 | 28 sources / 381 chunks; candidate index·corpus identity 일치 |
+| Linux 의존성 import·활성 root·process cwd | 검증 통과 |
+| 내부·외부 health / 홈페이지 | HTTP 200 / 200 / 200; 앱·기존 Tunnel 정상 보고 |
+| 실제 보관 | 신규·189cf00·876ea52의 총 3개; 성공 검증 뒤 8fa463e 제거 |
+| 복원 준비 | 직전 189cf00의 loader·import 검사, rollbackReady 확인 |
+| 이번 운영 rollback / provider 호출 | rollback 불필요 / 0회 |
+
+이번 공개 준비에서는 보관 번들을 메모리에서 읽어 archive·manifest hash와 payload 112개 전체의 크기·SHA-256을 대조했다. 모두 일치했고 node_modules·평가 fixture 항목은 0개였다. 일반 테스트 1033 pass·4 skip, static check와 build 통과는 당시 후보 코드 검증으로 기록한다. Health·loader 성공과 응답의 의미 품질 평가는 검증 대상이 다르다.
+
+[복원·보관 테스트 발췌](../cases/knowledge-index-release-consistency/verification/rollback-retention.excerpt.test.py#L1-L65)는 합성 Knowledge·Index 파일을 가진 실제 POSIX 심볼릭 링크에서 실패를 주입하고 이전 내용이 함께 복원되는지 검사한다. 보관 순서도 별도 assertion으로 확인한다. Linux 안전 테스트 8개 통과에는 이 검사가 포함돼 있다. 실제 운영에서는 배포가 성공해 자동 rollback을 실행할 필요가 없었다. 운영에서 확인한 것은 새 릴리스의 일관성과 이전 릴리스의 복원 준비 상태다.
+
+26일 배포에서는 Cloudflare가 Python urllib 기본 User-Agent 요청을 HTTP 403으로 거부했다. 실행용 client identity를 명시한 같은 health 검사는 200을 반환했다. 기존 보안 설정·health 검사와 승인한 archive·manifest·배포 스크립트 hash는 유지됐다.
+
+### 출처 범위와 남은 확인 사항
+
+운영 제약·2개에서 3개로의 변경 이유·설계 위임은 29일 직접 사용자 설명, 26일 요구·승인은 원본 메시지, 구체적 설계는 당시 AI 선언·코드, 운영 상태는 당시 도구 출력·검증 JSON으로 구분한다. 정확한 초기 서버 설치·보안 패치 작업 로그와 전후 공간 측정, 최초 2→3 변경 대화, 초기 Windows 의존성 요구 원문, Linux/root 오류·수정 승인 원문은 미확보다.
+
+코드 발췌는 제약과 결과를 설명하는 메커니즘을 선택한다. 부분 발췌는 선언한 범위 사이 한 빈 줄을 두고 원래 문장·식별자·참조를 보존한다. retention의 ROOT와 테스트의 deploy.py import 등 원래 애플리케이션 참조가 남는다. 비공개 Knowledge·QB 원문·자격증명·접속 정보·보호 설정 내용·전체 운영 명령·대화 전문은 공개 범위에서 제외한다.
 
 <details>
-<summary>원본 snapshot·행·SHA-256</summary>
+<summary>발췌 원본·범위·SHA-256</summary>
 
-| 공개 Excerpt | 원본 commit / 경로 / 행 | 원본 = 공개 SHA-256 |
+| 공개 Excerpt | 원본 commit / 경로 / 원본 행 → 공개 행 | 원본 SHA-256 → 공개 SHA-256 |
 |---|---|---|
-| [p0/ask-protection.ts](../cases/http-socket-response-boundaries/p0/ask-protection.ts#L1-L75) | `e37bca4739f5fec64c767d20b54f51c5f303388b`<br>`sveltekit/src/lib/server/api/ask-protection.ts`<br>1–75 | `dafc37680bdec4924f72087d62a96cc04b4cff9c154fb77dfd56e6ea484dd20b` |
-| [p0/ask-protection.test.ts](../cases/http-socket-response-boundaries/p0/ask-protection.test.ts#L1-L52) | `e37bca4739f5fec64c767d20b54f51c5f303388b`<br>`sveltekit/src/lib/server/api/ask-protection.test.ts`<br>1–52 | `e275b80e9a1fdf061db3359b364b2a6546b3018143b1849cf2d4d56ad6398487` |
-| [p0/ask-route.ts](../cases/http-socket-response-boundaries/p0/ask-route.ts#L1-L66) | `e37bca4739f5fec64c767d20b54f51c5f303388b`<br>`sveltekit/src/routes/api/ask/+server.ts`<br>1–66 | `c417e0de7c9ec9ede71c56e0534b84810f1de403fcb93099edaf1c9c7badb7b3` |
-| [p0/service-failure.ts](../cases/http-socket-response-boundaries/p0/service-failure.ts#L1-L79) | `e37bca4739f5fec64c767d20b54f51c5f303388b`<br>`sveltekit/src/lib/server/api/service-failure.ts`<br>1–79 | `469ce502486224dd03c8f5fee97a17d7c750e7231f96670e169fd80fbef40b50` |
-| [socket/body-socket.test.ts](../cases/http-socket-response-boundaries/socket/body-socket.test.ts#L1-L88) | `e37bca4739f5fec64c767d20b54f51c5f303388b`<br>`sveltekit/src/routes/api/ask/body-socket.test.ts`<br>1–88 | `faa071b7b1fa2ed9fd71d95717c83e12467e821cf7419d700fa66e06163e0a91` |
-| [separated/ask-route.ts](../cases/http-socket-response-boundaries/separated/ask-route.ts#L1-L53) | `8aca7d655c35813ac3d6d5fb29b356296d324bc6`<br>`sveltekit/src/routes/api/ask/+server.ts`<br>1–53 | `d75bb01021ff4b9572e4eb7a2c95838e8a39743e70e506ee1eb7c2dcb6008fb0` |
-| [separated/ask-response.ts](../cases/http-socket-response-boundaries/separated/ask-response.ts#L1-L42) | `8aca7d655c35813ac3d6d5fb29b356296d324bc6`<br>`sveltekit/src/lib/server/api/ask-response.ts`<br>1–42 | `76243506b15921a0304a82a2d2122086090bc8fbd817ecca336f983b9f155b25` |
-| [separated/ask-response.test.ts](../cases/http-socket-response-boundaries/separated/ask-response.test.ts#L1-L65) | `8aca7d655c35813ac3d6d5fb29b356296d324bc6`<br>`sveltekit/src/lib/server/api/ask-response.test.ts`<br>1–65 | `b5e0f686d039e00999de11911aafe49c61b26a7fa312fa82a6aa692a268de203` |
-| [separated/service-failure.ts](../cases/http-socket-response-boundaries/separated/service-failure.ts#L1-L31) | `8aca7d655c35813ac3d6d5fb29b356296d324bc6`<br>`sveltekit/src/lib/server/api/service-failure.ts`<br>1–31 | `d6b4bbe6124867d14e5ab5ac43f57f21ad32e532cbacd7db557aee370a25835a` |
-| [separated/service-failure.test.ts](../cases/http-socket-response-boundaries/separated/service-failure.test.ts#L1-L28) | `8aca7d655c35813ac3d6d5fb29b356296d324bc6`<br>`sveltekit/src/lib/server/api/service-failure.test.ts`<br>1–28 | `0916171b5b1a8bfbe089c8e42fe0423281cd09e63b5bea8baddfead919050c18` |
-| [separated/safe-diagnostics.ts](../cases/http-socket-response-boundaries/separated/safe-diagnostics.ts#L1-L50) | `8aca7d655c35813ac3d6d5fb29b356296d324bc6`<br>`sveltekit/src/lib/server/observability/safe-diagnostics.ts`<br>1–50 | `330445d4083f90f1417c19d4c46d63df2c6a402b75d7d04be4914a7eb5ec70aa` |
-| [separated/safe-diagnostics.test.ts](../cases/http-socket-response-boundaries/separated/safe-diagnostics.test.ts#L1-L55) | `8aca7d655c35813ac3d6d5fb29b356296d324bc6`<br>`sveltekit/src/lib/server/observability/safe-diagnostics.test.ts`<br>1–55 | `e577510c377d3150cfa68fb07815e0ebf1d25badaf5a0e6887be0d3e6d8ea5a6` |
+| [release/bundle.py](../cases/knowledge-index-release-consistency/release/bundle.py#L1-L82) | `4fddd619640fbbf77fbc58f2a80e8aaa2065f231`<br>`scripts/deployment/bundle.py`<br>1–82 → 1–82 | `d0e38d5162f8309eecd6f44673aed6f0d8e9425e0292d342f42f62f1c37af33e` → `d0e38d5162f8309eecd6f44673aed6f0d8e9425e0292d342f42f62f1c37af33e` |
+| [release/activation.excerpt.py](../cases/knowledge-index-release-consistency/release/activation.excerpt.py#L1-L40) | `4fddd619640fbbf77fbc58f2a80e8aaa2065f231`<br>`scripts/deployment/deploy.py`<br>6–6 → 1–1; 22–24 → 3–5; 98–131 → 7–40 | `8ec2db16cac2a5c77b46662ade526e779eca51c9c47fee517c4e1cb595a230ad` → `11fdfdc060ffe222fbbf2e821d7a6d1e308471840805f9129bbd22ef445aea8e` |
+| [release/retention.excerpt.py](../cases/knowledge-index-release-consistency/release/retention.excerpt.py#L1-L30) | `4fddd619640fbbf77fbc58f2a80e8aaa2065f231`<br>`scripts/deployment/deploy.py`<br>7–7 → 1–1; 22–24 → 3–5; 173–196 → 7–30 | `8ec2db16cac2a5c77b46662ade526e779eca51c9c47fee517c4e1cb595a230ad` → `77723432da30fa2382dae6a97ce48d972e388c6f2078683e66041db613138f82` |
+| [verification/rollback-retention.excerpt.test.py](../cases/knowledge-index-release-consistency/verification/rollback-retention.excerpt.test.py#L1-L65) | `4fddd619640fbbf77fbc58f2a80e8aaa2065f231`<br>`scripts/deployment/test_deploy.py`<br>1–28 → 1–28; 122–157 → 30–65 | `07ceb585168a3e8a717fd6b520850a56bd7a748617323139f578481596548914` → `525e2fe3a8d94b32c1fabe0f65032427f4268a3df17c76194984572c6a6c96a1` |
 
 | 공개 근거 | 분류 | SHA-256 |
 |---|---|---|
-| [evidence/observed-results.json](../cases/http-socket-response-boundaries/evidence/observed-results.json#L1-L199) | Reconstructed | `fd37b0bc833d23f02bce123532ea64690931a217e517d8d48225f3c3e7821be2` |
-| [evidence/source-register.json](../cases/http-socket-response-boundaries/evidence/source-register.json#L1-L333) | Reconstructed | `df10919fc92100013dff1e84786f0ad38767b1f730a46b253ca69422bfcf5204` |
+| [evidence/decisions-and-constraints.json](../cases/knowledge-index-release-consistency/evidence/decisions-and-constraints.json#L1-L119) | Reconstructed | `ccd5b7bd9c248ea3fdb3a61a1fd44b0512128e46d37ded2349bd5ffe584dfcbc` |
+| [evidence/deployment-observed-results.json](../cases/knowledge-index-release-consistency/evidence/deployment-observed-results.json#L1-L78) | Reconstructed | `4d6ec007c67cfd014471053f9bd02761417a82c2ffc3c8e1b5e96aaf5146a899` |
+| [evidence/source-register.json](../cases/knowledge-index-release-consistency/evidence/source-register.json#L1-L385) | Reconstructed | `0195a7c968cd0f7224c3cee20b5b21b6913da297f55f92ce4fe617fb425b67e2` |
 
-당시 검증 문서: e37bca4739f5fec64c767d20b54f51c5f303388b의 docs/api-ask-protection.md, 초기 구현 50–64행·실소켓 실패 66–104행·수정 검증 106–125행. 전체 원본 SHA-256은 3219eec400cfb8302487736c4c761750fc795613cc263d6ef4e143071393bb95다. 연구 C04/U04와 CG08의 Git 기준본·hash·출처 범위는 source-register.json에 보존한다. 파일 경로는 비공개 Synethos 저장소 상대경로로 식별한다.
+원본 경로는 비공개 Synethos 저장소 상대경로다. 출처 등록부는 4fddd61의 문서·배포 코드와 보존된 배포 전 점검·승인·실행·완료 파일의 hash, 전체 세션 원본 식별과 선택한 메시지 hash를 연결한다. 서버 접속·운영 민감정보를 포함한 원본 자료는 비공개로 보존한다.
 
 </details>
 
 ### 공개 준비 검증
 
-전체 파일 Excerpt 12개는 선언한 Git 원본 bytes·SHA-256과 일치했고 TypeScript 구문 파싱을 통과했다. 근거 JSON 2개가 파싱됐고 원본 검증 문서·연구 자료 3개의 hash와 당시 보고 수치를 대조했다. 소켓 수정 후 body reader·소켓 회귀 파일은 책임 분리 커밋 전후 동일했고, 진단 allowlist·함수 로직의 이동을 확인했다. 영문·한글의 파일/외부 링크와 SHA-256 집합이 일치했으며 README 2개·개발 기록 2개의 로컬 링크 722개는 파일·헤딩·행 범위 검증을 통과했다.
+원본 전체·선택 범위 코드 4개와 공개 발췌를 대조했고 Python 구문 파싱 4개·공개 JSON 파싱 3개를 통과했다. Git 문서·코드·연구 기록 hash 7개, 보관 원본 hash 8개, 전체 세션 hash와 선택 메시지 text hash 10개를 확인했다. 보관 번들의 payload 112개는 크기·SHA-256이 모두 일치했고 실제 index와 manifest의 identity·건수도 일치했다.
 
-사례 01~06의 본문·공개 파일과 Synethos 원본을 보존했다. 공개 대상의 credential 값·로컬 사용자 경로·비공개 저장소 URL·QB 원문 포함 여부를 점검했고 diff 공백 검사를 통과했다. 검증은 Git 원본·보존 문서 열람과 로컬 파싱·계산으로 수행했다. 당시 애플리케이션 테스트·소켓 실험을 재실행하거나 모델 호출·index build·서버 접근을 수행하지 않았다. 당시 수치와 승인 기록의 근거 공백은 위 범위로 유지한다.
+README 2개·개발 기록 2개의 로컬 링크 692개는 파일·헤딩·행 범위 검증을 통과했다. 영문·한글의 파일/외부 링크 대상과 SHA-256 집합이 일치한다. 사례 01~06 본문과 공개 파일 132개는 기준 커밋의 내용을 보존했다. 파일 비교는 Windows 체크아웃 개행을 정규화했다.
+
+공개 대상 코드·근거 projection·사례 07 본문에서 credential 값·비공개 Knowledge/QB payload·비공개 저장소 URL·로컬 사용자 경로·서버 접근 정보를 점검했다. 검증은 원본 열람과 로컬 파싱·hash 계산으로 수행했다. 새 애플리케이션 테스트·모델 호출·index build·서버 접근·배포는 수행하지 않았다. Synethos working tree는 clean이며 원본을 보존했다.

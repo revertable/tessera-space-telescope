@@ -1,0 +1,78 @@
+{
+  "classification": "Reconstructed",
+  "sourceRegister": "source-register.json",
+  "source": "C07-L03 deployment-result.json, C07-L01 completion-report.md, C07-S01 and retained archive",
+  "historicalDeployment": {
+    "sourceCommit": "4fddd619640fbbf77fbc58f2a80e8aaa2065f231",
+    "release": "20261026-4fddd61-01",
+    "status": "deployed",
+    "indexes": [
+      {
+        "fingerprint": "2e1215b366d0af233c745ad3da6eccf8fc1b9978d1e96efe7f29c3609531e859",
+        "corpusFingerprint": "44de0570052f251c42153ea8165d52126538d21ae5bf39fd5c025e3f8c6cdf72",
+        "sourceCount": 28,
+        "chunkCount": 381
+      }
+    ],
+    "dependencyImports": "passed",
+    "internalHealth": 200,
+    "externalHealth": 200,
+    "homepage": 200,
+    "activeRootAndProcessDirectory": "Matched the active release in original post-deployment checks; literal operational paths omitted.",
+    "retainedReleases": [
+      "20261026-4fddd61-01",
+      "20261026-189cf00-01",
+      "20261026-876ea52-01"
+    ],
+    "removedReleases": [
+      "20261026-8fa463e-01"
+    ],
+    "totalRetained": 3,
+    "rollbackReady": true,
+    "productionRollbackOccurred": false,
+    "verifiedFiles": 112,
+    "providerCalls": 0,
+    "approvedScriptUnchanged": true
+  },
+  "candidateValidation": {
+    "ordinaryTestsPassed": 1033,
+    "ordinaryTestsSkipped": 4,
+    "staticErrors": 0,
+    "staticWarnings": 0,
+    "productionBuild": "passed",
+    "scope": "Historical code/build verification; semantic answer quality is separate."
+  },
+  "safetyTests": {
+    "source": "C07-S01 / 2026-10-26T12:39:59.309Z and 12:42:03.125Z",
+    "platform": "Linux",
+    "passed": 8,
+    "scope": [
+      "Manifest/commit/index identity and counts",
+      "Tampered/unlisted/draft payload rejection",
+      "Archive traversal/link/duplicate/dependency rejection",
+      "Injected activation failure and previous release/index restoration",
+      "Successful activation",
+      "Actual POSIX atomic symlink rollback of synthetic Knowledge/Index files",
+      "Three-release retention ordering",
+      "Post-npm permission normalization"
+    ],
+    "productionRollbackEvidence": false
+  },
+  "bundleVerification": {
+    "archiveSha256": "f185e0655e2c6cf3e1449369ffb3a12414465d85e57519eb9f9e042dbc8094bd",
+    "manifestSha256": "b40bb4ff1d0f3428a14b85e9e33b61e37b37947dd8b92e24c07e32bac8e38eb4",
+    "payloadFiles": 112,
+    "bytesAndSha256Matched": 112,
+    "nodeModulesEntries": 0,
+    "evaluationFixtureEntries": 0,
+    "verifiedOn": "2026-10-29",
+    "method": "Archive decompressed and inspected in memory; no payload written to disk."
+  },
+  "runtimeIssue": {
+    "observation": "Cloudflare returned HTTP 403 for default Python urllib User-Agent.",
+    "response": "An explicit deployment client identity obtained HTTP 200 with the same health checks.",
+    "preserved": "Approved deployment script/archive/manifest hashes and security/health checks.",
+    "source": "C07-L01, C07-L05, C07-L06 and C07-S01"
+  },
+  "verificationScope": "Historical operating observations and injected-failure tests; this publication performs no fresh deployment, server inspection, rollback, package installation or model call."
+}

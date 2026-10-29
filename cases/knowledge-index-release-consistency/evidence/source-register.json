@@ -1,0 +1,385 @@
+{
+  "classification": "Reconstructed",
+  "preparedOn": "2026-10-29",
+  "synethosCommit": "4fddd619640fbbf77fbc58f2a80e8aaa2065f231",
+  "tesseraPriorCasesBaseline": "f8c6d1ead93050a2e8a18b0cb761bc05816b6357",
+  "code": [
+    {
+      "publicPath": "release/bundle.py",
+      "classification": "Excerpt",
+      "commit": "4fddd619640fbbf77fbc58f2a80e8aaa2065f231",
+      "sourcePath": "scripts/deployment/bundle.py",
+      "selection": "whole original file",
+      "ranges": [
+        {
+          "original": [
+            1,
+            82
+          ],
+          "public": [
+            1,
+            82
+          ]
+        }
+      ],
+      "originalSha256": "d0e38d5162f8309eecd6f44673aed6f0d8e9425e0292d342f42f62f1c37af33e",
+      "publicSha256": "d0e38d5162f8309eecd6f44673aed6f0d8e9425e0292d342f42f62f1c37af33e"
+    },
+    {
+      "publicPath": "release/activation.excerpt.py",
+      "classification": "Excerpt",
+      "commit": "4fddd619640fbbf77fbc58f2a80e8aaa2065f231",
+      "sourcePath": "scripts/deployment/deploy.py",
+      "selection": "selected original ranges joined with one blank line",
+      "ranges": [
+        {
+          "original": [
+            6,
+            6
+          ],
+          "public": [
+            1,
+            1
+          ]
+        },
+        {
+          "original": [
+            22,
+            24
+          ],
+          "public": [
+            3,
+            5
+          ]
+        },
+        {
+          "original": [
+            98,
+            131
+          ],
+          "public": [
+            7,
+            40
+          ]
+        }
+      ],
+      "originalSha256": "8ec2db16cac2a5c77b46662ade526e779eca51c9c47fee517c4e1cb595a230ad",
+      "publicSha256": "11fdfdc060ffe222fbbf2e821d7a6d1e308471840805f9129bbd22ef445aea8e"
+    },
+    {
+      "publicPath": "release/retention.excerpt.py",
+      "classification": "Excerpt",
+      "commit": "4fddd619640fbbf77fbc58f2a80e8aaa2065f231",
+      "sourcePath": "scripts/deployment/deploy.py",
+      "selection": "selected original ranges joined with one blank line",
+      "ranges": [
+        {
+          "original": [
+            7,
+            7
+          ],
+          "public": [
+            1,
+            1
+          ]
+        },
+        {
+          "original": [
+            22,
+            24
+          ],
+          "public": [
+            3,
+            5
+          ]
+        },
+        {
+          "original": [
+            173,
+            196
+          ],
+          "public": [
+            7,
+            30
+          ]
+        }
+      ],
+      "originalSha256": "8ec2db16cac2a5c77b46662ade526e779eca51c9c47fee517c4e1cb595a230ad",
+      "publicSha256": "77723432da30fa2382dae6a97ce48d972e388c6f2078683e66041db613138f82"
+    },
+    {
+      "publicPath": "verification/rollback-retention.excerpt.test.py",
+      "classification": "Excerpt",
+      "commit": "4fddd619640fbbf77fbc58f2a80e8aaa2065f231",
+      "sourcePath": "scripts/deployment/test_deploy.py",
+      "selection": "selected original ranges joined with one blank line",
+      "ranges": [
+        {
+          "original": [
+            1,
+            28
+          ],
+          "public": [
+            1,
+            28
+          ]
+        },
+        {
+          "original": [
+            122,
+            157
+          ],
+          "public": [
+            30,
+            65
+          ]
+        }
+      ],
+      "originalSha256": "07ceb585168a3e8a717fd6b520850a56bd7a748617323139f578481596548914",
+      "publicSha256": "525e2fe3a8d94b32c1fabe0f65032427f4268a3df17c76194984572c6a6c96a1"
+    }
+  ],
+  "historical": [
+    {
+      "id": "C07-G01",
+      "commit": "4fddd619640fbbf77fbc58f2a80e8aaa2065f231",
+      "sourcePath": "docs/production-deployment.md",
+      "sha256": "1ea493f961d9fd630d7c5bb2a2b320b8d1c829189038edfed8ac7f031e8c6bcf"
+    },
+    {
+      "id": "C07-G02",
+      "commit": "4fddd619640fbbf77fbc58f2a80e8aaa2065f231",
+      "sourcePath": "scripts/deployment/bundle.py",
+      "sha256": "d0e38d5162f8309eecd6f44673aed6f0d8e9425e0292d342f42f62f1c37af33e"
+    },
+    {
+      "id": "C07-G03",
+      "commit": "4fddd619640fbbf77fbc58f2a80e8aaa2065f231",
+      "sourcePath": "scripts/deployment/deploy.py",
+      "sha256": "8ec2db16cac2a5c77b46662ade526e779eca51c9c47fee517c4e1cb595a230ad"
+    },
+    {
+      "id": "C07-G04",
+      "commit": "4fddd619640fbbf77fbc58f2a80e8aaa2065f231",
+      "sourcePath": "scripts/deployment/test_deploy.py",
+      "sha256": "07ceb585168a3e8a717fd6b520850a56bd7a748617323139f578481596548914"
+    },
+    {
+      "id": "C07-G05",
+      "commit": "4fddd619640fbbf77fbc58f2a80e8aaa2065f231",
+      "sourcePath": "scripts/deployment/probe.mjs",
+      "sha256": "a4a6360520aada0d0fe5e7b91d07813c0753b89a2a405b7c3c9b39510e90cde1"
+    },
+    {
+      "id": "C07-G06",
+      "commit": "59cb3ddc09ef80a2b6f0d873b3a88eb4690d3fd8",
+      "sourcePath": "docs/development-status.md",
+      "sha256": "0d28c1367ad994f329ae097d9d355c7088c3efe456ebe72f253b710bd16e1ff1",
+      "scope": "Production and Verification — 2026-10-22; earlier Ubuntu/Tunnel/dependency operating report."
+    }
+  ],
+  "artifacts": [
+    {
+      "id": "C07-L01",
+      "path": "tmp/synethos-release-4fddd61/completion-report.md",
+      "sha256": "f7e31b97cc13e06e0c9138aa7a1e3d7d6ec7841a96b6f466a6fafbebbffdcdcf",
+      "scope": "Retained private original; public evidence selects necessary metadata and results."
+    },
+    {
+      "id": "C07-L02",
+      "path": "tmp/synethos-release-4fddd61/deployment-approval.md",
+      "sha256": "df2454462258a225b91b4529a2c519f2f5d00b815bdfb827e801ea1a1f838053",
+      "scope": "Retained private original; public evidence selects necessary metadata and results."
+    },
+    {
+      "id": "C07-L03",
+      "path": "tmp/synethos-release-4fddd61/deployment-result.json",
+      "sha256": "0fb1e9ae089aacc084f1d0991ec8da4be1c61b2a5081d24eae7c48436b16e134",
+      "scope": "Retained private original; public evidence selects necessary metadata and results."
+    },
+    {
+      "id": "C07-L04",
+      "path": "tmp/synethos-release-4fddd61/activation.log",
+      "sha256": "74cdb0de7e81d53dbcd7a83eca6c6657d19a5eb882527ee0128294f0a4c3d196",
+      "scope": "Retained private original; public evidence selects necessary metadata and results."
+    },
+    {
+      "id": "C07-L05",
+      "path": "tmp/synethos-release-4fddd61/prepare-with-client-id.log",
+      "sha256": "e6361af6e1273c1577da46b7969ea54f4dd04d986cca4498b847d17a2236d29b",
+      "scope": "Retained private original; public evidence selects necessary metadata and results."
+    },
+    {
+      "id": "C07-L06",
+      "path": "tmp/synethos-release-4fddd61/invoke-deployment.py",
+      "sha256": "76d23e959a66b767a7367af8d6218f879855bd60e243ef747c2271c700eef61e",
+      "scope": "Retained private original; public evidence selects necessary metadata and results."
+    },
+    {
+      "id": "C07-L07",
+      "path": "tmp/synethos-release-4fddd61/release.tar.gz",
+      "sha256": "f185e0655e2c6cf3e1449369ffb3a12414465d85e57519eb9f9e042dbc8094bd",
+      "scope": "Retained private original; public evidence selects necessary metadata and results."
+    },
+    {
+      "id": "C07-L08",
+      "path": "tmp/synethos-predeploy-203b571-20261026.md",
+      "sha256": "2ea751d7f2b2b2db2b5bbea2749c3f8f5185f0f1e198e03929c4e69686d84784",
+      "scope": "Private read-only predeployment report; disk availability, old/candidate index state and old deployment-script limitations."
+    }
+  ],
+  "method": "Original code ranges and private evidence hashes; operational access data, complete sessions and payloads remain private.",
+  "session": {
+    "id": "C07-S01",
+    "sessionId": "01a177b0-1d84-7cc0-aedb-4a06f6d9c661",
+    "artifact": "rollout-2026-10-26T19-09-53-01a177b0-1d84-7cc0-aedb-4a06f6d9c661.jsonl",
+    "sha256": "cbdf7837ad3e0c12df136688ab5ea16613bb021bb39c3d744de274f31de35db8",
+    "scope": "Original full session directly read; message metadata/hashes published, private full text/tool output retained separately.",
+    "textHashMethod": "SHA-256 UTF-8 text content blocks joined by newline.",
+    "messages": [
+      {
+        "atUtc": "2026-10-26T12:22:05.529Z",
+        "atKst": "2026-10-26T21:22:05.529+09:00",
+        "role": "user",
+        "textSha256": "121b6eecdaa3aa3231864417ce3b796b0d6b4627e5b05b0adbfaeaabb6c0cc29",
+        "scope": "Requirements: retain existing release/Tunnel structure, Knowledge/Index consistency, Linux dependency access and imports, reusable deployment and total three releases."
+      },
+      {
+        "atUtc": "2026-10-26T12:28:01.646Z",
+        "atKst": "2026-10-26T21:28:01.646+09:00",
+        "role": "assistant",
+        "textSha256": "548a00c2c641ca1220b5c59d4bbe044033668f94a6d53ae5aaa7526f0fb8fe0a",
+        "scope": "AI implementation/verification/candidate preparation scope."
+      },
+      {
+        "atUtc": "2026-10-26T12:28:25.746Z",
+        "atKst": "2026-10-26T21:28:25.746+09:00",
+        "role": "user",
+        "textSha256": "40531d16a68c4bdff1df021a58b054bfdc3d0be2f1ced37a9e4fb08f2becd2c4",
+        "scope": "Approval of implementation/verification/candidate preparation scope."
+      },
+      {
+        "atUtc": "2026-10-26T12:44:39.175Z",
+        "atKst": "2026-10-26T21:44:39.175+09:00",
+        "role": "assistant",
+        "textSha256": "a01054a445d3418b02136b436eb7ef5d558ddc66d2d9a0400acc37043340864d",
+        "scope": "Candidate verification results and separate Git declaration."
+      },
+      {
+        "atUtc": "2026-10-26T12:48:38.896Z",
+        "atKst": "2026-10-26T21:48:38.896+09:00",
+        "role": "user",
+        "textSha256": "40531d16a68c4bdff1df021a58b054bfdc3d0be2f1ced37a9e4fb08f2becd2c4",
+        "scope": "Git commit/push approval."
+      },
+      {
+        "atUtc": "2026-10-26T12:51:33.126Z",
+        "atKst": "2026-10-26T21:51:33.126+09:00",
+        "role": "assistant",
+        "textSha256": "dcab1fd204272173250b4190d20d6f1556eadc57d9b6392849ae2ef5017ccbf3",
+        "scope": "Committed candidate and production deployment declaration."
+      },
+      {
+        "atUtc": "2026-10-26T12:51:33.254Z",
+        "atKst": "2026-10-26T21:51:33.254+09:00",
+        "role": "user",
+        "textSha256": "fa2a04b97cb382bc5d17b214c1b618f01f1b6b9e4bd560a183d1b7729e3c02b1",
+        "scope": "Request exact production scope and rollback plan after completion."
+      },
+      {
+        "atUtc": "2026-10-26T12:51:48.222Z",
+        "atKst": "2026-10-26T21:51:48.222+09:00",
+        "role": "assistant",
+        "textSha256": "dc3e4542113645eca7f712cc92ff67c4e50fe6de73e00d5532e80c29dc728b2c",
+        "scope": "Production switch, verification, rollback and retention scope."
+      },
+      {
+        "atUtc": "2026-10-26T12:52:55.532Z",
+        "atKst": "2026-10-26T21:52:55.532+09:00",
+        "role": "user",
+        "textSha256": "40531d16a68c4bdff1df021a58b054bfdc3d0be2f1ced37a9e4fb08f2becd2c4",
+        "scope": "Production deployment approval."
+      },
+      {
+        "atUtc": "2026-10-26T12:59:22.934Z",
+        "atKst": "2026-10-26T21:59:22.934+09:00",
+        "role": "assistant",
+        "textSha256": "879e213cc121d8ac90925f3c59553abd05dc48dc35f2fcc02588cc1d79189269",
+        "scope": "Deployment completion and three-release retention report."
+      }
+    ],
+    "toolObservations": [
+      {
+        "atUtc": "2026-10-26T12:04:59.201Z",
+        "atKst": "2026-10-26T21:04:59.201+09:00",
+        "observation": "Filesystem total 9.8G, used 6.0G, available 3.3G, usage 65%."
+      },
+      {
+        "atUtc": "2026-10-26T12:10:14.978Z",
+        "atKst": "2026-10-26T21:10:14.978+09:00",
+        "observation": "Earlier server deploy script already normalizes permissions, checks service-account imports/current root and retains three releases."
+      },
+      {
+        "atUtc": "2026-10-26T12:39:59.309Z",
+        "atKst": "2026-10-26T21:39:59.309+09:00",
+        "observation": "Linux safety suite: Ran 8 tests in 0.054s; OK."
+      },
+      {
+        "atUtc": "2026-10-26T12:42:03.125Z",
+        "atKst": "2026-10-26T21:42:03.125+09:00",
+        "observation": "Linux safety suite: Ran 8 tests in 0.053s; OK."
+      }
+    ]
+  },
+  "developerClarification": {
+    "source": "Direct developer clarification in this Tessera replacement task on 2026-10-29",
+    "threadId": "01a18747-2717-7783-94ba-2125239f8f15",
+    "atUtc": "2026-10-29T12:40:29.139Z",
+    "atKst": "2026-10-29T21:40:29.139+09:00",
+    "textSha256": "38f3f8b1bff969fac82374bc06e3ddf00a1d1eb428e9bf9d2a8b7916a8d5c654"
+  },
+  "evidenceLevels": {
+    "directDeveloperStatement": "The developer supplied environment, constraints, reasons and design-delegation account in the October 29 replacement request.",
+    "historicalUserDecision": "Original October 26 requests and approvals directly inspected; retaining existing design does not establish who first devised its details.",
+    "implementation": "Original Git code and prior server-script observation.",
+    "operatingObservation": "Historical tool output and retained runtime verification JSON; no new server inspection.",
+    "testVerification": "Historical injected-failure/offline Linux safety tests; separate from production rollback."
+  },
+  "remainingGaps": [
+    "Initial server provisioning and security-update command/package logs with before/after disk measurements",
+    "Original conversation changing two retained releases to three",
+    "Exact first Linux dependency/active-root error output and associated approval",
+    "Original early Windows-dependency-copy prohibition message"
+  ],
+  "publication": {
+    "scope": "Selected original code and metadata projections; keep private Knowledge, credentials, full operational commands, server access information and private conversation payloads private.",
+    "codeRole": "Mechanisms support the account of operating constraints, choices and observed outcomes. Prior case 05 remains the index-portability/identity record."
+  },
+  "research": [
+    {
+      "commit": "1a0fececdd17b6d3ca18d2b12c8c0048f0b37eb4",
+      "sourcePath": "docs/research/decision-candidates.md",
+      "sha256": "a3f398cefec7419dccc04a5848b1e22b35edde9cb77f932894f3f9cf278ac628",
+      "scope": "C09/U09 research and original-artifact ledger; direct originals used for confirmed observations."
+    }
+  ],
+  "publicationVerification": {
+    "performedOn": "2026-10-29",
+    "originalCodeSelectionsMatched": 4,
+    "pythonFilesSyntaxParsed": 4,
+    "publicJsonFilesParsed": 3,
+    "historicalGitAndResearchHashesMatched": 7,
+    "privateArtifactHashesMatched": 8,
+    "originalSessionHashMatched": true,
+    "originalMessageTextHashesMatched": 10,
+    "archivePayloadSizesAndHashesMatched": 112,
+    "runtimeIndexMatchesManifest": true,
+    "localMarkdownLinksChecked": 692,
+    "bilingualFileAndExternalLinksMatched": true,
+    "bilingualSha256SetsMatched": true,
+    "priorCaseFilesPreserved": 132,
+    "priorCaseComparison": "Git baseline content matched with checkout line endings normalized; cases 01–06 prose also preserved.",
+    "privacyReview": "Selected code, evidence projections and case 07 prose checked for credential values, private Knowledge/QB payloads, private repository URLs, local user paths and server access details.",
+    "execution": "Read-only original inspection and local parsing/hash comparisons; no application test, model call, index build, server access or deployment executed."
+  }
+}
