@@ -1,0 +1,176 @@
+{
+  "classification": "Reconstructed",
+  "snapshots": [
+    {
+      "stage": "initial-contracts",
+      "sourceCommit": "fc509b07cbc33035ae12bd6b837d93b3045d216b",
+      "generation": {
+        "targets": [
+          {
+            "provider": "gemini",
+            "model": "gemini-3.5-flash-lite"
+          },
+          {
+            "provider": "gemini",
+            "model": "gemini-3.1-flash-lite"
+          }
+        ],
+        "maxOutputTokens": 1200
+      },
+      "embedding": {
+        "provider": "gemini",
+        "model": "gemini-embedding-2",
+        "outputDimensions": 768
+      }
+    },
+    {
+      "stage": "independent-build-and-runtime",
+      "sourceCommit": "c7610edd7223be7fe77cd7ae9722c58c27e81690",
+      "generation": {
+        "credentialSlot": "primary",
+        "targets": [
+          {
+            "provider": "gemini",
+            "model": "gemini-3.5-flash-lite"
+          },
+          {
+            "provider": "gemini",
+            "model": "gemini-3.1-flash-lite"
+          }
+        ],
+        "maxOutputTokens": 1200
+      },
+      "embedding": {
+        "targets": [
+          {
+            "id": "cohere-embed-v4",
+            "provider": "cohere",
+            "model": "embed-v4.0",
+            "dimensions": 1536,
+            "credentialSlot": "fallback"
+          },
+          {
+            "id": "voyage-4",
+            "provider": "voyage",
+            "model": "voyage-4",
+            "dimensions": 1024,
+            "credentialSlot": "tertiary"
+          }
+        ],
+        "runtimeTargetIds": [
+          "cohere-embed-v4",
+          "voyage-4"
+        ]
+      }
+    },
+    {
+      "stage": "credential-binding-separated",
+      "sourceCommit": "de197a5c0c245f64034c94542e96b09f3361dd63",
+      "generation": {
+        "credentialSlot": "generation",
+        "targets": [
+          {
+            "provider": "gemini",
+            "model": "gemini-3.5-flash-lite"
+          },
+          {
+            "provider": "gemini",
+            "model": "gemini-3.1-flash-lite"
+          }
+        ],
+        "maxOutputTokens": 1200
+      },
+      "embedding": {
+        "targets": [
+          {
+            "id": "cohere-embed-v4",
+            "provider": "cohere",
+            "model": "embed-v4.0",
+            "dimensions": 1536
+          },
+          {
+            "id": "voyage-4",
+            "provider": "voyage",
+            "model": "voyage-4",
+            "dimensions": 1024
+          }
+        ],
+        "runtimeTargetIds": [
+          "cohere-embed-v4",
+          "voyage-4"
+        ]
+      }
+    },
+    {
+      "stage": "generation-registry",
+      "sourceCommit": "b00bf595439bd71540ace4e34d6f56a803eb5719",
+      "generation": {
+        "targets": [
+          {
+            "id": "gemini-3-5-flash-lite",
+            "provider": "gemini",
+            "model": "gemini-3.5-flash-lite",
+            "options": {
+              "maxOutputTokens": 1200
+            }
+          },
+          {
+            "id": "gemini-3-1-flash-lite",
+            "provider": "gemini",
+            "model": "gemini-3.1-flash-lite",
+            "options": {
+              "maxOutputTokens": 1200
+            }
+          },
+          {
+            "id": "cohere-command-a-plus",
+            "provider": "cohere",
+            "model": "command-a-plus-05-2026",
+            "options": {
+              "maxOutputTokens": 1200,
+              "thinking": "provider-default"
+            }
+          },
+          {
+            "id": "groq-qwen3-8-27b",
+            "provider": "groq",
+            "model": "qwen/qwen3.8-27b",
+            "options": {
+              "maxOutputTokens": 1200,
+              "reasoningEffort": "none"
+            }
+          }
+        ],
+        "runtimeTargetIds": [
+          "gemini-3-5-flash-lite",
+          "gemini-3-1-flash-lite"
+        ]
+      },
+      "embedding": {
+        "targets": [
+          {
+            "id": "cohere-embed-v4-1536",
+            "provider": "cohere",
+            "model": "embed-v4.0",
+            "dimensions": 1536
+          },
+          {
+            "id": "gemini-embedding-2-768",
+            "provider": "gemini",
+            "model": "gemini-embedding-2",
+            "dimensions": 768
+          },
+          {
+            "id": "gemini-embedding-2-1536",
+            "provider": "gemini",
+            "model": "gemini-embedding-2",
+            "dimensions": 1536
+          }
+        ],
+        "runtimeTargetIds": [
+          "cohere-embed-v4-1536"
+        ]
+      }
+    }
+  ]
+}

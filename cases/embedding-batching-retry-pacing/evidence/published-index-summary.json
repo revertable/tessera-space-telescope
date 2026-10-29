@@ -1,0 +1,21 @@
+{
+  "classification": "Reconstructed",
+  "sourceCommit": "033e02fabe868a14cd8a4a932b50fbdba9a064fa",
+  "sourceSha256": "a0d705c70fbba84886ddae0a64c3811f69bdca4927290ae6282f69eb4c3640f6",
+  "metadata": {
+    "schemaVersion": 4,
+    "createdAt": "2026-10-17T13:17:33.825Z",
+    "fingerprint": "30886679a306cf2ee9a3cd10532e6a7cfb5549f85baf3f595f672c9273e4b150",
+    "corpusFingerprint": "d352089cee17f28edd44d56db5282c12875a1ad20bbcb757283736895c2c812b",
+    "embeddingProvider": "gemini",
+    "embeddingModel": "gemini-embedding-2",
+    "embeddingInputVersion": 2,
+    "vectorDimension": 768
+  },
+  "structuralChecks": {
+    "chunkCount": 373,
+    "documentHashEntryCount": 28,
+    "allVectorsMatchDeclaredDimension": true,
+    "allVectorElementsFinite": true
+  }
+}
