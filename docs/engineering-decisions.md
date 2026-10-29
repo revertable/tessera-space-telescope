@@ -12,6 +12,8 @@ These records connect implementation code to the problems, experiments, and deci
 
 Each case includes a source ledger identifying its code snapshots and retained evidence. Historical tests are published as implementation evidence; this repository does not provide their dependencies or a test runner.
 
+Retained originals on the home PC were additionally inspected on October 29, 2026. The [recovered-source register](evidence/recovered-source-register.json) preserves original file hashes, session/message times, observation conditions, and remaining questions for cases 01–06. User-input history identifies original requests and decisions; experiment results and completion reports retain their historical execution conditions.
+
 ## Contents
 
 - [01 — From Local Qwen/Ollama Inference to the Gemini API](#01--from-local-qwenollama-inference-to-the-gemini-api) — 2026-09-26
@@ -64,6 +66,8 @@ At 03:50:47, the developer judged execution stability, resource demands, and res
 The decision also narrowed implementation scope: remove the local inference path rather than maintain a selectable local/API compatibility layer. Approved knowledge, retrieval, record-grounding rules, and citation checks were to remain. Existing Qwen embeddings were not to be reused as Gemini embeddings.
 
 This was a product-scope decision based on the observed constraints and the experiments recorded above. The developer selected the Gemini API free tier available on September 26, 2026.
+
+The 03:50:47 decision and 03:58:18 follow-up were directly inspected in original user-input history. The follow-up combined Ollama cleanup and Gemini generation/embedding integration into one completion scope, skipping a separate intermediate unconfigured-state implementation. Actual API calls and a new index were deferred until key entry. The [recovered-source register](evidence/recovered-source-register.json) preserves session IDs, message times, and original-text hashes.
 
 ### Implementation: local HTTP calls to a server-side API client
 
@@ -186,7 +190,7 @@ The private Synethos source is identified by commit and repository-relative path
 | Transition decision | Retained developer request dated 2026-09-26 03:50:47 KST | Local retirement and API choice because of resources, stability, and response time; recorded judgment |
 | Power/low-load records | Retained logs and artifacts identified below | Environment, completion, and measurements; power-loss cause unconfirmed |
 
-The following hashes identify retained artifacts as recorded in the existing research. The code hashes above were recomputed for this publication; the experiment files below were not rerun or all independently reverified for it. Raw files and complete transcripts are not included.
+All six retained originals below were directly read on the home PC and their SHA-256 values recomputed; every value matched the existing register. The summary, response, memory timeline, and Ollama logs support the low-load run’s completion, measurements, and placement conditions above. Raw files and complete transcripts remain privately retained.
 
 | Retained artifact identity | Recorded SHA-256 |
 |---|---|
@@ -237,6 +241,8 @@ These columns distinguish the languages/variants of returned URLs. Registering b
 Search responses contained text blocks with Title, Link, and Content lines. The report found no structuredContent, typed locale, Space identity, page/section ID, translation-pair relationship, or search score; only array order was available. Both language versions of Why We Study could have the same title, so title equality was insufficient to identify locale. Repository inspection established a reviewed 16-to-16 document-pair matrix. The /kr/ URL path was the observed locale signal.
 
 The September 28 artifact independently records server version 0.27.2, the four advertised tools, and search responses without structuredContent or reported tool errors. The saved observation was reviewed during publication preparation. Raw page contents are not published here.
+
+Additional raw probes recovered on the home PC are MCP root-endpoint runs at September 26 23:45:48.199 and September 27 21:05:46.310. Each retains four searches, two page results per search, server version 0.27.2, and four tools. The [recovered-source register](evidence/recovered-source-register.json) adds both original hashes, observation times, and per-search response shapes. The September 26 file is the original Single-Space observation above; the September 27 file supports its own root-endpoint observation; the two-endpoint comparison and September 28 09:44:31.093 run retain their separate records.
 
 ### Implementing a defensive evidence boundary
 
@@ -463,7 +469,7 @@ The integrated research records a fresh three-way comparison with the same saved
 | Cohere Command A+ | 22/40 | 3 | 4 | 3.042s |
 | Groq GPT-OSS 120B | 25/40 | 2 | 0 | 1.524s |
 
-The original full40 directory is unavailable in the current checkout; its report identity and recorded hash are retained in the source ledger. This table remains a previously transcribed experimental report. The committed `0baebd9` configuration establishes the next runtime state: Gemini generation primary, Groq GPT-OSS fallback, and Cohere registered for explicit evaluation. October 1 subject retention, this full40 assessment, and the later retrieval diagnostic each retain their own measures and conditions.
+The original full40 directory and report were recovered on the home PC, and the registered report hash matched. All 120 requests, responses, results, and manual reviews were cross-checked and the table recalculated. Gemini and Cohere used output caps of 32768; GPT-OSS used strict JSON Schema and a 4096 cap, omitting reasoning_effort to use the recorded medium default. The [original-result projection](../cases/model-selection-quality-availability/evidence/october03-reported-results.json) preserves per-case identities, options, verification, and historical ratings. The committed 0baebd9 runtime uses Gemini generation primary and Groq GPT-OSS fallback, with Cohere retained for explicit evaluation. October 1 subject retention, this full40 assessment, and the later retrieval diagnostic retain their own measures and conditions.
 
 ### October 6: a classifier gate stopped expansion
 
@@ -504,7 +510,7 @@ The [evidence-rank calculation](../cases/cohere-lifecycle/evaluation/retrieval-e
 
 ### Retirement decision: benefit relative to scale and operating cost
 
-**Recorded historical decision, October 16 at 21:02:47.996:** the earlier research transcribed a developer request recognizing Cohere’s retrieval quality and build speed/convenience while prioritizing free production operation. It recorded the then-understood Trial-key production restrictions and paid Production-key requirement, and the need for Cohere query embeddings in the same space even with a prebuilt index. The request compared development/evaluation-only retention with complete removal. The original archived session is unavailable at its registered path in this checkout; this account retains the earlier research’s transcription level.
+**Recorded historical decision, October 16 at 21:02:47.996:** the original developer message in the recovered home-PC archive recognized Cohere’s retrieval quality and build speed/convenience while prioritizing free production operation. It specified the then-understood Trial-key production restrictions and paid Production-key requirement, and the need for same-space Cohere query embeddings even with a prebuilt index. The developer asked whether the recent quality difference justified cost and management complexity at Synethos’s scale, comparing development/evaluation-only retention with complete removal, and selected complete removal. The original archive hash matched the existing register; the [recovered-source register](evidence/recovered-source-register.json) separates message locations for the developer decision and agent review/completion reports.
 
 **Developer clarification during publication preparation, October 29, 2026:** the developer explicitly stated that Cohere outperformed Gemini in some evaluations, but the observed difference at Synethos’s scale was too small to justify payment. The developer would have considered paid adoption if the performance advantage had been much larger or the service larger and more complex. The final judgment weighed the actual performance difference, service scale, substitutability, and operating cost together.
 
@@ -520,15 +526,15 @@ On October 17 at 22:19:07.357 the developer reported a successful rebuild and CU
 
 ### Verification scope and remaining questions
 
-The October 1 quality results are contemporaneous reports in a directly inspected session. The October 6 classifier and October 15 retrieval aggregates are traceable to files inspected for this publication. The October 3 generation results and October 16 removal reports retain the earlier research’s recorded source identities and verification limits. The October 29 rationale is the developer’s direct clarification in this publication task.
+The October 1 quality results are contemporaneous reports in a directly inspected session. Original October 3 generation artifacts and October 6 classifier/October 15 retrieval files were directly compared. The original October 16/17 session was read for the removal decision, agent completion report, and developer CURRENT observation. Execution results retain each historical report’s conditions. The October 29 rationale is the developer’s later clarification in this publication task.
 
-Remaining questions are the full introduction/Cohere-only-switch motives, the scope of the October 6 cost statement, independent historical key/terms evidence, the classifier output/block-handling cause, unavailable raw generation responses and build-attempt ledgers, and post-removal production verification. No model request, index build, or historical application test was executed for this publication.
+Remaining questions are the full introduction/Cohere-only-switch motives, the scope of the October 6 cost statement, independent historical key/terms evidence, the classifier output/block-handling cause, build-attempt ledgers, and post-removal production verification. No model request, index build, or historical application test was executed for this publication.
 
 ### Source traceability and publication form
 
 Fifteen whole-file Excerpts preserve source bytes. Four partial Excerpts join the listed original declarations/test statements with blank lines; names, imports, and selected statements remain unchanged. The tests retain synthetic credentials and fixtures, plus references to omitted application modules. The classifier excerpt preserves the schema/parser/gate and references its original harness state. These selections are published for code reading. The local harness excerpt normalizes CRLF line endings to LF.
 
-The two Reconstructed JSON files use new editorial envelopes. `target-history.json` copies complete generation/embedding fields from the identified example configurations. `observed-results.json` selects the saved classifier summary/counters and derives retrieval aggregates from original/final evidence ranks. Raw private records, full experimental responses, credentials, index vectors, and local user paths remain outside the published files.
+The two Reconstructed JSON files use new editorial envelopes. `target-history.json` copies complete generation/embedding fields from the identified example configurations. `observed-results.json` selects the saved classifier summary/counters and derives retrieval aggregates from original/final evidence ranks. Added generationOctober03 links the recovered full40 aggregates/options/verification; retirementOctober16 selects the original-session developer decision, completion report, and next-day CURRENT report. Raw private records, full experimental responses, credentials, index vectors, and local user paths remain outside the published files.
 
 #### Source commits
 
@@ -574,7 +580,7 @@ Original paths are relative to the private repository. Ranges are inclusive and 
 | [after-removal/target-options.ts](../cases/cohere-lifecycle/after-removal/target-options.ts#L1-L25) | `e700717` · `sveltekit/src/lib/server/generation/target-options.ts` | Excerpt (whole) · 1–25 → 1–25 |
 | [after-removal/runtime-selection.excerpt.test.ts](../cases/cohere-lifecycle/after-removal/runtime-selection.excerpt.test.ts#L1-L67) | `e700717` · `sveltekit/src/lib/server/config.test.ts` | Excerpt · 1–12 → 1–12; 15–15 → 14–14; 17–21 → 16–20; 40–59 → 22–41; 62–65 → 43–46; 67–73 → 48–54; 76–87 → 56–67 |
 | [configuration/target-history.json](../cases/cohere-lifecycle/configuration/target-history.json#L1-L227) | Inputs specified in the assembly rules below | Reconstructed · Selection / new envelope |
-| [evidence/observed-results.json](../cases/cohere-lifecycle/evidence/observed-results.json#L1-L138) | Inputs specified in the assembly rules below | Reconstructed · Selection / new envelope |
+| [evidence/observed-results.json](../cases/cohere-lifecycle/evidence/observed-results.json#L1-L224) | Inputs specified in the assembly rules below | Reconstructed · Selection / new envelope |
 
 #### Reconstruction rules
 
@@ -591,6 +597,7 @@ Original paths are relative to the private repository. Ranges are inclusive and 
 | `evidence/observed-results.json` · `tmp/cohere-retrieval-intent-experiment/results.json` | Retained file | `ac60cd7bfd1514b9fcc0659b04b3cea18732eb3e3b3ab745a38101fca7bd470c` |
 | `evidence/observed-results.json` · `docs/evaluation/retrieval/2026-10-15/gemini.json` | Retained file | `f40fc07305a3b8542f6e82b34e494d139a85963a8c5f08490a5a0f3bda1ca85c` |
 | `evidence/observed-results.json` · `docs/evaluation/retrieval/2026-10-15/cohere.json` | Retained file | `2eb76f90c94d3092b2246e4e6bac342ab738f73dde284aa800cd4e3e50adc801` |
+| `evidence/observed-results.json` · recovered full40 and retirement session | [Recovered-source register](evidence/recovered-source-register.json), HOME06-3WAY and HOME03-04-SESSION | Original report/archive hashes verified 2026-10-29; historical ratings and report scope retained. |
 
 #### Non-code evidence and availability
 
@@ -614,14 +621,14 @@ Hashes below were computed from source bytes for this publication except where e
 | `docs/evaluation/retrieval/2026-10-15/cohere.json` | `3a6e2e477fa5a66fe67656b802c4bf9bdaf59218`; `2eb76f90c94d3092b2246e4e6bac342ab738f73dde284aa800cd4e3e50adc801` |
 | `rollout-2026-10-01T13-14-09-01a0f5ab-72f3-70c1-84fa-31f27c25d590.jsonl.zst` | `d181117b3c4d2f997b997bccb7c3bc8279de40abc53a50e29127a93239a0d37b` |
 
-The following originals were unavailable at their registered paths. Identifiers and hashes are retained from the existing evidence register.
+The originals below were recovered on the home PC and matched their registered SHA-256 values. Message locations and additional source identities are preserved in the [recovered-source register](evidence/recovered-source-register.json).
 
 | Previously recorded original | Recorded SHA-256 · scope |
 |---|---|
 | `generation-model-comparison/2026-10-03-full40-3way-1/final-report.md` | `a82073631b743462c5a31051071ba994f9339b346849e29bbe171375ace7c231` · October 3 generation table |
 | `rollout-2026-10-16T20-10-29-01a14468-00a5-7ff2-8053-0e588b0c1335.jsonl.zst` | `9a167a56794bb628bd58e92581435b4efcacab3568d01e83d9dbf36ad79f9b99` · Retirement decision, completion, and index separation |
 
-Message locations: the inspected October 1 session’s UTC 04:47:45.250Z, 07:43:18.624Z, 08:04:10.538Z, 08:13:29Z, and 08:32:44Z correspond to KST 13:47:45.250, 16:43:18.624, 17:04:10.538, 17:13:29, and 17:32:44. Previously recorded retirement-session locations are October 16 UTC 12:02:47.996Z (developer decision), 12:19:53.762Z (completion report), 12:29:36.316Z (exclude indexes), and October 17 13:19:07.357Z (CURRENT report). The October 6 19:17:35.774 handoff is UTC 10:17:35.774Z and is cited through the existing research transcription.
+Message locations: the inspected October 1 session’s UTC 04:47:45.250Z, 07:43:18.624Z, 08:04:10.538Z, 08:13:29Z, and 08:32:44Z correspond to KST 13:47:45.250, 16:43:18.624, 17:04:10.538, 17:13:29, and 17:32:44. Directly inspected retirement-session locations are October 16 UTC 12:02:47.996Z (developer decision), 12:19:53.762Z (completion report), 12:29:36.316Z (exclude indexes), and October 17 13:19:07.357Z (CURRENT report). The October 6 19:17:35.774 handoff is UTC 10:17:35.774Z and is cited through the existing research transcription.
 
 Developer clarification: supplied directly by the developer in this publication-preparation conversation on 2026-10-29. The decision section incorporates the stated performance difference, service scale, substitutability, operating cost, and conditions under which paid adoption would be considered.
 
@@ -652,7 +659,7 @@ Original hashes cover entire source files; public hashes cover Tessera files. Pa
 | `after-removal/target-options.ts` | `a50ca17941224e1da6854283a2269feabe3509a0f96020f86dfaebdbeab42a3b` | `a50ca17941224e1da6854283a2269feabe3509a0f96020f86dfaebdbeab42a3b` |
 | `after-removal/runtime-selection.excerpt.test.ts` | `9fa7424e052d1c60b19dbdc5fecfb1ad2cc898539475f461c0ccb43f8b078a31` | `777fd0be16eed54245d7e6eadbb2d0a363e96fb6495dcd3fed6ec8c22c80e709` |
 | `configuration/target-history.json` | See input table | `3dc01f1d86c74fc0e59d49ae8afb46562b064d1e1b36c108d9cf7e3e834ca5fe` |
-| `evidence/observed-results.json` | See input table | `3561e1aad43a2b782760dc3adc3b993312f7b00304b76eb1c724560659c43a5d` |
+| `evidence/observed-results.json` | See input table | `6b8b177f791e5a01a99ede6109fded3927cb29aed5c3d1820a89e44be2d11933` |
 
 </details>
 
@@ -758,7 +765,7 @@ At 20:22:30.299, a developer report recorded Gemini HTTP 429/RESOURCE_EXHAUSTED 
 | TPM estimate | Assuming the 35.21K peak represented the same five-batch interval: 60×(35.21K/5)/30K≈14.1 seconds per batch. |
 | Selected policy | Minimum 22 seconds between Gemini document-request starts, including retry attempts. |
 
-The earlier research preserves these as user observations and design calculations. Exact quota accounting, alignment of RPM/TPM peaks, batch 9 attempt count, and actual provider waits remain unconfirmed. The archived original session is unavailable at its registered path in the current environment.
+The archived session containing these user observations and design calculations was directly read on the home PC; its original hash matched the register. Exact quota accounting, alignment of RPM/TPM peaks, batch 9 attempt count, and actual provider waits remain unconfirmed. The [recovered-source register](evidence/recovered-source-register.json) separates observation, design, and implementation-report times and sources.
 
 ### One build-local gate, common retry logging
 
@@ -803,7 +810,7 @@ This artifact confirms the completed stored vector structure. The per-attempt wi
 
 ### Verification levels and source selection
 
-Code and commit differences, published test assertions, historical tracked development reports, and the final committed index were directly inspected. The October 16/17 user observations and implementation checkpoints are cited through the existing research transcription; the registered archived session and original failed/completed build ledgers were unavailable. Arithmetic is presented with its recorded assumptions.
+Code and commit differences, published test assertions, historical tracked development reports, and the final committed index were directly inspected. October 16/17 user observations and implementation checkpoints were directly read in the recovered archived session. Original failed/completed build ledgers remain unavailable. Arithmetic retains its historical assumptions; next-day completion is attributed to the developer’s successful-rebuild/CURRENT report.
 
 The core embedding orchestration, Gemini adapter, and common embedding failure implementation at `e700717` match the current private HEAD for those paths. This publication reads retained records and source objects; it executes no model request, index build, or historical application test.
 
@@ -907,7 +914,7 @@ These hashes were computed from entire source bytes for this publication. The ba
 | `docs/research/synethos-evidence-register.md` | `3a6e2e477fa5a66fe67656b802c4bf9bdaf59218` | `6f173ba83687e68daaa115623404e159af8efa37fc454c0e42559e761303bdf7` |
 | `docs/research/decision-candidates.md` | `3a6e2e477fa5a66fe67656b802c4bf9bdaf59218` | `6a1a2b0c4ab1dc25ee94a253f96c987d9d6d8ec6cf80d2f075b2be77fa1b06cc` |
 
-The existing register identifies the archived session as `rollout-2026-10-16T20-10-29-01a14468-00a5-7ff2-8053-0e588b0c1335.jsonl.zst`, with recorded SHA-256 `9a167a56794bb628bd58e92581435b4efcacab3568d01e83d9dbf36ad79f9b99`. That original was unavailable at its registered path; this hash remains the previously recorded value. Message locations below retain the existing research transcription.
+The archived session is `rollout-2026-10-16T20-10-29-01a14468-00a5-7ff2-8053-0e588b0c1335.jsonl.zst`. Its home-PC original SHA-256, `9a167a56794bb628bd58e92581435b4efcacab3568d01e83d9dbf36ad79f9b99`, matched the existing register. The messages below were directly checked against the original; the [recovered-source register](evidence/recovered-source-register.json) adds per-message text hashes.
 
 | UTC message time | KST | Record |
 |---|---|---|
@@ -990,7 +997,7 @@ English/Korean facts, source mappings, and code targets were compared. All 412 l
 
 A new office checkout had no dependencies or local index, while its environment still referenced the home checkout on another drive. At 09:27:40, the developer requested checkout-relative paths and npm.cmd, preserving the machine's PowerShell policy. Commit 1261bf8 at 10:00:18 derived the project root from the script location, resolved npm.cmd through Get-Command, and placed cache/temp under the checkout: [development launcher](../cases/cross-pc-index-portability/bootstrap/dev.ps1#L1-L14) and [index launcher](../cases/cross-pc-index-portability/bootstrap/index.ps1#L1-L15). This was the initial missing-artifact/setup event.
 
-At 19:59:19, the developer requested generating Gemini/Cohere indexes on one PC and sharing them through Git to save repeated document-embedding time and provider quota. Persistent identity needed to survive runtime target naming, priority, and credential-slot changes. At 23:19:09, the developer requested Git sharing, atomic publication, and stale-artifact cleanup after successful publication. These requests survive as research transcriptions.
+At 19:59:19, the developer requested generating Gemini/Cohere indexes on one PC and sharing them through Git to save repeated document-embedding time and provider quota. Persistent identity needed to survive runtime target naming, priority, and credential-slot changes. At 23:19:09, the developer requested Git sharing, atomic publication, and stale-artifact cleanup after successful publication. These requests were directly inspected in original user-input history on the home PC.
 
 The preceding schema-3 implementation included target.id in the [fingerprint](../cases/cross-pc-index-portability/before/corpus.ts#L21-L33) and [storage directory/reader](../cases/cross-pc-index-portability/before/store.ts#L8-L40). A runtime-role rename could change persistent artifact identity. Commit 9e96d4f at 20:14:41 introduced schema 4: provider, model, dimensions, and embedding input version define the embedding space; corpus plus that contract determine the fingerprint. [Case 04's identity excerpt](../cases/embedding-batching-retry-pacing/architecture/embedding-space.excerpt.ts#L1-L44) and [tests](../cases/embedding-batching-retry-pacing/architecture/embedding-space.excerpt.test.ts#L1-L79) preserve that boundary.
 
@@ -998,7 +1005,7 @@ Commit 9123e12 at 23:46:52 moved production artifacts from ignored cache/index t
 
 ### September 30: line endings changed hashes while chunks stayed equal
 
-At 21:16:48, the developer reported raw source hashes changing with checkout line endings while chunks remained equal, leaving a 505-vector artifact falsely stale. At 21:18:24, the requested outcome was immediate reuse of the office-built Git artifact on another PC. These times and observations come from retained research transcriptions.
+At 21:16:48, the developer reported raw source hashes changing with checkout line endings while chunks remained equal, leaving a 505-vector artifact falsely stale. At 21:18:24, the requested outcome was immediate reuse of the office-built Git artifact on another PC. These times and observations were directly inspected in original user-input history on the home PC.
 
 Commit de58671 at 22:23:36 added [canonical content](../cases/cross-pc-index-portability/canonicalization/content.ts#L1-L4): CRLF and lone CR become LF. The [source loader](../cases/cross-pc-index-portability/canonicalization/manifest.ts#L1-L50) supplies canonical content to [corpus preparation](../cases/cross-pc-index-portability/canonicalization/corpus.ts#L54-L73); [chunk section parsing](../cases/cross-pc-index-portability/canonicalization/chunker.ts#L20-L74) uses the same transformation. Corpus identity also includes chunker version, chunk limits, source ID, file, title, and public URL.
 
@@ -1057,7 +1064,7 @@ Exact before/after execution logs from the second PC remain unavailable. A previ
 
 ### Sources and publication choices
 
-The September 28 09:27:40 request was directly inspected in session 01a0e55f-fed2-7973-93fb-e80d25f296b2, whose filename begins 09:17:48; compressed-file SHA-256 de5561f7093616ecfe76164289354fd8a99feb5e8b0d3766e22200ff68b0ee5b. Later September 28 requests and September 30 observations survive as research transcriptions of sessions 01a0e775-78b0-73b0-ad5a-902cc720edc7, 01a0e862-09ff-7d42-bd7e-6195ccaaa1a7, and 01a0f218-3b96-73e1-a0b9-a1696608e74f; those three originals were unavailable here. The original October 22 session 01a1613d-e5c6-76f2-9e3d-42c9eeca696b has SHA-256 37823ca6529dfca51f56283ca715ad80e733df9ce371251e261692d25527baef. The private consolidated development history and evidence register supplied the chronology and unresolved questions. Publication-time comparisons are identified above.
+The September 28 09:27:40 request was directly inspected in session 01a0e55f-fed2-7973-93fb-e80d25f296b2, whose filename begins 09:17:48; compressed-file SHA-256 de5561f7093616ecfe76164289354fd8a99feb5e8b0d3766e22200ff68b0ee5b. Later September 28 requests and September 30 observations were directly inspected in original user-input history. Their session IDs are 01a0e775-78b0-73b0-ad5a-902cc720edc7, 01a0e862-09ff-7d42-bd7e-6195ccaaa1a7, and 01a0f218-3b96-73e1-a0b9-a1696608e74f; complete parent sessions remain unavailable. The [recovered-source register](evidence/recovered-source-register.json) retains message times and original-text hashes. The 21:18:24 request explicitly required the same Git artifact to be CURRENT and immediately usable in CRLF/LF checkouts without additional embedding/build. The original October 22 session 01a1613d-e5c6-76f2-9e3d-42c9eeca696b has SHA-256 37823ca6529dfca51f56283ca715ad80e733df9ce371251e261692d25527baef. The private consolidated development history and evidence register supplied the chronology and unresolved questions. Publication-time comparisons are identified above.
 
 Whole-file Excerpts preserve complete selected snapshots. Partial Excerpts retain the listed source ranges with blank separators, original imports, identifiers, and application references. Storage/status/menu select reuse behavior; test excerpts select relevant assertions; production excerpts select packaging and validation while operational access details remain private. Reconstructed JSON selects recorded fields and labels digest calculations/editorial grouping. Full knowledge/vector payload remains private. All source code uses Excerpt; no Mixed reconstruction was needed.
 
@@ -1125,7 +1132,7 @@ English/Korean source targets and hashes match. All 522 local links passed file,
 
 **Development period:** 2026-09-26 ~ 2026-10-16
 
-**Code classification:** Excerpt — 15 source/test files; Reconstructed — four configuration/evidence records.
+**Code classification:** Excerpt — 15 source/test files; Reconstructed — five configuration/evidence records.
 
 **Outcome:** Generation settled on Gemini 3.5 Flash Lite primary and Groq GPT-OSS 120B fallback. The choice combined task-specific quality, observed availability, free-tier capacity, and the service's operating scope. Candidate adoption, local experiments, and committed runtime selection are dated separately below.
 
@@ -1156,6 +1163,16 @@ On October 1, fixed-context question-subject experiments favored Cohere in subje
 | HTTP 503 failures | 17 |
 | Subsequent response | HTTP 429 indicating daily-quota exhaustion |
 
+**Request correspondence established from recovered originals:** the home-PC prior approved run and subsequent retry run retain ledgers, request bodies, and native provider responses, which were directly compared. The three key report/decision-file hashes matched their registered values. The [original aggregates and request ledger](../cases/model-selection-quality-availability/evidence/october03-reported-results.json) preserve this correspondence and timestamps/body hashes/response hashes for all 24 calls.
+
+| Gemini 3.8 run scope | Requests | Successes | HTTP 503 | HTTP 429 |
+|---|---:|---:|---:|---:|
+| Prior approved run | 6 | 1 | 5 | 0 |
+| Subsequent retry run | 15 | 2 | 12 | 1 |
+| Total before the 429 | 20 | 3 | 17 | 0 |
+
+One Gemini 3.5 success in the prior run and two in the retry run are separate from the 3.8 usage above. The twenty-first known 3.8 request returned an actual HTTP 429/RESOURCE_EXHAUSTED envelope specifying quotaId GenerateRequestsPerDayPerProjectPerModel-FreeTier and quotaValue 20. This establishes attempt-level correspondence between the previously separate 20-call history and the retry run. These observations and quota exhaustion grounded the developer’s conclusion that failed requests consumed daily budget. The retained records do not directly establish provider-side individual deductions, other account activity, or monetary billing.
+
 From this result, the developer concluded that 503 failures counted toward the call allowance: most of the day's capacity had been consumed while producing very few usable responses. Twenty calls per day was already insufficient for Synethos, and losing most of that allowance to failures removed the practical reason to select Gemini 3.8 for operation.
 
 The developer directly set the stop condition: retry HTTP 503, but abandon the model when a daily-limit 429 occurred. The observed result met that condition, and the developer excluded 3.8 from Synethos's operating candidates. Its quality advantage on some questions remained part of the evaluation.
@@ -1169,9 +1186,9 @@ The developer also considered whether paid access could resolve the availability
 | QB18 | 3.8 was clearly better at including the supplied OCR residence/period-parsing explanation. |
 | QB20 | The answers were judged equivalent. |
 
-[The historical report reconstruction](../cases/model-selection-quality-availability/evidence/october03-reported-results.json#L1-L101) retains this experiment's counts: 3.8 made 15 requests, with two successes, twelve HTTP 503 responses, and one HTTP 429. The two 3.5 successes bring the run total to 17 requests. QB18 took 742.410 seconds until a 3.8 success; that successful request itself took 16.564 seconds. QB20's 3.8 success took 17.222 seconds.
+[The historical report reconstruction](../cases/model-selection-quality-availability/evidence/october03-reported-results.json#L1-L4095) retains this experiment's counts: 3.8 made 15 requests, with two successes, twelve HTTP 503 responses, and one HTTP 429. The two 3.5 successes bring the run total to 17 requests. QB18 took 742.410 seconds until a 3.8 success; that successful request itself took 16.564 seconds. QB20's 3.8 success took 17.222 seconds.
 
-The retained 03:20:37 developer request specified stopping and rejecting the candidate on the agreed failure condition. At 03:35:46, a daily-quota response triggered the predefined stop condition. Further requests after that 429 were zero; QB25's A request and both QB11 requests were uncalled.
+The original 03:20:37 developer request was directly read in history.jsonl; its message hash and time are preserved in the [recovered-source register](evidence/recovered-source-register.json). It required immediate termination and candidate rejection on the agreed failure condition. At 03:35:46, the daily-quota response triggered that condition. Further requests after the 429 were zero; QB25’s A request and both QB11 requests were uncalled.
 
 **Contemporaneous discussion recovered through history search:** on October 29, the developer supplied the following ChatGPT past-conversation search results. Times are KST. These are user-provided search records; the original conversation URL, identifier, and full messages remain unavailable.
 
@@ -1185,7 +1202,7 @@ The retained 03:20:37 developer request specified stopping and rejecting the can
 | 03:35:06 | The developer reported AI Studio daily usage of 17/20 while failures accumulated. |
 | 03:49:02 | Test summary: 15 Gemini 3.8 requests, two successes, twelve 503s, one 429. |
 
-The final breakdown matches the registered experimental transcription. The 03:19:52 condition corresponds in content to the separately transcribed 03:20:37 Codex request; each source keeps its own message time. AI Studio 17/20 is a reported account-usage observation.
+The final counts agree with the directly inspected experiment originals. The condition in the 03:19:52 ChatGPT search record corresponds to the Codex 03:20:37 original user-input message; each source retains its own message time. AI Studio 17/20 remains the developer’s contemporaneous account-usage report.
 
 **Additional external context:** the developer recalls searching for similar complaints after the errors and quota depletion. The original ChatGPT conversation URL/identifier is unavailable. A [Google AI Developers Forum post](https://discuss.ai.google.dev/t/gemini-api-503/183913), published September 21 and directly inspected for this publication, reports recurring 503s on the free tier in Google Apps Script, including gemini-3.8-flash among three affected models. A reply describes temporary service overload. This supplies a similar external failure observation alongside the operating results that drove the decision.
 
@@ -1210,11 +1227,26 @@ A separate fresh full40 comparison used the same saved evidence, question, promp
 | Cohere Command A+ | 22/40 | 3 | 4 | 3.042s |
 | Groq GPT-OSS 120B | 25/40 | 2 | 0 | 1.524s |
 
-This table is a previously transcribed historical report. The [same reconstruction](../cases/model-selection-quality-availability/evidence/october03-reported-results.json#L1-L101) identifies its original report and registered hash; the original directory is unavailable in this checkout. Exact archived inference options remain unavailable. The October 1 subject-retention and October 3 partial 3.8 experiments retain their separate measures and conditions.
+The recovered full40 originals record a sequential run on October 3 at 05:10:24.134–05:53:01.835, HEAD bbac3a6d11993f3c3e3d80eec44df86e7779073d. All 120 requests, responses, results, and manual reviews were compared. The common-input hashes for 40 questions, 120 request-body hashes, native-response-to-result correspondence, and normalized-answer-to-historical-review correspondence all matched. The [original-result projection](../cases/model-selection-quality-availability/evidence/october03-reported-results.json) retains per-case identities and recalculated aggregates. Gemini/Cohere output caps were 32768; GPT-OSS used a 4096 cap and strict JSON Schema, omitting reasoning_effort to use the recorded provider default medium. Retry/fallback counts were zero, with a minimum 65-second Groq request-start interval. Successful-request latency is separate from between-request waits. October 1 subject retention and the partial 3.8 comparison retain their own measures and conditions.
 
 At 04:05:58, the retained developer request asked to re-evaluate GPT-OSS after the earlier Groq candidate failures. At 07:42:12, 0baebd9 changed runtime to Gemini 3.5 primary and Groq openai/gpt-oss-120b fallback, retaining Cohere for explicit evaluation. The configured caps were Gemini 32768 and GPT-OSS 4096 with medium reasoning effort. The [routing regression excerpt](../cases/model-selection-quality-availability/runtime/groq-fallback.excerpt.test.ts#L28-L93) verifies those caps, quota-triggered dispatch through the actual Groq adapter with mocked HTTP 200/429/503 responses, registry/runtime independence, and one-target explicit execution.
 
 The resulting lineup used the evaluated GPT-OSS model after the earlier Qwen candidate was removed. [Case 04's GPT-OSS adapter](../cases/embedding-batching-retry-pacing/architecture/groq/generation.ts#L1-L28) preserves the corresponding strict-schema and reasoning-option mapping.
+
+### October 3: compare reasoning settings and retain the existing configuration
+
+After full40, the developer requested Gemini 3.5 primary/GPT-OSS fallback at 06:09:47, then a reasoning-only comparison preserving the inputs and baseline at 06:30:45. The 06:38:49.902–07:18:09.538 run used the same HEAD, preserving the in-progress Groq integration changes while making fresh calls only for Gemini medium and GPT-OSS high. The [reasoning comparison evidence](../cases/model-selection-quality-availability/evidence/october03-reasoning-results.json) retains options, denominators, hashes for all 77 calls, and historical ratings. All 77 requests matched baseline shared inputs and differed only in the reasoning option. Retry, fallback, embedding, retrieval, reranker, and index-rebuild counts were zero.
+
+| Comparison | Same successful questions | Fully correct | Cited required claims | Observation |
+|---|---:|---|---|---|
+| Gemini default/minimal → medium | 40 | 27 → 27 | 31/49 → 31/49 | Mean latency 1508.029 → 3339.448ms |
+| GPT-OSS medium → high | 36 | 24 → 26 | 30/44 → 31/44 | Hard failure union 2 → 3 |
+
+Gemini medium recovered QB18 OCR parsing and QB37 records/citation handling but omitted details in QB04/QB12, leaving no net fully-correct or coverage gain. GPT-OSS high resolved QB32’s unsupported unknown-handling explanation and recovered QB33’s decision sequence, while introducing an unsupported effect in QB12 and a naming error in QB16; QB25 entity conflation remained. These are per-question changes in the historical manual ratings.
+
+Gemini medium succeeded on 40/40 questions. GPT-OSS high succeeded on QB01–QB36, stopped on an HTTP 429 tokens-per-day error at QB37, and left QB38–QB40 unexecuted. The returned limit 200000, used 198748, and requested 3431 describe cumulative account state, rather than usage attributable to the high run alone. Quality comparisons with high use the same 36 successful questions. This October 3 error and the October 15 rate-limit failures are separate observations.
+
+The historical report weighed quality changes, new errors, latency, and reasoning usage and recommended retaining existing settings. The original 07:34:34 developer message retained Gemini default/minimal and GPT-OSS medium and finalized only the already implemented Groq fallback replacement. Commit 0baebd9 at 07:42:12 then recorded these settings. The [recovered-source register](evidence/recovered-source-register.json) identifies the experiment requests, recommendation report, and final developer decision separately.
 
 ### October 6: make runtime fallback and explicit evaluation serve different purposes
 
@@ -1265,9 +1297,9 @@ On October 16 at 21:32:34, e700717 removed Cohere's evaluation/support paths whi
 
 ### Source levels, publication choices, and remaining questions
 
-Configuration changes and published historical source are code-confirmed. October 3 quality/request counts retain their earlier research transcription level. October 15 results and archive hashes were inspected directly; semantic ratings and product acceptance are preserved manual-review records. The developer-provided ChatGPT search records preserve the initial September 26 switch rationale and five-test report, October 3 discussion/stop condition/usage report, and October 16 fallback-retention judgment at their search-evidence level. The October 29 capacity rationale, recalled quota depletion, and broader external-reaction memory are explicitly attributed later statements.
+Configuration changes and published historical source are code-confirmed. Original October 3 requests, responses, manual ratings, exact options, correspondence between both runs, and the additional reasoning comparison were directly checked. October 15 results and archive hashes were also directly inspected; semantic ratings and product acceptance remain preserved manual-review records. Developer-provided ChatGPT search records retain the initial September 26 switch rationale/five-test report, October 3 discussion/usage report, and October 16 fallback-retention judgment at their search-evidence level. October 3 Codex stop conditions and setting-retention decisions were separately confirmed in original user-input history. The October 29 capacity rationale, recalled quota depletion, and broader external-reaction memory remain attributed later statements.
 
-Remaining gaps are original October 3 response/attempt files and exact options, correspondence between the separately recorded request histories, independent provider-side request accounting, the original Qwen failure ledger, and the original ChatGPT conversation and other external posts recalled by the developer. Groq's October 15 semantic quality and the exact limiting quota remain unconfirmed. Historical limits are dated to their records.
+Remaining gaps are provider-side individual request deductions, other account activity, monetary billing, the original Qwen failure ledger, the original ChatGPT conversation/AI Studio screenshot, and other external posts recalled by the developer. Groq’s October 15 semantic quality and exact limiting quota remain unconfirmed. Recovered October 3 responses, options, request correspondence, and historical limits retain their respective record dates.
 
 Whole-file Excerpts keep small, coherent implementation/test units: baseline quota handling, canonical evidence/runner contracts, and transport/diagnostic behavior. Partial Excerpts isolate fixed-input comparison and the adopted runtime's regressions, preserving original statements, imports, and references. The common policy is retained whole because its fallback eligibility, header/body parsing, and safe projection work together. Reconstructed JSON selects original settings/results and labels editorial grouping, aggregate calculations, earlier transcriptions, and later developer testimony. The two selected generated answers preserve actual failure evidence; full knowledge payloads and credentials remain private. No Mixed source was needed.
 
@@ -1294,7 +1326,8 @@ Original paths are relative to private Synethos. Ranges identify original snapsh
 | [availability/failure-policy.test.ts](../cases/model-selection-quality-availability/availability/failure-policy.test.ts#L1-L46)<br>Excerpt · whole original | `c5d615c6d4068a14daaa841c15dc8992ffda2fdc`<br>`sveltekit/src/lib/server/providers/failure-policy.test.ts`<br>1–46 | `20484a0a6bd6dbc11079b434c2b817250a24ef105fe160db546214d1a94101b3` → `20484a0a6bd6dbc11079b434c2b817250a24ef105fe160db546214d1a94101b3` |
 | [runtime/groq-fallback.excerpt.test.ts](../cases/model-selection-quality-availability/runtime/groq-fallback.excerpt.test.ts#L1-L93)<br>Excerpt · selected ranges | `0baebd9f242d88ffa15ef1953204c391ae97e623`<br>`sveltekit/src/lib/server/generation/orchestrator.test.ts`<br>1–26, 29–94 | `b14c3609ddc9b572f5d30caf2b1748bc9904166ffbf0380bf162448e5dbf5024` → `605f8bfae3d99425f5ad72d7330a9313a69297df277fbb65413e2ef5baff9092` |
 | [evidence/model-selection-history.json](../cases/model-selection-quality-availability/evidence/model-selection-history.json#L1-L242)<br>Reconstructed | Reconstructed; inputs below | `c63e9034f76e2e24b41cb0f5fd20b2bab45badf7558bb39abfff598bc33e5223` |
-| [evidence/october03-reported-results.json](../cases/model-selection-quality-availability/evidence/october03-reported-results.json#L1-L101)<br>Reconstructed | Reconstructed; inputs below | `b2d4572b8eb1bd0274382ceddfe7e8d301515457694b6ada4f6640a9321c6fe8` |
+| [evidence/october03-reported-results.json](../cases/model-selection-quality-availability/evidence/october03-reported-results.json#L1-L4095)<br>Reconstructed | Reconstructed; inputs below | `a5fef1700b72c31ce09a565f2273077858a67cd00d0a603120d387d393b61875` |
+| [evidence/october03-reasoning-results.json](../cases/model-selection-quality-availability/evidence/october03-reasoning-results.json#L1-L1709)<br>Reconstructed | Reconstructed; inputs below | `49b5f81c218db20296ef99e42b3eb74d29c2680c7bf684fe413df2e82c4f72b2` |
 | [evidence/developer-clarification-20261029.json](../cases/model-selection-quality-availability/evidence/developer-clarification-20261029.json#L1-L184)<br>Reconstructed | Reconstructed; inputs below | `d209fd34242c8932f6488f187a56f37bfbffa77e90f78ef032887c261c0f3069` |
 | [evidence/october15-observed-results.json](../cases/model-selection-quality-availability/evidence/october15-observed-results.json#L1-L2302)<br>Reconstructed | Reconstructed; inputs below | `927ed5e3880e8915d0865cbdb44d6cb834f89b67c137a7df3b4b248e2ae910e8` |
 
@@ -1310,6 +1343,8 @@ Original paths are relative to private Synethos. Ranges identify original snapsh
 | `evidence/model-selection-history.json` | `e7007172cc7a5171948659c4f1ceb6fd65dd1332` / `config/mosaic.json`<br>`fade19dc3b7d4080c23a66518e4716b9419f6af70e377e573958216bf65dee20` |
 | `evidence/october03-reported-results.json` | `3a6e2e477fa5a66fe67656b802c4bf9bdaf59218` / `docs/research/synethos-development-history.md`<br>`31c98a7c6b2fe222ca9b116130a857c316008b8cb79550425aba50e491ebd2a3` |
 | `evidence/october03-reported-results.json` | `3a6e2e477fa5a66fe67656b802c4bf9bdaf59218` / `docs/research/synethos-evidence-register.md`<br>`6f173ba83687e68daaa115623404e159af8efa37fc454c0e42559e761303bdf7` |
+| `evidence/october03-reported-results.json` | HOME06-3WAY/HOME06-PRIOR/HOME06-RETRY/HOME06-LEDGER/HOME06-DECISION/HOME06-QUOTA in the [recovered-source register](evidence/recovered-source-register.json): original hashes, 120 results and 24-call correspondence checked 2026-10-29. |
+| `evidence/october03-reasoning-results.json` | HOME06-REASONING/HOME06-REASONING-METRICS/HOME06-REASONING-EXECUTION in the [recovered-source register](evidence/recovered-source-register.json): report/metrics/execution hashes and 77 request/response/review projections. |
 | `evidence/developer-clarification-20261029.json` | `Tessera case 06 user statements and ChatGPT history-search results supplied on 2026-10-29`<br>Direct statements and user-delivered search results in this task; original ChatGPT messages unavailable, no Git object or file hash. |
 | `evidence/developer-clarification-20261029.json` | `https://discuss.ai.google.dev/t/handling-429-503-errors-from-the-gemini-api/124640/79`<br>Public forum user report directly inspected on 2026-10-29; model/tier/sample identified in the record. |
 | `evidence/developer-clarification-20261029.json` | `https://discuss.ai.google.dev/t/persistent-37-unavailable-503-on-generatecontent-with-gemini-3-6-flash-paid-tier-1-zero-429s-counttokens-unaffected/179971`<br>Public forum user report directly inspected on 2026-10-29; model/tier/sample identified in the record. |
@@ -1366,8 +1401,16 @@ Original paths are relative to private Synethos. Ranges identify original snapsh
 
 ### Publication checks
 
-Twelve whole-file Excerpts matched their Git source bytes; three partial Excerpts matched every declared source range. All 15 TypeScript files passed syntax parsing. The four JSON reconstructions passed parsing, 57 hashed-input comparisons, configuration projection, original-result aggregation, representative-response comparison, and source-linkage checks. The October 15 archive’s 43 raw files and ten implementation/document files matched their recorded SHA-256 values.
+Twelve whole-file Excerpts matched their Git source bytes; three partial Excerpts matched every declared source range. All 15 TypeScript files passed syntax parsing. The original four JSON reconstructions passed parsing, 57 hashed-input comparisons during initial publication preparation, configuration projection, original-result aggregation, representative-response comparison, and source-linkage checks. The October 15 archive’s 43 raw files and ten implementation/document files matched their recorded SHA-256 values.
 
-The reconstructed counts were checked against all 40 case results, including 80 single Generation dispatches, 52 successful structural results, 28 rate-limit failures, success-only latency statistics, and the manual 32/6/2 ratings. The seven October 3 search times, three approximate September 26 times, October 16 operating judgment, AI Studio 17/20 report, and developer quota inference were checked for consistent attribution. The 8K TPM discussion and unresolved October 15 quota cause retain separate scopes. English/Korean code and external-reference targets and hashes match. All 622 local links passed file, heading, and line-range validation. Cases 01–05 retain their text and 112 published files.
+The reconstructed counts were checked against all 40 case results, including 80 single Generation dispatches, 52 successful structural results, 28 rate-limit failures, success-only latency statistics, and the manual 32/6/2 ratings. The seven October 3 search times, three approximate September 26 times, October 16 operating judgment, AI Studio 17/20 report, and developer quota inference were checked for consistent attribution. The 8K TPM discussion and unresolved October 15 quota cause retain separate scopes. English/Korean code and external-reference targets and hashes match. All 622 local links passed file, heading, and line-range validation. The 112 published files in cases 01–05 were preserved at that stage. Subsequent textual evidence additions are covered by the additional checks below.
 
 New code, selected responses, and document sections were reviewed for credential values, private knowledge payloads, private repository URLs, local user paths, and operational access details. Verification used historical source inspection, local parsing/calculation, and direct reading of the linked public forum post. Historical application tests, model calls, index builds, and live server access were not performed.
+
+### October 29 recovery and additional verification
+
+Nineteen representative originals and all 1146 files across five experiment directories were checked through byte hashes. Text hashes and UTC/KST times were verified for eleven archived-session messages and fourteen original user inputs. Case 01’s six runtime files, the case 03/04 archive, and case 06’s three previously registered report/decision files matched their recorded hashes.
+
+All 120 full40 requests, responses, results, and historical manual reviews, 24 prior/retry ledger entries, and 77 reasoning requests were cross-checked. Request-body hashes, response correspondence, classification counts, and successful-request latency were verified. Reasoning requests matched baseline shared inputs and differed only in the reasoning option. GPT-OSS high quality denominators were verified as 36 successful questions, 44 required claims, and 33 positive questions, separate from attempted-review totals that include failed QB37.
+
+All fourteen public JSON files parsed. English/Korean file/external links and SHA-256 multisets matched. The two READMEs and two development records passed validation of all 656 local file, heading, and line-range links. The existing 119 source/test files and Synethos originals were preserved; the Synethos working tree was clean. Existing-file changes cover two development records and two evidence JSON files; a reasoning-evidence JSON and shared recovered-source register were added. Published material was checked for credential values, local user paths, private repository URLs, and full knowledge payloads. Verification used original-record inspection and local computation; no new model call, historical experiment rerun, application test, index build, or server access was performed.

@@ -1,0 +1,605 @@
+{
+  "classification": "Reconstructed",
+  "verifiedOn": "2026-10-29",
+  "tesseraBaseline": "c7d944e1c1775f9759b8b2c9027624692568fbb7",
+  "synethosCheckoutHead": "1a0fececdd17b6d3ca18d2b12c8c0048f0b37eb4",
+  "method": "Read-only recovery and original-byte hashing; metadata projections, historical observations, historical manual ratings, and developer decisions retain their own scopes. No historical experiment or model call rerun.",
+  "sources": [
+    {
+      "id": "HOME01-1",
+      "sourceKind": "Synethos local artifact",
+      "path": "tmp/runtime/qwen8b-ollama.err.log",
+      "sha256": "e0136ac0b357a41caf1c7c2a35044cb36933d6ea39b20945f00ccfcc894b6032",
+      "cases": [
+        "01"
+      ],
+      "scope": "Original artifact hash recomputed; historical runtime observation.",
+      "verifiedOn": "2026-10-29"
+    },
+    {
+      "id": "HOME01-2",
+      "sourceKind": "Synethos local artifact",
+      "path": "tmp/runtime/qwen8b-ollama.out.log",
+      "sha256": "a4c01228c7f3760075b7f0f051f9e9edd70239c2e2a293cfb77caff7ceddbcc5",
+      "cases": [
+        "01"
+      ],
+      "scope": "Original artifact hash recomputed; historical runtime observation.",
+      "verifiedOn": "2026-10-29"
+    },
+    {
+      "id": "HOME01-3",
+      "sourceKind": "Synethos local artifact",
+      "path": "tmp/runtime/low-load-validation-20260926-032121/summary.json",
+      "sha256": "27d7170e3bfa75cb48c75ea149bfe1e53fda7b3082211b4b330cf6ebecf22668",
+      "cases": [
+        "01"
+      ],
+      "scope": "Original artifact hash recomputed; historical runtime observation.",
+      "verifiedOn": "2026-10-29"
+    },
+    {
+      "id": "HOME01-4",
+      "sourceKind": "Synethos local artifact",
+      "path": "tmp/runtime/low-load-validation-20260926-032121/response.json",
+      "sha256": "d60f94b860af11ecdb337ab832c19111d3bcf7711c75f51aaab552f1d9f66ea3",
+      "cases": [
+        "01"
+      ],
+      "scope": "Original artifact hash recomputed; historical runtime observation.",
+      "verifiedOn": "2026-10-29"
+    },
+    {
+      "id": "HOME01-5",
+      "sourceKind": "Synethos local artifact",
+      "path": "tmp/runtime/low-load-validation-20260926-032121/ollama.err.log",
+      "sha256": "5c26abd7230b0db96b57c3744c55727d0586b7c9e00761ba726701e9f3469321",
+      "cases": [
+        "01"
+      ],
+      "scope": "Original artifact hash recomputed; historical runtime observation.",
+      "verifiedOn": "2026-10-29"
+    },
+    {
+      "id": "HOME01-6",
+      "sourceKind": "Synethos local artifact",
+      "path": "tmp/runtime/low-load-validation-20260926-032121/memory-timeline.jsonl",
+      "sha256": "d7689540ebbab20cbbf29af48a3232f211d29e35022627296f2ce52c98ae3bf3",
+      "cases": [
+        "01"
+      ],
+      "scope": "Original artifact hash recomputed; historical runtime observation.",
+      "verifiedOn": "2026-10-29"
+    },
+    {
+      "id": "HOME02-1",
+      "sourceKind": "Synethos local artifact",
+      "path": "tmp/mcp-probes/gitbook-2026-09-26T14-45-48.199Z.json",
+      "sha256": "c93d718ae61847e7adc1739744fb29d0c2a0d77c281d911b0d751e8652f629cb",
+      "cases": [
+        "02"
+      ],
+      "scope": "Independent MCP root-endpoint probe; observedAt retained separately from other endpoint comparisons and topology records.",
+      "verifiedOn": "2026-10-29"
+    },
+    {
+      "id": "HOME02-2",
+      "sourceKind": "Synethos local artifact",
+      "path": "tmp/mcp-probes/gitbook-2026-09-27T12-05-46.310Z.json",
+      "sha256": "343197f7ebf11d201cd9dc282811f4171ca29c7ba84f54eb7cd39aad5a5d2e7a",
+      "cases": [
+        "02"
+      ],
+      "scope": "Independent MCP root-endpoint probe; observedAt retained separately from other endpoint comparisons and topology records.",
+      "verifiedOn": "2026-10-29"
+    },
+    {
+      "id": "HOME06-3WAY",
+      "sourceKind": "Synethos local artifact",
+      "path": "tmp/evaluation/generation-model-comparison/2026-10-03-full40-3way-1/final-report.md",
+      "sha256": "a82073631b743462c5a31051071ba994f9339b346849e29bbe171375ace7c231",
+      "cases": [
+        "03",
+        "06"
+      ],
+      "scope": "Contemporaneous full40 report; registered hash matched.",
+      "verifiedOn": "2026-10-29"
+    },
+    {
+      "id": "HOME06-PRIOR",
+      "sourceKind": "Synethos local artifact",
+      "path": "tmp/evaluation/generation-model-comparison/2026-10-03-approved-1/call-ledger.json",
+      "sha256": "a8b4c93d6d456c8d57ab38a619c8a0f15e205691c9ec0baad21b5f3763e503a1",
+      "cases": [
+        "06"
+      ],
+      "scope": "Seven calls including six Gemini 3.8 calls before retry run.",
+      "verifiedOn": "2026-10-29"
+    },
+    {
+      "id": "HOME06-RETRY",
+      "sourceKind": "Synethos local artifact",
+      "path": "tmp/evaluation/generation-model-comparison/2026-10-03-retry-primary-1/report.md",
+      "sha256": "9e29fbbe0540b6a90aa138b1b8754143dfa0f71c2da1f22f8bc055e7f8a9602e",
+      "cases": [
+        "06"
+      ],
+      "scope": "Contemporaneous retry report; registered hash matched.",
+      "verifiedOn": "2026-10-29"
+    },
+    {
+      "id": "HOME06-LEDGER",
+      "sourceKind": "Synethos local artifact",
+      "path": "tmp/evaluation/generation-model-comparison/2026-10-03-retry-primary-1/call-ledger.json",
+      "sha256": "84457ec0226f06b05674e88985aa7edb70d85891725767b9a545c660243df189",
+      "cases": [
+        "06"
+      ],
+      "scope": "Seventeen chronological attempts, including terminal daily-quota 429.",
+      "verifiedOn": "2026-10-29"
+    },
+    {
+      "id": "HOME06-DECISION",
+      "sourceKind": "Synethos local artifact",
+      "path": "tmp/evaluation/generation-model-comparison/2026-10-03-retry-primary-1/production-candidate-decision.json",
+      "sha256": "d3f9dadf3cbec2e6b7a182731a6963a8f3c68ab9efdb1d272ca3b37e9422db1b",
+      "cases": [
+        "06"
+      ],
+      "scope": "Contemporaneous candidate rejection; registered hash matched.",
+      "verifiedOn": "2026-10-29"
+    },
+    {
+      "id": "HOME06-QUOTA",
+      "sourceKind": "Synethos local artifact",
+      "path": "tmp/evaluation/generation-model-comparison/2026-10-03-retry-primary-1/responses/QB25-B-0001-native.json",
+      "sha256": "69e683aca18eaf6d457e51a37a421a33a822c5e00133098669063d2408af762b",
+      "cases": [
+        "06"
+      ],
+      "scope": "Actual daily request quota error envelope.",
+      "verifiedOn": "2026-10-29"
+    },
+    {
+      "id": "HOME06-REASONING",
+      "sourceKind": "Synethos local artifact",
+      "path": "tmp/evaluation/generation-model-comparison/2026-10-03-full40-reasoning-1/final-report.md",
+      "sha256": "99c4a855fa6a93020ba2f36d0fc425ec469b4cba06985439cc917f0e9c2b9f26",
+      "cases": [
+        "06"
+      ],
+      "scope": "Contemporaneous reasoning comparison and recommendation.",
+      "verifiedOn": "2026-10-29"
+    },
+    {
+      "id": "HOME06-REASONING-METRICS",
+      "sourceKind": "Synethos local artifact",
+      "path": "tmp/evaluation/generation-model-comparison/2026-10-03-full40-reasoning-1/metrics.json",
+      "sha256": "139267125b96b41a6e053912f808f5c5786b622578da057c1dfa54357f23f1d6",
+      "cases": [
+        "06"
+      ],
+      "scope": "Historical manual classifications and runtime aggregates.",
+      "verifiedOn": "2026-10-29"
+    },
+    {
+      "id": "HOME06-REASONING-EXECUTION",
+      "sourceKind": "Synethos local artifact",
+      "path": "tmp/evaluation/generation-model-comparison/2026-10-03-full40-reasoning-1/execution-summary.json",
+      "sha256": "829c6791281f9e80bf757946232fd793628e2cf17b53393e13d5e1e098edff69",
+      "cases": [
+        "06"
+      ],
+      "scope": "77 calls, terminal high-setting 429, no retries/fallback/other APIs.",
+      "verifiedOn": "2026-10-29"
+    },
+    {
+      "id": "HOME06-INTEGRATION",
+      "sourceKind": "Synethos local artifact",
+      "path": "tmp/evaluation/groq-production-fallback/2026-10-03-1/final-report.md",
+      "sha256": "3d11b28797232ca4e3e26bc4835648e7fabaaf54292bc9ec717c7db5c7f56793",
+      "cases": [
+        "06"
+      ],
+      "scope": "Historical integration tests and one production-adapter smoke; medium explicitly set.",
+      "verifiedOn": "2026-10-29"
+    },
+    {
+      "id": "HOME03-04-SESSION",
+      "sourceKind": "Codex archived session",
+      "artifact": "rollout-2026-10-16T20-10-29-01a14468-00a5-7ff2-8053-0e588b0c1335.jsonl.zst",
+      "sessionId": "01a14468-00a5-7ff2-8053-0e588b0c1335",
+      "sha256": "9a167a56794bb628bd58e92581435b4efcacab3568d01e83d9dbf36ad79f9b99",
+      "cases": [
+        "03",
+        "04"
+      ],
+      "verifiedOn": "2026-10-29",
+      "messages": [
+        {
+          "atUtc": "2026-10-16T11:22:30.299Z",
+          "atKst": "2026-10-16T20:22:30.299+09:00",
+          "role": "user",
+          "textSha256": "2423149b688a804903920a4883db783cc3119b65960a9078cd43eebfd0cf10fb",
+          "scope": "Batch 9 failure and investigation request"
+        },
+        {
+          "atUtc": "2026-10-16T11:25:31.863Z",
+          "atKst": "2026-10-16T20:25:31.863+09:00",
+          "role": "assistant",
+          "textSha256": "480b447fc5d11cf5801d7cc81c23d71d7c1e853818fa210da585d7d9fed1aa33",
+          "scope": "Investigation report; actual attempt count and waits unconfirmed"
+        },
+        {
+          "atUtc": "2026-10-16T11:27:38.961Z",
+          "atKst": "2026-10-16T20:27:38.961+09:00",
+          "role": "user",
+          "textSha256": "5a6d9260045938db38767715e67db062ea9bd5d88a70a061d1dab9be7539b54c",
+          "scope": "AI Studio RPM/TPM/RPD observations and pacing design request"
+        },
+        {
+          "atUtc": "2026-10-16T11:28:39.623Z",
+          "atKst": "2026-10-16T20:28:39.623+09:00",
+          "role": "assistant",
+          "textSha256": "10ab25f29b2ce994b94f89b41b7e991e60a894903dc7799099d7d24df68680d8",
+          "scope": "22-second design calculation and assumptions"
+        },
+        {
+          "atUtc": "2026-10-16T11:31:07.589Z",
+          "atKst": "2026-10-16T20:31:07.589+09:00",
+          "role": "assistant",
+          "textSha256": "e238e0a60c45def9078950fc18b88366020e407b5e57c1c56715bfa3a39d7f30",
+          "scope": "Implementation/checkpoint report"
+        },
+        {
+          "atUtc": "2026-10-16T11:41:35.648Z",
+          "atKst": "2026-10-16T20:41:35.648+09:00",
+          "role": "user",
+          "textSha256": "cc9a716c14430b994f4c5909d83f4e884b3b5d2f1e06178977615a0365297c8b",
+          "scope": "Provider-agnostic logging and Gemini-specific pacing boundary"
+        },
+        {
+          "atUtc": "2026-10-16T12:02:47.996Z",
+          "atKst": "2026-10-16T21:02:47.996+09:00",
+          "role": "user",
+          "textSha256": "8df5c9f4e81b974bc3ad133adb743183b27b39097a8da7e5acc6fe9f2420f073",
+          "scope": "Cohere complete-removal judgment and comparison of alternatives"
+        },
+        {
+          "atUtc": "2026-10-16T12:05:17.364Z",
+          "atKst": "2026-10-16T21:05:17.364+09:00",
+          "role": "assistant",
+          "textSha256": "ddb4c92d7985e4bd2811ca875e2ed3e1d581be7177ac1a0102c0ad257049aba9",
+          "scope": "Independent review of removal alternatives"
+        },
+        {
+          "atUtc": "2026-10-16T12:19:53.762Z",
+          "atKst": "2026-10-16T21:19:53.762+09:00",
+          "role": "assistant",
+          "textSha256": "230ab7d3d0034817388b747243e3c6cff5cec301c89e9cfa90a334e995b7848b",
+          "scope": "Removal completion and verification report"
+        },
+        {
+          "atUtc": "2026-10-16T12:29:36.316Z",
+          "atKst": "2026-10-16T21:29:36.316+09:00",
+          "role": "user",
+          "textSha256": "32be5127d78e2782eaab4150e93a26541830926aca24e2a5f6fdade3773ae150",
+          "scope": "Separate code and index commits"
+        },
+        {
+          "atUtc": "2026-10-17T13:19:07.357Z",
+          "atKst": "2026-10-17T22:19:07.357+09:00",
+          "role": "user",
+          "textSha256": "de553a9732e709facb78532c27c37215cc1a541ab7d374b9e4a4843ab3f2f259",
+          "scope": "Successful rebuild and CURRENT observation"
+        }
+      ],
+      "textHashMethod": "SHA-256 UTF-8 content text blocks joined by newline; message text retained privately."
+    }
+  ],
+  "inventories": [
+    {
+      "path": "tmp/evaluation/generation-model-comparison/2026-10-03-full40-3way-plan-1",
+      "files": 207,
+      "inventorySha256": "3aeab9c80af276749c6f52424d276da22a62694e53f43568a09da039d44b74cf",
+      "method": "SHA-256 of identityHash ordered JSON array of {path, sha256}, sorted by repository-relative path; every original file byte-hashed."
+    },
+    {
+      "path": "tmp/evaluation/generation-model-comparison/2026-10-03-full40-3way-1",
+      "files": 502,
+      "inventorySha256": "64e15ce32ce71056521f5173ce5432d5be978418b7c1d6bea8f681b3dce2f25b",
+      "method": "SHA-256 of identityHash ordered JSON array of {path, sha256}, sorted by repository-relative path; every original file byte-hashed."
+    },
+    {
+      "path": "tmp/evaluation/generation-model-comparison/2026-10-03-approved-1",
+      "files": 33,
+      "inventorySha256": "536c5dee3c607dfe152f023d44010106ed873e98dea9991a74e980c5e58daf55",
+      "method": "SHA-256 of identityHash ordered JSON array of {path, sha256}, sorted by repository-relative path; every original file byte-hashed."
+    },
+    {
+      "path": "tmp/evaluation/generation-model-comparison/2026-10-03-retry-primary-1",
+      "files": 73,
+      "inventorySha256": "fe9e6c538eeec2e1a394d3d5849aa81f24d7e298bff5a09c6895043b6d089639",
+      "method": "SHA-256 of identityHash ordered JSON array of {path, sha256}, sorted by repository-relative path; every original file byte-hashed."
+    },
+    {
+      "path": "tmp/evaluation/generation-model-comparison/2026-10-03-full40-reasoning-1",
+      "files": 331,
+      "inventorySha256": "4641232f26c263b70a545b0185bb9c3fc969558a7c22f03d36b72fa07992466a",
+      "method": "SHA-256 of identityHash ordered JSON array of {path, sha256}, sorted by repository-relative path; every original file byte-hashed."
+    }
+  ],
+  "userInputHistory": {
+    "artifact": "history.jsonl",
+    "scope": "Original user inputs; complete parent sessions remain unavailable for these IDs.",
+    "textHashMethod": "SHA-256 of original message text UTF-8 bytes; timestamp precision is one second.",
+    "messages": [
+      {
+        "case": "01",
+        "sessionId": "01a0d86c-9cff-7b52-b966-bb5aa0f22537",
+        "atUtc": "2026-09-25T18:50:47.000Z",
+        "atKst": "2026-09-26T03:50:47.000+09:00",
+        "textSha256": "265c26554c09a5be10ef1ca51576c3cf0e98f30d61c482c806634f4038733f0f",
+        "scope": "Local retirement and Gemini transition decision"
+      },
+      {
+        "case": "01",
+        "sessionId": "01a0d86c-9cff-7b52-b966-bb5aa0f22537",
+        "atUtc": "2026-09-25T18:58:18.000Z",
+        "atKst": "2026-09-26T03:58:18.000+09:00",
+        "textSha256": "a1c433faecd30ce47f02d123fa388e5e822c272c04d63c44c81b4d69a9aa3ed5",
+        "scope": "Combine local cleanup and API integration; skip intermediate implementation"
+      },
+      {
+        "case": "05",
+        "sessionId": "01a0e775-78b0-73b0-ad5a-902cc720edc7",
+        "atUtc": "2026-09-28T10:54:45.000Z",
+        "atKst": "2026-09-28T19:54:45.000+09:00",
+        "textSha256": "947e53b3660ff73251983e51e6177fc9fad16bea94d46b66e09ff2075cd1b0dc",
+        "scope": "Separate persistent identity and runtime priority"
+      },
+      {
+        "case": "05",
+        "sessionId": "01a0e775-78b0-73b0-ad5a-902cc720edc7",
+        "atUtc": "2026-09-28T10:59:19.000Z",
+        "atKst": "2026-09-28T19:59:19.000+09:00",
+        "textSha256": "dbb32812d8745ef1e89fee58d8f263514e7075d6ac4153aa04231cc608522333",
+        "scope": "Git-shared artifact and cross-environment reuse goal"
+      },
+      {
+        "case": "05",
+        "sessionId": "01a0e862-09ff-7d42-bd7e-6195ccaaa1a7",
+        "atUtc": "2026-09-28T14:19:09.000Z",
+        "atKst": "2026-09-28T23:19:09.000+09:00",
+        "textSha256": "e1e60ceea53aa887dbb275d41fce9ab9e427a7b80fe589338af68cb9b4779a87",
+        "scope": "Persistent artifact lifecycle and sharing"
+      },
+      {
+        "case": "05",
+        "sessionId": "01a0e862-09ff-7d42-bd7e-6195ccaaa1a7",
+        "atUtc": "2026-09-28T14:31:28.000Z",
+        "atKst": "2026-09-28T23:31:28.000+09:00",
+        "textSha256": "a045fdc6f85b3c5ae3bd60b3d3d05906e37ab9d11d1b98cb49a25a3b49bcc679",
+        "scope": "Validate candidate, atomically publish, then clean stale artifacts"
+      },
+      {
+        "case": "05",
+        "sessionId": "01a0f218-3b96-73e1-a0b9-a1696608e74f",
+        "atUtc": "2026-09-30T12:16:48.000Z",
+        "atKst": "2026-09-30T21:16:48.000+09:00",
+        "textSha256": "891f1b25a0c137084eb5709f5453e945724642db0386cf39ca3fb8b8c40c80a5",
+        "scope": "False-stale diagnosis and vector-preserving migration request"
+      },
+      {
+        "case": "05",
+        "sessionId": "01a0f218-3b96-73e1-a0b9-a1696608e74f",
+        "atUtc": "2026-09-30T12:18:24.000Z",
+        "atKst": "2026-09-30T21:18:24.000+09:00",
+        "textSha256": "7c68922e77abb80d6f02a041ab8aa68fcf7ab532884c52a3447af30b7a1ecd21",
+        "scope": "Pull-only portability acceptance criterion"
+      },
+      {
+        "case": "06",
+        "sessionId": "01a0fc21-8175-77b2-9d49-087fa07ff6b8",
+        "atUtc": "2026-10-02T18:20:37.000Z",
+        "atKst": "2026-10-03T03:20:37.000+09:00",
+        "textSha256": "1dd69e351d45bfebf3ec5fed13de15d87b534ab7b97e91249f40d965bd4918f6",
+        "scope": "503 retry, terminal daily 429, and candidate rejection condition"
+      },
+      {
+        "case": "06",
+        "sessionId": "01a0fc21-8175-77b2-9d49-087fa07ff6b8",
+        "atUtc": "2026-10-02T19:05:58.000Z",
+        "atKst": "2026-10-03T04:05:58.000+09:00",
+        "textSha256": "dcedf590b8a763b230b3c22d160b4f29e9ce50228f8c20008ef059bbe731513f",
+        "scope": "GPT-OSS re-evaluation request"
+      },
+      {
+        "case": "06",
+        "sessionId": "01a0fc21-8175-77b2-9d49-087fa07ff6b8",
+        "atUtc": "2026-10-02T19:51:25.000Z",
+        "atKst": "2026-10-03T04:51:25.000+09:00",
+        "textSha256": "cd2c3fa62467554bc8d3c8a63f60d656f2218a8ed0434849099d0c879d38c8c8",
+        "scope": "Fresh three-way full40 request"
+      },
+      {
+        "case": "06",
+        "sessionId": "01a0fc21-8175-77b2-9d49-087fa07ff6b8",
+        "atUtc": "2026-10-02T21:09:47.000Z",
+        "atKst": "2026-10-03T06:09:47.000+09:00",
+        "textSha256": "9badd68cd507ccd55bb13ca1f8783f62c70f033f7f25c0eca6c7ddcf9949c64a",
+        "scope": "Adopt GPT-OSS runtime fallback after full40"
+      },
+      {
+        "case": "06",
+        "sessionId": "01a0fc21-8175-77b2-9d49-087fa07ff6b8",
+        "atUtc": "2026-10-02T21:30:45.000Z",
+        "atKst": "2026-10-03T06:30:45.000+09:00",
+        "textSha256": "277aec8f3f4ad26d0dabc353426cece2b4a37a1ea4193295354250cdb42ad812",
+        "scope": "Reasoning-only additional comparison"
+      },
+      {
+        "case": "06",
+        "sessionId": "01a0fc21-8175-77b2-9d49-087fa07ff6b8",
+        "atUtc": "2026-10-02T22:34:34.000Z",
+        "atKst": "2026-10-03T07:34:34.000+09:00",
+        "textSha256": "135220e49bac0f9ee8789c547df781a667c4bef6a6b36301dd0fae5c09f93d64",
+        "scope": "Retain default/minimal primary and medium fallback after reasoning experiment"
+      }
+    ]
+  },
+  "remainingGaps": {
+    "01": [
+      "Power-loss cause/time and last-question mapping",
+      "Local long-term stability"
+    ],
+    "02": [
+      "Matched ledger for all endpoint observations",
+      "Relative importance of final withdrawal motives",
+      "September 28 raw probe absent from this home probe directory"
+    ],
+    "03": [
+      "Full initial/Cohere-only switch motives",
+      "Classifier raw provider-block cause",
+      "Independent historical key/terms evidence"
+    ],
+    "04": [
+      "Failed/completed build per-attempt ledger and measured pacing waits",
+      "Exact provider-side quota accounting"
+    ],
+    "05": [
+      "Second-PC before/after execution logs",
+      "6-batch/10.22-MiB run correspondence"
+    ],
+    "06": [
+      "Provider-side request accounting and other account activity",
+      "Original ChatGPT conversation and AI Studio screenshot",
+      "Original Qwen attempt ledger",
+      "October 15 Groq exact quota and semantic quality"
+    ]
+  },
+  "rootEndpointProbes": [
+    {
+      "path": "tmp/mcp-probes/gitbook-2026-09-26T14-45-48.199Z.json",
+      "sha256": "c93d718ae61847e7adc1739744fb29d0c2a0d77c281d911b0d751e8652f629cb",
+      "observedAtUtc": "2026-09-26T14:45:48.199Z",
+      "observedAtKst": "2026-09-26T23:45:48.199+09:00",
+      "serverVersion": "0.27.2",
+      "toolNames": [
+        "searchDocumentation",
+        "getPage",
+        "askQuestion",
+        "sendFeedback"
+      ],
+      "searches": [
+        {
+          "question": "왜 우리는 공부하는가?",
+          "textBlocks": 10,
+          "pageResults": 2,
+          "structuredContentPresent": false,
+          "isError": false
+        },
+        {
+          "question": "AI를 개발에서 어떤 위치에 두고 있는가?",
+          "textBlocks": 10,
+          "pageResults": 2,
+          "structuredContentPresent": false,
+          "isError": false
+        },
+        {
+          "question": "Human Auditor가 의미하는 것은 무엇인가?",
+          "textBlocks": 10,
+          "pageResults": 2,
+          "structuredContentPresent": false,
+          "isError": false
+        },
+        {
+          "question": "Ride, Don't Race와 Why We Study는 어떤 관계인가?",
+          "textBlocks": 10,
+          "pageResults": 2,
+          "structuredContentPresent": false,
+          "isError": false
+        }
+      ]
+    },
+    {
+      "path": "tmp/mcp-probes/gitbook-2026-09-27T12-05-46.310Z.json",
+      "sha256": "343197f7ebf11d201cd9dc282811f4171ca29c7ba84f54eb7cd39aad5a5d2e7a",
+      "observedAtUtc": "2026-09-27T12:05:46.310Z",
+      "observedAtKst": "2026-09-27T21:05:46.310+09:00",
+      "serverVersion": "0.27.2",
+      "toolNames": [
+        "searchDocumentation",
+        "getPage",
+        "askQuestion",
+        "sendFeedback"
+      ],
+      "searches": [
+        {
+          "question": "왜 우리는 공부하는가?",
+          "textBlocks": 10,
+          "pageResults": 2,
+          "structuredContentPresent": false,
+          "isError": false
+        },
+        {
+          "question": "AI를 개발에서 어떤 위치에 두고 있는가?",
+          "textBlocks": 10,
+          "pageResults": 2,
+          "structuredContentPresent": false,
+          "isError": false
+        },
+        {
+          "question": "Human Auditor가 의미하는 것은 무엇인가?",
+          "textBlocks": 10,
+          "pageResults": 2,
+          "structuredContentPresent": false,
+          "isError": false
+        },
+        {
+          "question": "Ride, Don't Race와 Why We Study는 어떤 관계인가?",
+          "textBlocks": 10,
+          "pageResults": 2,
+          "structuredContentPresent": false,
+          "isError": false
+        }
+      ]
+    }
+  ],
+  "publicEvidenceRevision": {
+    "baseline": "c7d944e1c1775f9759b8b2c9027624692568fbb7",
+    "files": [
+      {
+        "path": "cases/cohere-lifecycle/evidence/observed-results.json",
+        "baselineGitBytesSha256": "3561e1aad43a2b782760dc3adc3b993312f7b00304b76eb1c724560659c43a5d",
+        "revisedBytesSha256": "6b8b177f791e5a01a99ede6109fded3927cb29aed5c3d1820a89e44be2d11933"
+      },
+      {
+        "path": "cases/model-selection-quality-availability/evidence/october03-reported-results.json",
+        "baselineGitBytesSha256": "b2d4572b8eb1bd0274382ceddfe7e8d301515457694b6ada4f6640a9321c6fe8",
+        "revisedBytesSha256": "a5fef1700b72c31ce09a565f2273077858a67cd00d0a603120d387d393b61875"
+      }
+    ]
+  },
+  "verification": {
+    "verifiedOn": "2026-10-29",
+    "representativeOriginalFiles": 19,
+    "experimentInventoryFiles": 1146,
+    "archivedSessionMessages": 11,
+    "userInputMessages": 14,
+    "full40RequestsResponsesResultsReviewsEach": 120,
+    "priorRetryLedgerEntries": 24,
+    "reasoningRequests": 77,
+    "parsedPublicJsonFiles": 14,
+    "preservedSourceTestFiles": 119,
+    "localLinksAcrossTwoReadmesAndTwoDevelopmentRecords": 656,
+    "englishKoreanFileExternalLinks": "matched",
+    "englishKoreanSha256Multisets": "matched",
+    "sourceRepositoryWorkingTree": "clean",
+    "newModelCalls": 0,
+    "historicalExperimentReruns": 0,
+    "applicationTestsRun": 0,
+    "indexBuilds": 0,
+    "serverAccesses": 0
+  }
+}

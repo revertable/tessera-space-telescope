@@ -12,6 +12,8 @@
 
 각 사례의 출처표에 코드 기준본과 보존 근거를 식별합니다. 당시 테스트도 구현 근거로 공개하며, 이 저장소에는 해당 의존성이나 테스트 실행기를 제공하지 않습니다.
 
+2026년 10월 29일 집 PC의 보존 원본을 추가 대조했습니다. [복구 근거 등록부](evidence/recovered-source-register.json)는 사례 01~06의 원본 파일 해시, 세션·메시지 시각, 관측 조건과 남은 확인 사항을 보존합니다. 사용자 입력 이력은 요청·판단의 원문으로, 실험 결과와 완료 보고는 당시 실행 조건의 기록으로 구분합니다.
+
 ## 목차
 
 - [01 — From Local Qwen/Ollama Inference to the Gemini API](#01--from-local-qwenollama-inference-to-the-gemini-api) — 2026-09-26
@@ -64,6 +66,8 @@
 구현 범위도 좁혔습니다. 로컬/API 선택형 호환 계층을 유지하는 대신 로컬 추론 경로를 제거했습니다. 승인 knowledge, 검색, 기록 기반 생성 규칙과 인용 검증은 유지하고, 기존 Qwen embedding을 Gemini embedding으로 재사용하지 않도록 했습니다.
 
 이 결정은 관찰한 제약과 위 실험 결과에 따른 제품 범위 판단입니다. 사용자는 2026년 9월 26일 당시 제공되던 Gemini API 무료 티어를 선택했습니다.
+
+03:50:47 결정과 03:58:18 후속 요청을 사용자 입력 이력 원문에서 직접 확인했습니다. 후속 요청은 Ollama 정리와 Gemini 생성·embedding 연결을 하나의 완료 범위로 묶고 중간 미설정 상태의 별도 구현을 생략했습니다. 실제 API 호출과 새 index 생성은 key 입력 후 단계로 뒀습니다. [복구 근거 등록부](evidence/recovered-source-register.json)에 session ID·메시지 시각·원문 hash를 보존합니다.
 
 ### 구현: 로컬 HTTP 호출에서 서버 API client로
 
@@ -186,7 +190,7 @@ Index 호환성도 함께 바뀝니다.
 | 전환 결정 | 2026-09-26 03:50:47 KST의 보존된 개발자 요청 | 자원·안정성·응답시간을 이유로 로컬 중단·Gemini 전환;당시 판단의 기록 |
 | 전원·저부하 기록 | 아래 식별한 보존 로그·산출물 | 환경·완료·측정값;전원 원인은 미확인 |
 
-다음은 기존 연구에서 채록한 원본 식별용 hash입니다. 이번 공개 작업에서 다시 계산한 값은 위 코드 hash이며,아래 실험 파일을 새로 실행하거나 원본 전부를 재검증하지 않았습니다. 원시 파일과 대화 전문은 포함하지 않습니다.
+다음 6개 보존 원본을 집 PC에서 직접 읽고 SHA-256을 다시 계산했으며 기존 채록값과 모두 일치했습니다. Summary·응답·메모리 timeline·Ollama 로그는 위 저부하 실행의 완료·측정값·배치 조건을 뒷받침합니다. 원시 파일과 대화 전문은 비공개로 보존합니다.
 
 | 보존 artifact 식별자 | 채록 SHA-256 |
 |---|---|
@@ -237,6 +241,8 @@ GitBook은 Cosmic Horizon의 영문·한글 문서를 게시하고 MCP로 제공
 검색 응답은 Title/Link/Content 행이 들어 있는 text block이었습니다. 보고서는 structuredContent, typed locale, Space identity, page/section ID, 번역 pair 관계, 검색 score가 없고 배열 순서만 있음을 기록합니다. Why We Study의 두 언어 문서 제목도 같을 수 있어 제목만으로 locale을 식별할 수 없었습니다. Repository 조사로 16↔16문서 pair 관계를 확인했습니다. 관측된 locale 단서는 /kr/ URL 경로였습니다.
 
 28일 artifact에도 별도로 server version 0.27.2, 노출 도구 4개, structuredContent와 tool error 보고가 없는 검색 응답이 기록돼 있습니다. 공개 준비 중 이 저장 관측을 검토했습니다. Raw page 내용은 공개하지 않습니다.
+
+집 PC에서 추가 확보한 raw probe는 9월 26일 23:45:48.199와 27일 21:05:46.310의 MCP root endpoint 실행입니다. 각 파일에 검색 4건과 검색별 page 결과 2개, server version 0.27.2와 도구 4개가 보존돼 있습니다. [복구 근거 등록부](evidence/recovered-source-register.json)에 두 파일의 원본 hash·관측 시각·검색별 반환 형태를 추가했습니다. 26일 파일은 위 Single-Space 관측의 원본이고 27일 파일은 그 시각의 root endpoint 관측을 뒷받침하며, 위 two-endpoint 비교와 28일 09:44:31.093 실행은 각각의 기록으로 유지합니다.
 
 ### 구현: 방어적으로 읽는 근거 경계
 
@@ -463,7 +469,7 @@ Build 보고서에는 별도 실행들이 기록돼 있습니다. 한 과거 bui
 | Cohere Command A+ | 22/40 | 3 | 4 | 3.042초 |
 | Groq GPT-OSS 120B | 25/40 | 2 | 0 | 1.524초 |
 
-현재 checkout에는 원본 full40 디렉터리가 없으며 보고서 식별자와 채록 hash를 출처표에 보존합니다. 이 표의 수준은 기존 조사에 채록된 실험 보고입니다. 커밋된 `0baebd9` 설정은 이후 runtime 상태를 확인해 줍니다. Gemini generation primary, Groq GPT-OSS fallback이며 Cohere는 명시적 평가 대상으로 등록돼 있습니다. 10월 1일 대상 유지, 이 full40 판정과 이후 검색 diagnostic은 각각의 지표·조건을 유지합니다.
+집 PC에서 원본 full40 디렉터리와 보고서를 확보했고 등록 해시가 일치했습니다. 요청·응답·결과·수동 판정 각 120개를 대조하고 위 집계를 다시 계산했습니다. Gemini·Cohere 출력 상한은 32768, GPT-OSS는 strict JSON Schema와 상한 4096을 사용했으며 reasoning_effort는 기본 medium을 사용하도록 생략했습니다. [원본 결과 projection](../cases/model-selection-quality-availability/evidence/october03-reported-results.json)은 문항별 identity·옵션·검증과 당시 판정을 보존합니다. 커밋된 0baebd9의 runtime은 Gemini generation primary·Groq GPT-OSS fallback이고 Cohere는 명시적 평가 대상으로 남았습니다. 10월 1일 대상 유지, 이 full40 판정과 이후 검색 diagnostic은 각각의 지표·조건을 유지합니다.
 
 ### 10월 6일: classifier gate에서 후속 실험 중단
 
@@ -504,7 +510,7 @@ L2/L3/S4는 설명문·중복 JSON으로 엄격한 parsing에 실패했습니다
 
 ### 제거 판단: 규모·운영 비용과 성능 이점의 비교
 
-**당시 판단, 10월 16일 21:02:47.996:** 기존 조사는 Cohere 검색 품질과 build 속도·편의성을 인정하면서 무료 production 운영을 우선한 사용자 요청을 채록했습니다. 당시 이해한 Trial key의 production 제약·Production key 과금 조건과, 사전 생성 index를 사용해도 같은 space의 Cohere query embedding 호출이 필요하다는 점을 기록했습니다. 개발/evaluation 전용 유지와 완전 제거를 비교했습니다. 등록된 보관 세션 원본은 현재 checkout의 해당 경로에서 확보되지 않아 이 내용은 기존 조사 채록 수준으로 유지합니다.
+**당시 판단, 10월 16일 21:02:47.996:** 집 PC에서 확보한 보관 세션의 사용자 원문은 Cohere 검색 품질과 build 속도·편의성을 인정하면서 무료 production 운영을 우선했습니다. 당시 이해한 Trial key의 production 제약·Production key 과금 조건과, 사전 생성 index를 사용해도 같은 space의 Cohere query embedding 호출이 필요하다는 점을 명시했습니다. 최근 품질 차이가 Synethos 규모에서 비용과 관리 복잡도를 감수할 정도인지 검토하며 개발/evaluation 전용 유지와 완전 제거를 비교하도록 했고, 사용자는 완전 제거를 선택했습니다. 세션 원본 해시는 기존 등록값과 일치하며 [복구 근거 등록부](evidence/recovered-source-register.json)에 사용자 결정과 agent 검토·완료 보고의 메시지 위치를 구분합니다.
 
 **공개 준비 중 사용자가 직접 밝힌 판단 근거, 2026년 10월 29일:** Cohere는 일부 평가에서 Gemini보다 좋은 성능을 보였지만, Synethos 규모에서는 관측된 차이가 과금을 정당화할 만큼 크지 않았습니다. 성능 차이가 훨씬 크거나 서비스가 더 크고 복잡했다면 비용을 지불하는 도입도 고려했을 것입니다. 최종 판단은 실제 성능 차이, 서비스 규모, 대체 가능성과 운영 비용을 종합한 결정이었습니다.
 
@@ -514,21 +520,21 @@ L2/L3/S4는 설명문·중복 JSON으로 엄격한 parsing에 실패했습니다
 
 `e700717`은 Cohere HTTP client·adapter와 테스트, factory 등록, provider 옵션, 설정·example binding과 현재 평가 선택지를 제거했습니다. Client는 native `fetch` 구현이었습니다. [제거 후 embedding factory](../cases/cohere-lifecycle/after-removal/embedding-provider-factory.ts#L12-L24)는 Gemini를, [generation factory](../cases/cohere-lifecycle/after-removal/generation-provider-factory.ts#L17-L33)는 Gemini·Groq를 지원합니다. [옵션 검사](../cases/cohere-lifecycle/after-removal/target-options.ts#L4-L25)와 [선택한 설정 테스트](../cases/cohere-lifecycle/after-removal/runtime-selection.excerpt.test.ts#L22-L67)는 유지된 provider 경계와 runtime 선택을 보여줍니다.
 
-Provider abstraction, 과거 비교 artifact, 공통 document-build 진행 로그와 Gemini 전용 요청 시작 간격 22초 pacing을 유지했습니다. Pacing은 그날 저녁 조사하던 별도 document-build quota 문제에 대응한 변경입니다. 21:19:53.762 제거 완료 채록 보고는 테스트 939개 통과·기존 skip 4개·static check/build 통과와 knowledge 변경에 따른 Gemini index stale 상태를 함께 기록합니다. 사용자는 21:29:36.316 index를 제외하고 코드를 먼저 커밋하도록 했습니다.
+Provider abstraction, 과거 비교 artifact, 공통 document-build 진행 로그와 Gemini 전용 요청 시작 간격 22초 pacing을 유지했습니다. Pacing은 그날 저녁 조사하던 별도 document-build quota 문제에 대응한 변경입니다. 21:19:53.762 원본 세션의 agent 완료 보고는 테스트 939개 통과·기존 skip 4개·static check/build 통과와 knowledge 변경에 따른 Gemini index stale 상태를 함께 기록합니다. 사용자는 21:29:36.316 index를 제외하고 코드를 먼저 커밋하도록 했습니다.
 
 10월 17일 22:19:07.357 사용자는 rebuild 성공·CURRENT 상태를 보고했습니다. 22:20:44의 `033e02f`는 새 Gemini artifact를 추가하고 이전 Gemini·retired Cohere artifact를 제거했습니다. 코드 통합, index rebuild 보고와 artifact 공개를 각각 구분합니다. 제거 후 production 동작은 이 사례에서 독립 검증한 근거 범위 밖입니다.
 
 ### 검증 범위와 남은 사항
 
-10월 1일 품질 결과는 이번에 직접 읽은 원본 세션의 당시 보고입니다. 10월 6일 classifier·10월 15일 검색 집계는 이번 공개에서 확인한 파일로 추적할 수 있습니다. 10월 3일 generation 결과·10월 16일 제거 보고는 기존 조사의 출처 식별자·검증 한계를 유지합니다. 10월 29일 근거는 이 공개 작업에서 사용자가 직접 밝힌 설명입니다.
+10월 1일 품질 결과는 직접 읽은 원본 세션의 당시 보고입니다. 10월 3일 generation 원본과 10월 6일 classifier·10월 15일 검색 파일은 직접 대조했습니다. 10월 16~17일 원본 세션에서 제거 판단·agent 완료 보고·사용자의 CURRENT 확인을 직접 읽었습니다. 실행 결과는 각 당시 보고의 조건으로 유지합니다. 10월 29일 근거는 이 공개 작업에서 사용자가 직접 밝힌 후속 설명입니다.
 
-남은 사항은 최초 도입·Cohere 단독 전환의 전체 동기, 10월 6일 비용 발언의 적용 범위, 당시 key·약관의 독립 자료, classifier 출력·block 처리 원인, 미확보 generation raw 응답·build 시도별 ledger와 제거 후 production 검증입니다. 이번 공개에서는 모델 요청·index build·당시 애플리케이션 테스트를 실행하지 않았습니다.
+남은 사항은 최초 도입·Cohere 단독 전환의 전체 동기, 10월 6일 비용 발언의 적용 범위, 당시 key·약관의 독립 자료, classifier 출력·block 처리 원인, build 시도별 ledger와 제거 후 production 검증입니다. 이번 공개에서는 모델 요청·index build·당시 애플리케이션 테스트를 실행하지 않았습니다.
 
 ### 출처 추적과 공개 방식
 
 전체 파일 Excerpt 15개는 원본 bytes를 보존합니다. 일부 Excerpt 4개는 아래 원본 선언·테스트 문장을 빈 줄로 연결하며 이름·import·선택 문장을 유지합니다. 테스트에는 합성 credential·fixture와 생략한 애플리케이션 모듈 참조가 남아 있습니다. Classifier 발췌는 schema·parser·gate와 원래 harness 상태 참조를 보존합니다. 선택한 코드는 열람 목적으로 공개합니다. 로컬 harness 발췌의 줄바꿈은 CRLF에서 LF로 정규화했습니다.
 
-Reconstructed JSON 2개는 새 편집 구조를 사용합니다. `target-history.json`은 식별한 example 설정의 generation·embedding 필드 전체를 복사합니다. `observed-results.json`은 저장 classifier summary·counter를 선택하고 original/final 근거 순위에서 검색 집계를 계산합니다. 비공개 원문, 실험 응답 전문, credential, index vector와 로컬 사용자 경로는 공개 파일 범위에서 제외합니다.
+Reconstructed JSON 2개는 새 편집 구조를 사용합니다. `target-history.json`은 식별한 example 설정의 generation·embedding 필드 전체를 복사합니다. `observed-results.json`은 저장 classifier summary·counter를 선택하고 original/final 근거 순위에서 검색 집계를 계산합니다. 추가한 generationOctober03은 복구한 full40 집계·옵션·검증을 연결하고 retirementOctober16은 원본 세션의 사용자 판단·완료 보고·다음 날 CURRENT 보고를 선택합니다. 비공개 원문, 실험 응답 전문, credential, index vector와 로컬 사용자 경로는 공개 파일 범위에서 제외합니다.
 
 #### 기준 커밋
 
@@ -574,7 +580,7 @@ Reconstructed JSON 2개는 새 편집 구조를 사용합니다. `target-history
 | [after-removal/target-options.ts](../cases/cohere-lifecycle/after-removal/target-options.ts#L1-L25) | `e700717` · `sveltekit/src/lib/server/generation/target-options.ts` | Excerpt (전체) · 1–25 → 1–25 |
 | [after-removal/runtime-selection.excerpt.test.ts](../cases/cohere-lifecycle/after-removal/runtime-selection.excerpt.test.ts#L1-L67) | `e700717` · `sveltekit/src/lib/server/config.test.ts` | Excerpt · 1–12 → 1–12; 15–15 → 14–14; 17–21 → 16–20; 40–59 → 22–41; 62–65 → 43–46; 67–73 → 48–54; 76–87 → 56–67 |
 | [configuration/target-history.json](../cases/cohere-lifecycle/configuration/target-history.json#L1-L227) | 입력 파일은 아래 구성 규칙에 명시 | Reconstructed · 선택·새 구조 |
-| [evidence/observed-results.json](../cases/cohere-lifecycle/evidence/observed-results.json#L1-L138) | 입력 파일은 아래 구성 규칙에 명시 | Reconstructed · 선택·새 구조 |
+| [evidence/observed-results.json](../cases/cohere-lifecycle/evidence/observed-results.json#L1-L224) | 입력 파일은 아래 구성 규칙에 명시 | Reconstructed · 선택·새 구조 |
 
 #### 재구성 규칙
 
@@ -591,6 +597,7 @@ Reconstructed JSON 2개는 새 편집 구조를 사용합니다. `target-history
 | `evidence/observed-results.json` · `tmp/cohere-retrieval-intent-experiment/results.json` | 보존 파일 | `ac60cd7bfd1514b9fcc0659b04b3cea18732eb3e3b3ab745a38101fca7bd470c` |
 | `evidence/observed-results.json` · `docs/evaluation/retrieval/2026-10-15/gemini.json` | 보존 파일 | `f40fc07305a3b8542f6e82b34e494d139a85963a8c5f08490a5a0f3bda1ca85c` |
 | `evidence/observed-results.json` · `docs/evaluation/retrieval/2026-10-15/cohere.json` | 보존 파일 | `2eb76f90c94d3092b2246e4e6bac342ab738f73dde284aa800cd4e3e50adc801` |
+| `evidence/observed-results.json` · 복구한 full40·제거 세션 | [복구 근거 등록부](evidence/recovered-source-register.json), HOME06-3WAY·HOME03-04-SESSION | 보고서·보관 원본 hash를 2026-10-29 대조; 당시 판정·보고 범위 유지. |
 
 #### 코드 외 근거와 접근 상태
 
@@ -614,14 +621,14 @@ Reconstructed JSON 2개는 새 편집 구조를 사용합니다. `target-history
 | `docs/evaluation/retrieval/2026-10-15/cohere.json` | `3a6e2e477fa5a66fe67656b802c4bf9bdaf59218`; `2eb76f90c94d3092b2246e4e6bac342ab738f73dde284aa800cd4e3e50adc801` |
 | `rollout-2026-10-01T13-14-09-01a0f5ab-72f3-70c1-84fa-31f27c25d590.jsonl.zst` | `d181117b3c4d2f997b997bccb7c3bc8279de40abc53a50e29127a93239a0d37b` |
 
-다음 원본은 등록된 경로에서 확보되지 않았습니다. 식별자·hash는 기존 근거 등록부의 채록값입니다.
+다음 원본은 집 PC에서 확보해 기존 등록 SHA-256과 모두 일치함을 확인했습니다. 메시지 위치와 추가 원본 identity는 [복구 근거 등록부](evidence/recovered-source-register.json)에 보존합니다.
 
 | 기존 채록 원본 | 채록 SHA-256 · 적용 범위 |
 |---|---|
 | `generation-model-comparison/2026-10-03-full40-3way-1/final-report.md` | `a82073631b743462c5a31051071ba994f9339b346849e29bbe171375ace7c231` · 10월 3일 generation 표 |
 | `rollout-2026-10-16T20-10-29-01a14468-00a5-7ff2-8053-0e588b0c1335.jsonl.zst` | `9a167a56794bb628bd58e92581435b4efcacab3568d01e83d9dbf36ad79f9b99` · 제거 판단·완료·index 분리 보고 |
 
-메시지 위치: 10월 1일 원본의 UTC 04:47:45.250Z·07:43:18.624Z·08:04:10.538Z·08:13:29Z·08:32:44Z는 각각 KST 13:47:45.250·16:43:18.624·17:04:10.538·17:13:29·17:32:44입니다. 기존 채록 제거 세션은 10월 16일 UTC 12:02:47.996Z(사용자 판단), 12:19:53.762Z(완료 보고), 12:29:36.316Z(index 제외 요청), 10월 17일 13:19:07.357Z(CURRENT 보고)로 식별합니다. 10월 6일 19:17:35.774 인수인계는 UTC 10:17:35.774Z이며 기존 조사 채록을 사용했습니다.
+메시지 위치: 10월 1일 원본의 UTC 04:47:45.250Z·07:43:18.624Z·08:04:10.538Z·08:13:29Z·08:32:44Z는 각각 KST 13:47:45.250·16:43:18.624·17:04:10.538·17:13:29·17:32:44입니다. 직접 읽은 제거 세션은 10월 16일 UTC 12:02:47.996Z(사용자 판단), 12:19:53.762Z(완료 보고), 12:29:36.316Z(index 제외 요청), 10월 17일 13:19:07.357Z(CURRENT 보고)로 식별합니다. 10월 6일 19:17:35.774 인수인계는 UTC 10:17:35.774Z이며 기존 조사 채록을 사용했습니다.
 
 사용자 추가 설명: 2026-10-29 이 공개 사례 준비 대화에서 사용자가 직접 제공했습니다. 성능 차이·서비스 규모·대체 가능성·운영 비용과 유료 도입을 고려할 조건을 명시한 문장을 위 판단 절에 반영했습니다.
 
@@ -652,7 +659,7 @@ Reconstructed JSON 2개는 새 편집 구조를 사용합니다. `target-history
 | `after-removal/target-options.ts` | `a50ca17941224e1da6854283a2269feabe3509a0f96020f86dfaebdbeab42a3b` | `a50ca17941224e1da6854283a2269feabe3509a0f96020f86dfaebdbeab42a3b` |
 | `after-removal/runtime-selection.excerpt.test.ts` | `9fa7424e052d1c60b19dbdc5fecfb1ad2cc898539475f461c0ccb43f8b078a31` | `777fd0be16eed54245d7e6eadbb2d0a363e96fb6495dcd3fed6ec8c22c80e709` |
 | `configuration/target-history.json` | 입력 표 참조 | `3dc01f1d86c74fc0e59d49ae8afb46562b064d1e1b36c108d9cf7e3e834ca5fe` |
-| `evidence/observed-results.json` | 입력 표 참조 | `3561e1aad43a2b782760dc3adc3b993312f7b00304b76eb1c724560659c43a5d` |
+| `evidence/observed-results.json` | 입력 표 참조 | `6b8b177f791e5a01a99ede6109fded3927cb29aed5c3d1820a89e44be2d11933` |
 
 </details>
 
@@ -758,7 +765,7 @@ Cohere의 [기존 공개 generation adapter](../cases/cohere-lifecycle/generatio
 | TPM 추정 | 35.21K peak가 같은 5배치 구간이라는 가정에서 60×(35.21K/5)/30K≈배치당 14.1초. |
 | 선택 정책 | Retry를 포함한 Gemini document 요청 시작 사이 최소 22초. |
 
-기존 조사는 이를 사용자 관측과 설계 계산으로 보존합니다. 정확한 quota 차감, RPM/TPM peak의 시간 대응, batch 9 실제 시도 수와 provider 대기 경과는 미확인입니다. 등록된 보관 세션 원본은 현재 환경의 해당 경로에서 확보되지 않았습니다.
+집 PC에서 해당 사용자 관측과 설계 계산이 담긴 보관 세션을 직접 읽었고 원본 해시는 기존 등록값과 일치했습니다. 정확한 quota 차감, RPM/TPM peak의 시간 대응, batch 9 실제 시도 수와 provider 대기 경과는 미확인입니다. [복구 근거 등록부](evidence/recovered-source-register.json)에 관측·설계·구현 보고의 시각과 출처를 구분합니다.
 
 ### Build 내부 gate와 공통 retry logging
 
@@ -803,7 +810,7 @@ Cohere의 [기존 공개 generation adapter](../cases/cohere-lifecycle/generatio
 
 ### 검증 수준과 원본 선택
 
-코드·커밋 차이, 공개 테스트 assertion, 과거 tracked 개발 보고서와 최종 커밋 index를 직접 확인했습니다. 10월 16~17일 사용자 관측·구현 checkpoint는 기존 조사 채록을 통해 인용하며, 등록된 보관 세션·실패/완료 build 원시 ledger는 확보되지 않았습니다. 계산은 당시 가정을 함께 제시합니다.
+코드·커밋 차이, 공개 테스트 assertion, 과거 tracked 개발 보고서와 최종 커밋 index를 직접 확인했습니다. 10월 16~17일 사용자 관측·구현 checkpoint는 확보한 보관 세션 원문에서 직접 확인했습니다. 실패/완료 build의 원시 ledger는 확보되지 않았습니다. 계산은 당시 가정을 함께 제시하며, 다음 날 완료는 사용자의 재빌드 성공·CURRENT 확인 보고로 구분합니다.
 
 `e700717`의 핵심 embedding orchestration·Gemini adapter·공통 embedding 실패 구현은 해당 경로의 현재 비공개 HEAD와 일치합니다. 이번 공개는 보존 기록·원본 객체를 읽어 작성하며 모델 요청·index build·당시 애플리케이션 테스트를 실행하지 않습니다.
 
@@ -907,7 +914,7 @@ Reconstructed JSON 2개는 편집한 구조를 사용합니다. 하나는 과거
 | `docs/research/synethos-evidence-register.md` | `3a6e2e477fa5a66fe67656b802c4bf9bdaf59218` | `6f173ba83687e68daaa115623404e159af8efa37fc454c0e42559e761303bdf7` |
 | `docs/research/decision-candidates.md` | `3a6e2e477fa5a66fe67656b802c4bf9bdaf59218` | `6a1a2b0c4ab1dc25ee94a253f96c987d9d6d8ec6cf80d2f075b2be77fa1b06cc` |
 
-기존 근거 등록부의 보관 세션 식별자는 `rollout-2026-10-16T20-10-29-01a14468-00a5-7ff2-8053-0e588b0c1335.jsonl.zst`, 채록 SHA-256은 `9a167a56794bb628bd58e92581435b4efcacab3568d01e83d9dbf36ad79f9b99`입니다. 해당 원본은 등록된 경로에서 확보되지 않았으며 이 hash는 기존 채록값입니다. 다음 메시지 위치도 기존 연구의 채록을 유지합니다.
+보관 세션 식별자는 `rollout-2026-10-16T20-10-29-01a14468-00a5-7ff2-8053-0e588b0c1335.jsonl.zst`이며, 집 PC 원본의 SHA-256 `9a167a56794bb628bd58e92581435b4efcacab3568d01e83d9dbf36ad79f9b99`가 기존 채록값과 일치했습니다. 다음 메시지를 원문에서 직접 대조했으며 [복구 근거 등록부](evidence/recovered-source-register.json)에 메시지별 text hash를 추가했습니다.
 
 | UTC 메시지 시각 | KST | 기록 |
 |---|---|---|
@@ -990,7 +997,7 @@ Artifact의 `createdAt`은 별도 저장 metadata입니다. 요청/보고·커�
 
 새 사무실 checkout에는 의존성과 로컬 인덱스가 없었고, 환경 설정은 다른 드라이브의 집 checkout을 가리켰다. 09:27:40 사용자는 시스템 PowerShell 정책을 유지하면서 checkout 기준 경로와 npm.cmd 사용을 요청했다. 10:00:18의 1261bf8은 스크립트 위치에서 프로젝트 루트를 구하고 Get-Command로 npm.cmd를 찾으며 cache/temp를 checkout 아래에 두었다. [개발 실행 스크립트](../cases/cross-pc-index-portability/bootstrap/dev.ps1#L1-L14)와 [인덱스 실행 스크립트](../cases/cross-pc-index-portability/bootstrap/index.ps1#L1-L15)에서 확인된다. 이는 초기 산출물 부재·환경 설정 사건이다.
 
-19:59:19 사용자는 한 PC에서 Gemini/Cohere 인덱스를 생성하고 Git으로 공유하여 문서 Embedding에 드는 시간과 Provider quota를 절약하기를 요청했다. 영구 identity는 runtime target 이름·우선순위·credential slot 변경에도 유지되어야 했다. 23:19:09에는 Git 공유·atomic publication·publish 성공 후 stale 산출물 정리를 요청했다. 이 요청들은 연구 전사본에 보존되어 있다.
+19:59:19 사용자는 한 PC에서 Gemini/Cohere 인덱스를 생성하고 Git으로 공유하여 문서 Embedding에 드는 시간과 Provider quota를 절약하기를 요청했다. 영구 identity는 runtime target 이름·우선순위·credential slot 변경에도 유지되어야 했다. 23:19:09에는 Git 공유·atomic publication·publish 성공 후 stale 산출물 정리를 요청했다. 이 요청들은 집 PC 사용자 입력 이력 원문에서 직접 확인했다.
 
 직전 schema 3 구현은 [fingerprint](../cases/cross-pc-index-portability/before/corpus.ts#L21-L33)와 [저장 디렉터리·reader](../cases/cross-pc-index-portability/before/store.ts#L8-L40)에 target.id를 반영했다. Runtime 역할의 이름 변경이 영구 산출물 identity를 바꿀 수 있었다. 20:14:41의 9e96d4f는 schema 4를 도입했다. Provider·모델·차원·embedding input version으로 embedding space를 정의하고 corpus와 이 계약으로 fingerprint를 정했다. [사례 04의 identity 발췌](../cases/embedding-batching-retry-pacing/architecture/embedding-space.excerpt.ts#L1-L44)와 [테스트](../cases/embedding-batching-retry-pacing/architecture/embedding-space.excerpt.test.ts#L1-L79)가 이 경계를 보존한다.
 
@@ -998,7 +1005,7 @@ Artifact의 `createdAt`은 별도 저장 metadata입니다. 요청/보고·커�
 
 ### 9월 30일: 청크는 같지만 개행에 따라 바뀌는 해시
 
-21:16:48 사용자는 checkout의 개행에 따라 raw source hash가 달라지지만 청크는 같아 505-vector 산출물이 false-stale이 된다고 보고했다. 21:18:24에는 사무실에서 만든 Git 산출물을 다른 PC에서 바로 재사용하기를 요청했다. 이 시각과 관측은 보존된 연구 전사본에 근거한다.
+21:16:48 사용자는 checkout의 개행에 따라 raw source hash가 달라지지만 청크는 같아 505-vector 산출물이 false-stale이 된다고 보고했다. 21:18:24에는 사무실에서 만든 Git 산출물을 다른 PC에서 바로 재사용하기를 요청했다. 이 시각과 관측은 집 PC 사용자 입력 이력 원문에서 직접 확인했다.
 
 22:23:36의 de58671은 [canonical content](../cases/cross-pc-index-portability/canonicalization/content.ts#L1-L4)를 추가해 CRLF와 단독 CR을 LF로 바꿨다. [Source 로더](../cases/cross-pc-index-portability/canonicalization/manifest.ts#L1-L50)는 [corpus 준비](../cases/cross-pc-index-portability/canonicalization/corpus.ts#L54-L73)에 canonical content를 공급하고, [청크 section 파싱](../cases/cross-pc-index-portability/canonicalization/chunker.ts#L20-L74)도 같은 변환을 사용한다. Corpus identity에는 chunker version·청크 크기 제한·source ID·파일·제목·공개 URL도 들어간다.
 
@@ -1057,7 +1064,7 @@ Artifact의 `createdAt`은 별도 저장 metadata입니다. 요청/보고·커�
 
 ### 출처와 공개 방식
 
-9월 28일 09:27:40 요청은 session 01a0e55f-fed2-7973-93fb-e80d25f296b2 원본에서 직접 확인했다. 파일명 시작 시각은 09:17:48이고 압축 파일 SHA-256은 de5561f7093616ecfe76164289354fd8a99feb5e8b0d3766e22200ff68b0ee5b다. 이후 9월 28일 요청과 30일 관측은 session 01a0e775-78b0-73b0-ad5a-902cc720edc7·01a0e862-09ff-7d42-bd7e-6195ccaaa1a7·01a0f218-3b96-73e1-a0b9-a1696608e74f의 연구 전사본에 남아 있으며 이 세 원본은 이번 환경에서 확보되지 않았다. 10월 22일 원본 session 01a1613d-e5c6-76f2-9e3d-42c9eeca696b의 SHA-256은 37823ca6529dfca51f56283ca715ad80e733df9ce371251e261692d25527baef다. 비공개 통합 개발사·근거 등록부에서 연표와 미확인 항목을 가져왔으며 공개 준비 중 대조한 결과는 위에 구분했다.
+9월 28일 09:27:40 요청은 session 01a0e55f-fed2-7973-93fb-e80d25f296b2 원본에서 직접 확인했다. 파일명 시작 시각은 09:17:48이고 압축 파일 SHA-256은 de5561f7093616ecfe76164289354fd8a99feb5e8b0d3766e22200ff68b0ee5b다. 이후 9월 28일 요청과 30일 관측은 사용자 입력 이력 원문에서 직접 확인했다. Session ID는 01a0e775-78b0-73b0-ad5a-902cc720edc7·01a0e862-09ff-7d42-bd7e-6195ccaaa1a7·01a0f218-3b96-73e1-a0b9-a1696608e74f이며 전체 부모 세션은 확보되지 않았다. [복구 근거 등록부](evidence/recovered-source-register.json)에 메시지 시각·원문 hash를 보존했다. 21:18:24 요구는 같은 Git 산출물이 CRLF/LF 환경에서 CURRENT가 되고 추가 embedding/build 없이 즉시 사용되는 것을 완료 기준으로 명시했다. 10월 22일 원본 session 01a1613d-e5c6-76f2-9e3d-42c9eeca696b의 SHA-256은 37823ca6529dfca51f56283ca715ad80e733df9ce371251e261692d25527baef다. 비공개 통합 개발사·근거 등록부에서 연표와 미확인 항목을 가져왔으며 공개 준비 중 대조한 결과는 위에 구분했다.
 
 전체 파일 Excerpt는 선택한 snapshot을 완전하게 보존한다. 부분 Excerpt는 아래 원본 범위와 구간 사이 빈 줄을 사용하고 import·식별자·애플리케이션 참조를 유지한다. Storage/status/menu는 재사용 동작을, 테스트는 관련 assertion을, 운영 발췌는 패키징·검증을 선택하고 운영 접근 정보는 비공개로 유지한다. Reconstructed JSON은 기록의 필드를 선택하고 digest 계산·편집상 그룹화를 표시한다. Knowledge·벡터 전체 payload는 비공개로 유지한다. 모든 소스 코드는 Excerpt이며 Mixed 재구성은 필요하지 않았다.
 
@@ -1125,7 +1132,7 @@ Artifact의 `createdAt`은 별도 저장 metadata입니다. 요청/보고·커�
 
 **개발 기간:** 2026-09-26 ~ 2026-10-16
 
-**코드 분류:** Excerpt — 소스·테스트 15개; Reconstructed — 설정·근거 기록 4개.
+**코드 분류:** Excerpt — 소스·테스트 15개; Reconstructed — 설정·근거 기록 5개.
 
 **결과:** Generation은 Gemini 3.5 Flash Lite primary와 Groq GPT-OSS 120B fallback으로 정리됐다. 과제별 품질·관측된 가용성·무료 티어 용량·서비스 운영 범위를 함께 고려한 선택이다. 후보 도입, 로컬 실험, 커밋된 runtime 선택은 아래에서 각각의 시점으로 기록한다.
 
@@ -1156,6 +1163,16 @@ Gemini API 전환 커밋 9a3df61의 최초 설정은 gemini-3.8-flash였다. 14:
 | HTTP 503 실패 | 17회 |
 | 이후 응답 | 일일 quota 소진을 나타내는 HTTP 429 |
 
+**복구한 원본으로 확인한 요청 대응:** 집 PC의 직전 승인 실행과 후속 재시도 실행에서 ledger·요청 본문·provider 응답 원본을 직접 대조했습니다. 세 핵심 보고서·결정 파일의 해시는 기존 등록값과 일치했습니다. [원본 집계와 요청 원장](../cases/model-selection-quality-availability/evidence/october03-reported-results.json)은 아래 대응과 24개 전체 요청의 시각·본문 hash·응답 hash를 보존합니다.
+
+| Gemini 3.8 실행 범위 | 요청 | 성공 | HTTP 503 | HTTP 429 |
+|---|---:|---:|---:|---:|
+| 직전 승인 실행 | 6 | 1 | 5 | 0 |
+| 후속 재시도 실행 | 15 | 2 | 12 | 1 |
+| 429 직전까지 합계 | 20 | 3 | 17 | 0 |
+
+직전 실행의 Gemini 3.5 성공 1회와 후속 실행의 성공 2회는 위 3.8 사용량에서 분리했습니다. 알려진 3.8의 21번째 요청이 반환한 실제 오류는 HTTP 429/RESOURCE_EXHAUSTED, quotaId GenerateRequestsPerDayPerProjectPerModel-FreeTier, quotaValue 20을 명시했습니다. 따라서 기존에 별도 이력으로 둔 20회와 재시도 실행의 요청별 대응을 확인했습니다. 사용자가 실패 요청도 일일 budget을 소모했다고 판단한 근거는 이 관측과 한도 소진입니다. Provider 측 개별 차감·다른 계정 활동·금전 청구는 확보된 기록으로 직접 확인되지 않았습니다.
+
 사용자는 이 결과를 통해 503 실패 요청도 호출 한도에 포함된다고 판단했다. 정상 응답을 거의 얻지 못한 채 하루 사용량 대부분이 소진됐기 때문이다. 하루 20회라는 한도 자체도 Synethos 운영에 부족했고, 그마저 대부분 실패로 소진되는 상황에서는 Gemini 3.8을 운영 모델로 선택할 이유가 없었다.
 
 사용자는 HTTP 503은 재시도하되 일일 한도 429가 발생하면 모델을 포기한다는 중단 조건을 직접 정했다. 실제 결과가 이 조건에 도달해 3.8을 Synethos 운영 후보에서 제외했다. 일부 질문에서 관찰한 품질 이점은 평가 결과로 유지했다.
@@ -1169,9 +1186,9 @@ Gemini API 전환 커밋 9a3df61의 최초 설정은 gemini-3.8-flash였다. 14:
 | QB18 | 제공된 OCR 거주지·기간 파싱 설명을 포함해 3.8이 명확히 우세했다. |
 | QB20 | 두 응답은 동등하다고 판정했다. |
 
-[당시 보고의 재구성](../cases/model-selection-quality-availability/evidence/october03-reported-results.json#L1-L101)에 해당 실험의 집계를 보존했다. 3.8은 15회 요청 중 성공 2·HTTP 503 12·HTTP 429 1이었다. 3.5의 성공 2회를 포함한 전체 요청은 17회다. QB18에서 3.8 성공까지 742.410초가 걸렸고 성공 요청 자체는 16.564초였다. QB20의 3.8 성공 요청은 17.222초였다.
+[당시 보고의 재구성](../cases/model-selection-quality-availability/evidence/october03-reported-results.json#L1-L4095)에 해당 실험의 집계를 보존했다. 3.8은 15회 요청 중 성공 2·HTTP 503 12·HTTP 429 1이었다. 3.5의 성공 2회를 포함한 전체 요청은 17회다. QB18에서 3.8 성공까지 742.410초가 걸렸고 성공 요청 자체는 16.564초였다. QB20의 3.8 성공 요청은 17.222초였다.
 
-보존된 03:20:37 사용자 요청에는 합의한 실패 조건에서 중단하고 후보를 기각하는 기준이 있다. 03:35:46 daily quota 응답으로 중단 조건에 도달했다. 해당 429 뒤 요청은 0회이며 QB25의 A 요청과 QB11 양쪽은 호출하지 않았다.
+03:20:37 사용자 요청 원문을 history.jsonl에서 직접 확인했고 [복구 근거 등록부](evidence/recovered-source-register.json)에 메시지 hash와 시각을 보존했습니다. 요청은 합의한 실패 조건에서 즉시 중단하고 후보를 기각하도록 했습니다. 03:35:46 daily quota 응답으로 중단 조건에 도달했습니다. 해당 429 뒤 요청은 0회이며 QB25의 A 요청과 QB11 양쪽은 호출하지 않았습니다.
 
 **대화 재검색으로 확보한 당시 논의:** 10월 29일 사용자가 다음 ChatGPT 과거 대화 재검색 결과를 전달했다. 시각은 KST다. 사용자 제공 검색 기록이며 원본 대화 URL·식별자·전문은 아직 확보되지 않았다.
 
@@ -1185,7 +1202,7 @@ Gemini API 전환 커밋 9a3df61의 최초 설정은 gemini-3.8-flash였다. 14:
 | 03:35:06 | 사용자가 실패가 쌓이는 동안 AI Studio 일일 사용량 17/20을 확인했다고 보고. |
 | 03:49:02 | 테스트 정리: Gemini 3.8 요청 15회, 성공 2·503 12·429 1. |
 
-최종 집계는 등록된 실험 전사본과 일치한다. 03:19:52 조건은 별도로 전사된 Codex 03:20:37 요청과 내용이 대응하며 각 출처의 메시지 시각을 유지한다. AI Studio 17/20은 계정 사용량에 대한 당시 사용자 보고다.
+최종 집계는 직접 확인한 실험 원본과 일치한다. 03:19:52 ChatGPT 검색 기록의 조건과 사용자 입력 이력의 Codex 03:20:37 요청은 내용이 대응하며 각 출처의 메시지 시각을 유지한다. AI Studio 17/20은 계정 사용량에 대한 당시 사용자 보고다.
 
 **부차적인 외부 참고:** 사용자는 오류와 한도 소진 이후 비슷한 불만을 검색했던 것으로 기억한다. 원본 ChatGPT 대화 URL·식별자는 확보되지 않았다. [Google AI Developers Forum 게시글](https://discuss.ai.google.dev/t/gemini-api-503/183913)은 9월 21일 게시됐으며 이번 공개 준비 중 직접 확인했다. Google Apps Script·무료 티어에서 gemini-3.8-flash를 포함한 세 모델의 503이 반복됐다는 신고이며, 답글은 일시적 서비스 과부하를 설명한다. 이 자료는 의사결정의 중심인 운영 관측에 유사한 외부 실패 사례를 덧붙인다.
 
@@ -1210,11 +1227,26 @@ Gemini API 전환 커밋 9a3df61의 최초 설정은 gemini-3.8-flash였다. 14:
 | Cohere Command A+ | 22/40 | 3 | 4 | 3.042초 |
 | Groq GPT-OSS 120B | 25/40 | 2 | 0 | 1.524초 |
 
-이 표는 기존 연구에 전사된 당시 보고다. [같은 재구성 자료](../cases/model-selection-quality-availability/evidence/october03-reported-results.json#L1-L101)에 원본 보고서와 등록 해시를 보존했으며 현재 checkout에는 원본 디렉터리가 없다. 보관 당시의 정확한 추론 옵션도 확보되지 않았다. 10월 1일 대상 유지 실험과 10월 3일의 3.8 부분 비교는 각각의 지표·조건으로 유지한다.
+집 PC의 full40 원본은 10월 3일 05:10:24.134~05:53:01.835, HEAD bbac3a6d11993f3c3e3d80eec44df86e7779073d의 순차 실행을 기록한다. 요청·응답·결과·수동 판정 각 120개를 직접 대조했고, 40문항의 공통 입력 hash·120개 요청 본문 hash·원시 응답→결과·정규화 답변→당시 수동 판정의 대응이 모두 일치했다. [원본 결과 projection](../cases/model-selection-quality-availability/evidence/october03-reported-results.json)에 문항별 identity와 재집계 결과를 보존했다. Gemini·Cohere 출력 상한은 32768, GPT-OSS는 4096·strict JSON Schema였고 reasoning_effort는 당시 provider 기본 medium을 쓰도록 생략했다. Retry/fallback은 0회, Groq 요청 시작 간격은 최소 65초였다. 성공 응답 지연과 요청 사이 대기를 구분한다. 10월 1일 대상 유지 실험과 3.8 부분 비교는 각각의 지표·조건으로 유지한다.
 
 보존된 04:05:58 사용자 요청은 이전 Groq 후보의 실패 이후 GPT-OSS를 재평가하도록 했다. 07:42:12의 0baebd9는 runtime을 Gemini 3.5 primary·Groq openai/gpt-oss-120b fallback으로 바꾸고 Cohere를 명시적 평가용으로 남겼다. 설정은 Gemini 출력 상한 32768, GPT-OSS 4096·reasoning effort medium이었다. [Routing 회귀 발췌](../cases/model-selection-quality-availability/runtime/groq-fallback.excerpt.test.ts#L28-L93)는 출력 상한, quota에서 실제 Groq adapter로 진행하는 경로의 mocked HTTP 200/429/503, registry/runtime 독립성, 명시적 단일 target 실행을 확인한다.
 
 최종 구성에는 앞서 제거한 Qwen 후보와 다른 GPT-OSS 모델을 사용했다. [사례 04의 GPT-OSS adapter](../cases/embedding-batching-retry-pacing/architecture/groq/generation.ts#L1-L28)가 strict schema·reasoning 옵션의 매핑을 보존한다.
+
+### 10월 3일: reasoning 설정을 비교한 뒤 기존 설정 유지
+
+Full40 뒤 06:09:47 사용자는 Gemini 3.5 primary·GPT-OSS fallback 채택을 요청했고, 06:30:45에는 기존 입력과 baseline을 보존한 reasoning 추가 비교를 요청했다. 06:38:49.902~07:18:09.538 실행은 같은 HEAD에서 진행 중이던 Groq 연결 변경을 보존한 채 Gemini medium과 GPT-OSS high만 새로 호출했다. [Reasoning 비교 근거](../cases/model-selection-quality-availability/evidence/october03-reasoning-results.json)에 옵션·분모·77개 요청의 hash와 당시 판정을 보존한다. 77개 요청은 baseline과 reasoning 옵션만 달랐고 공통 입력이 일치했다. Retry·fallback·embedding·retrieval·reranker·index rebuild는 모두 0회였다.
+
+| 비교 | 동일 성공 문항 | 완전 정답 | 인용이 있는 required claim | 관측 |
+|---|---:|---|---|---|
+| Gemini default/minimal → medium | 40 | 27 → 27 | 31/49 → 31/49 | 평균 지연 1508.029 → 3339.448ms |
+| GPT-OSS medium → high | 36 | 24 → 26 | 30/44 → 31/44 | Hard failure union 2 → 3 |
+
+Gemini medium은 QB18의 OCR 파싱과 QB37의 records/citation 처리를 회복했지만 QB04·QB12에서 detail을 누락해 전체 완전 정답·coverage의 순증은 없었다. GPT-OSS high는 QB32의 근거 없는 unknown 처리 설명을 해소하고 QB33의 판단 순서를 회복했지만 QB12에 근거 없는 효과 설명, QB16에 이름 표기 오류가 생겼고 QB25의 entity conflation은 남았다. 이는 당시 수동 판정의 문항별 변화다.
+
+Gemini medium은 40/40 성공했다. GPT-OSS high는 QB01~QB36 성공 후 QB37에서 HTTP 429 tokens-per-day 오류를 받아 종료했고 QB38~QB40은 미실행이었다. 오류가 반환한 limit 200000·used 198748·requested 3431은 당시 계정 누적 상태이며 high 실행만의 사용량으로 합산하지 않는다. High 비교의 품질 분모는 같은 성공 36문항으로 제한했다. 이 10월 3일 오류와 10월 15일의 rate-limit 실패는 별도 관측이다.
+
+당시 보고서는 품질 변화·새 오류·지연·reasoning 사용량을 함께 검토해 기존 설정 유지를 권고했다. 07:34:34 사용자 원문은 Gemini default/minimal·GPT-OSS medium을 유지하고 이미 구현한 Groq fallback 교체만 마무리하도록 했다. 이후 07:42:12의 0baebd9가 이 설정을 커밋했다. [복구 근거 등록부](evidence/recovered-source-register.json)는 실험 요청, 권고 보고서와 최종 사용자 결정을 각각 식별한다.
 
 ### 10월 6일: 운영 fallback과 명시적 평가의 실행 계약 분리
 
@@ -1265,9 +1297,9 @@ Corpus는 27 sources·372 chunks였다. Question bank canonical-portfolio conten
 
 ### 근거 수준·공개 방식·남은 확인 사항
 
-설정 변경과 공개한 당시 코드는 직접 확인했다. 10월 3일 품질·요청 집계는 기존 연구 전사본 수준을 유지한다. 10월 15일 결과와 보관 해시는 직접 대조했으며 의미 판정·제품 수용은 보존된 수동 검토 기록이다. 사용자 제공 ChatGPT 검색 기록은 9월 26일 최초 전환 이유·5건 테스트 보고, 10월 3일 논의·중단 조건·사용량 보고, 10월 16일 fallback 유지 판단을 검색 근거 수준으로 보존한다. 10월 29일 호출 용량 판단·한도 소진 회고·더 넓은 외부 반응에 대한 기억은 후속 사용자 진술로 구분했다.
+설정 변경과 공개한 당시 코드를 직접 확인했다. 10월 3일 원본 요청·응답·수동 판정·정확한 옵션·두 실행의 요청 대응과 reasoning 추가 비교를 직접 대조했다. 10월 15일 결과와 보관 해시도 직접 대조했으며 의미 판정·제품 수용은 보존된 수동 검토 기록이다. 사용자 제공 ChatGPT 검색 기록은 9월 26일 최초 전환 이유·5건 테스트 보고, 10월 3일 논의·사용량 보고, 10월 16일 fallback 유지 판단을 검색 근거 수준으로 보존한다. 10월 3일 Codex 중단 조건·설정 유지 결정은 별도로 사용자 입력 원문을 확인했다. 10월 29일 호출 용량 판단·한도 소진 회고·더 넓은 외부 반응에 대한 기억은 후속 사용자 진술로 구분했다.
 
-남은 사항은 10월 3일 원본 응답/attempt 파일·정확한 옵션, 별도 요청 이력의 대응, Provider 측 개별 요청 차감, 초기 Qwen 실패 ledger, 원본 ChatGPT 대화와 사용자가 기억하는 다른 외부 게시글이다. Groq의 10월 15일 의미 품질·정확한 quota 종류도 미확인이다. 역사적 한도에는 해당 기록의 시점을 유지한다.
+남은 사항은 Provider 측 개별 요청 차감·다른 계정 활동·금전 청구, 초기 Qwen 실패 ledger, 원본 ChatGPT 대화·AI Studio 화면과 사용자가 기억하는 다른 외부 게시글이다. Groq의 10월 15일 의미 품질·정확한 quota 종류도 미확인이다. 10월 3일 원본 응답·옵션·요청 대응의 확인 결과와 역사적 한도는 각각의 기록 시점을 유지한다.
 
 전체 파일 Excerpt는 초기 quota 처리·canonical evidence/runner 계약·transport/diagnostic 동작처럼 작은 구현·테스트 단위를 보존한다. 부분 Excerpt는 고정 입력 비교와 채택한 runtime의 회귀를 선택하고 원래 문장·import·참조를 유지한다. 공통 정책은 fallback 조건·header/body 파싱·안전한 projection이 함께 동작해 전체를 보존했다. Reconstructed JSON은 원본 설정·결과를 선택하고 편집상 그룹화·집계 계산·이전 전사본·후속 사용자 진술을 구분한다. 선택한 실제 응답 두 개는 실패 근거를 보존하며 Knowledge 전체 payload와 credential은 비공개로 유지한다. Mixed 소스는 필요하지 않았다.
 
@@ -1294,7 +1326,8 @@ Corpus는 27 sources·372 chunks였다. Question bank canonical-portfolio conten
 | [availability/failure-policy.test.ts](../cases/model-selection-quality-availability/availability/failure-policy.test.ts#L1-L46)<br>Excerpt · 전체 원본 | `c5d615c6d4068a14daaa841c15dc8992ffda2fdc`<br>`sveltekit/src/lib/server/providers/failure-policy.test.ts`<br>1–46 | `20484a0a6bd6dbc11079b434c2b817250a24ef105fe160db546214d1a94101b3` → `20484a0a6bd6dbc11079b434c2b817250a24ef105fe160db546214d1a94101b3` |
 | [runtime/groq-fallback.excerpt.test.ts](../cases/model-selection-quality-availability/runtime/groq-fallback.excerpt.test.ts#L1-L93)<br>Excerpt · 부분 발췌 | `0baebd9f242d88ffa15ef1953204c391ae97e623`<br>`sveltekit/src/lib/server/generation/orchestrator.test.ts`<br>1–26, 29–94 | `b14c3609ddc9b572f5d30caf2b1748bc9904166ffbf0380bf162448e5dbf5024` → `605f8bfae3d99425f5ad72d7330a9313a69297df277fbb65413e2ef5baff9092` |
 | [evidence/model-selection-history.json](../cases/model-selection-quality-availability/evidence/model-selection-history.json#L1-L242)<br>Reconstructed | Reconstructed; 아래 입력표 | `c63e9034f76e2e24b41cb0f5fd20b2bab45badf7558bb39abfff598bc33e5223` |
-| [evidence/october03-reported-results.json](../cases/model-selection-quality-availability/evidence/october03-reported-results.json#L1-L101)<br>Reconstructed | Reconstructed; 아래 입력표 | `b2d4572b8eb1bd0274382ceddfe7e8d301515457694b6ada4f6640a9321c6fe8` |
+| [evidence/october03-reported-results.json](../cases/model-selection-quality-availability/evidence/october03-reported-results.json#L1-L4095)<br>Reconstructed | Reconstructed; 아래 입력표 | `a5fef1700b72c31ce09a565f2273077858a67cd00d0a603120d387d393b61875` |
+| [evidence/october03-reasoning-results.json](../cases/model-selection-quality-availability/evidence/october03-reasoning-results.json#L1-L1709)<br>Reconstructed | Reconstructed; inputs below | `49b5f81c218db20296ef99e42b3eb74d29c2680c7bf684fe413df2e82c4f72b2` |
 | [evidence/developer-clarification-20261029.json](../cases/model-selection-quality-availability/evidence/developer-clarification-20261029.json#L1-L184)<br>Reconstructed | Reconstructed; 아래 입력표 | `d209fd34242c8932f6488f187a56f37bfbffa77e90f78ef032887c261c0f3069` |
 | [evidence/october15-observed-results.json](../cases/model-selection-quality-availability/evidence/october15-observed-results.json#L1-L2302)<br>Reconstructed | Reconstructed; 아래 입력표 | `927ed5e3880e8915d0865cbdb44d6cb834f89b67c137a7df3b4b248e2ae910e8` |
 
@@ -1310,6 +1343,8 @@ Corpus는 27 sources·372 chunks였다. Question bank canonical-portfolio conten
 | `evidence/model-selection-history.json` | `e7007172cc7a5171948659c4f1ceb6fd65dd1332` / `config/mosaic.json`<br>`fade19dc3b7d4080c23a66518e4716b9419f6af70e377e573958216bf65dee20` |
 | `evidence/october03-reported-results.json` | `3a6e2e477fa5a66fe67656b802c4bf9bdaf59218` / `docs/research/synethos-development-history.md`<br>`31c98a7c6b2fe222ca9b116130a857c316008b8cb79550425aba50e491ebd2a3` |
 | `evidence/october03-reported-results.json` | `3a6e2e477fa5a66fe67656b802c4bf9bdaf59218` / `docs/research/synethos-evidence-register.md`<br>`6f173ba83687e68daaa115623404e159af8efa37fc454c0e42559e761303bdf7` |
+| `evidence/october03-reported-results.json` | [복구 근거 등록부](evidence/recovered-source-register.json)의 HOME06-3WAY·HOME06-PRIOR·HOME06-RETRY·HOME06-LEDGER·HOME06-DECISION·HOME06-QUOTA: 원본 hash, 120개 결과와 24개 요청 대응을 2026-10-29 대조. |
+| `evidence/october03-reasoning-results.json` | [복구 근거 등록부](evidence/recovered-source-register.json)의 HOME06-REASONING·HOME06-REASONING-METRICS·HOME06-REASONING-EXECUTION: 보고서·집계·실행 hash와 77개 요청·응답·판정 projection. |
 | `evidence/developer-clarification-20261029.json` | `Tessera case 06 user statements and ChatGPT history-search results supplied on 2026-10-29`<br>Direct statements and user-delivered search results in this task; original ChatGPT messages unavailable, no Git object or file hash. |
 | `evidence/developer-clarification-20261029.json` | `https://discuss.ai.google.dev/t/handling-429-503-errors-from-the-gemini-api/124640/79`<br>Public forum user report directly inspected on 2026-10-29; model/tier/sample identified in the record. |
 | `evidence/developer-clarification-20261029.json` | `https://discuss.ai.google.dev/t/persistent-37-unavailable-503-on-generatecontent-with-gemini-3-6-flash-paid-tier-1-zero-429s-counttokens-unaffected/179971`<br>Public forum user report directly inspected on 2026-10-29; model/tier/sample identified in the record. |
@@ -1366,8 +1401,16 @@ Corpus는 27 sources·372 chunks였다. Question bank canonical-portfolio conten
 
 ### 공개 준비 검증
 
-전체 파일 Excerpt 12개는 Git 원본 바이트와, 부분 Excerpt 3개는 선언한 모든 원본 범위와 일치했다. TypeScript 15개는 구문 파싱을 통과했다. JSON 재구성 4개는 파싱·입력 해시 57개 대조·설정 projection·원본 결과 집계·대표 응답 대조·출처 연결 검증을 통과했다. 10월 15일 보관 원본 43개와 구현/문서 10개도 기록된 SHA-256과 일치했다.
+전체 파일 Excerpt 12개는 Git 원본 바이트와, 부분 Excerpt 3개는 선언한 모든 원본 범위와 일치했다. TypeScript 15개는 구문 파싱을 통과했다. 기존 JSON 재구성 4개는 최초 공개 준비에서 파싱·입력 해시 57개 대조·설정 projection·원본 결과 집계·대표 응답 대조·출처 연결 검증을 통과했다. 10월 15일 보관 원본 43개와 구현/문서 10개도 기록된 SHA-256과 일치했다.
 
-40문항 원본 결과로 단일 Generation dispatch 80회·성공 구조 검사 52개·rate-limit 실패 28개·성공 표본 지연 통계·수동 판정 32/6/2를 대조했다. 10월 3일 검색 시각 7개·9월 26일 근사 시각 3개·10월 16일 운영 판단·AI Studio 17/20 보고·사용자 quota 판단의 출처를 대조했다. 8K TPM 논의와 10월 15일 quota 원인 미확인은 범위를 구분했다. 영문·한글의 코드/외부 자료 링크 대상과 해시가 일치한다. 로컬 링크 622개의 파일·헤딩·라인 범위 검증을 통과했다. 사례 01~05의 본문과 공개 파일 112개를 보존했다.
+40문항 원본 결과로 단일 Generation dispatch 80회·성공 구조 검사 52개·rate-limit 실패 28개·성공 표본 지연 통계·수동 판정 32/6/2를 대조했다. 10월 3일 검색 시각 7개·9월 26일 근사 시각 3개·10월 16일 운영 판단·AI Studio 17/20 보고·사용자 quota 판단의 출처를 대조했다. 8K TPM 논의와 10월 15일 quota 원인 미확인은 범위를 구분했다. 영문·한글의 코드/외부 자료 링크 대상과 해시가 일치한다. 로컬 링크 622개의 파일·헤딩·라인 범위 검증을 통과했다. 사례 01~05의 공개 파일 112개를 보존했다. 이후 본문 근거 보강은 아래 추가 검증으로 구분한다.
 
 새 코드·선택한 응답·문서에서 credential 값·비공개 Knowledge payload·비공개 저장소 URL·로컬 사용자 경로·운영 접근 정보를 점검했다. 검증은 당시 소스 열람·로컬 파싱/계산·연결한 공개 포럼 원문 열람으로 수행했다. 당시 애플리케이션 테스트·모델 호출·인덱스 빌드·실시간 서버 접근은 수행하지 않았다.
+
+### 10월 29일 원본 복구·추가 검증
+
+집 PC의 대표 원본 19개와 5개 실험 디렉터리의 파일 1146개를 byte hash로 대조했다. 원본 보관 세션의 메시지 11개와 사용자 입력 이력 14개의 text hash·UTC/KST 시각을 확인했다. 사례 01의 runtime 파일 6개, 사례 03·04의 보관 세션, 사례 06의 기존 등록 보고서·결정 파일 3개는 기존 해시와 일치했다.
+
+Full40의 요청·응답·결과·당시 수동 판정 각 120개, 직전/재시도 ledger 24건과 reasoning 요청 77건을 대조했다. 요청 본문 hash와 응답 대응·분류 집계·성공 지연을 확인했으며 reasoning 요청은 baseline과 공통 입력이 같고 reasoning 옵션만 달랐다. GPT-OSS high의 품질 분모는 성공 36문항·required claim 44개·양성 질문 33개로 확인하고, 실패 QB37을 포함한 시도 전체 집계와 분리했다.
+
+공개 JSON 14개가 파싱됐고 영문·한글의 파일/외부 링크와 SHA-256 집합이 일치했다. README 2개와 개발 기록 2개의 로컬 링크 656개는 파일·헤딩·라인 범위 검증을 통과했다. 기존 소스·테스트 119개와 Synethos 원본을 보존했으며 Synethos working tree는 clean이었다. 변경한 기존 파일은 개발 기록 2개와 근거 JSON 2개이고, reasoning 근거 JSON과 공통 복구 근거 등록부를 추가했다. 공개 대상에서 credential 값·로컬 사용자 경로·비공개 저장소 URL·Knowledge 전체 payload를 점검했다. 검증은 원본 열람과 로컬 계산으로 수행했으며 새 모델 호출·과거 실험 재실행·애플리케이션 테스트·index build·서버 접근은 수행하지 않았다.

@@ -1,22 +1,28 @@
 {
   "classification": "Reconstructed",
-  "evidenceLevel": "Previously transcribed historical reports; registered originals unavailable in this checkout.",
+  "evidenceLevel": "Original reports, request bodies, provider responses, ledgers, results and historical manual reviews directly inspected on 2026-10-29.",
   "registeredReports": [
     {
       "path": "tmp/evaluation/generation-model-comparison/2026-10-03-full40-3way-1/final-report.md",
-      "registeredSha256": "a82073631b743462c5a31051071ba994f9339b346849e29bbe171375ace7c231"
+      "registeredSha256": "a82073631b743462c5a31051071ba994f9339b346849e29bbe171375ace7c231",
+      "verifiedSha256": "a82073631b743462c5a31051071ba994f9339b346849e29bbe171375ace7c231",
+      "verifiedOn": "2026-10-29"
     },
     {
       "path": "tmp/evaluation/generation-model-comparison/2026-10-03-retry-primary-1/report.md",
-      "registeredSha256": "9e29fbbe0540b6a90aa138b1b8754143dfa0f71c2da1f22f8bc055e7f8a9602e"
+      "registeredSha256": "9e29fbbe0540b6a90aa138b1b8754143dfa0f71c2da1f22f8bc055e7f8a9602e",
+      "verifiedSha256": "9e29fbbe0540b6a90aa138b1b8754143dfa0f71c2da1f22f8bc055e7f8a9602e",
+      "verifiedOn": "2026-10-29"
     },
     {
       "path": "tmp/evaluation/generation-model-comparison/2026-10-03-retry-primary-1/production-candidate-decision.json",
-      "registeredSha256": "d3f9dadf3cbec2e6b7a182731a6963a8f3c68ab9efdb1d272ca3b37e9422db1b"
+      "registeredSha256": "d3f9dadf3cbec2e6b7a182731a6963a8f3c68ab9efdb1d272ca3b37e9422db1b",
+      "verifiedSha256": "d3f9dadf3cbec2e6b7a182731a6963a8f3c68ab9efdb1d272ca3b37e9422db1b",
+      "verifiedOn": "2026-10-29"
     }
   ],
   "threeWay": {
-    "condition": "Same saved evidence, question, prompt and schema; fresh full40; 40 successful responses per model. Exact archived model options are unavailable.",
+    "condition": "Fresh full40 with the same saved question, evidence/order/citation IDs, prompt and schema across three models; 40 successful responses per model. Provider-specific output caps and transport schemas retained below.",
     "successfulRequests": 120,
     "results": [
       {
@@ -43,7 +49,3580 @@
         "contractFailures": 0,
         "meanGenerationLatencyMs": 1524
       }
-    ]
+    ],
+    "head": "bbac3a6d11993f3c3e3d80eec44df86e7779073d",
+    "execution": {
+      "startedAt": "2026-10-02T20:10:24.134Z",
+      "endedAt": "2026-10-02T20:53:01.835Z",
+      "wallClockMs": 2557701,
+      "httpCalls": 120,
+      "perModel": {
+        "A": {
+          "attempts": 40,
+          "httpSuccess": 40,
+          "schemaSuccess": 40,
+          "completeUsable": 40
+        },
+        "B": {
+          "attempts": 40,
+          "httpSuccess": 40,
+          "schemaSuccess": 40,
+          "completeUsable": 40
+        },
+        "C": {
+          "attempts": 40,
+          "httpSuccess": 40,
+          "schemaSuccess": 40,
+          "completeUsable": 40
+        }
+      },
+      "stopped": {},
+      "fatal": null,
+      "otherApiCalls": {
+        "queryEmbedding": 0,
+        "documentEmbedding": 0,
+        "retrieval": 0,
+        "reranker": 0,
+        "indexRebuild": 0
+      },
+      "retry": 0,
+      "fallback": 0,
+      "preservation": {
+        "passed": true,
+        "trackedSourceChanges": 0,
+        "environmentChanges": 0,
+        "historicalChanges": 0,
+        "head": "bbac3a6d11993f3c3e3d80eec44df86e7779073d",
+        "workingTree": ""
+      }
+    },
+    "options": {
+      "gemini35": {
+        "maxOutputTokens": 32768,
+        "thinkingConfig": "omitted; production default/minimal",
+        "temperature": "omitted",
+        "responseMimeType": "application/json"
+      },
+      "cohere": {
+        "maxTokens": 32768,
+        "thinking": "provider-default",
+        "temperature": "omitted",
+        "responseFormat": "json_object with schema"
+      },
+      "gptOss": {
+        "maxCompletionTokens": 4096,
+        "reasoningEffort": "omitted; provider default medium as recorded at the time",
+        "responseFormat": "json_schema",
+        "strict": true,
+        "stream": false,
+        "tools": "omitted"
+      }
+    },
+    "conditions": {
+      "questionBankVersion": "1",
+      "profile": "full-40",
+      "embeddingSpace": "Gemini embedding-2 / 768; saved production evidence",
+      "retry": 0,
+      "fallback": 0,
+      "groqMinimumRequestSpacingMs": 65000,
+      "scope": "One sequential run; latency excludes between-request pacing; exact provider request configuration is retained, independent long-term availability is unmeasured."
+    },
+    "perResponse": [
+      {
+        "caseId": "QB01",
+        "variant": "A",
+        "model": "gemini-3.5-flash-lite",
+        "sharedInputHash": "9b67afa1e70a1eded095a84a25464c3232d5957946e3e10a84228aac30e7e48c",
+        "evidenceHash": "88d8786293931de5d371c5c2aa27f5c1bcc17822023ffeae64270cb826218639",
+        "wireBodyHash": "5a642dfcde89673ac6de7414a60171acbb7c4ecef12ecc655f85bbfb43c758be",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 1507.9378000000002,
+        "historicalClassification": "fully correct",
+        "claimStatuses": [
+          {
+            "claimId": "c1",
+            "status": "F",
+            "deliveredFull": true
+          }
+        ],
+        "sourceSha256": {
+          "requests": "c7d2db7c5a00cc3ceda4e5c4b193acca604c0f8712c08646f40cdbeeba6d2f74",
+          "responses": "b2c09fd6273e1f0c083badad40695017b4f1b905ba2a3f407a9aee1bcdb4393c",
+          "results": "fb5b13e551068cdd6d2fc018fe45303c8724e388fa8c895a7f941ab59c35eb2a",
+          "manual-review": "37e7d16626381016caae805804272a29ebc23d28fb928cdee5586a6068e76df2"
+        }
+      },
+      {
+        "caseId": "QB01",
+        "variant": "B",
+        "model": "command-a-plus-05-2026",
+        "sharedInputHash": "9b67afa1e70a1eded095a84a25464c3232d5957946e3e10a84228aac30e7e48c",
+        "evidenceHash": "88d8786293931de5d371c5c2aa27f5c1bcc17822023ffeae64270cb826218639",
+        "wireBodyHash": "183e9e8f73c4788ce1b1217658b301c18cbba1453011da57a7d75a95629a0577",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 1710.3242,
+        "historicalClassification": "fully correct",
+        "claimStatuses": [
+          {
+            "claimId": "c1",
+            "status": "F",
+            "deliveredFull": true
+          }
+        ],
+        "sourceSha256": {
+          "requests": "25a29f039a74f65cc1b8eae9aed0fbec26a89c3b39fb8ab5cc74315757c5b7d7",
+          "responses": "a76a0c6a55d0e8ac4ddda25838daf409f8c5c5fc267656a48c02abf0a2695f7f",
+          "results": "40b118fd2af7df4fdfd80881bce8bcc30cb2a395690a7598fc31bc07c4c362d2",
+          "manual-review": "b1a2c997eed30e83e44e0a278a71a92102bfa896e426887f3dcfbce5dff889c5"
+        }
+      },
+      {
+        "caseId": "QB01",
+        "variant": "C",
+        "model": "openai/gpt-oss-120b",
+        "sharedInputHash": "9b67afa1e70a1eded095a84a25464c3232d5957946e3e10a84228aac30e7e48c",
+        "evidenceHash": "88d8786293931de5d371c5c2aa27f5c1bcc17822023ffeae64270cb826218639",
+        "wireBodyHash": "266a5995a2466096f4b148648b2a631279b7297d8065af3653d9d9e2827f3f7c",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 962.4751999999999,
+        "historicalClassification": "fully correct",
+        "claimStatuses": [
+          {
+            "claimId": "c1",
+            "status": "F",
+            "deliveredFull": true
+          }
+        ],
+        "sourceSha256": {
+          "requests": "3333b0200dbad4c56d02fd0ceec63f30ad8229827a54bae09fc0eb632642a8a6",
+          "responses": "0394f96625d0b73a2dcd594aff812d656dfad3507488c2eca810da3c8e64395a",
+          "results": "1081b0473d0b6fd84b4251421b2f1869ba2611ea9f8a66767db32536605e25d3",
+          "manual-review": "b3307d866e4b06ca101105f9b46a7498e25d364c8883852bd8dd68868b423f8d"
+        }
+      },
+      {
+        "caseId": "QB02",
+        "variant": "A",
+        "model": "gemini-3.5-flash-lite",
+        "sharedInputHash": "2953bae4af547766e2728dfb9ce6411bb34f958a975f39d7cc8ee6dfa6e13244",
+        "evidenceHash": "49432b6685a3eba4305bf588b7abd87cf9466e22f6d8a2ec7e286c237262efbd",
+        "wireBodyHash": "c3a7fcc044a5e8db84492fa90d542d5d7d669f49b3186d5a4ee82996721a739f",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 1840.0402000000004,
+        "historicalClassification": "fully correct",
+        "claimStatuses": [
+          {
+            "claimId": "c1",
+            "status": "F",
+            "deliveredFull": true
+          }
+        ],
+        "sourceSha256": {
+          "requests": "94a2f60fb1fe5cb93b0b7b47c0b4cde75f6ff7931dfa197b8898dd48858a6094",
+          "responses": "90e062c53b3df151fb7ff69cda42f60c084b7d32e8aee149f0868510bd5dba9e",
+          "results": "e1b4d796081d35cbf4d2ba370a7d02a41b286e1129c4ba63f18c6ae7c617fffa",
+          "manual-review": "a4d82f6bf685ac279414ee62007d3c588df306807a3f12185bdf9673b325dc15"
+        }
+      },
+      {
+        "caseId": "QB02",
+        "variant": "B",
+        "model": "command-a-plus-05-2026",
+        "sharedInputHash": "2953bae4af547766e2728dfb9ce6411bb34f958a975f39d7cc8ee6dfa6e13244",
+        "evidenceHash": "49432b6685a3eba4305bf588b7abd87cf9466e22f6d8a2ec7e286c237262efbd",
+        "wireBodyHash": "bcec23471431391a3273b00da615e1693e906b9dde124cffe00a2adb8a718bdc",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 1920.500100000001,
+        "historicalClassification": "fully correct",
+        "claimStatuses": [
+          {
+            "claimId": "c1",
+            "status": "F",
+            "deliveredFull": true
+          }
+        ],
+        "sourceSha256": {
+          "requests": "66bc94137cd5f72f288e546e376757ad458e2bf99225b69858617867287e0bf8",
+          "responses": "68bfcab1abb684ad9ca5a857d794560461892f9366a2dbb2582d32f1e4e6d9a6",
+          "results": "71d20a48fb1423af376b1ccb33837b28ebf1e60820f7168f88de9fdea69a5ad7",
+          "manual-review": "4e0dc5411d0c1a402270ebc8ad3adc52cd0932af545abb0e9cfa3b5ec70b0f45"
+        }
+      },
+      {
+        "caseId": "QB02",
+        "variant": "C",
+        "model": "openai/gpt-oss-120b",
+        "sharedInputHash": "2953bae4af547766e2728dfb9ce6411bb34f958a975f39d7cc8ee6dfa6e13244",
+        "evidenceHash": "49432b6685a3eba4305bf588b7abd87cf9466e22f6d8a2ec7e286c237262efbd",
+        "wireBodyHash": "92f15a91ee5a1ed7291528c5a62a5a019fb9fa160084d993b49952e1c828e2d4",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 1279.1016999999993,
+        "historicalClassification": "fully correct",
+        "claimStatuses": [
+          {
+            "claimId": "c1",
+            "status": "F",
+            "deliveredFull": true
+          }
+        ],
+        "sourceSha256": {
+          "requests": "6d3eb44e964a1644b6ad2049c130e0ef74f8b3fb90387b7244e4bca8cc691c78",
+          "responses": "b18aa33645541caf9728a4210c479b309682e475aebef878d69b237193808480",
+          "results": "dd0cfa4dd79fd193670c3f73914b1613d21fc7509d77ec8ccc70d299ae9890bf",
+          "manual-review": "e3292257faa799cea43b1a2aee8085dd128492c18d026e7c144d54192608a27d"
+        }
+      },
+      {
+        "caseId": "QB03",
+        "variant": "A",
+        "model": "gemini-3.5-flash-lite",
+        "sharedInputHash": "3fafad5a51f98a52d4565f319aa633b2addc7ffb29a556ae6e672e8596eae846",
+        "evidenceHash": "52fb6557171f453b5d4ad3e1022344cd987df0b316a8193bec08200c61dd12ae",
+        "wireBodyHash": "fad93b79318e3636665d537f7727d3414166d675c26d5ef705ccb0a1c8df8968",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 1475.378899999996,
+        "historicalClassification": "fully correct",
+        "claimStatuses": [
+          {
+            "claimId": "c1",
+            "status": "F",
+            "deliveredFull": true
+          }
+        ],
+        "sourceSha256": {
+          "requests": "e4624e504072a0e5cd7dc91c7eda63975371066e18f083c0da3d7bfdfe8e1f45",
+          "responses": "09b896b5abdf921f52bed589e9ae2c796cd02f8c904f0e0c586b561f3710d3e2",
+          "results": "4402f8513bcc28b7d780b24f9516027fcb597f372d913572fd6f966c8a45a18a",
+          "manual-review": "0cacc1f37e51b2b010ca46b4bd8394b447c6d9aa1a3ac46e6239a46fbb151fea"
+        }
+      },
+      {
+        "caseId": "QB03",
+        "variant": "B",
+        "model": "command-a-plus-05-2026",
+        "sharedInputHash": "3fafad5a51f98a52d4565f319aa633b2addc7ffb29a556ae6e672e8596eae846",
+        "evidenceHash": "52fb6557171f453b5d4ad3e1022344cd987df0b316a8193bec08200c61dd12ae",
+        "wireBodyHash": "3c73cdeab6757f0ce769f94d4fe0f4fcf041785891803ab6877b38fb43aef33f",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 3077.0742000000027,
+        "historicalClassification": "fully correct",
+        "claimStatuses": [
+          {
+            "claimId": "c1",
+            "status": "F",
+            "deliveredFull": true
+          }
+        ],
+        "sourceSha256": {
+          "requests": "c14d438e37a2e26cefd4686e8034ffade6435dc036af9b5e22e375c8143039ed",
+          "responses": "399adba7d24b1a2a47f868bd0512607531432ca8d09b4df22f2d1a05a3669004",
+          "results": "9a90e95c86b85784ccfbe9e0e755249b97891cc28ffcf252a423ee90843c9cbd",
+          "manual-review": "36d97648e0396cc7d595548a4a94f14b05797a1aa18278b1d939624c2934b5c5"
+        }
+      },
+      {
+        "caseId": "QB03",
+        "variant": "C",
+        "model": "openai/gpt-oss-120b",
+        "sharedInputHash": "3fafad5a51f98a52d4565f319aa633b2addc7ffb29a556ae6e672e8596eae846",
+        "evidenceHash": "52fb6557171f453b5d4ad3e1022344cd987df0b316a8193bec08200c61dd12ae",
+        "wireBodyHash": "7fbb96cba2c6dca5156786541f4a7c96884e3908795bfb90f67c9aab06aa911d",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 1527.5959999999905,
+        "historicalClassification": "fully correct",
+        "claimStatuses": [
+          {
+            "claimId": "c1",
+            "status": "F",
+            "deliveredFull": true
+          }
+        ],
+        "sourceSha256": {
+          "requests": "096d7dbace31d7932ca06ebfa1339756e77abbceaea2c7a432ea0957ad9820a5",
+          "responses": "6f613fb5270f07b54a729e47a40263690a7ea89aca851cfb8916b61b62b7d152",
+          "results": "d8db9c3a6871abe46cd1b1a47c1f057316ebf75ad46b37f141412e601f26f153",
+          "manual-review": "c00fa73a68a88de9b8092c7352a5257e12422334e4aee58c7a85e8bed618e329"
+        }
+      },
+      {
+        "caseId": "QB04",
+        "variant": "A",
+        "model": "gemini-3.5-flash-lite",
+        "sharedInputHash": "af70df8c779084a999dd07edb9d4000f76d707c437fbc853c3144abc90e0299c",
+        "evidenceHash": "1aa1d7098ba914faad598e1aa49cd673795ea7aab2d4a524d4fccaec137bd482",
+        "wireBodyHash": "56507c8d7fb969ec3d35a545ddc60b3b8826aa9bd98bff51dd7ec611afda597e",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 1393.0417000000016,
+        "historicalClassification": "fully correct",
+        "claimStatuses": [
+          {
+            "claimId": "c1",
+            "status": "F",
+            "deliveredFull": true
+          }
+        ],
+        "sourceSha256": {
+          "requests": "a5a4606c1f75d867b5753a495991633bb347d1489fc176a0c22011014ac6dfde",
+          "responses": "c1347d6f0e1988b273fad7fbf0a9c7477f4b07d48889a6c7e678bb7d31d304a8",
+          "results": "e8e30af9f8d0a15a22323a433483ddd75e2f4f29496bedd1f1a50b3de1f12b1d",
+          "manual-review": "9c0b35f71a41c1bd7aa157562833b1b4386ac21dc959a52ea180ee32cd37c5e8"
+        }
+      },
+      {
+        "caseId": "QB04",
+        "variant": "B",
+        "model": "command-a-plus-05-2026",
+        "sharedInputHash": "af70df8c779084a999dd07edb9d4000f76d707c437fbc853c3144abc90e0299c",
+        "evidenceHash": "1aa1d7098ba914faad598e1aa49cd673795ea7aab2d4a524d4fccaec137bd482",
+        "wireBodyHash": "036594efe999ab14658372635eca7ae30428e3765ba083cc729f8babacf3d8fd",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 5593.955399999977,
+        "historicalClassification": "partial",
+        "claimStatuses": [
+          {
+            "claimId": "c1",
+            "status": "O",
+            "deliveredFull": false
+          }
+        ],
+        "sourceSha256": {
+          "requests": "3936fc366a8a43a707dab7ad5a797634d6197c18f901d1936f87843180acedb7",
+          "responses": "ddff7a20400e8153818b3e54ace18049453baf4f4b8da4429b853efb32db785b",
+          "results": "6fc2383cc751bee295ff37accdce89a26e5a72de01992b2136a0b48738a127b5",
+          "manual-review": "fe664419e517fd80dd360826243a2a788a364c3574aa0c4400600a467bdb6084"
+        }
+      },
+      {
+        "caseId": "QB04",
+        "variant": "C",
+        "model": "openai/gpt-oss-120b",
+        "sharedInputHash": "af70df8c779084a999dd07edb9d4000f76d707c437fbc853c3144abc90e0299c",
+        "evidenceHash": "1aa1d7098ba914faad598e1aa49cd673795ea7aab2d4a524d4fccaec137bd482",
+        "wireBodyHash": "b8028e2a6221984fb7989ff766e6a8d1459f32883a947a94b2a5412ffd42982d",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 1247.4339999999793,
+        "historicalClassification": "fully correct",
+        "claimStatuses": [
+          {
+            "claimId": "c1",
+            "status": "F",
+            "deliveredFull": true
+          }
+        ],
+        "sourceSha256": {
+          "requests": "984baee2d5ee66036d218afb0f4e05e33028b78bcc163365f67234b99898ca2d",
+          "responses": "34d0ccbed3b8230e4fc0fd8f76421ee974cb4e0803c5e24c27d07eebc7c7fd6a",
+          "results": "a8f91f7ab13dd8b339e972decb8bb97ea9efd7cdb0306b93df3f83b8faf2245d",
+          "manual-review": "c335342a2a743d0ee745dc6dda7765ccce79d202464ea894e26ab80081c9d96a"
+        }
+      },
+      {
+        "caseId": "QB05",
+        "variant": "A",
+        "model": "gemini-3.5-flash-lite",
+        "sharedInputHash": "bd7d667014e282ae0418f05d4e2342ebb4f74ebb77e2846f003cb82f223e0fdc",
+        "evidenceHash": "34f32178b01f65b704f7eba2994ad71671112f12e0cf910bb756905922d18680",
+        "wireBodyHash": "450853df4dfbe823ef2a4df109b42d85fac657e7bac0f79ef23b837ab3d06f29",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 1474.252199999988,
+        "historicalClassification": "fully correct",
+        "claimStatuses": [
+          {
+            "claimId": "c1",
+            "status": "F",
+            "deliveredFull": true
+          }
+        ],
+        "sourceSha256": {
+          "requests": "cfccef305fb1cb94afc1a2940fc5f9cb15bbe954b5bf78fa6f69e8141a23f703",
+          "responses": "ea607b63cdd9c01296ebc973b0339c68d8917a9d90ac3b3f900442f0864d0116",
+          "results": "e824d09923d8ae33377afa6d3802d8344c9e4ff197fbf3abc05699a2febcbea2",
+          "manual-review": "92aede86441cf824e2c3f199038bb73e8b83356c72a0d6bfd7d3d686ee08a16c"
+        }
+      },
+      {
+        "caseId": "QB05",
+        "variant": "B",
+        "model": "command-a-plus-05-2026",
+        "sharedInputHash": "bd7d667014e282ae0418f05d4e2342ebb4f74ebb77e2846f003cb82f223e0fdc",
+        "evidenceHash": "34f32178b01f65b704f7eba2994ad71671112f12e0cf910bb756905922d18680",
+        "wireBodyHash": "1e06bf127b7409f8fd1775a974a0973f31d19e0fd91bf01ab6b01fb7c22fb330",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 2291.2093999999925,
+        "historicalClassification": "fully correct",
+        "claimStatuses": [
+          {
+            "claimId": "c1",
+            "status": "F",
+            "deliveredFull": true
+          }
+        ],
+        "sourceSha256": {
+          "requests": "1ccf1f9ce7674c35fa239dc6b894d4e7f5759e376beb640c8ca07a943b093e54",
+          "responses": "5e5d7b01bb3cdc5416cdc8ae9251e0dcb886eeba20d147857fd2e5f77e80c959",
+          "results": "191885f49ef37d73983da3d3fa186fbdf5802bb12fac1f28a346eed60a180f1e",
+          "manual-review": "4bb778daf16634ea14ac00936be8e7d62ee004af303268b75bd54a5b342e444e"
+        }
+      },
+      {
+        "caseId": "QB05",
+        "variant": "C",
+        "model": "openai/gpt-oss-120b",
+        "sharedInputHash": "bd7d667014e282ae0418f05d4e2342ebb4f74ebb77e2846f003cb82f223e0fdc",
+        "evidenceHash": "34f32178b01f65b704f7eba2994ad71671112f12e0cf910bb756905922d18680",
+        "wireBodyHash": "e7660ad228a3350ecbd334be5d9a027c240f98d6ad07ac453bfa5b4eaaf40300",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 876.5835999999545,
+        "historicalClassification": "fully correct",
+        "claimStatuses": [
+          {
+            "claimId": "c1",
+            "status": "F",
+            "deliveredFull": true
+          }
+        ],
+        "sourceSha256": {
+          "requests": "4579d9115728cf822b7845fb56fe71e3bcce7289fc5719eef5a5206843abe2a4",
+          "responses": "04873122a71c29c6db4cdf5f2be9f1cfea6153d8a4830d22445f2a77301c0879",
+          "results": "fe3c049cf59d600b97563b88ef29b1f3bf817fd945a29f80975add43a9a24df9",
+          "manual-review": "ed4b3a459b7b0c6bebb9259674afc0fa933aaea0b3a6e3ea57943307882bba66"
+        }
+      },
+      {
+        "caseId": "QB06",
+        "variant": "A",
+        "model": "gemini-3.5-flash-lite",
+        "sharedInputHash": "c24dd1662ba124a2cf8776d69b85d2cb555c5edf165ca146c196420dae168442",
+        "evidenceHash": "3b70cdf4e983ab8e24c8562c9bbb4153ce827d829d417bfb02c367f39e8c4ec2",
+        "wireBodyHash": "023875985186fd904b2af95dbc3d7dc81234dc3a8660c383c31059e13f49c682",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 1542.5324000000255,
+        "historicalClassification": "fully correct",
+        "claimStatuses": [
+          {
+            "claimId": "c1",
+            "status": "F",
+            "deliveredFull": true
+          }
+        ],
+        "sourceSha256": {
+          "requests": "012f5db976393383007650c2b73c6a2b5f2afdabc4644357a4424bb079c1ae7a",
+          "responses": "29396589a9d69f48ec31ba08a3511aef0b5ec23b002694c6440288f8464c3dac",
+          "results": "f6119303bc59b24d0e2822fa18249381b72547a7a5e45ad3b19703eff44b3c87",
+          "manual-review": "d980010fd222d59ee64a58250fdde64f75fb906bcb8130428f975f40ab2d865c"
+        }
+      },
+      {
+        "caseId": "QB06",
+        "variant": "B",
+        "model": "command-a-plus-05-2026",
+        "sharedInputHash": "c24dd1662ba124a2cf8776d69b85d2cb555c5edf165ca146c196420dae168442",
+        "evidenceHash": "3b70cdf4e983ab8e24c8562c9bbb4153ce827d829d417bfb02c367f39e8c4ec2",
+        "wireBodyHash": "710f889bc241414cea777ba15db1224a6691b9f30677df32e5d1a4f27e0d024f",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 2350.285900000017,
+        "historicalClassification": "fully correct",
+        "claimStatuses": [
+          {
+            "claimId": "c1",
+            "status": "F",
+            "deliveredFull": true
+          }
+        ],
+        "sourceSha256": {
+          "requests": "81e53c0cc23f155f520635fbd9b6086a9c8937d3408a52e85ddfd2ec0ca0f9ae",
+          "responses": "95b5518fae7afbd5f6c14fd643e3469b4339ec8105672e570ebacd41413130a4",
+          "results": "8b53cfa5022710a8e68e7ce5a72a185a0b0309121e8a2531bfecd86be2e378c6",
+          "manual-review": "bb182fde688cdc917a9470ae25e05f084ce033d9f8c3d66f5f053aeaa93be896"
+        }
+      },
+      {
+        "caseId": "QB06",
+        "variant": "C",
+        "model": "openai/gpt-oss-120b",
+        "sharedInputHash": "c24dd1662ba124a2cf8776d69b85d2cb555c5edf165ca146c196420dae168442",
+        "evidenceHash": "3b70cdf4e983ab8e24c8562c9bbb4153ce827d829d417bfb02c367f39e8c4ec2",
+        "wireBodyHash": "c49cbb098bad7b176e34a4cdd8989508a9c24707b58a2fc2ca95d775691ace64",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 1305.9372999999905,
+        "historicalClassification": "fully correct",
+        "claimStatuses": [
+          {
+            "claimId": "c1",
+            "status": "F",
+            "deliveredFull": true
+          }
+        ],
+        "sourceSha256": {
+          "requests": "a5b5158ca36125b2ae5b052584d11432a7ee803b20daf3d18d3344e1edd920ba",
+          "responses": "282d17113fe785b7180a0c474898e59bb330ac07e16835250302bf081317ba3a",
+          "results": "7aea3ddd255d5d6b3306b9e7eee4bee064d1d7325f1f41f2258b96cf4257ef8b",
+          "manual-review": "77bc5229a736491ececf190ae5d26feb9556e91f5d765361fae64202b6345914"
+        }
+      },
+      {
+        "caseId": "QB07",
+        "variant": "A",
+        "model": "gemini-3.5-flash-lite",
+        "sharedInputHash": "eff0d89c9efa72697a1d55f2040b703bc82f5cbcc89370c2b4cd6f9f22dcf045",
+        "evidenceHash": "8669ca3fff4e3a714ab612d7d5aa0d8c3b3475db6966225b4d3cc72be988d0c7",
+        "wireBodyHash": "3c88782f4e9c42f39405b66dc83715dc2674cad8ede0fff41456a9a7e52c012f",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 1517.8572999999742,
+        "historicalClassification": "fully correct",
+        "claimStatuses": [
+          {
+            "claimId": "c1",
+            "status": "F",
+            "deliveredFull": true
+          }
+        ],
+        "sourceSha256": {
+          "requests": "776714cd95191490349921db4c208eafd9fa33d5e7f834b4f99e19b5d9d0271e",
+          "responses": "815a125a1770703b1e479292d6345d4392577bbf8c1584a1a8197dc0165ed74f",
+          "results": "e20c22d88610ec22f2f682d5032c3c3df46402a23c46f77fcd621f0868b768c8",
+          "manual-review": "45f6ae07cb2c740376d367a36d1f3b9c38ed8c32d02f80551f78d10dbe1316d5"
+        }
+      },
+      {
+        "caseId": "QB07",
+        "variant": "B",
+        "model": "command-a-plus-05-2026",
+        "sharedInputHash": "eff0d89c9efa72697a1d55f2040b703bc82f5cbcc89370c2b4cd6f9f22dcf045",
+        "evidenceHash": "8669ca3fff4e3a714ab612d7d5aa0d8c3b3475db6966225b4d3cc72be988d0c7",
+        "wireBodyHash": "d2ad8d32afe9c979b37eb7f87eaec100757cc94610fda1c3c1dad612075129da",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 1661.4767999999458,
+        "historicalClassification": "fully correct",
+        "claimStatuses": [
+          {
+            "claimId": "c1",
+            "status": "F",
+            "deliveredFull": true
+          }
+        ],
+        "sourceSha256": {
+          "requests": "88ecf954bf9c13816f0a344e99ac25849da11f707ce6c537a562cd2ab455f962",
+          "responses": "a98480d715246628850de0e53e9a9e7fc00e6cd907fa29f3365447e755f26527",
+          "results": "3d86f395ed4d208e9eff75d24628ee5c38567b1cda244caddbb50b557db57b7c",
+          "manual-review": "2e7e531716da97f08e7c80e13dd5f7279e970172099fadaca0575fc14ae7311c"
+        }
+      },
+      {
+        "caseId": "QB07",
+        "variant": "C",
+        "model": "openai/gpt-oss-120b",
+        "sharedInputHash": "eff0d89c9efa72697a1d55f2040b703bc82f5cbcc89370c2b4cd6f9f22dcf045",
+        "evidenceHash": "8669ca3fff4e3a714ab612d7d5aa0d8c3b3475db6966225b4d3cc72be988d0c7",
+        "wireBodyHash": "42bea35d2f0384055b2277aa5ea071746f07150249a46d851c62a2af188ea9a3",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 950.3686000000453,
+        "historicalClassification": "fully correct",
+        "claimStatuses": [
+          {
+            "claimId": "c1",
+            "status": "F",
+            "deliveredFull": true
+          }
+        ],
+        "sourceSha256": {
+          "requests": "7ec742d139fceabde22957b4e07138e6d244172ba62405473c90fddc842d92a7",
+          "responses": "18870c423080b205c00a047e85ff4a226b340e552d209f08da38a1ba2d1ecf43",
+          "results": "3a3f8c86c087188a851bac38c77df0ff093be786f84c98f6caa08a3e02a00f31",
+          "manual-review": "01252f08e5475a8e5a0fcdc6c33ebd4cbcc15a0f8f9166e5dcf6a6d69a5da9a9"
+        }
+      },
+      {
+        "caseId": "QB08",
+        "variant": "A",
+        "model": "gemini-3.5-flash-lite",
+        "sharedInputHash": "482e7e7021f9e62fa7ef6840517e85ec38799ca435c0c1a6fc05f371baecea1a",
+        "evidenceHash": "f845b50d4062d659f49276e6d3c51757ddc36d560e1f2306028c7c12339b644b",
+        "wireBodyHash": "264d5a3ca1893d3e27b7c852f437bce545d7cacad1168ffa8028f607a2351c06",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 1240.187099999981,
+        "historicalClassification": "fully correct",
+        "claimStatuses": [
+          {
+            "claimId": "c1",
+            "status": "F",
+            "deliveredFull": true
+          }
+        ],
+        "sourceSha256": {
+          "requests": "d9fddd2724f6c4647c495c56906d7859188337452a955f0925f3bf6853e133eb",
+          "responses": "da17299e26f1456edaa0b957a9af2f2805a7bc0c18fa4daa460599fd04c9e394",
+          "results": "a262dae1f1798aeec14b642872e3b420207b8f0a139d6f42987382ee5f4f4862",
+          "manual-review": "8549ced89e5640a592d77dbc0e801481b1748181480d9d826c20e96d1b606722"
+        }
+      },
+      {
+        "caseId": "QB08",
+        "variant": "B",
+        "model": "command-a-plus-05-2026",
+        "sharedInputHash": "482e7e7021f9e62fa7ef6840517e85ec38799ca435c0c1a6fc05f371baecea1a",
+        "evidenceHash": "f845b50d4062d659f49276e6d3c51757ddc36d560e1f2306028c7c12339b644b",
+        "wireBodyHash": "fc5ac233f48c72ab042a36f157547f739011edd531e3976c79c48265a07dbf42",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 2509.052000000025,
+        "historicalClassification": "fully correct",
+        "claimStatuses": [
+          {
+            "claimId": "c1",
+            "status": "F",
+            "deliveredFull": true
+          }
+        ],
+        "sourceSha256": {
+          "requests": "02bcae0c6145d541b5f8483f6ae72226c98e55ec38c083ea4ce9cff66edd37c3",
+          "responses": "19059005b89982ebbb3c201ea56fafe98811cdaf7b13977a7054f97fc642414c",
+          "results": "de4877d124a03a8ce1580214a58842db075d195a3a43544569e6ace393cd64bb",
+          "manual-review": "14fd77c069ddda9aa661a1612db2b07ce1b44c3f67b6f2f150a9fdb3adf855be"
+        }
+      },
+      {
+        "caseId": "QB08",
+        "variant": "C",
+        "model": "openai/gpt-oss-120b",
+        "sharedInputHash": "482e7e7021f9e62fa7ef6840517e85ec38799ca435c0c1a6fc05f371baecea1a",
+        "evidenceHash": "f845b50d4062d659f49276e6d3c51757ddc36d560e1f2306028c7c12339b644b",
+        "wireBodyHash": "675d4f8dcb9931a4110db5547677e4403bed63c27c595b92bb1ce620512d7de2",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 1229.409800000023,
+        "historicalClassification": "fully correct",
+        "claimStatuses": [
+          {
+            "claimId": "c1",
+            "status": "F",
+            "deliveredFull": true
+          }
+        ],
+        "sourceSha256": {
+          "requests": "a33a39d932a2f89f042741784e993bd4a0c93606077ded3966ff372131f3c681",
+          "responses": "8d64181c665f8984f322514659b53df42008f76abc50e5bf9e008cace463ffd0",
+          "results": "4e69602f04b36a54f648f6a3aedd8ada276b8f2729e88d608b5dfc5caf12e442",
+          "manual-review": "89f32beed35c6d18d399b364b8ede325795dcd9a7ff7aea49e0e0b2c9bcb04db"
+        }
+      },
+      {
+        "caseId": "QB09",
+        "variant": "A",
+        "model": "gemini-3.5-flash-lite",
+        "sharedInputHash": "3da7027d8eeece815bfdecfbca92663c22eafb0dc43f8d2d6b7dd6512f1adb4a",
+        "evidenceHash": "b7b4b2493935273c1c94d19ec0ec7a406345b425194869855a493d9e544071cc",
+        "wireBodyHash": "8c589d034f6e13a16b8467bef9ece70296a5b343f9cabeb1374af57f607e6bcf",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 1596.8113000000012,
+        "historicalClassification": "fully correct",
+        "claimStatuses": [
+          {
+            "claimId": "c1",
+            "status": "F",
+            "deliveredFull": true
+          },
+          {
+            "claimId": "c2",
+            "status": "F",
+            "deliveredFull": true
+          }
+        ],
+        "sourceSha256": {
+          "requests": "9acac65e311df351860df6d3dbc6284b2b1bfa85b011229be2d524e4d03ce8d2",
+          "responses": "595d1bce7639c1940457c2dcbd88e514ef711fce0f7e3aa3848efaf7d7648e31",
+          "results": "900ad30bdb57fc80d89536f92f86d210fc2ad68e8f4ac847fc279e5611c12ca7",
+          "manual-review": "c47639719bc52c11b4ccec78500bc57e8c806518c2bf3ee222dd87a19183a041"
+        }
+      },
+      {
+        "caseId": "QB09",
+        "variant": "B",
+        "model": "command-a-plus-05-2026",
+        "sharedInputHash": "3da7027d8eeece815bfdecfbca92663c22eafb0dc43f8d2d6b7dd6512f1adb4a",
+        "evidenceHash": "b7b4b2493935273c1c94d19ec0ec7a406345b425194869855a493d9e544071cc",
+        "wireBodyHash": "3c1adc364d9469a694675818648c1ad03e6fbd7b853797878443e6ac358912cb",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 2020.9175000000396,
+        "historicalClassification": "fully correct",
+        "claimStatuses": [
+          {
+            "claimId": "c1",
+            "status": "F",
+            "deliveredFull": true
+          },
+          {
+            "claimId": "c2",
+            "status": "F",
+            "deliveredFull": true
+          }
+        ],
+        "sourceSha256": {
+          "requests": "dcd0a7a0c609a7be1d88f8a886dba5bcb642cb1d49b5a1a2f51a4f4390b639df",
+          "responses": "aa07bc2163a2b29d7100bc69264d5081cb4746963c613f52ecf60c476cb0ff6b",
+          "results": "186547a51521cbe8841559c52f31f3051a3335339e675f76dba9638facf4ed1b",
+          "manual-review": "96553ca5b462681f1cc94626d1759f27eca9e094b6783cc4ab34f13ef8bca530"
+        }
+      },
+      {
+        "caseId": "QB09",
+        "variant": "C",
+        "model": "openai/gpt-oss-120b",
+        "sharedInputHash": "3da7027d8eeece815bfdecfbca92663c22eafb0dc43f8d2d6b7dd6512f1adb4a",
+        "evidenceHash": "b7b4b2493935273c1c94d19ec0ec7a406345b425194869855a493d9e544071cc",
+        "wireBodyHash": "b15c33ddae9f7194a7fd6dacbe685cc2d7c58ffc2799b0e9e4a27babbcdca743",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 1292.4712999999756,
+        "historicalClassification": "fully correct",
+        "claimStatuses": [
+          {
+            "claimId": "c1",
+            "status": "F",
+            "deliveredFull": true
+          },
+          {
+            "claimId": "c2",
+            "status": "F",
+            "deliveredFull": true
+          }
+        ],
+        "sourceSha256": {
+          "requests": "b458a1f814c94176424ee66f3ae41a6b5d5af71b42709b6cd2be0f1489448d6e",
+          "responses": "b56186332d1a3400bcf5966bc87c1fc8f461d95cf0bd69c1c0cfa7bbd7fff5f7",
+          "results": "e966b3f2b63f9103c6e6d4b0f4d5fdbb0c4b7aa0ea4a0c0b135fa48f2f9a129a",
+          "manual-review": "3e05aecb40b06e653494ce5e0c56049853efcdae8d5a468a98af6ea90bf6c8fa"
+        }
+      },
+      {
+        "caseId": "QB10",
+        "variant": "A",
+        "model": "gemini-3.5-flash-lite",
+        "sharedInputHash": "1a69e8cb0bda90f012ef66bc78457b767c71a3c7ea63e6417633c8499e376871",
+        "evidenceHash": "5d3f8e67758f944ac1644f81eba76a19bfb81a9effa15eac5b78c6156a48b16d",
+        "wireBodyHash": "bc2995110d7ccc6eca4bcd9efdf12b40f64ca947ae9c9459052c18372f4650e7",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 1615.4253000000026,
+        "historicalClassification": "fully correct",
+        "claimStatuses": [
+          {
+            "claimId": "c1",
+            "status": "F",
+            "deliveredFull": true
+          },
+          {
+            "claimId": "c2",
+            "status": "F",
+            "deliveredFull": true
+          }
+        ],
+        "sourceSha256": {
+          "requests": "f34deb1214c026832c8be73d762c1ff0fb480103f0bf775c94399e5b80bbff96",
+          "responses": "a6617b8baae48182f8fa75037a279b4f2ca30bbe27cba254a6c7a90fd76cdfee",
+          "results": "7882a838cea3bdee46c6d2b8687468c5569a77d527d1a8aa695e6cfdf7cf3614",
+          "manual-review": "fcde907858bdd1a09af248079cd746d6703e63a0ef47b2b1c1bfe3d2904b439d"
+        }
+      },
+      {
+        "caseId": "QB10",
+        "variant": "B",
+        "model": "command-a-plus-05-2026",
+        "sharedInputHash": "1a69e8cb0bda90f012ef66bc78457b767c71a3c7ea63e6417633c8499e376871",
+        "evidenceHash": "5d3f8e67758f944ac1644f81eba76a19bfb81a9effa15eac5b78c6156a48b16d",
+        "wireBodyHash": "23f28ab7cd991016f9eda151e0f8a4d9ac15c6b2037bb6717b6da5d73f3e6584",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 2984.658000000054,
+        "historicalClassification": "partial",
+        "claimStatuses": [
+          {
+            "claimId": "c1",
+            "status": "P",
+            "deliveredFull": false
+          },
+          {
+            "claimId": "c2",
+            "status": "F",
+            "deliveredFull": true
+          }
+        ],
+        "sourceSha256": {
+          "requests": "2a3314d475512d3181eb14620daf6394b136da58764fae5c1b57ff75168023d9",
+          "responses": "5465d99e5cde34ade892e87ff9f5815edc06d432a2913620eb0f78cdbd9700e6",
+          "results": "40f43bee1bf0f5a68dfdae7b27e8988b2d729a782f9c2d65cd73d3748958e453",
+          "manual-review": "4ff7a2f95412f2d287c5b6397cfad52678b44d6367f649b497c94d45fec2e376"
+        }
+      },
+      {
+        "caseId": "QB10",
+        "variant": "C",
+        "model": "openai/gpt-oss-120b",
+        "sharedInputHash": "1a69e8cb0bda90f012ef66bc78457b767c71a3c7ea63e6417633c8499e376871",
+        "evidenceHash": "5d3f8e67758f944ac1644f81eba76a19bfb81a9effa15eac5b78c6156a48b16d",
+        "wireBodyHash": "b668e7756d51fa5465ea9fb49a1118fc33b632434763835a4e549fac450c9fc6",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 1487.8679000000702,
+        "historicalClassification": "fully correct",
+        "claimStatuses": [
+          {
+            "claimId": "c1",
+            "status": "F",
+            "deliveredFull": true
+          },
+          {
+            "claimId": "c2",
+            "status": "F",
+            "deliveredFull": true
+          }
+        ],
+        "sourceSha256": {
+          "requests": "58e816360cd5d93eab13c97c78ddc1f66cd345588f6eb4fa41128f9d91e31096",
+          "responses": "506edba2f32ef6de8d3f26d562dd58cc41067531e25cc1a0cfb3e7a4016f59d1",
+          "results": "625caedc44734ef368b48e8d44a7eebb257fd3980abdc91c450cbb1dd7e11aa1",
+          "manual-review": "67534b5a45fc07209a1e7b0e897131f2d8646dcffef3a71b69eab2b4f1433863"
+        }
+      },
+      {
+        "caseId": "QB11",
+        "variant": "A",
+        "model": "gemini-3.5-flash-lite",
+        "sharedInputHash": "2c02746b92c92edc4bf623cd8987fd5e71f0bfa803b674c91ead23bcf7f44a59",
+        "evidenceHash": "e79a5a985fe59ea485f68420073809ddbb2af04bf2eee40718548eaf27e97c83",
+        "wireBodyHash": "7aebb337540cbebc462044b9616e1c334cdf759e540a9e4e4e3d5d402bd14f3a",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 1298.8604999999516,
+        "historicalClassification": "partial",
+        "claimStatuses": [
+          {
+            "claimId": "c1",
+            "status": "O",
+            "deliveredFull": false
+          },
+          {
+            "claimId": "c2",
+            "status": "P",
+            "deliveredFull": false
+          }
+        ],
+        "sourceSha256": {
+          "requests": "b2baaf88c8e8abaa5b66ecd9f985df1eee62d3314f62cdd59b2c6e7f1fe59298",
+          "responses": "386d8eebf9df6b9dcf6cab97ef22c6868c1c3d725a1981e06e7afac1069383f0",
+          "results": "4f1708033f49ccc42becab12ab73ad0d424525e513a18a2514e76112857eb0f4",
+          "manual-review": "145a7f910063ffad79bfc682cc3f241e45e9ac580ff02ecae9bd42f4aa6d22a7"
+        }
+      },
+      {
+        "caseId": "QB11",
+        "variant": "B",
+        "model": "command-a-plus-05-2026",
+        "sharedInputHash": "2c02746b92c92edc4bf623cd8987fd5e71f0bfa803b674c91ead23bcf7f44a59",
+        "evidenceHash": "e79a5a985fe59ea485f68420073809ddbb2af04bf2eee40718548eaf27e97c83",
+        "wireBodyHash": "2d65e6b969caabcae110674728e2bf47d725579e0b9e0805e0a1fa905b968126",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 3287.048300000024,
+        "historicalClassification": "partial",
+        "claimStatuses": [
+          {
+            "claimId": "c1",
+            "status": "O",
+            "deliveredFull": false
+          },
+          {
+            "claimId": "c2",
+            "status": "P",
+            "deliveredFull": false
+          }
+        ],
+        "sourceSha256": {
+          "requests": "8341c81ce87ae326f69fa3f0561fe523ee13cb6acaaba57703c0fa67134f5b03",
+          "responses": "3a154fe34e70de6afdc8e6a2b4b794929813dfe484c6a10534cf5746023c4e13",
+          "results": "1f89e7c00516bf66933eb0364d71f9ce7be66dc8e79b6a81758f357d1fe182fb",
+          "manual-review": "be346c48c558fd9c1d967bd9d6158227eb7ab86647a43dbba200ec56371d9b7c"
+        }
+      },
+      {
+        "caseId": "QB11",
+        "variant": "C",
+        "model": "openai/gpt-oss-120b",
+        "sharedInputHash": "2c02746b92c92edc4bf623cd8987fd5e71f0bfa803b674c91ead23bcf7f44a59",
+        "evidenceHash": "e79a5a985fe59ea485f68420073809ddbb2af04bf2eee40718548eaf27e97c83",
+        "wireBodyHash": "55abc28e3ba39a46ce2939e1de2784adbd3c46f16f90d5b68e6f387008c298c4",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 3212.081200000015,
+        "historicalClassification": "partial",
+        "claimStatuses": [
+          {
+            "claimId": "c1",
+            "status": "O",
+            "deliveredFull": false
+          },
+          {
+            "claimId": "c2",
+            "status": "F",
+            "deliveredFull": true
+          }
+        ],
+        "sourceSha256": {
+          "requests": "aed78a325d8dfde1bf2d13cf648de4d2cef7c864643da3ddf4cd6f515b0b8e23",
+          "responses": "48fb4c632ec3a7445de485cfa295eb0e07df4d504a5997f108315922112f19d9",
+          "results": "b37c04fe0e55bb3d4413975905441add1ed6882bce0073de4ca603fa030a13ad",
+          "manual-review": "fc9322b3b6fdec702ba7c380f6c6bf0431cc67f93f900434a82e1d65174bb843"
+        }
+      },
+      {
+        "caseId": "QB12",
+        "variant": "A",
+        "model": "gemini-3.5-flash-lite",
+        "sharedInputHash": "c239e0373368017d4c7e6967fcffb1a4cc42a2413471926d528a0bbb509caf1f",
+        "evidenceHash": "c8b6ca04a22da80713ad5434dcf022944e61cf92b388eacef49aa6d5dd8f8d33",
+        "wireBodyHash": "8543032b9be72e00cb20a837e1598505ec234a761c02ba7c9fe64541cc8fcdb3",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 1401.656100000022,
+        "historicalClassification": "partial",
+        "claimStatuses": [
+          {
+            "claimId": "c1",
+            "status": "F",
+            "deliveredFull": true
+          },
+          {
+            "claimId": "c2",
+            "status": "P",
+            "deliveredFull": false
+          }
+        ],
+        "sourceSha256": {
+          "requests": "1bc8611062c770661b5be3a7dc83464769b9bdd110cc69061910a514cc5488bf",
+          "responses": "3288f1e5ebd9a6c4cf611064a9fa86cd8978cf190b0c94a9084816296d3205ae",
+          "results": "a47fc3f5d664ed3ace54fdc5958435a2c0d5175913d5cb3e81bf1b70b6481560",
+          "manual-review": "559a4fb6b1bb3e58d2b16ca9a59dd09bb3e4cc3df26465efac1f7db8a263e2cd"
+        }
+      },
+      {
+        "caseId": "QB12",
+        "variant": "B",
+        "model": "command-a-plus-05-2026",
+        "sharedInputHash": "c239e0373368017d4c7e6967fcffb1a4cc42a2413471926d528a0bbb509caf1f",
+        "evidenceHash": "c8b6ca04a22da80713ad5434dcf022944e61cf92b388eacef49aa6d5dd8f8d33",
+        "wireBodyHash": "4aee2af5b5e1fe6e3359bf76b426f953af91bcfe2155842deabe6f3e9dc472c6",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 3942.542299999972,
+        "historicalClassification": "grounding failure",
+        "claimStatuses": [
+          {
+            "claimId": "c1",
+            "status": "F",
+            "deliveredFull": true
+          },
+          {
+            "claimId": "c2",
+            "status": "P",
+            "deliveredFull": false
+          }
+        ],
+        "sourceSha256": {
+          "requests": "8a4017b096df580f4c2c4f87745290295499b696d1411e223e1108f478961aa6",
+          "responses": "ea26be666b3a55a929a3c38619921677cd4177ff1a65af38e56ac73e03eb53a9",
+          "results": "d293bba08d38eed8a80011c8662eb2a71fbc6aff55a5bc59bfdb2e63c91fbee0",
+          "manual-review": "d7c60655a2814a3de3a2873a1bd2e2eaa05642ef103d2a68b54bafe775c113d0"
+        }
+      },
+      {
+        "caseId": "QB12",
+        "variant": "C",
+        "model": "openai/gpt-oss-120b",
+        "sharedInputHash": "c239e0373368017d4c7e6967fcffb1a4cc42a2413471926d528a0bbb509caf1f",
+        "evidenceHash": "c8b6ca04a22da80713ad5434dcf022944e61cf92b388eacef49aa6d5dd8f8d33",
+        "wireBodyHash": "ab75fad7f12bb4dc3ad1e3b91fedd997ca7bea87e0323e1cb289fa3a1004101a",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 2236.867100000032,
+        "historicalClassification": "partial",
+        "claimStatuses": [
+          {
+            "claimId": "c1",
+            "status": "F",
+            "deliveredFull": true
+          },
+          {
+            "claimId": "c2",
+            "status": "P",
+            "deliveredFull": false
+          }
+        ],
+        "sourceSha256": {
+          "requests": "38b6244c1dff280aeb3aba1e0616a1ffedf2911aef937724367ec6011e04669b",
+          "responses": "b724bd214f5ef8fdffb28bff73319634372d9a2f8c06176c9d10d96357b84320",
+          "results": "46ca99575b4cbab016dfccae16dc6ba79aa563e6b7d5ff56e38c665f9ae850a2",
+          "manual-review": "90829a3cda58bd5e47fe24ad73bc9f234f7795c3f0a1d8da24cfd6d841aa8b74"
+        }
+      },
+      {
+        "caseId": "QB13",
+        "variant": "A",
+        "model": "gemini-3.5-flash-lite",
+        "sharedInputHash": "83ff2371ed235e05472e58809e5fb17de4157da50f5dea02059439e1d2bb845e",
+        "evidenceHash": "f90047bd793982b152821eca6b179dc9027d678e5be9d7395be06e97fa39a6af",
+        "wireBodyHash": "df5fbec0f344a0514fc9d807faed0a87fbc691592bbc862b5a2aaab33c2f8027",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 1418.921500000055,
+        "historicalClassification": "partial",
+        "claimStatuses": [
+          {
+            "claimId": "c1",
+            "status": "P",
+            "deliveredFull": false
+          },
+          {
+            "claimId": "c2",
+            "status": "P",
+            "deliveredFull": false
+          }
+        ],
+        "sourceSha256": {
+          "requests": "3bfbdad4ae7f6e343b9fe58d84625993603e7c151681eaf0c5b3c2a93ac3c0b1",
+          "responses": "d5a793bdbfc0f5761e8465b00e44b2aac1e98d7ff7a09e7607a144d9f1f3f717",
+          "results": "c1112c550e1dd176849d7baaae660f97ccc1ec079ad9499f0f6b2dac04ae7f31",
+          "manual-review": "f8e7627bca9bcb9378124f0e7ed5e207056928f3ad4504b447cdc923357c263b"
+        }
+      },
+      {
+        "caseId": "QB13",
+        "variant": "B",
+        "model": "command-a-plus-05-2026",
+        "sharedInputHash": "83ff2371ed235e05472e58809e5fb17de4157da50f5dea02059439e1d2bb845e",
+        "evidenceHash": "f90047bd793982b152821eca6b179dc9027d678e5be9d7395be06e97fa39a6af",
+        "wireBodyHash": "f4de98306f3009b4546b913eb69e1cdcec5925708814e77ef044f059cad2211d",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 1871.1345000000438,
+        "historicalClassification": "partial",
+        "claimStatuses": [
+          {
+            "claimId": "c1",
+            "status": "P",
+            "deliveredFull": false
+          },
+          {
+            "claimId": "c2",
+            "status": "P",
+            "deliveredFull": false
+          }
+        ],
+        "sourceSha256": {
+          "requests": "702b01240a44c5816063dadaa2385d1f63dadcc7f13d3232402b7ec5f7a95f3c",
+          "responses": "99cd8d3e07afa0a70c22f1e1ae08b3fecbfb6466801cc27bd70b8e076273feee",
+          "results": "713580b60e2744b41da2ccfaaebb1d29fd81835506ccbb8b504646f2d416cd2e",
+          "manual-review": "1c0e1d88b9ed18749a910fb179a7675b35c75dc811e7cbf3b0d811133f20505e"
+        }
+      },
+      {
+        "caseId": "QB13",
+        "variant": "C",
+        "model": "openai/gpt-oss-120b",
+        "sharedInputHash": "83ff2371ed235e05472e58809e5fb17de4157da50f5dea02059439e1d2bb845e",
+        "evidenceHash": "f90047bd793982b152821eca6b179dc9027d678e5be9d7395be06e97fa39a6af",
+        "wireBodyHash": "171172f122f7ac8eef1d09cba3f2a5f6e7fbace40e9a58210919c9916ab8857d",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 1629.9196999999695,
+        "historicalClassification": "partial",
+        "claimStatuses": [
+          {
+            "claimId": "c1",
+            "status": "P",
+            "deliveredFull": false
+          },
+          {
+            "claimId": "c2",
+            "status": "P",
+            "deliveredFull": false
+          }
+        ],
+        "sourceSha256": {
+          "requests": "8cea38262861db6a958fc2d47ae87cc9733bbfa22adf9e6337040a69048ba062",
+          "responses": "3662878ef01539c20ab150f3c1fff93156b5d3feb65aea75c5f2c14d843fe1ac",
+          "results": "49f42d8ff79492f3d8602b42d2feae0dbaca279a69e027ce37a7b43c4fff3ebc",
+          "manual-review": "139848c093ad41c12b115e928998ffc65af92e506265ef824752841802830162"
+        }
+      },
+      {
+        "caseId": "QB14",
+        "variant": "A",
+        "model": "gemini-3.5-flash-lite",
+        "sharedInputHash": "1c6e1566f419095c442e4f3d5ae243c9530bc12d044b85327ec54e2f812306f1",
+        "evidenceHash": "88c25d2a170cc8c9a190ba767202262447e0b69d39407b949c3adfc4b00bad8f",
+        "wireBodyHash": "3b3ea16f355c4df11713b31520146b92df466467fcfe09b70c93dea50858a18a",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 1767.6332999999868,
+        "historicalClassification": "fully correct",
+        "claimStatuses": [
+          {
+            "claimId": "c1",
+            "status": "F",
+            "deliveredFull": true
+          },
+          {
+            "claimId": "c2",
+            "status": "F",
+            "deliveredFull": true
+          }
+        ],
+        "sourceSha256": {
+          "requests": "c63cbc88e26e72423adaf1216915b4be8ad839d622d0cd5cc1de3f2edf708b4e",
+          "responses": "1d9825a71ac50f92ae3aa83e89a8049e33fbcd9d1e81132995a268322b6265be",
+          "results": "9985605d4a0941fb10812c9953273adad2303bf296996e749a6f1130d87a0f79",
+          "manual-review": "0e8f004b9487c25d807afb44d460e9a8cf1b1380a316168087b3af64817a89da"
+        }
+      },
+      {
+        "caseId": "QB14",
+        "variant": "B",
+        "model": "command-a-plus-05-2026",
+        "sharedInputHash": "1c6e1566f419095c442e4f3d5ae243c9530bc12d044b85327ec54e2f812306f1",
+        "evidenceHash": "88c25d2a170cc8c9a190ba767202262447e0b69d39407b949c3adfc4b00bad8f",
+        "wireBodyHash": "da27bffafe4320d4552888888311a34c52efc2616e541ac59f590dbe3b695000",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 4479.882199999993,
+        "historicalClassification": "fully correct",
+        "claimStatuses": [
+          {
+            "claimId": "c1",
+            "status": "F",
+            "deliveredFull": true
+          },
+          {
+            "claimId": "c2",
+            "status": "F",
+            "deliveredFull": true
+          }
+        ],
+        "sourceSha256": {
+          "requests": "304be0d43ede04c549e276b6adbe1b1036d45d7789ea75e823cb773d3225fdf8",
+          "responses": "793472d91698c4b39c794a814470bd1cbb76e0b09ab1dc23ab0f2feb146239f9",
+          "results": "2655e9d93372f5f367e9c100b21ceede27ab2d0a5ab03551864fb1c1baa4e3bc",
+          "manual-review": "39d724bd799ba7cf1262fcf3b1a0f783a3dcb919c7fb280bc8410ec55c29a9ef"
+        }
+      },
+      {
+        "caseId": "QB14",
+        "variant": "C",
+        "model": "openai/gpt-oss-120b",
+        "sharedInputHash": "1c6e1566f419095c442e4f3d5ae243c9530bc12d044b85327ec54e2f812306f1",
+        "evidenceHash": "88c25d2a170cc8c9a190ba767202262447e0b69d39407b949c3adfc4b00bad8f",
+        "wireBodyHash": "95eaacf24d9c0077231400bd28bc2f606a7d7704e56073784624b5382d8bc357",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 1840.781100000022,
+        "historicalClassification": "fully correct",
+        "claimStatuses": [
+          {
+            "claimId": "c1",
+            "status": "F",
+            "deliveredFull": true
+          },
+          {
+            "claimId": "c2",
+            "status": "F",
+            "deliveredFull": true
+          }
+        ],
+        "sourceSha256": {
+          "requests": "27af0ee7411ea1d5571dcf10dead04d8956be180dcc8ecd8c21857b4de3cc5d8",
+          "responses": "02b94f641ad655b7c160171b30224c9c279bb092718ef7dd7f9be3731d62f6d5",
+          "results": "dfa6d50254193262696681aa57291a9e1f4eed4443187a54a3e73fa04ec43bac",
+          "manual-review": "e4deaaab2347ca81c6871186392948ff4262c85566b7910fce30cd4471ecc029"
+        }
+      },
+      {
+        "caseId": "QB15",
+        "variant": "A",
+        "model": "gemini-3.5-flash-lite",
+        "sharedInputHash": "05808c0d9f3e11ed3724e7945a5251c32d04f978639332888760e66cf7a52126",
+        "evidenceHash": "906563dff33762e49595ed2331743b7ec8b8d9cdefce2a229a7f1459cb544904",
+        "wireBodyHash": "71487855fc2e76e10bc154aa3e66dae81d9c4b3670d6f25cb019f772cc47e932",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 1407.2462000000523,
+        "historicalClassification": "partial",
+        "claimStatuses": [
+          {
+            "claimId": "c1",
+            "status": "P",
+            "deliveredFull": false
+          },
+          {
+            "claimId": "c2",
+            "status": "F",
+            "deliveredFull": true
+          }
+        ],
+        "sourceSha256": {
+          "requests": "82055f5fdd75b0a177d5d1c7ef56ef3f590a675f48703fac07c422e298e3495f",
+          "responses": "7c25fdb2c9c7b3bbc9d9d0b1f20efb77239e3512b663ef2330832223cf8c485a",
+          "results": "4af47a8bbe086b7d80638f089b79a6ddd19ecd1986fa1cf3e8842cc1d4de6b89",
+          "manual-review": "9ece469e1caf69bea463100fe504c380e96f75d3c79ec5311566112ab9eb8eb3"
+        }
+      },
+      {
+        "caseId": "QB15",
+        "variant": "B",
+        "model": "command-a-plus-05-2026",
+        "sharedInputHash": "05808c0d9f3e11ed3724e7945a5251c32d04f978639332888760e66cf7a52126",
+        "evidenceHash": "906563dff33762e49595ed2331743b7ec8b8d9cdefce2a229a7f1459cb544904",
+        "wireBodyHash": "8f3ffd3e379d014c53de4b6ff7908b07f617258a82382c322ab3416c38f760f5",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 3248.7847999999067,
+        "historicalClassification": "partial",
+        "claimStatuses": [
+          {
+            "claimId": "c1",
+            "status": "P",
+            "deliveredFull": false
+          },
+          {
+            "claimId": "c2",
+            "status": "F",
+            "deliveredFull": true
+          }
+        ],
+        "sourceSha256": {
+          "requests": "6c0132a701422cb8126726de5c635dede05cd9ffbdaecce7f434a3a64950c1ac",
+          "responses": "ecfd52cdba28be007a2578f0ea5c13ca2f68782ae981b75fc346e172120b33c4",
+          "results": "72bbcf03855c4b5936e78c423db025f7fdd17ecabf8faaba10d1fa99777490c6",
+          "manual-review": "e892aa96e881894db75fff3dc8c2777a039e5fa64435ee19a9d2d24b74306b63"
+        }
+      },
+      {
+        "caseId": "QB15",
+        "variant": "C",
+        "model": "openai/gpt-oss-120b",
+        "sharedInputHash": "05808c0d9f3e11ed3724e7945a5251c32d04f978639332888760e66cf7a52126",
+        "evidenceHash": "906563dff33762e49595ed2331743b7ec8b8d9cdefce2a229a7f1459cb544904",
+        "wireBodyHash": "27ce8dea52ad3ef90e978570307b34f739e2f68f1975b6fc76705cdbacb67c7d",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 1405.6668000000063,
+        "historicalClassification": "partial",
+        "claimStatuses": [
+          {
+            "claimId": "c1",
+            "status": "P",
+            "deliveredFull": false
+          },
+          {
+            "claimId": "c2",
+            "status": "F",
+            "deliveredFull": true
+          }
+        ],
+        "sourceSha256": {
+          "requests": "3dff1be03a4648fd691f638b6a94d332af91e49638fa6370a8e20d1be884a797",
+          "responses": "c95bf36c17d242ba5aa60621c640f6d0b6e6eb316354d00184a44053d74fe99d",
+          "results": "e5e228a9f135f1fb3b24d8732dc3c5f1be5ecd5fe75c10422fc6bf0443864681",
+          "manual-review": "130308df2dfa7057b55da2408c31a9cc09f986ac790d645503bce279e92d3683"
+        }
+      },
+      {
+        "caseId": "QB16",
+        "variant": "A",
+        "model": "gemini-3.5-flash-lite",
+        "sharedInputHash": "33b1ee278490b9d45b739358a0282c6cf0c641e8b993e137be912cb422f85b86",
+        "evidenceHash": "70f5bbcf07811ff8db3d0ecc04f113cbaf980849e399280fd32f7298cb2e338a",
+        "wireBodyHash": "f6632c95cb08e8f22f1c416b1ebeef68e4dde1ff43e7167e8aa1717b4149efac",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 1507.3638999999966,
+        "historicalClassification": "partial",
+        "claimStatuses": [
+          {
+            "claimId": "c1",
+            "status": "P",
+            "deliveredFull": false
+          },
+          {
+            "claimId": "c2",
+            "status": "F",
+            "deliveredFull": true
+          }
+        ],
+        "sourceSha256": {
+          "requests": "559006916cebea7256ab78d099d7373ca06fb88d32f60876e2815e2e7ecbcb0d",
+          "responses": "bb8a8a001376ef197b99a665ab190e00a3691bbeab4f335b726c4e8694484a9c",
+          "results": "66e6711dceac39cdf6fa6e401efedf6be733feb031273044038c0fd82389f7be",
+          "manual-review": "6852e0b6aa9e08062d4c53a9fbda95886437de72ad4d3fa34418ab41756bacbd"
+        }
+      },
+      {
+        "caseId": "QB16",
+        "variant": "B",
+        "model": "command-a-plus-05-2026",
+        "sharedInputHash": "33b1ee278490b9d45b739358a0282c6cf0c641e8b993e137be912cb422f85b86",
+        "evidenceHash": "70f5bbcf07811ff8db3d0ecc04f113cbaf980849e399280fd32f7298cb2e338a",
+        "wireBodyHash": "03e544166c0938a16a2ddb4cdfe6ce44e6545fc2ca103dba47996b69bec090c4",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 4351.825199999963,
+        "historicalClassification": "fully correct",
+        "claimStatuses": [
+          {
+            "claimId": "c1",
+            "status": "F",
+            "deliveredFull": true
+          },
+          {
+            "claimId": "c2",
+            "status": "F",
+            "deliveredFull": true
+          }
+        ],
+        "sourceSha256": {
+          "requests": "6f8514a5f5fe5d8d31406e4d01e3f74e46805dc0673778303421fbb7873710d5",
+          "responses": "182428c80cce5d79a202f1d1ea7f95d5adfdd7cc37ed97a280dc4468ec5c41a9",
+          "results": "5a4205a775e90aa1012d5c60d2ef315ea9d984876a63f61602adc8551fd72cf5",
+          "manual-review": "c7256b3cba0015ed442e76d54ad69043b7d15293b8ba75f1a051aae0fb074905"
+        }
+      },
+      {
+        "caseId": "QB16",
+        "variant": "C",
+        "model": "openai/gpt-oss-120b",
+        "sharedInputHash": "33b1ee278490b9d45b739358a0282c6cf0c641e8b993e137be912cb422f85b86",
+        "evidenceHash": "70f5bbcf07811ff8db3d0ecc04f113cbaf980849e399280fd32f7298cb2e338a",
+        "wireBodyHash": "db686c9cde3a1ab9a2e5baabc4bce6774cf64ff68d02e3cfe349f72be9826642",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 1894.3563999999315,
+        "historicalClassification": "partial",
+        "claimStatuses": [
+          {
+            "claimId": "c1",
+            "status": "P",
+            "deliveredFull": false
+          },
+          {
+            "claimId": "c2",
+            "status": "F",
+            "deliveredFull": true
+          }
+        ],
+        "sourceSha256": {
+          "requests": "207653b2d11f9b1372cb9c48540adc19e50271f041b132d53c277c667f0cbb43",
+          "responses": "b55863c429e6089dcea93275be5c6e1012a3fbb962d73367374273889eeb943c",
+          "results": "4f094b469681185fe66960b15477a2c926bf4fe2330d1338e6710a544b6375d0",
+          "manual-review": "d8a00d5f09c674fcb88de6caee25f3944f0be22738880f58af265ab25d269d77"
+        }
+      },
+      {
+        "caseId": "QB17",
+        "variant": "A",
+        "model": "gemini-3.5-flash-lite",
+        "sharedInputHash": "7dcb7d48ee661fd3f185d8956af6e6de6da56bea88e530e99bfb0cc6fd34b115",
+        "evidenceHash": "9ad375ce628ad64caa7723ab9d086e5b6b626813fef6f335c016c086fdde1c25",
+        "wireBodyHash": "0746e004f2a80ab2d1c413c6cf77b7b6963e36dd2611d2fb6eca8d90f44a5710",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 1535.8397000000114,
+        "historicalClassification": "fully correct",
+        "claimStatuses": [
+          {
+            "claimId": "c1",
+            "status": "F",
+            "deliveredFull": true
+          }
+        ],
+        "sourceSha256": {
+          "requests": "93fc926f7c3f41795cb9b52dfdfbdac84052ce15e1dac6f2fa8f7ccbc7d9c2ae",
+          "responses": "e318f18128ddc2554c245741ffe6d07e301a7e6b7029115fa2dc80e598fa22c2",
+          "results": "55629275192cc55284696a7194eaf2048681d8c3769efe8efffcb3c599dac858",
+          "manual-review": "b4ec89f88eb7d365ed572fd05225f9fd7ed2a3cbc3c06fe6e1821ad2786ecfdb"
+        }
+      },
+      {
+        "caseId": "QB17",
+        "variant": "B",
+        "model": "command-a-plus-05-2026",
+        "sharedInputHash": "7dcb7d48ee661fd3f185d8956af6e6de6da56bea88e530e99bfb0cc6fd34b115",
+        "evidenceHash": "9ad375ce628ad64caa7723ab9d086e5b6b626813fef6f335c016c086fdde1c25",
+        "wireBodyHash": "8887d98def5cf6ac190d5311d20856ace128fa82e6cbd36cb5c677bf5c324f73",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 4348.244599999976,
+        "historicalClassification": "fully correct",
+        "claimStatuses": [
+          {
+            "claimId": "c1",
+            "status": "F",
+            "deliveredFull": true
+          }
+        ],
+        "sourceSha256": {
+          "requests": "399ae92bc0140c50d57b0ac82e2c90fe28c3ffe21c92fa01c6e56cf8526f79ef",
+          "responses": "af77c6c7274cce635691ddade84c2012b1f008f5efd6a75cbe6f5d7b8387274d",
+          "results": "43c12e52694e53f9e0c6a591be53f5ce71c9db97dacf9d2d0d1178c34c2b590f",
+          "manual-review": "01282bb710aab048feefe6f0a42dd1cb33cfc2a4cbf818c8da578a309a97fed3"
+        }
+      },
+      {
+        "caseId": "QB17",
+        "variant": "C",
+        "model": "openai/gpt-oss-120b",
+        "sharedInputHash": "7dcb7d48ee661fd3f185d8956af6e6de6da56bea88e530e99bfb0cc6fd34b115",
+        "evidenceHash": "9ad375ce628ad64caa7723ab9d086e5b6b626813fef6f335c016c086fdde1c25",
+        "wireBodyHash": "c159a3520ef238692f1de455db17fc6e7943ae3de20d67ccab7af1a1a382b773",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 1751.8689999999478,
+        "historicalClassification": "fully correct",
+        "claimStatuses": [
+          {
+            "claimId": "c1",
+            "status": "F",
+            "deliveredFull": true
+          }
+        ],
+        "sourceSha256": {
+          "requests": "08db2aa398a8ef993319b6e79b82d6880b3e01c80eaaf5025419393ff2dfc44f",
+          "responses": "6bbf20c3e9f9af1094928d358f059c3850edb8e32d4a5b39d512bb3e0e9d8342",
+          "results": "2775a73822778e59d4709915bc346328216eeba77bc90014cf91ef59c053bdb3",
+          "manual-review": "c1968c741a8afb1081767afc3febf8bc48eafebd0fd17fd48e4212ee25cdcde9"
+        }
+      },
+      {
+        "caseId": "QB18",
+        "variant": "A",
+        "model": "gemini-3.5-flash-lite",
+        "sharedInputHash": "fb8bfcadb4b7a02dd7f8db2769da972c5da0006ac91735f9aee3715e5d9522e8",
+        "evidenceHash": "72ef9a0846b12e2d0972a17cf313f4470e588047a389282ecf15cd135dfd58c3",
+        "wireBodyHash": "15cfc03f34fa6db0705cf6cdb6202615253700fd43bd5fd933c58bbc1a984be1",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 1686.217499999795,
+        "historicalClassification": "partial",
+        "claimStatuses": [
+          {
+            "claimId": "c1",
+            "status": "P",
+            "deliveredFull": false
+          }
+        ],
+        "sourceSha256": {
+          "requests": "9444f788153b2dd9d31c0d4e89a9240ad67320aa7530d356070a12a5c9062f52",
+          "responses": "349c589043681c325fa68439f5b96940dfd80a7343c618e6e0f665af55dd7952",
+          "results": "e70b665b8ddb712231b74dfa8b150bf144b58dda5bdbe16542f351cadcc876e9",
+          "manual-review": "60a556de94002c7c427a10e46a1b1f7bba40605d89e6d29491afe3d815d69689"
+        }
+      },
+      {
+        "caseId": "QB18",
+        "variant": "B",
+        "model": "command-a-plus-05-2026",
+        "sharedInputHash": "fb8bfcadb4b7a02dd7f8db2769da972c5da0006ac91735f9aee3715e5d9522e8",
+        "evidenceHash": "72ef9a0846b12e2d0972a17cf313f4470e588047a389282ecf15cd135dfd58c3",
+        "wireBodyHash": "13f52d4d911c3e565b76ff6c4a1fbcedb8fd484a6eafc228d47a3e5e8713bd69",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 3665.2567999998573,
+        "historicalClassification": "fully correct",
+        "claimStatuses": [
+          {
+            "claimId": "c1",
+            "status": "F",
+            "deliveredFull": true
+          }
+        ],
+        "sourceSha256": {
+          "requests": "5791514b0e4b4cdeeab0b085abfc28becf142370a31c4a132ef20031a4042e31",
+          "responses": "e327bf6b86c502809d995bfbfa98f5a6d3c7e3e736c6a462ce15ba02333d5fdb",
+          "results": "725adf2acbc10c7572e398f8c2a914109cb9f334e24b8fd1bf901b713f4a6c3d",
+          "manual-review": "e5cc760971ef7f8d70d4b156ab96f67b1d354c76725d85d949dbf2556b8fb9e9"
+        }
+      },
+      {
+        "caseId": "QB18",
+        "variant": "C",
+        "model": "openai/gpt-oss-120b",
+        "sharedInputHash": "fb8bfcadb4b7a02dd7f8db2769da972c5da0006ac91735f9aee3715e5d9522e8",
+        "evidenceHash": "72ef9a0846b12e2d0972a17cf313f4470e588047a389282ecf15cd135dfd58c3",
+        "wireBodyHash": "e3a47a4d5aa3bce00d46e54ef432f73a8acaf86a7b03e8e6c8240064096c1e89",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 2155.0751999998465,
+        "historicalClassification": "fully correct",
+        "claimStatuses": [
+          {
+            "claimId": "c1",
+            "status": "F",
+            "deliveredFull": true
+          }
+        ],
+        "sourceSha256": {
+          "requests": "7712d1accdcae63e8a52210291c75e7c414b7943093f9ff43e65f132c5dccf81",
+          "responses": "cc1f199eff339ff3fa2a63aad04d7bf0656f7441df51f6681a9c72d89cd9bb7b",
+          "results": "0b9440c65def4f4479913153caabbade1ec6daedf279b4aed4ad9a9899b4b0e2",
+          "manual-review": "bd18e086d06af68a507b0cc7e1970205a98fbdc8a079f597b4372642536107fb"
+        }
+      },
+      {
+        "caseId": "QB19",
+        "variant": "A",
+        "model": "gemini-3.5-flash-lite",
+        "sharedInputHash": "8a689933660f8dc0d483196af2489306892202f960c4aaf77a40c94bfc6eb7b3",
+        "evidenceHash": "00500dc0f48f552acb59694e994d7a82ca5ba9929794fc0492922e32ee572478",
+        "wireBodyHash": "63b1fa0b60c61a5d4f92f5c78b77e53bb8414a4cc16d0b95800fdabdafe672a2",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 1571.653599999845,
+        "historicalClassification": "fully correct",
+        "claimStatuses": [
+          {
+            "claimId": "c1",
+            "status": "F",
+            "deliveredFull": true
+          }
+        ],
+        "sourceSha256": {
+          "requests": "70fefc233a75d16724df75accd823486a75b8e619885633de37c5d21b625b23d",
+          "responses": "4ad4ffca1adae69115d0518598bf90faaddfdac0233f6f8b15fa326d62026212",
+          "results": "78e36bc35b7850724a0455cb9e8220891f964dc93394b9ce1e9913e3193dcb46",
+          "manual-review": "4adbb52c7a8ce95e610e311da5680415c8c64fa406e79f2c2a92d20d33398245"
+        }
+      },
+      {
+        "caseId": "QB19",
+        "variant": "B",
+        "model": "command-a-plus-05-2026",
+        "sharedInputHash": "8a689933660f8dc0d483196af2489306892202f960c4aaf77a40c94bfc6eb7b3",
+        "evidenceHash": "00500dc0f48f552acb59694e994d7a82ca5ba9929794fc0492922e32ee572478",
+        "wireBodyHash": "816ac08331dddf73f58b22658d0748eedec9c5e775273fa0260fed77810fbc41",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 1877.9562999999616,
+        "historicalClassification": "fully correct",
+        "claimStatuses": [
+          {
+            "claimId": "c1",
+            "status": "F",
+            "deliveredFull": true
+          }
+        ],
+        "sourceSha256": {
+          "requests": "d44cfc59dc15975db2369e6da2113a22fcf3d961ea9b027566d89f154fe399c9",
+          "responses": "594423f75e6778f17aca757741d1a1b0a51d28afa6f2b88c3d35b85a00e2301f",
+          "results": "54be5a22d59ee1e5339e3f559f76fd082991c225c366b78736243eaf148c6de3",
+          "manual-review": "bef6a60b6a054f67e0ad3c479a01b837b66e714c4bbdc3e8be7e6b2501719e9e"
+        }
+      },
+      {
+        "caseId": "QB19",
+        "variant": "C",
+        "model": "openai/gpt-oss-120b",
+        "sharedInputHash": "8a689933660f8dc0d483196af2489306892202f960c4aaf77a40c94bfc6eb7b3",
+        "evidenceHash": "00500dc0f48f552acb59694e994d7a82ca5ba9929794fc0492922e32ee572478",
+        "wireBodyHash": "b6811a34263ce85952e87680f18757f940def4f6e51a0d8d6f7f67944c1c7193",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 1495.466999999946,
+        "historicalClassification": "fully correct",
+        "claimStatuses": [
+          {
+            "claimId": "c1",
+            "status": "F",
+            "deliveredFull": true
+          }
+        ],
+        "sourceSha256": {
+          "requests": "43afe63c1d9cf2a61064726e8b4673b65a46082100395f5b1d39917a9cd554bc",
+          "responses": "1567ab61e12f2490e38685c661434045ecf220c9cc7d5183f4485a2c2be6a77a",
+          "results": "1a8b1f70a1369b94fe601e3c1373b204e029b4181c0a6fc3401c4b4b696d3e97",
+          "manual-review": "ee8f6270c19cc0e7e3f491211c02681d6208ee56b5d1cac1303fa2e29bf22463"
+        }
+      },
+      {
+        "caseId": "QB20",
+        "variant": "A",
+        "model": "gemini-3.5-flash-lite",
+        "sharedInputHash": "76b6dae59b14378b3a438b137445db8c093dcc1b091a58624e1ec9a14478177f",
+        "evidenceHash": "4e910ade794937227fc901d7054948c1331acc17bead01f20fc683d5b2f24974",
+        "wireBodyHash": "f1d475b373c5740a995c66b5dfa0663e7a82cc9b17043834f075e03ab55b6d59",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 1567.25139999995,
+        "historicalClassification": "fully correct",
+        "claimStatuses": [
+          {
+            "claimId": "c1",
+            "status": "F",
+            "deliveredFull": true
+          }
+        ],
+        "sourceSha256": {
+          "requests": "592e4a5f397c8c0f96d1c8076f11fec1f2f1ad17f33c283b34f5ca2fc86c5d0c",
+          "responses": "2f0a2ccd7855df5642aadfab3dcdaf4477e653a8611b4b190254f13514ca2613",
+          "results": "2f78cc5415db5437c8ffd8b014e79d4681b1df2f7873cbfce381d69310aef2a3",
+          "manual-review": "d2a6d9b1fedeb781d29ba9f34389626fb25846fe03812d049afc9c60674e39ad"
+        }
+      },
+      {
+        "caseId": "QB20",
+        "variant": "B",
+        "model": "command-a-plus-05-2026",
+        "sharedInputHash": "76b6dae59b14378b3a438b137445db8c093dcc1b091a58624e1ec9a14478177f",
+        "evidenceHash": "4e910ade794937227fc901d7054948c1331acc17bead01f20fc683d5b2f24974",
+        "wireBodyHash": "b8494988d317568c68828a1d2d46c86dc7b4eab218371382819174074dfedac2",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 3411.817100000102,
+        "historicalClassification": "contract failure",
+        "claimStatuses": [
+          {
+            "claimId": "c1",
+            "status": "F",
+            "deliveredFull": true
+          }
+        ],
+        "sourceSha256": {
+          "requests": "beff4378e0c10491087190b841b5f1851be8f4df2c83a6f0eecd04482bbc7d18",
+          "responses": "d2d9887abac3e249af962a6f248cfae12250d9602497bbde768b37fbc32113fc",
+          "results": "85ef1b96dc88a02f0320efc2d66e1928afd9209aa7f54c848f9300e4b93eb225",
+          "manual-review": "62f368219d233a0bf7a0368d8b7c7721cb198268c38560bd67816c18b89aa5b8"
+        }
+      },
+      {
+        "caseId": "QB20",
+        "variant": "C",
+        "model": "openai/gpt-oss-120b",
+        "sharedInputHash": "76b6dae59b14378b3a438b137445db8c093dcc1b091a58624e1ec9a14478177f",
+        "evidenceHash": "4e910ade794937227fc901d7054948c1331acc17bead01f20fc683d5b2f24974",
+        "wireBodyHash": "faee6a8fa2b84d9a83e35160e409c554ca62b811b2310dda07c8114a4bfbd095",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 1649.6976000000723,
+        "historicalClassification": "fully correct",
+        "claimStatuses": [
+          {
+            "claimId": "c1",
+            "status": "F",
+            "deliveredFull": true
+          }
+        ],
+        "sourceSha256": {
+          "requests": "adee643b16b284ce31dc550bd1443aed8af5641fa8610394b84ba12fadcfe21b",
+          "responses": "4cae205df2fbeff9620337fc2b4e379de7f6fa137a50f7fb6a46bf75a9445ebe",
+          "results": "bcdf8e3f71fd3218aef7dbb5089c0f8b335894d54910eca183bcf7655ea9b244",
+          "manual-review": "db6b62ac3d718560ed5a11fa6bbf5793cf0e312937d349e1f64ff706804fe40b"
+        }
+      },
+      {
+        "caseId": "QB21",
+        "variant": "A",
+        "model": "gemini-3.5-flash-lite",
+        "sharedInputHash": "2e6558a0d3d7a17963a7f2a006d1aa5b6f7fdd0742c466f87b0fb235320be3de",
+        "evidenceHash": "81a3aa9549087ccfcfa990372ff3324b1419f36512e795bf86ce02f975835d61",
+        "wireBodyHash": "07cf8c30a9c8a80bfb513056426ec9dae813f17ce08f33db06a034f379272cbd",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 1483.2882000000682,
+        "historicalClassification": "fully correct",
+        "claimStatuses": [
+          {
+            "claimId": "c1",
+            "status": "F",
+            "deliveredFull": true
+          }
+        ],
+        "sourceSha256": {
+          "requests": "2e924e77c3e0eb775ea5cb0d9a5bf7dd79f8e932ca328b4aaf391e07a18c0c4b",
+          "responses": "78db7ddaf34a15cb6dc2706e7b9f51059ab067ef7c7a66b0800fca9baa66d8d1",
+          "results": "3c9d5178c7cf892babaa5b667f8ced39175f5d32d7d115433deb83ad4b87c898",
+          "manual-review": "1cb7e671cc78b74aa4fed2973f8276e23517e03358df293d35e3dd5cca16b5a6"
+        }
+      },
+      {
+        "caseId": "QB21",
+        "variant": "B",
+        "model": "command-a-plus-05-2026",
+        "sharedInputHash": "2e6558a0d3d7a17963a7f2a006d1aa5b6f7fdd0742c466f87b0fb235320be3de",
+        "evidenceHash": "81a3aa9549087ccfcfa990372ff3324b1419f36512e795bf86ce02f975835d61",
+        "wireBodyHash": "649a9e02740f6d2c62bf4189d7d6e16bec68f8d7cde132902910d11c3a69477e",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 3354.4766999999993,
+        "historicalClassification": "fully correct",
+        "claimStatuses": [
+          {
+            "claimId": "c1",
+            "status": "F",
+            "deliveredFull": true
+          }
+        ],
+        "sourceSha256": {
+          "requests": "1a645b7dc9235930441fab063a914241d0b18e423cf6da6b401dc08e0061b753",
+          "responses": "1ca06bcee4d995cb47adcd8a6f67c6199630b365bc5ce897a918ae0e49fcb4f6",
+          "results": "09ca083628f9cfac64f5f202f59f2515b5c71c4e08bddd64a5dea2ede49e87b4",
+          "manual-review": "b5bd923a85677379ef38dd0ef3f868b8d75d0f8c676f1a48fa07f485c8c57a00"
+        }
+      },
+      {
+        "caseId": "QB21",
+        "variant": "C",
+        "model": "openai/gpt-oss-120b",
+        "sharedInputHash": "2e6558a0d3d7a17963a7f2a006d1aa5b6f7fdd0742c466f87b0fb235320be3de",
+        "evidenceHash": "81a3aa9549087ccfcfa990372ff3324b1419f36512e795bf86ce02f975835d61",
+        "wireBodyHash": "47e5231d25a16fa9b76aab9bff8098322719c9042d00e55c4ab63d3a1f32c693",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 1650.498399999924,
+        "historicalClassification": "fully correct",
+        "claimStatuses": [
+          {
+            "claimId": "c1",
+            "status": "F",
+            "deliveredFull": true
+          }
+        ],
+        "sourceSha256": {
+          "requests": "9874d59d5074ad4aa8ef7dc7aedae505de977b5def1ba5e9a43dfda8af3dbe61",
+          "responses": "bddea9ffe0b9441ddf7ea27f8d6bf2dd3d20ba3b86bb6ef538c23ec61d676112",
+          "results": "5f53879734674fc04c42667946e24649e7f279c87a37ba7b56bacf3e68e61dbe",
+          "manual-review": "a7c23e87803ab42cb9b811a31e96fba023df0c5d1ac16224734cdb36f31b3657"
+        }
+      },
+      {
+        "caseId": "QB22",
+        "variant": "A",
+        "model": "gemini-3.5-flash-lite",
+        "sharedInputHash": "aa8daf8d7d85e99df382eb850c842c40fc7dccfe8855bf3c6100989b9397637e",
+        "evidenceHash": "f62508fb9b0ad4a71233eeba089f57034cce1b9fe32eecb886ab7814df1d8ee2",
+        "wireBodyHash": "4e4e1185210c266d137e05e63764fe18aaab9f7f18b03faea02f7d418fe979e5",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 1244.470600000117,
+        "historicalClassification": "partial",
+        "claimStatuses": [
+          {
+            "claimId": "c1",
+            "status": "P",
+            "deliveredFull": false
+          },
+          {
+            "claimId": "c2",
+            "status": "O",
+            "deliveredFull": false
+          }
+        ],
+        "sourceSha256": {
+          "requests": "5db3c0c675e7d0e78799354b27fe9e3e4dc9b2760f371727002460f57347fe48",
+          "responses": "40372bfaf128622ae3a2908e7818ea5c179ad1c80a2447a2751adaf735691d7e",
+          "results": "f44fcaf3dcc7c0c155fdc3f6a8f28fe15ffcd084903445859d037c76ea0cd257",
+          "manual-review": "fcd24e603e26c823af7ba54f300b8b7ae7212c100440897bada4c0341c9eb153"
+        }
+      },
+      {
+        "caseId": "QB22",
+        "variant": "B",
+        "model": "command-a-plus-05-2026",
+        "sharedInputHash": "aa8daf8d7d85e99df382eb850c842c40fc7dccfe8855bf3c6100989b9397637e",
+        "evidenceHash": "f62508fb9b0ad4a71233eeba089f57034cce1b9fe32eecb886ab7814df1d8ee2",
+        "wireBodyHash": "644f95bc1a1ddad8a439e59ea4d3672e59c86121630c0b775c0c98aafcedbc40",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 3197.7024999998976,
+        "historicalClassification": "partial",
+        "claimStatuses": [
+          {
+            "claimId": "c1",
+            "status": "P",
+            "deliveredFull": false
+          },
+          {
+            "claimId": "c2",
+            "status": "O",
+            "deliveredFull": false
+          }
+        ],
+        "sourceSha256": {
+          "requests": "b7ced5811276ea148b9bf7c7c698001197b95496a6242c281419afc36c4e9d62",
+          "responses": "569333d742e132f3de7991cb7c8bc5d725e836d5b3f9bd33ed5aa45e5c877350",
+          "results": "e34cfcccc490e4a76a29131a4f1abe78d813e266a72264c36790398442dd56a9",
+          "manual-review": "de9a564fe83846635cf4fd8a2d6aa475e078c1ead9b33f04b6fe987bf6e732f0"
+        }
+      },
+      {
+        "caseId": "QB22",
+        "variant": "C",
+        "model": "openai/gpt-oss-120b",
+        "sharedInputHash": "aa8daf8d7d85e99df382eb850c842c40fc7dccfe8855bf3c6100989b9397637e",
+        "evidenceHash": "f62508fb9b0ad4a71233eeba089f57034cce1b9fe32eecb886ab7814df1d8ee2",
+        "wireBodyHash": "60d5ec0dc0738ab44f879daba458598fc9bccb05d954b49a2872e03737811045",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 1513.0314000002109,
+        "historicalClassification": "partial",
+        "claimStatuses": [
+          {
+            "claimId": "c1",
+            "status": "P",
+            "deliveredFull": false
+          },
+          {
+            "claimId": "c2",
+            "status": "O",
+            "deliveredFull": false
+          }
+        ],
+        "sourceSha256": {
+          "requests": "dfc530fec89b49bfa166f002acddb6e5d9e5a4cdd31012f8bbe820360c69bd7f",
+          "responses": "04459806bc62a0ce7f090a331d030481187bbc4cc3074717862d820ba68cb881",
+          "results": "eb9ebc97993a57de4b6d007ecf9937015f4fd89163d58b99093aac6267777e5b",
+          "manual-review": "a94424eb531a71333deae7f9a64b05fe02af8e2cefe3f12b562b7661deaed248"
+        }
+      },
+      {
+        "caseId": "QB23",
+        "variant": "A",
+        "model": "gemini-3.5-flash-lite",
+        "sharedInputHash": "acbf2616529d7d305f2a908e0df8e282e1ca5e501b6bc469030bd7773e749254",
+        "evidenceHash": "04d481ab4581f1a8b22a05587532aafadb26c75109ba66ba00c0904266af38d2",
+        "wireBodyHash": "389d14ca8731625a0f8f1c382c87e799cdf2602eda072a25de3482863dbd4d1d",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 1242.3757000002079,
+        "historicalClassification": "fully correct",
+        "claimStatuses": [],
+        "sourceSha256": {
+          "requests": "eb858a156270267483a8c67d3103ca58bdc355a249522fc6be058e79e6cdd4ad",
+          "responses": "b96226afe1990e2546ee9db95e0eb3f3ad68dd0f94f6ef9ac21a23542ba10167",
+          "results": "3bcf270075b39a456de271c58619284059bb469f7b0eba133f70fc303ecc4816",
+          "manual-review": "e227d24700b38d84e962a7d39bfb8bfcd7b65f3e0251977ad4374031c42b28d8"
+        }
+      },
+      {
+        "caseId": "QB23",
+        "variant": "B",
+        "model": "command-a-plus-05-2026",
+        "sharedInputHash": "acbf2616529d7d305f2a908e0df8e282e1ca5e501b6bc469030bd7773e749254",
+        "evidenceHash": "04d481ab4581f1a8b22a05587532aafadb26c75109ba66ba00c0904266af38d2",
+        "wireBodyHash": "03b9bd7f2acea8dd582c9fad02b08ae2b59607cdef57187b40d4d348d4199cd8",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 1843.9125000000931,
+        "historicalClassification": "fully correct",
+        "claimStatuses": [],
+        "sourceSha256": {
+          "requests": "e94e21cb8d025b93bf229c304a14a21a77de1619984f4f60e17b002747587504",
+          "responses": "277c6d00f87f3075ed3a3c5f3e76add3e81b2a9d21d39955891d7a91e025efc7",
+          "results": "697b9f94c5e8d1e037a4c4f8016bd557b4d0776da07e5278f3434d3c05a55d31",
+          "manual-review": "2362203e66bd899f95567552fbe1a2408bd4e516f1374b63cde280dd505aa461"
+        }
+      },
+      {
+        "caseId": "QB23",
+        "variant": "C",
+        "model": "openai/gpt-oss-120b",
+        "sharedInputHash": "acbf2616529d7d305f2a908e0df8e282e1ca5e501b6bc469030bd7773e749254",
+        "evidenceHash": "04d481ab4581f1a8b22a05587532aafadb26c75109ba66ba00c0904266af38d2",
+        "wireBodyHash": "cfc6e341620e6e84bf7d7e826ff947e292125f5c1b8a73eb3d89bc57f6ff7412",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 940.0371000000741,
+        "historicalClassification": "fully correct",
+        "claimStatuses": [],
+        "sourceSha256": {
+          "requests": "28770c479b50d7ee3ffb51fd6d2b058fe4764d160fc0e9ec26b9e6a59a567b75",
+          "responses": "7408dc899fa2656a995c55d0380a827ccee4f7c2d3fe07896f1f32b2b09d69da",
+          "results": "33a2bd16f6c5f866231aeb9218d292ade961b8345ae49e9eabcdf5eb62060060",
+          "manual-review": "fe698b11b9ce803ab0d2f7beb41e582b6e328e60e1537f39575ff6157410c72a"
+        }
+      },
+      {
+        "caseId": "QB24",
+        "variant": "A",
+        "model": "gemini-3.5-flash-lite",
+        "sharedInputHash": "99f05d813b652c5accf4333cdfbe8ea0105a3fbea5f0596844db8a9d2c089197",
+        "evidenceHash": "a7c8c79dfb8250b46bb76ac909bdcdb1fc46af6a4c0742a0f3496f5dea9dbf4a",
+        "wireBodyHash": "5346d66452409dce30a83c46040d14fbe97c46509b215307aecf76f844da7b21",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 1333.5226999998558,
+        "historicalClassification": "fully correct",
+        "claimStatuses": [],
+        "sourceSha256": {
+          "requests": "0716248b78b81a8c21e361855e28b2ec65ce760adbb5fc79ea096336747ede63",
+          "responses": "5a928e28387ff62033685cebe1494bc753a60088fc07c2ba704db6392e60ad02",
+          "results": "cba3333df2b756f52828fd857a32661b057e26c5d70450136c93baffba3e330d",
+          "manual-review": "1393eff17b3269e3398bdc1e59fddcb7f68d9eb0c1121729f36ac96592916c12"
+        }
+      },
+      {
+        "caseId": "QB24",
+        "variant": "B",
+        "model": "command-a-plus-05-2026",
+        "sharedInputHash": "99f05d813b652c5accf4333cdfbe8ea0105a3fbea5f0596844db8a9d2c089197",
+        "evidenceHash": "a7c8c79dfb8250b46bb76ac909bdcdb1fc46af6a4c0742a0f3496f5dea9dbf4a",
+        "wireBodyHash": "5158b1997fa6497936f810395fae8a3d44e9bd405d0d8c5af1ba63c6d6096903",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 1771.3670999999158,
+        "historicalClassification": "fully correct",
+        "claimStatuses": [],
+        "sourceSha256": {
+          "requests": "bec004fde8763d9240c94b3fd8afe5ea646c25707c60c02117052493b05fb040",
+          "responses": "c1af76788c7f8c090bb793f08d151b3947bd015ca288341c5165b567e765755e",
+          "results": "6a7c76bbcef719293ab944db5ffd63c4bc8aa098cdeeefc17597aba390a0d661",
+          "manual-review": "9f2bd96cdc74935cfe9d82243b5faeccf83285e0faac8e27cf03ce32f3b97c32"
+        }
+      },
+      {
+        "caseId": "QB24",
+        "variant": "C",
+        "model": "openai/gpt-oss-120b",
+        "sharedInputHash": "99f05d813b652c5accf4333cdfbe8ea0105a3fbea5f0596844db8a9d2c089197",
+        "evidenceHash": "a7c8c79dfb8250b46bb76ac909bdcdb1fc46af6a4c0742a0f3496f5dea9dbf4a",
+        "wireBodyHash": "bd433aa09f88250f53f35bb3c77de5abe7528d74ff65598b54d42b0c2b55c8bb",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 1426.6683000000194,
+        "historicalClassification": "fully correct",
+        "claimStatuses": [],
+        "sourceSha256": {
+          "requests": "c83ced6f4f0097eafd166132824edbda1d6c160bf9ce15b86b9c0214558a95e8",
+          "responses": "e1fafa04e5c6faf3d435f6c97059318d7fdb633fbd623705cb918cc55daff40d",
+          "results": "f027187f0156d58577a0ae3ecb21afa48e29afbba4324cd308b2be80713a09f0",
+          "manual-review": "865dad929c1ca850e368c730f57c00d7451dcf0b15c2f02e4aa91bfc79bc297e"
+        }
+      },
+      {
+        "caseId": "QB25",
+        "variant": "A",
+        "model": "gemini-3.5-flash-lite",
+        "sharedInputHash": "78ee1b3acbebe348f39bc28ed5bad2460e2110b9646539ef11ea8a6a2c06f8a9",
+        "evidenceHash": "ebbbeeb9b15534f4256863394440b745a622ab4e69102d3579041ddf97f1102f",
+        "wireBodyHash": "50ea06da554c9608a91adadde9861dbe32bee03867a7e6f14ab08bcb9599a7b7",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 1522.5191000001505,
+        "historicalClassification": "fully correct",
+        "claimStatuses": [
+          {
+            "claimId": "c1",
+            "status": "F",
+            "deliveredFull": true
+          },
+          {
+            "claimId": "c2",
+            "status": "F",
+            "deliveredFull": true
+          }
+        ],
+        "sourceSha256": {
+          "requests": "cc239244f5c4ab0850ad3b34168e25eafdc56e8d493dd77ca2044b354d12e4e8",
+          "responses": "ba607cdace78f09f8c16213832849bad6059307aee7567e13e8a1d3649f58285",
+          "results": "eb465b446b5fd56ee3cc5c3c7c1c13592c38c15ccbdb5244e0e52715d7735fb0",
+          "manual-review": "b3a96cfa1f348e9439b036284b2cdb7a7f04209e7ac45ef8c3b82b045a6c9b20"
+        }
+      },
+      {
+        "caseId": "QB25",
+        "variant": "B",
+        "model": "command-a-plus-05-2026",
+        "sharedInputHash": "78ee1b3acbebe348f39bc28ed5bad2460e2110b9646539ef11ea8a6a2c06f8a9",
+        "evidenceHash": "ebbbeeb9b15534f4256863394440b745a622ab4e69102d3579041ddf97f1102f",
+        "wireBodyHash": "b28d66685fa70f0a4ffa9c810db0ce09a0b639e682f2c646efcdfa729226e7e2",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 2112.336799999932,
+        "historicalClassification": "grounding failure",
+        "claimStatuses": [
+          {
+            "claimId": "c1",
+            "status": "X",
+            "deliveredFull": false
+          },
+          {
+            "claimId": "c2",
+            "status": "X",
+            "deliveredFull": false
+          }
+        ],
+        "sourceSha256": {
+          "requests": "efdc6523ff0e34a45074109199e11e17d8e5fba43107e7fabf146397b14d3c6c",
+          "responses": "9b07474911f25a458752a76d903c9ced833058896ddc333a0a942bd37f718372",
+          "results": "0c4844fe0f4cbcf88a3106fc61ee9b0d5ea3a919b5ecb58fb8856272f5b9bcbf",
+          "manual-review": "a047d681186d154d269e226bbc1a8428fb89ef9d11ef7684776d4b973858df67"
+        }
+      },
+      {
+        "caseId": "QB25",
+        "variant": "C",
+        "model": "openai/gpt-oss-120b",
+        "sharedInputHash": "78ee1b3acbebe348f39bc28ed5bad2460e2110b9646539ef11ea8a6a2c06f8a9",
+        "evidenceHash": "ebbbeeb9b15534f4256863394440b745a622ab4e69102d3579041ddf97f1102f",
+        "wireBodyHash": "3dc754add580989844a0c6df03e8e66f8c96f2a75d2d0fdadb7e305e7ac175ab",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 2461.336799999932,
+        "historicalClassification": "grounding failure",
+        "claimStatuses": [
+          {
+            "claimId": "c1",
+            "status": "X",
+            "deliveredFull": false
+          },
+          {
+            "claimId": "c2",
+            "status": "X",
+            "deliveredFull": false
+          }
+        ],
+        "sourceSha256": {
+          "requests": "d374cf205bf92f21743c19d2396cfbe138c78112281c77dd973fc629b3cb93a6",
+          "responses": "71f57faffadcb6a04fb5afedb4d7334f2cc1024fe26cd3f4cdbc9dc77b139690",
+          "results": "da35ccc7ae4c8613c1fc5e1a82d16e338f02aeb57f7df2470fee5670493d539f",
+          "manual-review": "ce831cd619a5875fad8a36bbb9af860e2aaa518d77d17fa345bed4dca18c8bc3"
+        }
+      },
+      {
+        "caseId": "QB26",
+        "variant": "A",
+        "model": "gemini-3.5-flash-lite",
+        "sharedInputHash": "9bef98026cd0b8b173f15bfb0e4c7d5f102fd162541ae4b31b98d93c1ce04620",
+        "evidenceHash": "df36e7af330df2bbc4cdb9a252d121ac40ae785da7e4df15a082fbb22f482df1",
+        "wireBodyHash": "06e54095ee314c8d98ec0c3a99c3c6696cb1de7025d590513e25e3ffe83b7648",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 1896.596499999985,
+        "historicalClassification": "partial",
+        "claimStatuses": [
+          {
+            "claimId": "c1",
+            "status": "P",
+            "deliveredFull": false
+          },
+          {
+            "claimId": "c2",
+            "status": "F",
+            "deliveredFull": true
+          }
+        ],
+        "sourceSha256": {
+          "requests": "f08341aa1b2a7d6a4326e99c92a6b24ceaa4c7ab0f66c238d0a6ae87323b5075",
+          "responses": "93a5c2cc914a64c8745b73fb6b4d4dadc9180071024862ec010059ddf76d86d7",
+          "results": "83ca5b75193e9d7dd8b659c68429d2861b528c9f11f9a1c222d3275240e15848",
+          "manual-review": "5f4386eb827b7f9aae727bbe35d7b737b7a56bfad071baa87dcd6140995b4a3e"
+        }
+      },
+      {
+        "caseId": "QB26",
+        "variant": "B",
+        "model": "command-a-plus-05-2026",
+        "sharedInputHash": "9bef98026cd0b8b173f15bfb0e4c7d5f102fd162541ae4b31b98d93c1ce04620",
+        "evidenceHash": "df36e7af330df2bbc4cdb9a252d121ac40ae785da7e4df15a082fbb22f482df1",
+        "wireBodyHash": "1fc4ca13e014e4134a8dd1513c131ef73c0f4b4637013ffa7d95d5ebb0adaf4c",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 4713.579900000012,
+        "historicalClassification": "partial",
+        "claimStatuses": [
+          {
+            "claimId": "c1",
+            "status": "P",
+            "deliveredFull": false
+          },
+          {
+            "claimId": "c2",
+            "status": "P",
+            "deliveredFull": false
+          }
+        ],
+        "sourceSha256": {
+          "requests": "e166e0064ac646fd98df845ce82604bead94ae24b62308be1e08e559da69ec6a",
+          "responses": "7bf95ffb774c5d55080509eb29cea484c6ede07dea0b4098ee2e3bb2f4a78230",
+          "results": "2c19f2175220a1048f89d0759a45bb8af5dd47875537de767bbf36be7c9fc474",
+          "manual-review": "40ab057a150857640cd919e12e9f3d81dde11ac78d81f337e33168936fc2e4e4"
+        }
+      },
+      {
+        "caseId": "QB26",
+        "variant": "C",
+        "model": "openai/gpt-oss-120b",
+        "sharedInputHash": "9bef98026cd0b8b173f15bfb0e4c7d5f102fd162541ae4b31b98d93c1ce04620",
+        "evidenceHash": "df36e7af330df2bbc4cdb9a252d121ac40ae785da7e4df15a082fbb22f482df1",
+        "wireBodyHash": "da995ded2d61c7cb839ea55eb7e9dd68adaedcd258019a20a52d2deadcafaa13",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 1583.4525999999605,
+        "historicalClassification": "partial",
+        "claimStatuses": [
+          {
+            "claimId": "c1",
+            "status": "P",
+            "deliveredFull": false
+          },
+          {
+            "claimId": "c2",
+            "status": "F",
+            "deliveredFull": true
+          }
+        ],
+        "sourceSha256": {
+          "requests": "a5ebe3b92099cd1eba6241d6acf1d6c0320902a1c5beb5da4976e9b562903cad",
+          "responses": "4d98db0f1477c4c68675140555bf001efe603284b04b48b5a298870cdf06d207",
+          "results": "3e4df5e0888a2702fffdbe9cefb448a4cf981f6f78d26c97aa36dfbe715cda63",
+          "manual-review": "44c48e7feb3a093c34ab92bb0753a3e21c12d205cadb11f78c25fc5a058dd2fd"
+        }
+      },
+      {
+        "caseId": "QB27",
+        "variant": "A",
+        "model": "gemini-3.5-flash-lite",
+        "sharedInputHash": "6f1a7bb8e11f5ab46fb8766c8da1e6bbb873d7feb26832a19cb55e01c545793f",
+        "evidenceHash": "5125cf18db2418ec0d6b1ae9d5df0532d3e48702abc014ff2d81fcaec037e123",
+        "wireBodyHash": "93b89f87404355aa22b6df9de86b89b7a0584e630fc238e4bc37333775374ef4",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 1442.318200000096,
+        "historicalClassification": "fully correct",
+        "claimStatuses": [
+          {
+            "claimId": "c1",
+            "status": "F",
+            "deliveredFull": true
+          }
+        ],
+        "sourceSha256": {
+          "requests": "25188c243d02662450c16b3e72efc395ee0a12a252cb72233f2598a31b704059",
+          "responses": "001bd455995748da689c0c5dbee4f80c89d97b548bcfbe7d299b95a0ccd64406",
+          "results": "91e64a4a93e790422265d58461bcf489592df200e10bf224de606f906633a460",
+          "manual-review": "089faf06ba1641f0dd83259d3a6d531caabb615f0cdef3d8d37a78a96d591d95"
+        }
+      },
+      {
+        "caseId": "QB27",
+        "variant": "B",
+        "model": "command-a-plus-05-2026",
+        "sharedInputHash": "6f1a7bb8e11f5ab46fb8766c8da1e6bbb873d7feb26832a19cb55e01c545793f",
+        "evidenceHash": "5125cf18db2418ec0d6b1ae9d5df0532d3e48702abc014ff2d81fcaec037e123",
+        "wireBodyHash": "b14eaee72567467118ee82a20d4be4b598781a8018628e24157f837147b2421a",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 6088.499700000044,
+        "historicalClassification": "partial",
+        "claimStatuses": [
+          {
+            "claimId": "c1",
+            "status": "O",
+            "deliveredFull": false
+          }
+        ],
+        "sourceSha256": {
+          "requests": "6645abbdaf1f352c1ab04f4a134d22d6417a363a12bc17aa106705f4cb1323e2",
+          "responses": "effce85be8068786bb239c39c0865077c48b678440ca464f5848577740b8d7b1",
+          "results": "821d07b621c15e968e2b799dffdbe3d7ab6ea212d2014f56d1cbe90b62cb6afe",
+          "manual-review": "1db1575d31af2a23a1a0d9e3df39df628dcf6e80fb12043f5aa3eded99a64f7d"
+        }
+      },
+      {
+        "caseId": "QB27",
+        "variant": "C",
+        "model": "openai/gpt-oss-120b",
+        "sharedInputHash": "6f1a7bb8e11f5ab46fb8766c8da1e6bbb873d7feb26832a19cb55e01c545793f",
+        "evidenceHash": "5125cf18db2418ec0d6b1ae9d5df0532d3e48702abc014ff2d81fcaec037e123",
+        "wireBodyHash": "3bc02811b1f44de27680fe040fd763e384466cc3d93b5381d92660e74b993580",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 1656.942800000077,
+        "historicalClassification": "fully correct",
+        "claimStatuses": [
+          {
+            "claimId": "c1",
+            "status": "F",
+            "deliveredFull": true
+          }
+        ],
+        "sourceSha256": {
+          "requests": "e79bd0d158a5661cd43b879809b86feab8dc7bfb12a203001739fff0786b150d",
+          "responses": "32bfdf07c2585964795774c6431a34fa429ec8bed19cce81f32374d095015c1c",
+          "results": "178c30ae074371b0ba1ae8621ee8064ceb5bc9a128bf8626a1b6fcc368431122",
+          "manual-review": "85b3f5bd4205ce027f19693900feac30960d49c9eb89e48f213943981fbed7ea"
+        }
+      },
+      {
+        "caseId": "QB28",
+        "variant": "A",
+        "model": "gemini-3.5-flash-lite",
+        "sharedInputHash": "15e14d53e4c34e8fa21710d9c835dde54530a773ac2c89feea2a0686666a027d",
+        "evidenceHash": "cd90a16a8f9564e233a893fc53550ad1e8443ba2d539074de4af70c5642d71f7",
+        "wireBodyHash": "72ac50464ff2cd48673dc153ce322216a9eb172edcde305626e4c5a1d7221a04",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 1201.0459999998566,
+        "historicalClassification": "fully correct",
+        "claimStatuses": [],
+        "sourceSha256": {
+          "requests": "2ce65de6212ac84d5bd16f282a36406d231330ff29ef0f9c239c64d0489e8428",
+          "responses": "dd85047fd7ffb20b650a3cdc9e4fe11b044b4656021d14953a3c363d4f5bf6a6",
+          "results": "33c413462943f183ff5ea4a3ff91d044771c12bb6ff25522956214bea587862a",
+          "manual-review": "a0865ba5534e6406b27a5b33c1ba51a5f1da438a7e7e1b756d640480a0006bd2"
+        }
+      },
+      {
+        "caseId": "QB28",
+        "variant": "B",
+        "model": "command-a-plus-05-2026",
+        "sharedInputHash": "15e14d53e4c34e8fa21710d9c835dde54530a773ac2c89feea2a0686666a027d",
+        "evidenceHash": "cd90a16a8f9564e233a893fc53550ad1e8443ba2d539074de4af70c5642d71f7",
+        "wireBodyHash": "1b895ab6ae64338afc27d6bc4cf8a2397b2d4e41136807ed798aa7e516c62c77",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 2053.5126999998465,
+        "historicalClassification": "fully correct",
+        "claimStatuses": [],
+        "sourceSha256": {
+          "requests": "1207e47ccc4a0f03a41aab7f76fff02f4563bb12a0841721fc7075d26ff372eb",
+          "responses": "e040329f645742029032156f1cc84734de4e90e2e773e8ad0c4ff68deab725a0",
+          "results": "4a04b466912e3a922895c2e0d019531c8abe141e73d49b85f68a1507b726ef91",
+          "manual-review": "9c165489927cfb9b4b7ac528a8d8ae833fa299bd7b7cffe49ca736a3af98ce70"
+        }
+      },
+      {
+        "caseId": "QB28",
+        "variant": "C",
+        "model": "openai/gpt-oss-120b",
+        "sharedInputHash": "15e14d53e4c34e8fa21710d9c835dde54530a773ac2c89feea2a0686666a027d",
+        "evidenceHash": "cd90a16a8f9564e233a893fc53550ad1e8443ba2d539074de4af70c5642d71f7",
+        "wireBodyHash": "061243fadb2ae94aa9bb1ad0badd0f11afc0f1f519227b6bbd60ee0be4c09cf7",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 1146.5733000000473,
+        "historicalClassification": "fully correct",
+        "claimStatuses": [],
+        "sourceSha256": {
+          "requests": "1c77cbfcfc1a9e2f26d3a25556541adac64fd16dcc02002551a5bc4b53d1dd56",
+          "responses": "9b5a37053a013d33cd156cff6ceee53fef242b22bac71834907de4754c9a94a0",
+          "results": "517a30bad9b34763b5398fa298486bf0a8ea3db93fc7eaf16617e62a3ea01cc2",
+          "manual-review": "18d2931f8e64fa3d2be8c9b38bdc2abb5e1c5787bb9e62f2cdba9aa08f458aae"
+        }
+      },
+      {
+        "caseId": "QB29",
+        "variant": "A",
+        "model": "gemini-3.5-flash-lite",
+        "sharedInputHash": "642352ebc446c04dd2aabcd141bca2bd1de462c1fa89507363dace0c79d38b80",
+        "evidenceHash": "8bcb3acbaed0b00e89d42399ae609aaaf0499eb2d6f037d1329c9860520172c7",
+        "wireBodyHash": "594cd4f028369998d2bba67e40648a31bf98756fb70bc9ce957ab1fc7c36e669",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 1489.3538999999873,
+        "historicalClassification": "fully correct",
+        "claimStatuses": [
+          {
+            "claimId": "c1",
+            "status": "F",
+            "deliveredFull": true
+          }
+        ],
+        "sourceSha256": {
+          "requests": "89454859389e240e463f7e917881c283e6a24a3c761e1cd7bc55c8c5d3a5205e",
+          "responses": "c96737430b3b476c7040cd25f1d29a9f9a62436623ff74e32410d9fad69de8a0",
+          "results": "0d461d34d415f2de789760f426a4e83b5ab3f365a0472a8c95cb2da47b28cf2d",
+          "manual-review": "b670bd75882460f8b8b1ae2f009a225a26a34c15206bc32549836c256ba28202"
+        }
+      },
+      {
+        "caseId": "QB29",
+        "variant": "B",
+        "model": "command-a-plus-05-2026",
+        "sharedInputHash": "642352ebc446c04dd2aabcd141bca2bd1de462c1fa89507363dace0c79d38b80",
+        "evidenceHash": "8bcb3acbaed0b00e89d42399ae609aaaf0499eb2d6f037d1329c9860520172c7",
+        "wireBodyHash": "8c091782f560e236f3d70f0d50d53f812709499533b4d1fec83adad27364373f",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 1800.9845000000205,
+        "historicalClassification": "fully correct",
+        "claimStatuses": [
+          {
+            "claimId": "c1",
+            "status": "F",
+            "deliveredFull": true
+          }
+        ],
+        "sourceSha256": {
+          "requests": "091e8b263e82fa86f91d8690638474248a39919fe99144af18eaca5fd5e99494",
+          "responses": "a2a2cac36feac4763e19c3f85fd549d34b988fe44852d20c4ac4cbda22a00834",
+          "results": "fb68c1fd2bf3205646b6b8603defaef1f5e3fd0911dccf0c7e49bbce512fd6d4",
+          "manual-review": "a6e7d70369f4ad7f8cfd1ef3eb1de3fe126647cdede8313bf486d6aa98c8bbbd"
+        }
+      },
+      {
+        "caseId": "QB29",
+        "variant": "C",
+        "model": "openai/gpt-oss-120b",
+        "sharedInputHash": "642352ebc446c04dd2aabcd141bca2bd1de462c1fa89507363dace0c79d38b80",
+        "evidenceHash": "8bcb3acbaed0b00e89d42399ae609aaaf0499eb2d6f037d1329c9860520172c7",
+        "wireBodyHash": "3a22551b4795f9cd27841f4298570cde92a46361aaebc820ee411b91de6ae144",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 896.6541999999899,
+        "historicalClassification": "fully correct",
+        "claimStatuses": [
+          {
+            "claimId": "c1",
+            "status": "F",
+            "deliveredFull": true
+          }
+        ],
+        "sourceSha256": {
+          "requests": "dc16e75e3761c539e98cc68a74596f44943ffe4b5599899f227c67a3ee23c61c",
+          "responses": "ca6fe11b59b4c5612802fe074e0dbb62325b0cb2be37f890c8e2e7f0e6faa532",
+          "results": "9890274652a8a7c29ffb43bc7ecb87dbb9da55d5237636925479956d14eab669",
+          "manual-review": "e6e4008a0e6134bbdd264daaa26d107f7370f1e63d07980f3ffc4fba0deb8810"
+        }
+      },
+      {
+        "caseId": "QB30",
+        "variant": "A",
+        "model": "gemini-3.5-flash-lite",
+        "sharedInputHash": "1839fe3b7cc29835d9171612273b35b63750ab1678eb6b9288441dcea45f190b",
+        "evidenceHash": "7dc2127a03637d159fc1f9705b21dd5ff3e40de1f73103d85659d548315bc6b9",
+        "wireBodyHash": "b8f09eb99fd15eaa2dc0dc79d31fe3070deaf7aa8e97861ca44434bce17abc2b",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 2030.3783999998122,
+        "historicalClassification": "fully correct",
+        "claimStatuses": [
+          {
+            "claimId": "c1",
+            "status": "F",
+            "deliveredFull": true
+          }
+        ],
+        "sourceSha256": {
+          "requests": "a6cef8933d541036dbe17d9dd73faac9cca3f5a74e78c6038bd25d13917c3ac8",
+          "responses": "832d615704c869382bb2885b3cf2650f7100f6ef42202fe5fbed56a40d443c2f",
+          "results": "b8efd10ac041716dedb833706e5831aee7ce13003b5e72866ac9b0a24773ff0c",
+          "manual-review": "a56f1bca26eb1c448501a2f97d2174d947225416fb323b3993a0c907750490a3"
+        }
+      },
+      {
+        "caseId": "QB30",
+        "variant": "B",
+        "model": "command-a-plus-05-2026",
+        "sharedInputHash": "1839fe3b7cc29835d9171612273b35b63750ab1678eb6b9288441dcea45f190b",
+        "evidenceHash": "7dc2127a03637d159fc1f9705b21dd5ff3e40de1f73103d85659d548315bc6b9",
+        "wireBodyHash": "007c31c56e854a675d86b1bd29ec5e7ccad31898e219fbcd907300fbed0d6db1",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 2033.3711000001058,
+        "historicalClassification": "fully correct",
+        "claimStatuses": [
+          {
+            "claimId": "c1",
+            "status": "F",
+            "deliveredFull": true
+          }
+        ],
+        "sourceSha256": {
+          "requests": "ca02f1b002947320f1cfe897ccb4532707694d653b178b026a1be1316ff437ef",
+          "responses": "7b1b45e288810f2bbd1fafc10f676c1d68bcc1ddffeceda8c6aff0e20bf7705e",
+          "results": "5776dc23dcd86cf1ac005ecff774b572aeb1c22968358cb0cd3508288d309b7e",
+          "manual-review": "c00b37e285b2b41964cb500a99600f98920314a0238415e6c34e12d328a998ab"
+        }
+      },
+      {
+        "caseId": "QB30",
+        "variant": "C",
+        "model": "openai/gpt-oss-120b",
+        "sharedInputHash": "1839fe3b7cc29835d9171612273b35b63750ab1678eb6b9288441dcea45f190b",
+        "evidenceHash": "7dc2127a03637d159fc1f9705b21dd5ff3e40de1f73103d85659d548315bc6b9",
+        "wireBodyHash": "0fdaa631de198238c1dcd0ca6629488102bff91ce473fabb7ac9f07bdfa5adb0",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 971.9693999998271,
+        "historicalClassification": "fully correct",
+        "claimStatuses": [
+          {
+            "claimId": "c1",
+            "status": "F",
+            "deliveredFull": true
+          }
+        ],
+        "sourceSha256": {
+          "requests": "c7de6cb846004a8ed00a83f0c1bd849f5ac531105230823eaa46bcf7e2c01eb5",
+          "responses": "21206790a5ea9416c9874e7282cfda2b093227a77d30ad9f74ef2da6fb825562",
+          "results": "f3f7fd61dc00b0f2ff9494ca9651c62f417b68611d2c278a97c6d209d6b2767c",
+          "manual-review": "5901993ab68c63d650bf41cc713e1d2fdbe981a0c04e45ae8e37b35dc15ce767"
+        }
+      },
+      {
+        "caseId": "QB31",
+        "variant": "A",
+        "model": "gemini-3.5-flash-lite",
+        "sharedInputHash": "7a10e7fac21bbe1e441458e9f3eb9d5281d976665c5d04f93af23f41dd680caf",
+        "evidenceHash": "45c33c7457a3fcedfe4e21239cc9a4e0c35d7404d56bb4965bc40311f91608da",
+        "wireBodyHash": "cdf6d6c138a1d02448556d3d18ec060f57fd0b3726d9bdc42d0a85a69d0e8a3e",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 1226.0708000001032,
+        "historicalClassification": "partial",
+        "claimStatuses": [
+          {
+            "claimId": "c1",
+            "status": "O",
+            "deliveredFull": false
+          }
+        ],
+        "sourceSha256": {
+          "requests": "d5a4123253f54c7d3eeb2e522ee3cb1774c51475ccf0adfc947a3accb322d64b",
+          "responses": "8f960bfc7011525fe3d794aab03ff666f8f5bb749f59795224897c2d15fedfc6",
+          "results": "a7c51d6a44f63ae9b5135a18501d14f518e385d28cf8d668581640b532c02662",
+          "manual-review": "8b96a9fb7c55118dabd16a19c2dae431b1cbd1eb6f7599f29a84963c3bd3cea5"
+        }
+      },
+      {
+        "caseId": "QB31",
+        "variant": "B",
+        "model": "command-a-plus-05-2026",
+        "sharedInputHash": "7a10e7fac21bbe1e441458e9f3eb9d5281d976665c5d04f93af23f41dd680caf",
+        "evidenceHash": "45c33c7457a3fcedfe4e21239cc9a4e0c35d7404d56bb4965bc40311f91608da",
+        "wireBodyHash": "d88ed78651787c88739d994b01efc2b61405cb5074c5e4898c6884431e4cb9be",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 2269.434099999955,
+        "historicalClassification": "contract failure",
+        "claimStatuses": [
+          {
+            "claimId": "c1",
+            "status": "O",
+            "deliveredFull": false
+          }
+        ],
+        "sourceSha256": {
+          "requests": "2cdaefa6badb3a5b9c1d5c10a6330d8621866656a6f1e087cd73431e8a23accc",
+          "responses": "acd68b0404e7a21f47613f9a7395583d36d90327b649095d8bbdbca06119f38b",
+          "results": "84db56abebb44868a34f78e7c88a32b6a720c2d6a6abe921a08973171a9f95a7",
+          "manual-review": "8613f41de5be2c819ad1774ce47b46f6e0bce84804bd3c3dab15c966819d0ee5"
+        }
+      },
+      {
+        "caseId": "QB31",
+        "variant": "C",
+        "model": "openai/gpt-oss-120b",
+        "sharedInputHash": "7a10e7fac21bbe1e441458e9f3eb9d5281d976665c5d04f93af23f41dd680caf",
+        "evidenceHash": "45c33c7457a3fcedfe4e21239cc9a4e0c35d7404d56bb4965bc40311f91608da",
+        "wireBodyHash": "9bcd385a93020f5bd71b3ce69aed4538cbabe8635e8337fa2fae111a604e1b14",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 1489.3532000000123,
+        "historicalClassification": "partial",
+        "claimStatuses": [
+          {
+            "claimId": "c1",
+            "status": "O",
+            "deliveredFull": false
+          }
+        ],
+        "sourceSha256": {
+          "requests": "0be5b959969946d5d932d1201dabc411f46ff8d783d9a57f56bd51418099fd5a",
+          "responses": "088bed63e76caab74ce9f99ebd10656998f4e6471b17d813307abe4d91198b8d",
+          "results": "2b7a4c80ee44a734e722cedbe0cab590f423d4a18fd556a2f70300982a02393f",
+          "manual-review": "70ff42c6f98dfddc4e6ae911574e42b1a797fd54f23f60370e01c9bc725e47ad"
+        }
+      },
+      {
+        "caseId": "QB32",
+        "variant": "A",
+        "model": "gemini-3.5-flash-lite",
+        "sharedInputHash": "94fe5410723fe674e2156774b32e674bcfa7e16a43d95924fba0063cd7fbc086",
+        "evidenceHash": "f70545a519e016ad68f8d775281c5c29c477850ac6d4b0c9a0abd612e5ea886b",
+        "wireBodyHash": "6b0d43cbcc424d3f703481aab9d44fccaef4d887273d32ed31910ef2a5a0f61c",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 1518.9237999999896,
+        "historicalClassification": "fully correct",
+        "claimStatuses": [
+          {
+            "claimId": "c1",
+            "status": "F",
+            "deliveredFull": true
+          }
+        ],
+        "sourceSha256": {
+          "requests": "6d6c77bf705c33b941ef6f1822ae694a8654006c8ea8224a6fb8088111eac542",
+          "responses": "3447e4afef08a7d5290e7095e8f7f9d3d6308ee1fbfac349a6d7aaaee85d5085",
+          "results": "0ae8ba2e3ceae8dbcff2d14922f4b5187a76b412bd1bffc483337702bd6328c4",
+          "manual-review": "c3ad11dcf709884f33978507688200f6c7ba1df3424b29be45c12b4f2e36516e"
+        }
+      },
+      {
+        "caseId": "QB32",
+        "variant": "B",
+        "model": "command-a-plus-05-2026",
+        "sharedInputHash": "94fe5410723fe674e2156774b32e674bcfa7e16a43d95924fba0063cd7fbc086",
+        "evidenceHash": "f70545a519e016ad68f8d775281c5c29c477850ac6d4b0c9a0abd612e5ea886b",
+        "wireBodyHash": "820b8effb7bd729319b627b0e3d2c280275f4027cd0d0cc67e629df640a50e39",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 3220.3830999999773,
+        "historicalClassification": "grounding failure",
+        "claimStatuses": [
+          {
+            "claimId": "c1",
+            "status": "F",
+            "deliveredFull": true
+          }
+        ],
+        "sourceSha256": {
+          "requests": "61b2cc54bc9a46b3e2603827fee3fd557a4061a83996028e7909c4154aaed3f3",
+          "responses": "53995f3fa1c4940ff039676d2877f62175c9dfc44a899be510925a693000d6c1",
+          "results": "4f3dcb916e7198863200fb040d1702ddf880e98017518529bb67da1a68056af4",
+          "manual-review": "08c07f253277e75de405ceb1900ed6fec3a5bdc2870e61b4cbe9beb0d1a47e59"
+        }
+      },
+      {
+        "caseId": "QB32",
+        "variant": "C",
+        "model": "openai/gpt-oss-120b",
+        "sharedInputHash": "94fe5410723fe674e2156774b32e674bcfa7e16a43d95924fba0063cd7fbc086",
+        "evidenceHash": "f70545a519e016ad68f8d775281c5c29c477850ac6d4b0c9a0abd612e5ea886b",
+        "wireBodyHash": "a9d5f0fc3a2205088314b28ae54dff203e4677df5de7f851b067485d600407b4",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 1296.8574000000954,
+        "historicalClassification": "grounding failure",
+        "claimStatuses": [
+          {
+            "claimId": "c1",
+            "status": "F",
+            "deliveredFull": true
+          }
+        ],
+        "sourceSha256": {
+          "requests": "169b878672679a42cf842a4dbe497b6b89f5d1d56bbcf783ed56aa406ebc49af",
+          "responses": "cd3985a1e10682dcb6fe0839ee63f3362d0ba57e655a8e0671ef656b3c546022",
+          "results": "6c3020d7c10e51214fc1300a88e547436804d267b020651ba4367f6dd91c0fcb",
+          "manual-review": "3b431f1cd0dc7f9326859894850d473b1584c8e7416fe3961e24b5671eb91693"
+        }
+      },
+      {
+        "caseId": "QB33",
+        "variant": "A",
+        "model": "gemini-3.5-flash-lite",
+        "sharedInputHash": "a9c3ac24249e2a57db5fc48751bd4f8692d0c938016c00f5c02065bee94a94ad",
+        "evidenceHash": "bd1ddc36a25bd08ff1c5970f152786d9383c345cce08802d7dfe56634ab74a5e",
+        "wireBodyHash": "02c8767a05f6fbf8887ef7424194231ec1e4f11557e95be8abcbe83c00716138",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 1646.6225000000559,
+        "historicalClassification": "partial",
+        "claimStatuses": [
+          {
+            "claimId": "c1",
+            "status": "P",
+            "deliveredFull": false
+          }
+        ],
+        "sourceSha256": {
+          "requests": "f7ed64bd4d50a666eb129d7ab6512a8deb985971431fbb17adff9406ee5f053e",
+          "responses": "dc04a9681a2ad7f0d46a471e5747eeed0d211b86cddc84176cc9377b3cd0dac4",
+          "results": "8a76d6ae1d9f112fe609116d5bf46545b5bc07352e2db8fd1dbc624bc0eb5793",
+          "manual-review": "d581ce128c4c132bd719300972ce09007d5fb0e779a6528eeb6fa261f8a32b20"
+        }
+      },
+      {
+        "caseId": "QB33",
+        "variant": "B",
+        "model": "command-a-plus-05-2026",
+        "sharedInputHash": "a9c3ac24249e2a57db5fc48751bd4f8692d0c938016c00f5c02065bee94a94ad",
+        "evidenceHash": "bd1ddc36a25bd08ff1c5970f152786d9383c345cce08802d7dfe56634ab74a5e",
+        "wireBodyHash": "e442407ab182fb8abfd3c93c4f5ceb5d0821ddda20018424b5f837225e73da2a",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 2645.6075999999885,
+        "historicalClassification": "partial",
+        "claimStatuses": [
+          {
+            "claimId": "c1",
+            "status": "P",
+            "deliveredFull": false
+          }
+        ],
+        "sourceSha256": {
+          "requests": "6d101caa1c31f7ae27465c616c70f33d581156ada501744ddc0405d7f4493029",
+          "responses": "8696acf308115c91ef288a442ffbf41126d68d9fbc9c174031cac5c6cc5cfa29",
+          "results": "07279fa0d7bec9ccb9571e273c0b1e70d37aa31b3395fdff0f188570c010906c",
+          "manual-review": "0c1b3558acf50c02e151b28c8a2dd7a47ef2c07803f6c56815005745a26fde03"
+        }
+      },
+      {
+        "caseId": "QB33",
+        "variant": "C",
+        "model": "openai/gpt-oss-120b",
+        "sharedInputHash": "a9c3ac24249e2a57db5fc48751bd4f8692d0c938016c00f5c02065bee94a94ad",
+        "evidenceHash": "bd1ddc36a25bd08ff1c5970f152786d9383c345cce08802d7dfe56634ab74a5e",
+        "wireBodyHash": "cc5f3e7d8b088412dcbcf7d11d68da35d70bd2ea6375cb67d4e9d48234a254b0",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 1632.0194000001065,
+        "historicalClassification": "partial",
+        "claimStatuses": [
+          {
+            "claimId": "c1",
+            "status": "P",
+            "deliveredFull": false
+          }
+        ],
+        "sourceSha256": {
+          "requests": "480ed276e1c5dbc9e8003a70c1e9b5c0f9e95740f37ddcdd2bde84b8e403ab3c",
+          "responses": "0cb4c0f460612e87c01dbbca72f0bb175390105779b7247b3fec97cc54e6233a",
+          "results": "677d4b4d2f951e515ce20727431b638a046f1d7740165ed64e3ebcd0a9960328",
+          "manual-review": "d4693d6b89f122c873a31f7a7a6935fde1dcf5dd66bc93873789fa5d7bc433b5"
+        }
+      },
+      {
+        "caseId": "QB34",
+        "variant": "A",
+        "model": "gemini-3.5-flash-lite",
+        "sharedInputHash": "f7f31c2ab61636cc8383c954151345cd71495484b17d2ad233e08b181e465226",
+        "evidenceHash": "55d7eae5fdfca7caae704f9758c950c4d032a9b179174d4b9b9f3d0affee5ac6",
+        "wireBodyHash": "9a8083fc0d2e9ac865b161d4a63e0a3e1afb38e9e71615fec9885204e5924342",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 1387.7751000002027,
+        "historicalClassification": "partial",
+        "claimStatuses": [
+          {
+            "claimId": "c1",
+            "status": "P",
+            "deliveredFull": false
+          }
+        ],
+        "sourceSha256": {
+          "requests": "22e8aa2158dec2413eb311293e465c522b88f494259c10aecc36342c1f3c16b4",
+          "responses": "679a82d1ce9649619ec46b95300f774ad596dd1fb4264edc395026f47c3089d5",
+          "results": "1c74541dde8108dee3865ad9a2525a9462b9bb542cbe31bc2feea425bd31ef9b",
+          "manual-review": "0e88c8cdee56f8d25d132c274b32d68d406820285c2ac6359533017a3ffabc6c"
+        }
+      },
+      {
+        "caseId": "QB34",
+        "variant": "B",
+        "model": "command-a-plus-05-2026",
+        "sharedInputHash": "f7f31c2ab61636cc8383c954151345cd71495484b17d2ad233e08b181e465226",
+        "evidenceHash": "55d7eae5fdfca7caae704f9758c950c4d032a9b179174d4b9b9f3d0affee5ac6",
+        "wireBodyHash": "de63216d2d1af4a976fb938e1ad18ac8b384245a485e7fd5df0929d44a401f85",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 2528.937100000214,
+        "historicalClassification": "partial",
+        "claimStatuses": [
+          {
+            "claimId": "c1",
+            "status": "P",
+            "deliveredFull": false
+          }
+        ],
+        "sourceSha256": {
+          "requests": "51c9f234ce1133b98020417747b6da36c12fedf68c4fe1e422993446dc8e029e",
+          "responses": "98620604b61adc3ed02bfc40e11c294c070acf0cb99871d04c9f3915cc343451",
+          "results": "636675217050c5f9ef830f865e652aa83bf95b2ed67e03afc93e434024897e8b",
+          "manual-review": "ed25384a14a84192b9487a45b16f05fbb5e02fcd07e112043e3bb5b56d2fa79f"
+        }
+      },
+      {
+        "caseId": "QB34",
+        "variant": "C",
+        "model": "openai/gpt-oss-120b",
+        "sharedInputHash": "f7f31c2ab61636cc8383c954151345cd71495484b17d2ad233e08b181e465226",
+        "evidenceHash": "55d7eae5fdfca7caae704f9758c950c4d032a9b179174d4b9b9f3d0affee5ac6",
+        "wireBodyHash": "5d024e1eceea4e62d1838e977ce898bbb74f9501c175c39e2fa782e484b5e1c4",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 1198.5451000002213,
+        "historicalClassification": "partial",
+        "claimStatuses": [
+          {
+            "claimId": "c1",
+            "status": "P",
+            "deliveredFull": false
+          }
+        ],
+        "sourceSha256": {
+          "requests": "1d9dec89dab06dd04bd46ef15c20878184202fef0d3a3e39d0ae9a9bdbb58b81",
+          "responses": "d2b7d2e7421214db86f5a0133b62799bb319eee5742c43e2f5a62e694a334a9b",
+          "results": "e7a710f8cd7d59ffe1b96cdb88e8ae4a38d9f484fcb3c24a08f5a28a191836b5",
+          "manual-review": "17b9b727e21ae15b154e982ae12c528589a365c6728156286c829dc7f3ad5405"
+        }
+      },
+      {
+        "caseId": "QB35",
+        "variant": "A",
+        "model": "gemini-3.5-flash-lite",
+        "sharedInputHash": "7498dbf2dc31df6bbe8391a2097345126f59a97b6d2f68d16ce9428f279c78b1",
+        "evidenceHash": "5d70d63e7d2de99e9b4165621ff7ccfd1fbf036d0f61a8385ef9306ca1b1ae6b",
+        "wireBodyHash": "0961da096184d62b7c0345600651b0a9db27218040131944acd72057bb3fc724",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 1619.348100000061,
+        "historicalClassification": "fully correct",
+        "claimStatuses": [
+          {
+            "claimId": "c1",
+            "status": "F",
+            "deliveredFull": true
+          }
+        ],
+        "sourceSha256": {
+          "requests": "0bfc629f6805e94b9ca8ed4ce3378af3bd56a35dd0a22721a9fcaaf7a6560072",
+          "responses": "3b4bda38a8c37b14160997735f3907e14257c5e214b8123a484f5277754f5e19",
+          "results": "aada700e6362f19bfbafff48a1e91683faa990b25cc465bed2095a05fb495614",
+          "manual-review": "eb32c0481ef01ffa1445569954ac4c48df27299562a2586dd39c89e89d4c9f0e"
+        }
+      },
+      {
+        "caseId": "QB35",
+        "variant": "B",
+        "model": "command-a-plus-05-2026",
+        "sharedInputHash": "7498dbf2dc31df6bbe8391a2097345126f59a97b6d2f68d16ce9428f279c78b1",
+        "evidenceHash": "5d70d63e7d2de99e9b4165621ff7ccfd1fbf036d0f61a8385ef9306ca1b1ae6b",
+        "wireBodyHash": "56f637d686b4bef10c01a3a2e8f0e7e199118292eefec3f5ccac760611d96924",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 4067.74589999998,
+        "historicalClassification": "contract failure",
+        "claimStatuses": [
+          {
+            "claimId": "c1",
+            "status": "F",
+            "deliveredFull": true
+          }
+        ],
+        "sourceSha256": {
+          "requests": "ceb5de1ed2f909f004ad9cba308402123fd99cd5fed1c4097a0c02fce18d527a",
+          "responses": "eeda1838f3dd6c1ac54d987f497d5cf384f14e4e4fd5117ea93b42f90f379d9c",
+          "results": "a36689dfcd291a1475df0045cf4c5ed6c8056718d3d971fa93507bcddb422c06",
+          "manual-review": "ad868665a973106c22de39019ce4d6169c448a60ea9895c7b2343936385e0bc9"
+        }
+      },
+      {
+        "caseId": "QB35",
+        "variant": "C",
+        "model": "openai/gpt-oss-120b",
+        "sharedInputHash": "7498dbf2dc31df6bbe8391a2097345126f59a97b6d2f68d16ce9428f279c78b1",
+        "evidenceHash": "5d70d63e7d2de99e9b4165621ff7ccfd1fbf036d0f61a8385ef9306ca1b1ae6b",
+        "wireBodyHash": "a5eb0bd1a99987689c897d010c6c0fc30afc977606a123787d1bef83ddeffe8a",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 1213.5082000000402,
+        "historicalClassification": "fully correct",
+        "claimStatuses": [
+          {
+            "claimId": "c1",
+            "status": "F",
+            "deliveredFull": true
+          }
+        ],
+        "sourceSha256": {
+          "requests": "fb4f7e7ef2080464cae162354103e93012bf873cf70bc227161f1b692656e3a7",
+          "responses": "dfc1ad9a0682d72a9c41f32cee5dff3ff6f8dede0e6b55e84bdf9c887585849f",
+          "results": "2743b64a00d5abd126e6b3516e019f0a152188d71c47e7b65e9bb413b62c0284",
+          "manual-review": "152cc1c0859db60b77c6f49c9b18dfac8f3b2761dd355a1c556706fca67597ff"
+        }
+      },
+      {
+        "caseId": "QB36",
+        "variant": "A",
+        "model": "gemini-3.5-flash-lite",
+        "sharedInputHash": "9ca5d11c74fbbfe6693ad8a1a5f523fa2516ce2492850fdb8f838c71932ba459",
+        "evidenceHash": "e48d35891e81b940a94e6b33a401ddd89fb0a301e2371b73ca32a16aea08339f",
+        "wireBodyHash": "f04ff84623df446c752bd18419836a9809a7b0e6161f444fcb2fc8f86dbd7b09",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 1672.9294000002556,
+        "historicalClassification": "fully correct",
+        "claimStatuses": [
+          {
+            "claimId": "c1",
+            "status": "F",
+            "deliveredFull": true
+          }
+        ],
+        "sourceSha256": {
+          "requests": "7884019293b0d6cad9018a82af14e7609c7d0242c7dd9537d9a60e25a9fb17a0",
+          "responses": "d8a127a7bdd988537abe11d0bc6836b44473f4d96b06bbaed782ef4a6b514dc0",
+          "results": "835ddd4cf256221e86a64c57a55d543bc85d24d5f34e379a88aaab175a97e237",
+          "manual-review": "32c4697d3ade9b07b1876a47d026a4bf199b32fd11322e79135a536700945ef9"
+        }
+      },
+      {
+        "caseId": "QB36",
+        "variant": "B",
+        "model": "command-a-plus-05-2026",
+        "sharedInputHash": "9ca5d11c74fbbfe6693ad8a1a5f523fa2516ce2492850fdb8f838c71932ba459",
+        "evidenceHash": "e48d35891e81b940a94e6b33a401ddd89fb0a301e2371b73ca32a16aea08339f",
+        "wireBodyHash": "3f4a23d71ceb4d4996f13097dc7db5fe8d6d1033ef3955be86005856748d02fb",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 1632.1609000000171,
+        "historicalClassification": "fully correct",
+        "claimStatuses": [
+          {
+            "claimId": "c1",
+            "status": "F",
+            "deliveredFull": true
+          }
+        ],
+        "sourceSha256": {
+          "requests": "a2b917bc5c5f16f06885341cd26ba5a4a46a41ae4e456134f8c1134f6dc76de0",
+          "responses": "689e9265a9f87c2b0acd339084fd8addb15ae4c00598769ffa8295764d1cd25f",
+          "results": "271a1da4943c32394b04edece31e3632997fab96e93b3c83fa24eadb5379cc4d",
+          "manual-review": "a861165843f3d2fe2889bb8b4a3becb5163614c3964f7e189060a546fa396a80"
+        }
+      },
+      {
+        "caseId": "QB36",
+        "variant": "C",
+        "model": "openai/gpt-oss-120b",
+        "sharedInputHash": "9ca5d11c74fbbfe6693ad8a1a5f523fa2516ce2492850fdb8f838c71932ba459",
+        "evidenceHash": "e48d35891e81b940a94e6b33a401ddd89fb0a301e2371b73ca32a16aea08339f",
+        "wireBodyHash": "f871aa25444e6ff7d48af562e42c7e190d5fc7d054eb95698af05c600212f097",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 1243.1481000003405,
+        "historicalClassification": "fully correct",
+        "claimStatuses": [
+          {
+            "claimId": "c1",
+            "status": "F",
+            "deliveredFull": true
+          }
+        ],
+        "sourceSha256": {
+          "requests": "44b1e80caaedc41e9a47b24afeaca7a4d1ba057d2bbebf79675034b81325e6ef",
+          "responses": "aadd2dd37618faa86c58772af95af24acfc58b9537514b42812cc1b556cf7496",
+          "results": "40a90064d0ffe3b6ad00aeca868d322b267c591badc4c1224f80b97d0eb53f18",
+          "manual-review": "6d8039ea7ceab0e00c1446c671b5587d2be57af69c69e356ddecf64e07100ff6"
+        }
+      },
+      {
+        "caseId": "QB37",
+        "variant": "A",
+        "model": "gemini-3.5-flash-lite",
+        "sharedInputHash": "7dcc5c8d04ace0fbb7a9a5bfc1bdb8ceca81e041a0072bc4092b4bc40f5ffeb4",
+        "evidenceHash": "4e6826e8307b905d9252d06cc8b9714b7ba9695b398559e3c0c7bdfb25b45af6",
+        "wireBodyHash": "577ddcdf227ecee0b5918198f67f1f5ff3149a352f4ae066399263924ffb8566",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 1210.781299999915,
+        "historicalClassification": "contract failure",
+        "claimStatuses": [
+          {
+            "claimId": "c1",
+            "status": "F",
+            "deliveredFull": false
+          },
+          {
+            "claimId": "c2",
+            "status": "O",
+            "deliveredFull": false
+          }
+        ],
+        "sourceSha256": {
+          "requests": "3a7619ce1822a419ecd989f190d4575b8fe6939db88aca40eaab036839dd7e57",
+          "responses": "049ccea55d6dba307c9ecbf6ca89b9845ba977feb6be532f0fb150c58025781d",
+          "results": "0752a41ffe641a7370b6f2c850ec84db06806d542ec896980a290bb40586e988",
+          "manual-review": "e8452c1097eb039e1e1161bc977942f7c46bfe8eea7f84372f4a629a9824027f"
+        }
+      },
+      {
+        "caseId": "QB37",
+        "variant": "B",
+        "model": "command-a-plus-05-2026",
+        "sharedInputHash": "7dcc5c8d04ace0fbb7a9a5bfc1bdb8ceca81e041a0072bc4092b4bc40f5ffeb4",
+        "evidenceHash": "4e6826e8307b905d9252d06cc8b9714b7ba9695b398559e3c0c7bdfb25b45af6",
+        "wireBodyHash": "0a474734156f887302c03fe09a87ba3523562afac952dd9385c0146266627b0e",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 3657.082099999767,
+        "historicalClassification": "partial",
+        "claimStatuses": [
+          {
+            "claimId": "c1",
+            "status": "F",
+            "deliveredFull": true
+          },
+          {
+            "claimId": "c2",
+            "status": "P",
+            "deliveredFull": false
+          }
+        ],
+        "sourceSha256": {
+          "requests": "ab7dafff6c3ead2f6edfb8c7e43aa9ef93b1afdfe4ab8fbfe91a54c470238d7c",
+          "responses": "6e355ebce2e272aa8840f8f47db0323c5bb89117b12f7d00b7a76e126708748a",
+          "results": "d8c568644a8bad67b6ddfc33957fc79370fcc83907f1cebecf527f354cb4d1f2",
+          "manual-review": "f5948703ce5a3be0a06ff4723e105ddbe85ea44790dd88bcda020ae266228ad9"
+        }
+      },
+      {
+        "caseId": "QB37",
+        "variant": "C",
+        "model": "openai/gpt-oss-120b",
+        "sharedInputHash": "7dcc5c8d04ace0fbb7a9a5bfc1bdb8ceca81e041a0072bc4092b4bc40f5ffeb4",
+        "evidenceHash": "4e6826e8307b905d9252d06cc8b9714b7ba9695b398559e3c0c7bdfb25b45af6",
+        "wireBodyHash": "e4413847e6cf1d6d7e4086db19953fe0e49c1746d5b2d15d947503af9cbd63a7",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 1716.4862000001594,
+        "historicalClassification": "partial",
+        "claimStatuses": [
+          {
+            "claimId": "c1",
+            "status": "F",
+            "deliveredFull": true
+          },
+          {
+            "claimId": "c2",
+            "status": "P",
+            "deliveredFull": false
+          }
+        ],
+        "sourceSha256": {
+          "requests": "e028cac8e10d6fdbab86996e1adc0f55af370a89110137cd632490d86367b1a4",
+          "responses": "f199a05e69841bd1a237f5c3245d2f58669fb05cdd398e6ba3416da5c5c3d95e",
+          "results": "9679fa09effcbfab98eae7467fd8ca634dcb20dcdaaec5abc6d706e9832055cf",
+          "manual-review": "61ae05a3daab9c9eceda9640233c05629de7bc615de22ef80262c911765031fc"
+        }
+      },
+      {
+        "caseId": "QB38",
+        "variant": "A",
+        "model": "gemini-3.5-flash-lite",
+        "sharedInputHash": "f7db0f5308040bae375d04ba9a523730db8ccab02e0df9b2a5a73a7f4a399b2d",
+        "evidenceHash": "e9c30e64abbde622a9f201e9944ac2d695e7e8875fbc62adc8b80ee73b39f30b",
+        "wireBodyHash": "bd746ce4202adab47953b95f8920ac55f5f79192293b3eb5229ec4df2581266b",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 1978.491399999708,
+        "historicalClassification": "fully correct",
+        "claimStatuses": [
+          {
+            "claimId": "c1",
+            "status": "F",
+            "deliveredFull": true
+          }
+        ],
+        "sourceSha256": {
+          "requests": "93d3aae4d12e4f5c570f212ee5549fcc73f66e8f074cfe4415ad57625adefe53",
+          "responses": "d81decbb4feea941b8552307ddf1217b4bcb2394a757511a58c23760e078ee5f",
+          "results": "3372ce14fed301305d98df3d77135a236382adbbfc570f8904fcd83ef7a7481c",
+          "manual-review": "4269a9a42898b9eb084df931e7ee378517253381b5e567b238354a72d4fd251d"
+        }
+      },
+      {
+        "caseId": "QB38",
+        "variant": "B",
+        "model": "command-a-plus-05-2026",
+        "sharedInputHash": "f7db0f5308040bae375d04ba9a523730db8ccab02e0df9b2a5a73a7f4a399b2d",
+        "evidenceHash": "e9c30e64abbde622a9f201e9944ac2d695e7e8875fbc62adc8b80ee73b39f30b",
+        "wireBodyHash": "df5acc51795f776edb3f8bb91029c5bd1253efd1adca8eb0148016c78a7a87db",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 1703.4903000001796,
+        "historicalClassification": "fully correct",
+        "claimStatuses": [
+          {
+            "claimId": "c1",
+            "status": "F",
+            "deliveredFull": true
+          }
+        ],
+        "sourceSha256": {
+          "requests": "e4b404c2c133df8ea503f9892a7aca59dcb07fa5ca3e26ff05e3ae09da8fb74c",
+          "responses": "f041b6693c6172e129c7e6bfa554794f640848c5a43d33e2fbfbae9098cd1700",
+          "results": "c49d538b19d9e349a81957ad414cfbdcc47531676850080df50aa36467fdb3c2",
+          "manual-review": "645c96b8018a3b7758ed0bea8373ea796ea9025e81d6cfcbd204e59715d8cc50"
+        }
+      },
+      {
+        "caseId": "QB38",
+        "variant": "C",
+        "model": "openai/gpt-oss-120b",
+        "sharedInputHash": "f7db0f5308040bae375d04ba9a523730db8ccab02e0df9b2a5a73a7f4a399b2d",
+        "evidenceHash": "e9c30e64abbde622a9f201e9944ac2d695e7e8875fbc62adc8b80ee73b39f30b",
+        "wireBodyHash": "3ff4e42c7ca08c52da32b935a540392c08a46404d89170adf52ca1ee7bfb5f51",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 2085.773099999875,
+        "historicalClassification": "partial",
+        "claimStatuses": [
+          {
+            "claimId": "c1",
+            "status": "P",
+            "deliveredFull": false
+          }
+        ],
+        "sourceSha256": {
+          "requests": "637ea78ced6e9e7676046180d366bce97ed8bc531171e04f3581474b6b008c06",
+          "responses": "4536ba0541edc78e7392ed6f1b6979e9fe893822aef8949caa71dc80a191c6f6",
+          "results": "7119682e9d922dd7455fda9cbd7612e7b6ee5b359c749889236430bfc8d207f9",
+          "manual-review": "c477be748b9694148a020e5e0e83bfa139156a9feea21d8023c161b0e937a116"
+        }
+      },
+      {
+        "caseId": "QB39",
+        "variant": "A",
+        "model": "gemini-3.5-flash-lite",
+        "sharedInputHash": "753ade95ad7afed14f5b242c34fdd489cdb7f9839afe2ab6cfc34e8ce48c08c9",
+        "evidenceHash": "d733b0d9b759e1aa44bc6f90aa8cf95caa913c2ea32573f8dd4d578f89972835",
+        "wireBodyHash": "3a359dcec4eaf7ca2dab596e3bbfa283dda42dac919bdd2fbc8ed73f27bdee67",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 1663.3802999998443,
+        "historicalClassification": "partial",
+        "claimStatuses": [
+          {
+            "claimId": "c1",
+            "status": "P",
+            "deliveredFull": false
+          },
+          {
+            "claimId": "c2",
+            "status": "P",
+            "deliveredFull": false
+          }
+        ],
+        "sourceSha256": {
+          "requests": "f475d493e8f11e13945ed3b8acc088b1f663e3abb2795d06185fe9482385898d",
+          "responses": "874b003751c059ce4f1085e210100d1d0dfc6f310f175706a495448a9309ba75",
+          "results": "9d9614a91a20294bc9fcb29246fbdb9e323a2e52a1abfe420c4cc3c49e5d2480",
+          "manual-review": "0e493cd599879cf6779c8b775c3341f5bfeb817732654da202edede35c968440"
+        }
+      },
+      {
+        "caseId": "QB39",
+        "variant": "B",
+        "model": "command-a-plus-05-2026",
+        "sharedInputHash": "753ade95ad7afed14f5b242c34fdd489cdb7f9839afe2ab6cfc34e8ce48c08c9",
+        "evidenceHash": "d733b0d9b759e1aa44bc6f90aa8cf95caa913c2ea32573f8dd4d578f89972835",
+        "wireBodyHash": "1768fba68ae50d14d866de45387d2e9cc5a87f170d7243a8fa1aa1570f362c3e",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 8176.818699999712,
+        "historicalClassification": "contract failure",
+        "claimStatuses": [
+          {
+            "claimId": "c1",
+            "status": "P",
+            "deliveredFull": false
+          },
+          {
+            "claimId": "c2",
+            "status": "P",
+            "deliveredFull": false
+          }
+        ],
+        "sourceSha256": {
+          "requests": "58b5c456dbcadc1c8cf4a17cf883ed8cf5073bd47526aecf2e864effa4e988ec",
+          "responses": "cfdeed424102235f40d997210e3a6fc1279c9f08f9212ec2ae305dd7398df132",
+          "results": "9d57562efbb1b4b07b415e2a79bbf2781cc10dc0e53bf81d9814baf5173cc94b",
+          "manual-review": "447301006b15e9820dd2bbec115290e10d57a2d7cac62a10f0d9a9dacf3ed536"
+        }
+      },
+      {
+        "caseId": "QB39",
+        "variant": "C",
+        "model": "openai/gpt-oss-120b",
+        "sharedInputHash": "753ade95ad7afed14f5b242c34fdd489cdb7f9839afe2ab6cfc34e8ce48c08c9",
+        "evidenceHash": "d733b0d9b759e1aa44bc6f90aa8cf95caa913c2ea32573f8dd4d578f89972835",
+        "wireBodyHash": "6729e3e2d9d31fe05d5203f1b4c7cee3ac6846fbe31af3df8a30acd5b4045a9c",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 2541.2058999999426,
+        "historicalClassification": "partial",
+        "claimStatuses": [
+          {
+            "claimId": "c1",
+            "status": "P",
+            "deliveredFull": false
+          },
+          {
+            "claimId": "c2",
+            "status": "P",
+            "deliveredFull": false
+          }
+        ],
+        "sourceSha256": {
+          "requests": "84cf53e401438ebf4923fa5d9d4ac4a8cf8ef6de0fd64e0a398190d3608d227c",
+          "responses": "c5b6fcad8f477cb15ee1aae47bcd17b5071ecd2ffa5cd2a698ad2a400de017a5",
+          "results": "e3e515b0fea37bbb0009e6795ea0601865a2288079bfc9fa22a309a669334cd3",
+          "manual-review": "f197885266d2d543fc43e6c9be5469025a7d5690ad18279914da7f01cb38d03b"
+        }
+      },
+      {
+        "caseId": "QB40",
+        "variant": "A",
+        "model": "gemini-3.5-flash-lite",
+        "sharedInputHash": "cb7ca6aca1a9c657de4a26bafc7b206f14e67bdedd20a9c620e67d63f1e97dc4",
+        "evidenceHash": "9be2d3cb75973b432417b24e45157a38eaabc7d327626fe317a06bd2eee7f7d4",
+        "wireBodyHash": "9192263262405159ea283aff1e91594cfd4b87a53d3b2d185cc22221af8189ec",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 1144.8700000001118,
+        "historicalClassification": "fully correct",
+        "claimStatuses": [],
+        "sourceSha256": {
+          "requests": "33bdf0858e597e4b330e3df4e98391807ed0a5af01bfbc9937d5aed2d699939c",
+          "responses": "c28244ba6d582d02fc8de15b26d5629345d5d99ac5cbeab7ca29ce5ac23f3346",
+          "results": "81ea667c0529f76838527706888d9c2d98d50c97b473904898f47f2916e3269b",
+          "manual-review": "d94327811695e5bae3974c48a03c1c60af0ebf893e855c1201babe21fb8b1a06"
+        }
+      },
+      {
+        "caseId": "QB40",
+        "variant": "B",
+        "model": "command-a-plus-05-2026",
+        "sharedInputHash": "cb7ca6aca1a9c657de4a26bafc7b206f14e67bdedd20a9c620e67d63f1e97dc4",
+        "evidenceHash": "9be2d3cb75973b432417b24e45157a38eaabc7d327626fe317a06bd2eee7f7d4",
+        "wireBodyHash": "78b1fe9702dfedd11b1f4328d83bb66af5e34bb650d2c0ef6252e6b113d92df6",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 2195.0838999999687,
+        "historicalClassification": "fully correct",
+        "claimStatuses": [],
+        "sourceSha256": {
+          "requests": "25cf03bf7df5c8d08d04e34370855c8067a35d7178d11524bbb3303d05be9411",
+          "responses": "91e2eff0b5c37b500e1c229fc1ab4a052bad92e6a17af32d802e0e2c3e618beb",
+          "results": "9abcc1d825a59d993bb64ce1a291f31837985c2de24fdbb3e2b5a325937a26cf",
+          "manual-review": "befcdf6348b261ee60bf94f57c01e1dda4d8d8203de6221f45e232cde266bac1"
+        }
+      },
+      {
+        "caseId": "QB40",
+        "variant": "C",
+        "model": "openai/gpt-oss-120b",
+        "sharedInputHash": "cb7ca6aca1a9c657de4a26bafc7b206f14e67bdedd20a9c620e67d63f1e97dc4",
+        "evidenceHash": "9be2d3cb75973b432417b24e45157a38eaabc7d327626fe317a06bd2eee7f7d4",
+        "wireBodyHash": "107f8aa9f7f63e7649f37ba0f9e7591d7276c13b3aa9b8c9c876ad154e5e8b0e",
+        "httpAttempts": 1,
+        "httpStatus": 200,
+        "jsonValid": true,
+        "schemaValid": true,
+        "finishComplete": true,
+        "generationLatencyMs": 871.4893000000156,
+        "historicalClassification": "fully correct",
+        "claimStatuses": [],
+        "sourceSha256": {
+          "requests": "9f04e78d56dc598b5845f7e6836bd706a18c264f914abcabd900d40f73e4d5cf",
+          "responses": "ab35f7f603043164eb564c6ac3018bd0b99f8509b1e1377584e36cde97224834",
+          "results": "87b22843f2574bcdf075e445d2cb15ad7bd24c31560b31c86cded60dee0c145e",
+          "manual-review": "6edf9b1406bc2a9091b081033fb84b3eada891fc075ca60981f89df821b01c3c"
+        }
+      }
+    ],
+    "originalVerification": {
+      "requests": 120,
+      "responses": 120,
+      "results": 120,
+      "historicalManualReviews": 120,
+      "sharedInputMatchedQuestions": 40,
+      "canonicalRequestHashesMatched": 120,
+      "nativeResponseToResultMatches": 120,
+      "normalizedAnswerToHistoricalReviewMatches": 120,
+      "classificationCounts": "Recomputed from historical reviews; semantic ratings preserved."
+    }
   },
   "retryPrimary": {
     "condition": "Same question, evidence, order, citations, prompt and schema; four questions planned; two pairs completed.",
@@ -83,19 +3662,434 @@
       "requests": 20,
       "success": 3,
       "http503": 17,
-      "relationToThisRun": "Exact attempt-level correspondence remains unconfirmed."
+      "relationToThisRun": "Directly matched: six prior Gemini 3.8 calls (one success/five 503) plus fourteen retry-run Gemini 3.8 calls before the terminal 429 (two successes/twelve 503). The next, twenty-first known Gemini 3.8 call returned 429.",
+      "confirmedOn": "2026-10-29"
     },
     "unconfirmed": [
       "Per-request provider-side quota accounting",
       "Other account activity",
       "Monetary billing"
-    ]
+    ],
+    "priorRun": {
+      "requestsAllModels": 7,
+      "gemini38": {
+        "requests": 6,
+        "success": 1,
+        "http503": 5
+      },
+      "gemini35": {
+        "requests": 1,
+        "success": 1
+      }
+    },
+    "options": {
+      "maxOutputTokens": 32768,
+      "temperature": "omitted",
+      "sdkAttemptsPerDispatch": 1,
+      "retry": "Harness retries temporary 3.8 HTTP 503; A called once after B success",
+      "requestedBackoffSeconds": [
+        5,
+        10,
+        20,
+        40,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60
+      ],
+      "requestedWaitTotalMs": 555000,
+      "reportedMeasuredWaitTotalMs": 555101
+    },
+    "actualQuotaResponse": {
+      "httpStatus": 429,
+      "providerCode": "RESOURCE_EXHAUSTED",
+      "quotaMetric": "generativelanguage.googleapis.com/generate_content_free_tier_requests",
+      "quotaId": "GenerateRequestsPerDayPerProjectPerModel-FreeTier",
+      "model": "gemini-3.8-flash",
+      "quotaValue": 20,
+      "atUtc": "2026-10-02T18:35:46.229Z"
+    },
+    "productionDecision": {
+      "model": "gemini-3.8-flash",
+      "status": "discarded as Synethos production candidate",
+      "basis": "User explicit condition: repeated503 followed by actual429 before enough successful comparisons (2/4 pairs). This applies despite a narrow generation-quality gain in QB18.",
+      "productionConfigChanged": false,
+      "currentPrimary": "gemini-3.5-flash-lite",
+      "further38Calls": false
+    }
   },
-  "method": "Select facts already transcribed in the consolidated history and evidence register. Registered report hashes are identifiers from that record, not hashes newly checked against the unavailable files.",
+  "method": "Original reports matched all three registered SHA-256 values. Recomputed counts from original ledgers and historical manual reviews; verified ordered-JSON request/native hashes and raw-to-normalized response linkage. Reconstructed metadata omits credentials, record payloads and full generated text. Provider quota consumption remains a historical inference distinct from observed HTTP results and the developer decision.",
   "transcribedUserRequests": {
     "sessionId": "01a0fc21-8175-77b2-9d49-087fa07ff6b8",
     "gemini38StopAndRejectionConditionsKst": "2026-10-03T03:20:37+09:00",
     "groqGptOssReevaluationRequestKst": "2026-10-03T04:05:58+09:00",
-    "originalSessionAvailability": "Registered original unavailable in this checkout; request times preserved in the evidence register."
-  }
+    "originalSessionAvailability": "User input originals directly read in history.jsonl; message hashes and times are registered separately. Complete parent session unavailable."
+  },
+  "sourceRegister": "docs/evidence/recovered-source-register.json",
+  "requestLedger": [
+    {
+      "run": "2026-10-03-approved-1",
+      "call": 1,
+      "caseId": "QB18",
+      "variant": "B",
+      "model": "gemini-3.8-flash",
+      "attempt": 1,
+      "startedAtUtc": "2026-10-02T17:59:43.113Z",
+      "httpStatus": 503,
+      "httpLatencyMs": 6672,
+      "requestBodyHash": "15cfc03f34fa6db0705cf6cdb6202615253700fd43bd5fd933c58bbc1a984be1",
+      "nativeResponseHash": "92685f40ca32c88b8ae43fef717aac7cd70f409b3ecb5c03b20bea8d3ee80675",
+      "requestFileSha256": "a769f53702ad8972bc662b60e57c539f659d6d6ea49d8c087ec13d1d26f27027",
+      "responseFileSha256": "01f5c7d4e4d8ec06c8098777e731b3d552ba518feb02b681f6c569edcd9c6f6d"
+    },
+    {
+      "run": "2026-10-03-approved-1",
+      "call": 2,
+      "caseId": "QB20",
+      "variant": "B",
+      "model": "gemini-3.8-flash",
+      "attempt": 1,
+      "startedAtUtc": "2026-10-02T17:59:49.792Z",
+      "httpStatus": 503,
+      "httpLatencyMs": 3990,
+      "requestBodyHash": "f1d475b373c5740a995c66b5dfa0663e7a82cc9b17043834f075e03ab55b6d59",
+      "nativeResponseHash": "92685f40ca32c88b8ae43fef717aac7cd70f409b3ecb5c03b20bea8d3ee80675",
+      "requestFileSha256": "914014f09ed4b182c6b6bbe1cad64bf303a6e9eb246e341def5ffa99845262e2",
+      "responseFileSha256": "01f5c7d4e4d8ec06c8098777e731b3d552ba518feb02b681f6c569edcd9c6f6d"
+    },
+    {
+      "run": "2026-10-03-approved-1",
+      "call": 3,
+      "caseId": "QB25",
+      "variant": "B",
+      "model": "gemini-3.8-flash",
+      "attempt": 1,
+      "startedAtUtc": "2026-10-02T17:59:53.785Z",
+      "httpStatus": 503,
+      "httpLatencyMs": 73508,
+      "requestBodyHash": "50ea06da554c9608a91adadde9861dbe32bee03867a7e6f14ab08bcb9599a7b7",
+      "nativeResponseHash": "92685f40ca32c88b8ae43fef717aac7cd70f409b3ecb5c03b20bea8d3ee80675",
+      "requestFileSha256": "bc24180ec8f586f389a690b47d82e25cc66a3849a0ba2fcdee7379833205a6a6",
+      "responseFileSha256": "01f5c7d4e4d8ec06c8098777e731b3d552ba518feb02b681f6c569edcd9c6f6d"
+    },
+    {
+      "run": "2026-10-03-approved-1",
+      "call": 4,
+      "caseId": "QB11",
+      "variant": "B",
+      "model": "gemini-3.8-flash",
+      "attempt": 1,
+      "startedAtUtc": "2026-10-02T18:01:07.335Z",
+      "httpStatus": 503,
+      "httpLatencyMs": 72899,
+      "requestBodyHash": "7aebb337540cbebc462044b9616e1c334cdf759e540a9e4e4e3d5d402bd14f3a",
+      "nativeResponseHash": "92685f40ca32c88b8ae43fef717aac7cd70f409b3ecb5c03b20bea8d3ee80675",
+      "requestFileSha256": "3a15001fb9f8712f8a0156d3d3c293b6e53fcf5506ca3ad3d68cb9ab11745a91",
+      "responseFileSha256": "01f5c7d4e4d8ec06c8098777e731b3d552ba518feb02b681f6c569edcd9c6f6d"
+    },
+    {
+      "run": "2026-10-03-approved-1",
+      "call": 5,
+      "caseId": "QB17",
+      "variant": "B",
+      "model": "gemini-3.8-flash",
+      "attempt": 1,
+      "startedAtUtc": "2026-10-02T18:02:20.283Z",
+      "httpStatus": 200,
+      "httpLatencyMs": 65841,
+      "requestBodyHash": "9b3c34600a846d0ef1cf2ab11984450fc07f87a7b21bb90eed38102a35607449",
+      "nativeResponseHash": "3aabde7191393003f38bce2f22e848455c809b719450451c604c02b376c0d186",
+      "requestFileSha256": "f2abaa3c2ade9dfb0cbf60ff2c796cbbfb21645b4da8f0a6e828739e5cd02737",
+      "responseFileSha256": "082ba2da1a432ef2483f4b45bae1a976a3fcda121ec37d3e07c66613c4f6a8cc"
+    },
+    {
+      "run": "2026-10-03-approved-1",
+      "call": 6,
+      "caseId": "QB17",
+      "variant": "A",
+      "model": "gemini-3.5-flash-lite",
+      "attempt": 1,
+      "startedAtUtc": "2026-10-02T18:03:26.130Z",
+      "httpStatus": 200,
+      "httpLatencyMs": 1753,
+      "requestBodyHash": "9b3c34600a846d0ef1cf2ab11984450fc07f87a7b21bb90eed38102a35607449",
+      "nativeResponseHash": "e9ee6a0b920e563bd01808eb538bd4b40b56bfc2f4ce59ad033c74aa3e748104",
+      "requestFileSha256": "b03cb08a122de40e714c6d1669f088d45fd67ad18aac52a4b723124aaac01a21",
+      "responseFileSha256": "fd1772813ab68ed46a444bc9589a6fdc1b317da2e780591346e33bf031f54fd0"
+    },
+    {
+      "run": "2026-10-03-approved-1",
+      "call": 7,
+      "caseId": "QB35",
+      "variant": "B",
+      "model": "gemini-3.8-flash",
+      "attempt": 1,
+      "startedAtUtc": "2026-10-02T18:03:27.893Z",
+      "httpStatus": 503,
+      "httpLatencyMs": 44169,
+      "requestBodyHash": "91aee7cb17a706069d1918f625370c31c6eae57c2bae9316e8606a5b0825b443",
+      "nativeResponseHash": "92685f40ca32c88b8ae43fef717aac7cd70f409b3ecb5c03b20bea8d3ee80675",
+      "requestFileSha256": "6faf1bb18206a4f05d01c14b270ef3229bf04a24fe64317c1d5b301377df440a",
+      "responseFileSha256": "01f5c7d4e4d8ec06c8098777e731b3d552ba518feb02b681f6c569edcd9c6f6d"
+    },
+    {
+      "run": "2026-10-03-retry-primary-1",
+      "call": 1,
+      "caseId": "QB18",
+      "variant": "B",
+      "model": "gemini-3.8-flash",
+      "attempt": 1,
+      "startedAtUtc": "2026-10-02T18:23:03.034Z",
+      "httpStatus": 503,
+      "httpLatencyMs": 7737,
+      "requestBodyHash": "15cfc03f34fa6db0705cf6cdb6202615253700fd43bd5fd933c58bbc1a984be1",
+      "nativeResponseHash": "92685f40ca32c88b8ae43fef717aac7cd70f409b3ecb5c03b20bea8d3ee80675",
+      "requestFileSha256": "a769f53702ad8972bc662b60e57c539f659d6d6ea49d8c087ec13d1d26f27027",
+      "responseFileSha256": "01f5c7d4e4d8ec06c8098777e731b3d552ba518feb02b681f6c569edcd9c6f6d"
+    },
+    {
+      "run": "2026-10-03-retry-primary-1",
+      "call": 2,
+      "caseId": "QB18",
+      "variant": "B",
+      "model": "gemini-3.8-flash",
+      "attempt": 2,
+      "startedAtUtc": "2026-10-02T18:23:15.783Z",
+      "httpStatus": 503,
+      "httpLatencyMs": 41569,
+      "requestBodyHash": "15cfc03f34fa6db0705cf6cdb6202615253700fd43bd5fd933c58bbc1a984be1",
+      "nativeResponseHash": "92685f40ca32c88b8ae43fef717aac7cd70f409b3ecb5c03b20bea8d3ee80675",
+      "requestFileSha256": "a769f53702ad8972bc662b60e57c539f659d6d6ea49d8c087ec13d1d26f27027",
+      "responseFileSha256": "01f5c7d4e4d8ec06c8098777e731b3d552ba518feb02b681f6c569edcd9c6f6d"
+    },
+    {
+      "run": "2026-10-03-retry-primary-1",
+      "call": 3,
+      "caseId": "QB18",
+      "variant": "B",
+      "model": "gemini-3.8-flash",
+      "attempt": 3,
+      "startedAtUtc": "2026-10-02T18:24:07.361Z",
+      "httpStatus": 503,
+      "httpLatencyMs": 35658,
+      "requestBodyHash": "15cfc03f34fa6db0705cf6cdb6202615253700fd43bd5fd933c58bbc1a984be1",
+      "nativeResponseHash": "92685f40ca32c88b8ae43fef717aac7cd70f409b3ecb5c03b20bea8d3ee80675",
+      "requestFileSha256": "a769f53702ad8972bc662b60e57c539f659d6d6ea49d8c087ec13d1d26f27027",
+      "responseFileSha256": "01f5c7d4e4d8ec06c8098777e731b3d552ba518feb02b681f6c569edcd9c6f6d"
+    },
+    {
+      "run": "2026-10-03-retry-primary-1",
+      "call": 4,
+      "caseId": "QB18",
+      "variant": "B",
+      "model": "gemini-3.8-flash",
+      "attempt": 4,
+      "startedAtUtc": "2026-10-02T18:25:03.039Z",
+      "httpStatus": 503,
+      "httpLatencyMs": 26922,
+      "requestBodyHash": "15cfc03f34fa6db0705cf6cdb6202615253700fd43bd5fd933c58bbc1a984be1",
+      "nativeResponseHash": "92685f40ca32c88b8ae43fef717aac7cd70f409b3ecb5c03b20bea8d3ee80675",
+      "requestFileSha256": "a769f53702ad8972bc662b60e57c539f659d6d6ea49d8c087ec13d1d26f27027",
+      "responseFileSha256": "01f5c7d4e4d8ec06c8098777e731b3d552ba518feb02b681f6c569edcd9c6f6d"
+    },
+    {
+      "run": "2026-10-03-retry-primary-1",
+      "call": 5,
+      "caseId": "QB18",
+      "variant": "B",
+      "model": "gemini-3.8-flash",
+      "attempt": 5,
+      "startedAtUtc": "2026-10-02T18:26:09.974Z",
+      "httpStatus": 503,
+      "httpLatencyMs": 9920,
+      "requestBodyHash": "15cfc03f34fa6db0705cf6cdb6202615253700fd43bd5fd933c58bbc1a984be1",
+      "nativeResponseHash": "92685f40ca32c88b8ae43fef717aac7cd70f409b3ecb5c03b20bea8d3ee80675",
+      "requestFileSha256": "a769f53702ad8972bc662b60e57c539f659d6d6ea49d8c087ec13d1d26f27027",
+      "responseFileSha256": "01f5c7d4e4d8ec06c8098777e731b3d552ba518feb02b681f6c569edcd9c6f6d"
+    },
+    {
+      "run": "2026-10-03-retry-primary-1",
+      "call": 6,
+      "caseId": "QB18",
+      "variant": "B",
+      "model": "gemini-3.8-flash",
+      "attempt": 6,
+      "startedAtUtc": "2026-10-02T18:27:19.902Z",
+      "httpStatus": 503,
+      "httpLatencyMs": 6685,
+      "requestBodyHash": "15cfc03f34fa6db0705cf6cdb6202615253700fd43bd5fd933c58bbc1a984be1",
+      "nativeResponseHash": "92685f40ca32c88b8ae43fef717aac7cd70f409b3ecb5c03b20bea8d3ee80675",
+      "requestFileSha256": "a769f53702ad8972bc662b60e57c539f659d6d6ea49d8c087ec13d1d26f27027",
+      "responseFileSha256": "01f5c7d4e4d8ec06c8098777e731b3d552ba518feb02b681f6c569edcd9c6f6d"
+    },
+    {
+      "run": "2026-10-03-retry-primary-1",
+      "call": 7,
+      "caseId": "QB18",
+      "variant": "B",
+      "model": "gemini-3.8-flash",
+      "attempt": 7,
+      "startedAtUtc": "2026-10-02T18:28:26.598Z",
+      "httpStatus": 503,
+      "httpLatencyMs": 7158,
+      "requestBodyHash": "15cfc03f34fa6db0705cf6cdb6202615253700fd43bd5fd933c58bbc1a984be1",
+      "nativeResponseHash": "92685f40ca32c88b8ae43fef717aac7cd70f409b3ecb5c03b20bea8d3ee80675",
+      "requestFileSha256": "a769f53702ad8972bc662b60e57c539f659d6d6ea49d8c087ec13d1d26f27027",
+      "responseFileSha256": "01f5c7d4e4d8ec06c8098777e731b3d552ba518feb02b681f6c569edcd9c6f6d"
+    },
+    {
+      "run": "2026-10-03-retry-primary-1",
+      "call": 8,
+      "caseId": "QB18",
+      "variant": "B",
+      "model": "gemini-3.8-flash",
+      "attempt": 8,
+      "startedAtUtc": "2026-10-02T18:29:33.773Z",
+      "httpStatus": 503,
+      "httpLatencyMs": 2967,
+      "requestBodyHash": "15cfc03f34fa6db0705cf6cdb6202615253700fd43bd5fd933c58bbc1a984be1",
+      "nativeResponseHash": "92685f40ca32c88b8ae43fef717aac7cd70f409b3ecb5c03b20bea8d3ee80675",
+      "requestFileSha256": "a769f53702ad8972bc662b60e57c539f659d6d6ea49d8c087ec13d1d26f27027",
+      "responseFileSha256": "01f5c7d4e4d8ec06c8098777e731b3d552ba518feb02b681f6c569edcd9c6f6d"
+    },
+    {
+      "run": "2026-10-03-retry-primary-1",
+      "call": 9,
+      "caseId": "QB18",
+      "variant": "B",
+      "model": "gemini-3.8-flash",
+      "attempt": 9,
+      "startedAtUtc": "2026-10-02T18:30:36.759Z",
+      "httpStatus": 503,
+      "httpLatencyMs": 5915,
+      "requestBodyHash": "15cfc03f34fa6db0705cf6cdb6202615253700fd43bd5fd933c58bbc1a984be1",
+      "nativeResponseHash": "92685f40ca32c88b8ae43fef717aac7cd70f409b3ecb5c03b20bea8d3ee80675",
+      "requestFileSha256": "a769f53702ad8972bc662b60e57c539f659d6d6ea49d8c087ec13d1d26f27027",
+      "responseFileSha256": "01f5c7d4e4d8ec06c8098777e731b3d552ba518feb02b681f6c569edcd9c6f6d"
+    },
+    {
+      "run": "2026-10-03-retry-primary-1",
+      "call": 10,
+      "caseId": "QB18",
+      "variant": "B",
+      "model": "gemini-3.8-flash",
+      "attempt": 10,
+      "startedAtUtc": "2026-10-02T18:31:42.693Z",
+      "httpStatus": 503,
+      "httpLatencyMs": 6818,
+      "requestBodyHash": "15cfc03f34fa6db0705cf6cdb6202615253700fd43bd5fd933c58bbc1a984be1",
+      "nativeResponseHash": "92685f40ca32c88b8ae43fef717aac7cd70f409b3ecb5c03b20bea8d3ee80675",
+      "requestFileSha256": "a769f53702ad8972bc662b60e57c539f659d6d6ea49d8c087ec13d1d26f27027",
+      "responseFileSha256": "01f5c7d4e4d8ec06c8098777e731b3d552ba518feb02b681f6c569edcd9c6f6d"
+    },
+    {
+      "run": "2026-10-03-retry-primary-1",
+      "call": 11,
+      "caseId": "QB18",
+      "variant": "B",
+      "model": "gemini-3.8-flash",
+      "attempt": 11,
+      "startedAtUtc": "2026-10-02T18:32:49.519Z",
+      "httpStatus": 503,
+      "httpLatencyMs": 6992,
+      "requestBodyHash": "15cfc03f34fa6db0705cf6cdb6202615253700fd43bd5fd933c58bbc1a984be1",
+      "nativeResponseHash": "92685f40ca32c88b8ae43fef717aac7cd70f409b3ecb5c03b20bea8d3ee80675",
+      "requestFileSha256": "a769f53702ad8972bc662b60e57c539f659d6d6ea49d8c087ec13d1d26f27027",
+      "responseFileSha256": "01f5c7d4e4d8ec06c8098777e731b3d552ba518feb02b681f6c569edcd9c6f6d"
+    },
+    {
+      "run": "2026-10-03-retry-primary-1",
+      "call": 12,
+      "caseId": "QB18",
+      "variant": "B",
+      "model": "gemini-3.8-flash",
+      "attempt": 12,
+      "startedAtUtc": "2026-10-02T18:33:56.536Z",
+      "httpStatus": 503,
+      "httpLatencyMs": 12313,
+      "requestBodyHash": "15cfc03f34fa6db0705cf6cdb6202615253700fd43bd5fd933c58bbc1a984be1",
+      "nativeResponseHash": "92685f40ca32c88b8ae43fef717aac7cd70f409b3ecb5c03b20bea8d3ee80675",
+      "requestFileSha256": "a769f53702ad8972bc662b60e57c539f659d6d6ea49d8c087ec13d1d26f27027",
+      "responseFileSha256": "01f5c7d4e4d8ec06c8098777e731b3d552ba518feb02b681f6c569edcd9c6f6d"
+    },
+    {
+      "run": "2026-10-03-retry-primary-1",
+      "call": 13,
+      "caseId": "QB18",
+      "variant": "B",
+      "model": "gemini-3.8-flash",
+      "attempt": 13,
+      "startedAtUtc": "2026-10-02T18:35:08.867Z",
+      "httpStatus": 200,
+      "httpLatencyMs": 16559,
+      "requestBodyHash": "15cfc03f34fa6db0705cf6cdb6202615253700fd43bd5fd933c58bbc1a984be1",
+      "nativeResponseHash": "83ffde14b04890d6e8d42311b3a139a8b739ff5ec58d4917b1b016950be3d686",
+      "requestFileSha256": "a769f53702ad8972bc662b60e57c539f659d6d6ea49d8c087ec13d1d26f27027",
+      "responseFileSha256": "4e33c5b76b3bff601cc932455403dd90389261383850a27663f151fc4d747533"
+    },
+    {
+      "run": "2026-10-03-retry-primary-1",
+      "call": 14,
+      "caseId": "QB18",
+      "variant": "A",
+      "model": "gemini-3.5-flash-lite",
+      "attempt": 1,
+      "startedAtUtc": "2026-10-02T18:35:25.439Z",
+      "httpStatus": 200,
+      "httpLatencyMs": 1494,
+      "requestBodyHash": "15cfc03f34fa6db0705cf6cdb6202615253700fd43bd5fd933c58bbc1a984be1",
+      "nativeResponseHash": "24dcb9b357a9b52c579614708be432f6de1d7327e86e4a3921d2c870c5b2392a",
+      "requestFileSha256": "40c3f9f55d9d71ab57783eacd8b2ca03bf121d6b76ae3c3d679da8bbfab6e371",
+      "responseFileSha256": "2c208d3523f85fc52a7eb82d4f6ef841b1f0542a301249177fab51d5d165251a"
+    },
+    {
+      "run": "2026-10-03-retry-primary-1",
+      "call": 15,
+      "caseId": "QB20",
+      "variant": "B",
+      "model": "gemini-3.8-flash",
+      "attempt": 1,
+      "startedAtUtc": "2026-10-02T18:35:26.939Z",
+      "httpStatus": 200,
+      "httpLatencyMs": 17215,
+      "requestBodyHash": "f1d475b373c5740a995c66b5dfa0663e7a82cc9b17043834f075e03ab55b6d59",
+      "nativeResponseHash": "3a5c3114640fcb3235135ee24543d4ca1e240cc78975520c6c2c9cb35e043a2b",
+      "requestFileSha256": "914014f09ed4b182c6b6bbe1cad64bf303a6e9eb246e341def5ffa99845262e2",
+      "responseFileSha256": "17f53b7532ed60e2bae7c817d87c4143ddbffa15dac2862811ee803be7af7465"
+    },
+    {
+      "run": "2026-10-03-retry-primary-1",
+      "call": 16,
+      "caseId": "QB20",
+      "variant": "A",
+      "model": "gemini-3.5-flash-lite",
+      "attempt": 1,
+      "startedAtUtc": "2026-10-02T18:35:44.163Z",
+      "httpStatus": 200,
+      "httpLatencyMs": 1775,
+      "requestBodyHash": "f1d475b373c5740a995c66b5dfa0663e7a82cc9b17043834f075e03ab55b6d59",
+      "nativeResponseHash": "c785788f9002722a23b084a83a6f2a89b9f2d0807e3f31b315b47bdc3bd188bc",
+      "requestFileSha256": "16f69134cd68c5bd4ba238d6b243b8ecefc965511a2a606641fdf1ea7ee9eb66",
+      "responseFileSha256": "26d8323cd62a95385862b0a89a7a8a822494b44786ad9fe766d8186088ad1e16"
+    },
+    {
+      "run": "2026-10-03-retry-primary-1",
+      "call": 17,
+      "caseId": "QB25",
+      "variant": "B",
+      "model": "gemini-3.8-flash",
+      "attempt": 1,
+      "startedAtUtc": "2026-10-02T18:35:45.944Z",
+      "httpStatus": 429,
+      "httpLatencyMs": 283,
+      "requestBodyHash": "50ea06da554c9608a91adadde9861dbe32bee03867a7e6f14ab08bcb9599a7b7",
+      "nativeResponseHash": "1e08e711e4bc69cca7dae43777550d8246e594da5a0b33256193c80ffb28396e",
+      "requestFileSha256": "bc24180ec8f586f389a690b47d82e25cc66a3849a0ba2fcdee7379833205a6a6",
+      "responseFileSha256": "69e683aca18eaf6d457e51a37a421a33a822c5e00133098669063d2408af762b"
+    }
+  ]
 }

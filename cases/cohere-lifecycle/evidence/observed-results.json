@@ -134,5 +134,91 @@
       "completeCasesAt5": 27,
       "completeCasesAt10": 29
     }
-  ]
+  ],
+  "generationOctober03": {
+    "sourceRegister": "docs/evidence/recovered-source-register.json",
+    "resultsSource": "cases/model-selection-quality-availability/evidence/october03-reported-results.json",
+    "reportSha256": "a82073631b743462c5a31051071ba994f9339b346849e29bbe171375ace7c231",
+    "verifiedOn": "2026-10-29",
+    "condition": "Fresh full40 with the same saved question, evidence/order/citation IDs, prompt and schema across three models; 40 successful responses per model. Provider-specific output caps and transport schemas retained below.",
+    "options": {
+      "gemini35": {
+        "maxOutputTokens": 32768,
+        "thinkingConfig": "omitted; production default/minimal",
+        "temperature": "omitted",
+        "responseMimeType": "application/json"
+      },
+      "cohere": {
+        "maxTokens": 32768,
+        "thinking": "provider-default",
+        "temperature": "omitted",
+        "responseFormat": "json_object with schema"
+      },
+      "gptOss": {
+        "maxCompletionTokens": 4096,
+        "reasoningEffort": "omitted; provider default medium as recorded at the time",
+        "responseFormat": "json_schema",
+        "strict": true,
+        "stream": false,
+        "tools": "omitted"
+      }
+    },
+    "results": [
+      {
+        "model": "gemini-3.5-flash-lite",
+        "fullyCorrect": 27,
+        "total": 40,
+        "groundingFailures": 0,
+        "contractFailures": 1,
+        "meanGenerationLatencyMs": 1508
+      },
+      {
+        "model": "command-a-plus-05-2026",
+        "fullyCorrect": 22,
+        "total": 40,
+        "groundingFailures": 3,
+        "contractFailures": 4,
+        "meanGenerationLatencyMs": 3042
+      },
+      {
+        "model": "openai/gpt-oss-120b",
+        "fullyCorrect": 25,
+        "total": 40,
+        "groundingFailures": 2,
+        "contractFailures": 0,
+        "meanGenerationLatencyMs": 1524
+      }
+    ],
+    "verification": {
+      "requests": 120,
+      "responses": 120,
+      "results": 120,
+      "historicalManualReviews": 120,
+      "sharedInputMatchedQuestions": 40,
+      "canonicalRequestHashesMatched": 120,
+      "nativeResponseToResultMatches": 120,
+      "normalizedAnswerToHistoricalReviewMatches": 120,
+      "classificationCounts": "Recomputed from historical reviews; semantic ratings preserved."
+    }
+  },
+  "retirementOctober16": {
+    "sourceRegister": "docs/evidence/recovered-source-register.json",
+    "sessionId": "01a14468-00a5-7ff2-8053-0e588b0c1335",
+    "compressedSha256": "9a167a56794bb628bd58e92581435b4efcacab3568d01e83d9dbf36ad79f9b99",
+    "verifiedOn": "2026-10-29",
+    "decisionAtUtc": "2026-10-16T12:02:47.996Z",
+    "decisionAtKst": "2026-10-16T21:02:47.996+09:00",
+    "developerJudgment": "Recognized retrieval/build advantages; at Synethos scale these did not justify production cost and provider/index management. Compared development/evaluation-only retention with complete removal.",
+    "historicalTermsScope": "Trial/Production key conditions are the developer understanding recorded at the time.",
+    "completionReport": {
+      "atUtc": "2026-10-16T12:19:53.762Z",
+      "testsPassed": 939,
+      "skipped": 4,
+      "staticCheck": "passed",
+      "build": "passed",
+      "index": "stale"
+    },
+    "rebuildUserReportAtUtc": "2026-10-17T13:19:07.357Z",
+    "scope": "Original messages directly inspected; historical execution and production behavior not independently rerun."
+  }
 }
