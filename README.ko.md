@@ -23,6 +23,7 @@ Synethos 전체 소스는 비공개로 유지하며, Tessera에는 선택한 코
 | 번호 | 사례 | 개발 날짜 |
 |---|---|---|
 | 01 | [From Local Qwen/Ollama Inference to the Gemini API](docs/engineering-decisions.ko.md#01--from-local-qwenollama-inference-to-the-gemini-api) | 2026-09-26 |
+| 02 | [From GitBook MCP to Local Knowledge](docs/engineering-decisions.ko.md#02--from-gitbook-mcp-to-local-knowledge) | 2026-09-26 ~ 2026-09-28 |
 
 ## Copyright
 

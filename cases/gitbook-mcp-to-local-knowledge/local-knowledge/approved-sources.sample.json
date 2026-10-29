@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "sources": [
+    {
+      "id": "cosmic-horizon-en-perspective-why-we-study",
+      "file": "approved/cosmic-horizon/perspective/why-we-study.md",
+      "title": "Why We Study",
+      "publicUrl": "https://riu-salze-studio.gitbook.io/cosmic-horizon/perspective/why-we-study"
+    },
+    {
+      "id": "cosmic-horizon-kr-perspective-why-we-study",
+      "file": "approved/cosmic-horizon-kr/perspective/why-we-study.md",
+      "title": "Why We Study",
+      "publicUrl": "https://riu-salze-studio.gitbook.io/cosmic-horizon/kr/perspective/why-we-study"
+    }
+  ]
+}
