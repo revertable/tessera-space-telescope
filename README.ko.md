@@ -18,18 +18,18 @@ Synethos 전체 소스는 비공개로 유지하며, Tessera에는 선택한 코
 
 ## Engineering Decisions
 
-[엔지니어링 개발 기록](docs/engineering-decisions.ko.md)에서 각 선택의 문제·판단·구현·검증과 코드 출처를 읽을 수 있습니다.
+각 사례에서 문제·판단·구현·검증과 코드 출처를 읽을 수 있습니다.
 
 | 번호 | 사례 | 개발 날짜 |
 |---|---|---|
-| 01 | [From Local Qwen/Ollama Inference to the Gemini API](docs/engineering-decisions.ko.md#01--from-local-qwenollama-inference-to-the-gemini-api) | 2026-09-26 |
-| 02 | [From GitBook MCP to Local Knowledge](docs/engineering-decisions.ko.md#02--from-gitbook-mcp-to-local-knowledge) | 2026-09-26 ~ 2026-09-28 |
-| 03 | [Cohere 도입·평가·제거](docs/engineering-decisions.ko.md#03--cohere-도입평가제거) | 2026-09-28 ~ 2026-10-17 |
-| 04 | [Provider 교체 설계와 Embedding 안정화](docs/engineering-decisions.ko.md#04--provider-교체-설계와-embedding-안정화) | 2026-09-26 ~ 2026-10-17 |
-| 05 | [Cross-PC Index Portability](docs/engineering-decisions.ko.md#05--cross-pc-index-portability) | 2026-09-28 ~ 2026-10-26 |
-| 06 | [Model Selection: Quality and Availability](docs/engineering-decisions.ko.md#06--model-selection-quality-and-availability) | 2026-09-26 ~ 2026-10-16 |
-| 07 | [Knowledge·Index 일관성과 복원 가능한 배포](docs/engineering-decisions.ko.md#07--knowledgeindex-일관성과-복원-가능한-배포) | 2026-10-22 ~ 2026-10-26 |
-| 08 | [Fix the Chunker, Not the Documents](docs/engineering-decisions.ko.md#08--fix-the-chunker-not-the-documents) | 2026-09-29 ~ 2026-10-02 |
+| 01 | [From Local Qwen/Ollama Inference to the Gemini API](docs/decisions/01-local-inference-to-gemini.ko.md) | 2026-09-26 |
+| 02 | [From GitBook MCP to Local Knowledge](docs/decisions/02-gitbook-to-local-knowledge.ko.md) | 2026-09-26 ~ 2026-09-28 |
+| 03 | [Cohere 도입·평가·제거](docs/decisions/03-cohere-evaluation-and-retirement.ko.md) | 2026-09-28 ~ 2026-10-17 |
+| 04 | [Provider 교체 설계와 Embedding 안정화](docs/decisions/04-provider-architecture-and-embedding-reliability.ko.md) | 2026-09-26 ~ 2026-10-17 |
+| 05 | [Cross-PC Index Portability](docs/decisions/05-cross-pc-index-portability.ko.md) | 2026-09-28 ~ 2026-10-26 |
+| 06 | [Model Selection: Quality and Availability](docs/decisions/06-model-selection-quality-and-availability.ko.md) | 2026-09-26 ~ 2026-10-16 |
+| 07 | [Knowledge·Index 일관성과 복원 가능한 배포](docs/decisions/07-knowledge-index-consistency-and-recoverable-deployment.ko.md) | 2026-10-22 ~ 2026-10-26 |
+| 08 | [Fix the Chunker, Not the Documents](docs/decisions/08-fix-the-chunker-not-the-documents.ko.md) | 2026-09-29 ~ 2026-10-02 |
 
 ## Copyright
 

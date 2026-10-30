@@ -18,18 +18,18 @@ Code is classified by its relationship to the private implementation:
 
 ## Engineering Decisions
 
-Read the [engineering development records](docs/engineering-decisions.md) for each decision's problem, judgment, implementation, verification, and code provenance.
+Select a case for its problem, decision, implementation, verification and source traceability.
 
 | No. | Case | Development date |
 |---|---|---|
-| 01 | [From Local Qwen/Ollama Inference to the Gemini API](docs/engineering-decisions.md#01--from-local-qwenollama-inference-to-the-gemini-api) | 2026-09-26 |
-| 02 | [From GitBook MCP to Local Knowledge](docs/engineering-decisions.md#02--from-gitbook-mcp-to-local-knowledge) | 2026-09-26 ~ 2026-09-28 |
-| 03 | [Introducing, Evaluating, and Retiring Cohere](docs/engineering-decisions.md#03--introducing-evaluating-and-retiring-cohere) | 2026-09-28 ~ 2026-10-17 |
-| 04 | [Provider Architecture and Embedding Reliability](docs/engineering-decisions.md#04--provider-architecture-and-embedding-reliability) | 2026-09-26 ~ 2026-10-17 |
-| 05 | [Cross-PC Index Portability](docs/engineering-decisions.md#05--cross-pc-index-portability) | 2026-09-28 ~ 2026-10-26 |
-| 06 | [Model Selection: Quality and Availability](docs/engineering-decisions.md#06--model-selection-quality-and-availability) | 2026-09-26 ~ 2026-10-16 |
-| 07 | [Knowledge–Index Consistency and Recoverable Deployment](docs/engineering-decisions.md#07--knowledgeindex-consistency-and-recoverable-deployment) | 2026-10-22 ~ 2026-10-26 |
-| 08 | [Fix the Chunker, Not the Documents](docs/engineering-decisions.md#08--fix-the-chunker-not-the-documents) | 2026-09-29 ~ 2026-10-02 |
+| 01 | [From Local Qwen/Ollama Inference to the Gemini API](docs/decisions/01-local-inference-to-gemini.md) | 2026-09-26 |
+| 02 | [From GitBook MCP to Local Knowledge](docs/decisions/02-gitbook-to-local-knowledge.md) | 2026-09-26 ~ 2026-09-28 |
+| 03 | [Introducing, Evaluating, and Retiring Cohere](docs/decisions/03-cohere-evaluation-and-retirement.md) | 2026-09-28 ~ 2026-10-17 |
+| 04 | [Provider Architecture and Embedding Reliability](docs/decisions/04-provider-architecture-and-embedding-reliability.md) | 2026-09-26 ~ 2026-10-17 |
+| 05 | [Cross-PC Index Portability](docs/decisions/05-cross-pc-index-portability.md) | 2026-09-28 ~ 2026-10-26 |
+| 06 | [Model Selection: Quality and Availability](docs/decisions/06-model-selection-quality-and-availability.md) | 2026-09-26 ~ 2026-10-16 |
+| 07 | [Knowledge–Index Consistency and Recoverable Deployment](docs/decisions/07-knowledge-index-consistency-and-recoverable-deployment.md) | 2026-10-22 ~ 2026-10-26 |
+| 08 | [Fix the Chunker, Not the Documents](docs/decisions/08-fix-the-chunker-not-the-documents.md) | 2026-09-29 ~ 2026-10-02 |
 
 ## Copyright
 
