@@ -74,5 +74,65 @@
     "preserved": "Approved deployment script/archive/manifest hashes and security/health checks.",
     "source": "C07-L01, C07-L05, C07-L06 and C07-S01"
   },
-  "verificationScope": "Historical operating observations and injected-failure tests; this publication performs no fresh deployment, server inspection, rollback, package installation or model call."
+  "verificationScope": "Historical operating observations and injected-failure tests; this publication performs no fresh deployment, server inspection, rollback, package installation or model call.",
+  "supplementedOn": "2026-10-30",
+  "earlierDeployments": [
+    {
+      "release": "20261022-033e02f-01",
+      "sourceCommit": "033e02fabe868a14cd8a4a932b50fbdba9a064fa",
+      "sources": [
+        "C07-S02:1372/1379/1409/1595",
+        "C07-L09",
+        "C07-L10",
+        "C07-L11"
+      ],
+      "separateLinuxDependencies": "Recorded requirement and reported installation; npm production installation avoids prepare by using ignore-scripts.",
+      "indexCheck": {
+        "state": "current",
+        "chunkCount": 373,
+        "evidence": "Retained runtime index check and contemporary completion report."
+      },
+      "health": true,
+      "scope": "Initial deployment. Separate from the later 8fa463e and 4fddd61 releases."
+    },
+    {
+      "release": "20261026-8fa463e-01",
+      "sourceCommit": "8fa463e6df0600a237c2b94ed8b726a2999c71c4",
+      "sources": [
+        "C07-S03:468/475/509/553/585/590/595/605/610/620/630",
+        "C07-L12",
+        "C07-L13",
+        "C07-L14"
+      ],
+      "attempts": [
+        {
+          "outcome": "activation-failed-and-recovered",
+          "atKst": "2026-10-26T14:47:50.309+09:00",
+          "productionRollbackOccurred": true,
+          "previousRelease": "20261022-033e02f-01",
+          "environmentRestored": true,
+          "restoredHealth": true,
+          "error": "Loopback health failed; subsequent journal ERR_MODULE_NOT_FOUND for dotenv.",
+          "accessEvidence": "Root-owned 0700 dependency directories and 0600 dotenv/package.json."
+        },
+        {
+          "outcome": "corrected-redeployment-success",
+          "atKst": "2026-10-26T14:50:27.509+09:00",
+          "productionRollbackOccurred": false,
+          "health": true,
+          "verifiedFiles": 111,
+          "manifestSourceCount": 28,
+          "manifestChunkCount": 382,
+          "environmentChange": "MOSAIC_PROJECT_ROOT only, through current",
+          "processDirectoryAndCurrent": "Checked by corrected deployment script.",
+          "scope": "Successful verification.json describes this corrected attempt. Index counts identify the packaged artifact; process/current/environment and health checks retain their own scope."
+        }
+      ]
+    }
+  ],
+  "rollbackEvidenceScopes": {
+    "earlierOperatingFailure": "C07-S03 records actual healthy recovery of the earlier 8fa463e activation failure.",
+    "laterOperatingSuccess": "historicalDeployment.productionRollbackOccurred=false belongs to the later 4fddd61 execution.",
+    "injectedTests": "safetyTests preserve synthetic/offline restoration verification separately."
+  }
 }

@@ -11,7 +11,7 @@
   "constraints": [
     {
       "id": "capacity",
-      "source": "October 29 direct developer clarification",
+      "source": "C07-S02 records 10/32/217/238/265/612/664/671/1046/1293/1569/1595; C07-S01 and October 29 clarification",
       "account": "Initially treated the nominal 10GB as available capacity; operating system and accumulated security updates left approximately 3–4GB. The provisioned environment was not up to date with security patches.",
       "historicalCorroboration": {
         "source": "C07-S01 / 2026-10-26T12:04:59.201Z and C07-L08",
@@ -20,8 +20,52 @@
         "availableReported": "3.3G",
         "availableBytes": 3516506112,
         "availableGiBApprox": 3.28,
-        "scope": "Corroborates available capacity; does not attribute consumed bytes to individual OS/update operations."
-      }
+        "scope": "October 26 measurements retained. Newly linked October 22 observations distinguish pre-update availability, downloaded cache, installed updates and post-cleanup/runtime space."
+      },
+      "earlierObservations": [
+        {
+          "atKst": "2026-10-22T10:34:22.014+09:00",
+          "evidence": "tool-output",
+          "source": "C07-S02:32",
+          "filesystemTotal": "9.8G",
+          "used": "5.3G",
+          "available": "4.0G",
+          "units": "Original df -h display."
+        },
+        {
+          "atKst": "2026-10-22T11:12:42.853+09:00",
+          "evidence": "tool-output",
+          "source": "C07-S02:224/238/265",
+          "filesystemTotalBytes": 10460876800,
+          "availableBytes": 3436027904,
+          "cachePackages": 224,
+          "cacheBytes": 806196658,
+          "installationState": "The contemporaneous inspection/report found previous installed versions retained; downloaded packages explain the main dry-run space reduction."
+        },
+        {
+          "atKst": "2026-10-22T13:35:30.875+09:00",
+          "evidence": "contemporaneous-ai-completion-report",
+          "source": "C07-S02:671/1046",
+          "securityUpdatesInstalled": 246,
+          "availableGiBReported": 2.9,
+          "minimumAvailableGiBReported": 2.44,
+          "kernelHoldsPreserved": 3,
+          "scope": "Approved security-package installation/report, distinct from general update candidates and from full kernel patching."
+        },
+        {
+          "atKst": "2026-10-22T14:01:14.138+09:00",
+          "evidence": "tool-output",
+          "source": "C07-S02:1293",
+          "availableBytes": 3148894208
+        },
+        {
+          "atKst": "2026-10-22T14:27:56.360+09:00",
+          "evidence": "tool-output",
+          "source": "C07-S02:1569/1595",
+          "availableBytes": 3740782592,
+          "context": "After cache cleanup and runtime/application setup; this difference includes multiple operations."
+        }
+      ]
     },
     {
       "id": "environment",
@@ -30,16 +74,16 @@
     },
     {
       "id": "retention",
-      "source": "October 29 direct developer clarification; October 26 request and earlier-script/runtime observations",
-      "account": "Changed the initially considered total of two releases to a total of three as an operating choice under limited disk space.",
+      "source": "C07-S03 records 648/668/675/693/1018/1038; existing C07-S01 request and code",
+      "account": "AI compared all/latest-plus-previous/latest-only retention and recommended two. The developer adopted two, then requested one more version, total three, as an operating choice.",
       "meaning": "Total three, including active and previous releases; no optimization calculation is attributed to the developer.",
-      "historicalCorroboration": "Three-release policy already present in the earlier October 26 server script, explicitly retained in user request and actual deployment."
+      "historicalCorroboration": "Original 14:51:56 AI recommendation, 14:52:21 developer adoption and 15:11:50 developer change are directly inspected. The later script/request/deployment retain three."
     },
     {
       "id": "platform-dependencies",
-      "source": "October 29 direct developer clarification; historical request and bundle/install results",
+      "source": "C07-S02 records 1372/1379/1409/1595; C07-L09/L10/L11; October 29 clarification",
       "account": "Do not copy Windows dependencies onto Linux. Prepare production dependencies for the operating environment.",
-      "historicalCorroboration": "Release archive contains zero node_modules entries; Linux npm ci/import/permission checks recorded."
+      "historicalCorroboration": "Original AI proposal at 14:06:56 precedes developer no-copy/separate-Linux requirement at 14:14:09 and approval at 14:15:58. October 22 retained setup reports separate Linux dependencies and a current 373-chunk index."
     }
   ],
   "responsibility": {
@@ -48,14 +92,18 @@
       "Chose total three retained releases",
       "Delegated detailed deployment design and implementation",
       "Adopted the existing release structure as a constraint in the later October 26 reusable-script request",
-      "Approved implementation, Git and production deployment separately"
+      "Approved implementation, Git and production deployment separately",
+      "Adopted the AI-proposed two-release policy and later chose three",
+      "Required separate Linux dependencies after the preceding AI recommendation"
     ],
     "ai": [
       "Detailed manifest/hash and candidate checks",
       "Permission normalization and service-account import/compiled-loader checks",
       "Atomic activation and rollback verification sequence",
       "Retention ordering and deletion safety",
-      "Implementation and verification within approved scopes"
+      "Implementation and verification within approved scopes",
+      "Recommended two retained releases after a measured storage/restore comparison",
+      "Diagnosed pinned project root and inaccessible installed dependencies; implemented permission/import preflight under the approved deployment scope"
     ]
   },
   "chronology": [
@@ -67,7 +115,7 @@
     {
       "at": "Before October 26 21:22 KST",
       "source": "C07-S01 original request and previous-script reading",
-      "event": "Earlier Linux dependency permissions and active-root fixes were already in operation; exact original failure event not recovered."
+      "event": "Earlier active-root and permission fixes preceded the reusable request; direct October 22/26 originals are now linked in earlierChronology."
     },
     {
       "at": "2026-10-26T21:04:59.201+09:00",
@@ -111,9 +159,131 @@
     }
   ],
   "initialProblems": {
-    "established": "Historical user request identifies earlier Linux dependency-access and active Knowledge/Index root issues; prior script and later checks retain the fixes.",
-    "unconfirmed": "Exact initial exception, original timestamp and repair approval not recovered.",
+    "established": "Direct originals now link old-release-pinned project root, actual inaccessible Linux dependencies, failed activation/healthy recovery and AI correction.",
+    "projectRoot": {
+      "source": "C07-S03:509/553; C07-L12/L13",
+      "finding": "MOSAIC_PROJECT_ROOT referenced the old release; preserve relative index directory, change project root through current, restore previous environment on failure.",
+      "scope": "Detected before activation; public answers using stale Knowledge were not demonstrated."
+    },
+    "dependencyAccess": {
+      "source": "C07-S03:585/590/595/605/610/630; C07-L12/L13",
+      "error": "ERR_MODULE_NOT_FOUND: Cannot find package dotenv",
+      "directoryMode": "0700",
+      "packageJsonMode": "0600",
+      "owner": "root",
+      "response": "AI corrected directory/read permissions, preserving executable bits, and added service-account dotenv/@google/genai import checks before activation."
+    },
+    "approval": {
+      "source": "C07-S03:468/475",
+      "atKst": "2026-10-26T14:42:49.628+09:00",
+      "scope": "Developer-approved deployment/internal-verification/recovery scope. The recorded subsequent failure/correction interval contains no separate developer approval message."
+    },
     "laterPreflight": "Previous script was tied to a specific commit/index/chunk count; changed Knowledge/Index required a reusable candidate-aware procedure."
   },
-  "scope": "Developer reasons/delegation and historical implementation/results retain their own sources and dates."
+  "scope": "Developer reasons/delegation and historical implementation/results retain their own sources and dates.",
+  "supplementedOn": "2026-10-30",
+  "earlierChronology": [
+    {
+      "at": "2026-10-22T13:11:30.055+09:00",
+      "source": "C07-S02:671",
+      "actor": "user",
+      "event": "Approve security-update installation scope."
+    },
+    {
+      "at": "2026-10-22T13:35:30.875+09:00",
+      "source": "C07-S02:1046",
+      "actor": "assistant-report",
+      "event": "Report 246 approved security packages installed; disk monitoring and holds retained."
+    },
+    {
+      "at": "2026-10-22T14:06:56.302+09:00",
+      "source": "C07-S02:1372",
+      "actor": "assistant",
+      "event": "Propose local build/separate Linux production dependencies; exclude Windows node_modules."
+    },
+    {
+      "at": "2026-10-22T14:14:09.781+09:00",
+      "source": "C07-S02:1379",
+      "actor": "user",
+      "event": "Require separate Linux production dependencies and no Windows node_modules copy."
+    },
+    {
+      "at": "2026-10-22T14:15:58.713+09:00",
+      "source": "C07-S02:1409",
+      "actor": "user",
+      "event": "Approve refined setup/loopback-deployment scope."
+    },
+    {
+      "at": "2026-10-22T14:30:30.300+09:00",
+      "source": "C07-S02:1595",
+      "actor": "assistant-report",
+      "event": "Report Linux dependency setup and loopback verification with existing 373-chunk index."
+    },
+    {
+      "at": "2026-10-26T14:42:49.628+09:00",
+      "source": "C07-S03:475",
+      "actor": "user",
+      "event": "Approve revised deployment through internal verification."
+    },
+    {
+      "at": "2026-10-26T14:44:51.004+09:00",
+      "source": "C07-S03:509",
+      "actor": "assistant",
+      "event": "Diagnose old-release-pinned project root before activation."
+    },
+    {
+      "at": "2026-10-26T14:47:50.309+09:00",
+      "source": "C07-S03:585",
+      "actor": "tool-output",
+      "event": "Failed activation restores previous release/environment and reports healthy recovery."
+    },
+    {
+      "at": "2026-10-26T14:48:18.359+09:00",
+      "source": "C07-S03:595",
+      "actor": "tool-output",
+      "event": "Journal reports ERR_MODULE_NOT_FOUND for dotenv."
+    },
+    {
+      "at": "2026-10-26T14:49:08.659+09:00",
+      "source": "C07-S03:605",
+      "actor": "tool-output",
+      "event": "Installed dependency directories are root-owned 0700 and dotenv/package.json is 0600."
+    },
+    {
+      "at": "2026-10-26T14:49:16.271+09:00",
+      "source": "C07-S03:610",
+      "actor": "assistant",
+      "event": "Report permission correction and service-account import preflight, then retry deployment."
+    },
+    {
+      "at": "2026-10-26T14:50:27.509+09:00",
+      "source": "C07-S03:630",
+      "actor": "tool-output",
+      "event": "Successful deployment follow-up: 111 payload files, healthy service."
+    },
+    {
+      "at": "2026-10-26T14:51:56.708+09:00",
+      "source": "C07-S03:668",
+      "actor": "assistant",
+      "event": "Recommend two retained releases after comparison."
+    },
+    {
+      "at": "2026-10-26T14:52:21.066+09:00",
+      "source": "C07-S03:675",
+      "actor": "user",
+      "event": "Adopt two-release retention."
+    },
+    {
+      "at": "2026-10-26T15:11:50.447+09:00",
+      "source": "C07-S03:1018",
+      "actor": "user",
+      "event": "Choose total three releases, one more version for headroom."
+    },
+    {
+      "at": "2026-10-26T15:12:43.106+09:00",
+      "source": "C07-S03:1038",
+      "actor": "assistant-report",
+      "event": "Record three-release policy for subsequent deployments; no server deletion in this step."
+    }
+  ]
 }

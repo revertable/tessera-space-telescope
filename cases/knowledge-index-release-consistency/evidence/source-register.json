@@ -226,6 +226,42 @@
       "path": "tmp/synethos-predeploy-203b571-20261026.md",
       "sha256": "2ea751d7f2b2b2db2b5bbea2749c3f8f5185f0f1e198e03929c4e69686d84784",
       "scope": "Private read-only predeployment report; disk availability, old/candidate index state and old deployment-script limitations."
+    },
+    {
+      "id": "C07-L09",
+      "path": "tmp/synethos-deploy/deploy-server.py",
+      "sha256": "b7b5d2e187f2abbf58fe1527c52327b7f38eea5a54437c82b7b0d75a5c3b29b7",
+      "scope": "Local October 22 initial-deployment script; implementation artifact, not a Git blob in 033e02f."
+    },
+    {
+      "id": "C07-L10",
+      "path": "tmp/synethos-deploy/final-verification.json",
+      "sha256": "b1d6105d63585a2aa0964e0d2251262bfdc8b8d01df2fe671c25216c3f89e9c3",
+      "scope": "Retained October 22 operating verification for release 20261022-033e02f-01."
+    },
+    {
+      "id": "C07-L11",
+      "path": "tmp/synethos-deploy/release-manifest.json",
+      "sha256": "657c0b5754c451be5c033a78a8a551567cb380c8257e90a9e4a6599f383eac3e",
+      "scope": "Retained October 22 manifest; same release also referenced in case 05."
+    },
+    {
+      "id": "C07-L12",
+      "path": "tmp/synethos-deploy-20261026-8fa463e/deploy.py",
+      "sha256": "049747bbff4ed4969fa255169bb27295845a923909651fbe557ba8927426faa6",
+      "scope": "Corrected local October 26 deployment script; original failed execution is separately preserved in C07-S03."
+    },
+    {
+      "id": "C07-L13",
+      "path": "tmp/synethos-deploy-20261026-8fa463e/verification.json",
+      "sha256": "ccf8195faebfe86c10914d85f70fc4500907fb313758d1256ebf44cf64dab039",
+      "scope": "Successful redeployment verification; its rollback=false describes this successful attempt."
+    },
+    {
+      "id": "C07-L14",
+      "path": "tmp/synethos-deploy-20261026-8fa463e/release-manifest.json",
+      "sha256": "7b30943da831466b821b72a2b2adf76d472d357c643178b3ad858e1866258c82",
+      "scope": "Retained manifest for the earlier 8fa463e deployment, distinct from the later 4fddd61 candidate."
     }
   ],
   "method": "Original code ranges and private evidence hashes; operational access data, complete sessions and payloads remain private.",
@@ -346,10 +382,9 @@
     "testVerification": "Historical injected-failure/offline Linux safety tests; separate from production rollback."
   },
   "remainingGaps": [
-    "Initial server provisioning and security-update command/package logs with before/after disk measurements",
-    "Original conversation changing two retained releases to three",
-    "Exact first Linux dependency/active-root error output and associated approval",
-    "Original early Windows-dependency-copy prohibition message"
+    "Exact free space immediately after provider provisioning, before initial administration",
+    "Complete attribution of filesystem use to individual OS/packages/security updates",
+    "Evidence that public answers actually used old Knowledge before the project-root correction"
   ],
   "publication": {
     "scope": "Selected original code and metadata projections; keep private Knowledge, credentials, full operational commands, server access information and private conversation payloads private.",
@@ -381,5 +416,423 @@
     "priorCaseComparison": "Git baseline content matched with checkout line endings normalized; cases 01–06 prose also preserved.",
     "privacyReview": "Selected code, evidence projections and case 07 prose checked for credential values, private Knowledge/QB payloads, private repository URLs, local user paths and server access details.",
     "execution": "Read-only original inspection and local parsing/hash comparisons; no application test, model call, index build, server access or deployment executed."
+  },
+  "additionalEvidencePreparedOn": "2026-10-30",
+  "additionalSessions": [
+    {
+      "id": "C07-S02",
+      "sessionId": "01a1613d-e5c6-76f2-9e3d-42c9eeca696b",
+      "artifact": "rollout-2026-10-22T10-33-29-01a1613d-e5c6-76f2-9e3d-42c9eeca696b.jsonl.zst",
+      "format": "zstd-compressed JSONL",
+      "storedSha256": "c5ce1d101b0a1f1117ceeb836ebc9e3ee212bc933c9adf71dbc8a366e1a2898d",
+      "jsonlSha256": "37823ca6529dfca51f56283ca715ad80e733df9ce371251e261692d25527baef",
+      "previousResearchRegistration": "OS07",
+      "relationship": "Same JSONL content hash as the existing private research registration; earlier development events selected for case 07.",
+      "messageHashMethod": "SHA-256 of UTF-8 input_text/output_text content blocks joined by newline.",
+      "toolOutputHashMethod": "SHA-256 of UTF-8 payload.output text; non-string values use compact JSON.stringify serialization, including stored result wrappers.",
+      "records": [
+        {
+          "line": 10,
+          "atUtc": "2026-10-22T01:33:48.799Z",
+          "atKst": "2026-10-22T10:33:48.799+09:00",
+          "role": "user",
+          "sha256": "96534525233d285c0e258b795a941282ac5989935b80231856dbfe386e3f55c7",
+          "hashKind": "message-text",
+          "scope": "Developer supplies nominal 10GB server constraint and requests an update/security plan."
+        },
+        {
+          "line": 32,
+          "atUtc": "2026-10-22T01:34:22.014Z",
+          "atKst": "2026-10-22T10:34:22.014+09:00",
+          "role": "custom_tool_call_output",
+          "sha256": "78bdd1a253e1011d48b580a6a0e49a3a11198518b0f1f14952a9d57414c8eac9",
+          "hashKind": "stored-tool-output",
+          "scope": "Historical df output before these updates: 9.8G total, 5.3G used, 4.0G available."
+        },
+        {
+          "line": 217,
+          "atUtc": "2026-10-22T02:12:20.521Z",
+          "atKst": "2026-10-22T11:12:20.521+09:00",
+          "role": "user",
+          "sha256": "1df72e40da3021a44374c8ea46256495d68e0648e618e561819ab44d036baf1a",
+          "hashKind": "message-text",
+          "scope": "Developer reports dry-run completion and reduced available space before actual installation."
+        },
+        {
+          "line": 224,
+          "atUtc": "2026-10-22T02:12:42.853Z",
+          "atKst": "2026-10-22T11:12:42.853+09:00",
+          "role": "custom_tool_call_output",
+          "sha256": "b2334657a6933afb8242e656e54ce91feb6bd1871f4f2e88046814c9588722d0",
+          "hashKind": "stored-tool-output",
+          "scope": "Byte-level df output after dry-run: filesystem 10460876800 bytes, available 3436027904 bytes."
+        },
+        {
+          "line": 238,
+          "atUtc": "2026-10-22T02:13:57.085Z",
+          "atKst": "2026-10-22T11:13:57.085+09:00",
+          "role": "custom_tool_call_output",
+          "sha256": "5063b52a9cd8d0bae58e90879e126586802695e989c3b011e51e67953985aa27",
+          "hashKind": "stored-tool-output",
+          "scope": "Tool records cache timing, counts/allocation and APT metadata."
+        },
+        {
+          "line": 265,
+          "atUtc": "2026-10-22T02:15:48.830Z",
+          "atKst": "2026-10-22T11:15:48.830+09:00",
+          "role": "assistant",
+          "sha256": "a189b9756339921cbaec46738c351140e8a6e13b75a2b389839eb6b50db3ab9d",
+          "hashKind": "message-text",
+          "scope": "AI diagnosis/report: 224 cached packages, 806196658 bytes, previous installed versions retained."
+        },
+        {
+          "line": 612,
+          "atUtc": "2026-10-22T04:02:26.101Z",
+          "atKst": "2026-10-22T13:02:26.101+09:00",
+          "role": "custom_tool_call_output",
+          "sha256": "3cf3233f64594543dbdc26363c0cea5649eccca4f9ba8e18e8d21b3ae50cb5a8",
+          "hashKind": "stored-tool-output",
+          "scope": "Tool recomputes 246 security updates, cache reuse and additional-download estimate."
+        },
+        {
+          "line": 664,
+          "atUtc": "2026-10-22T04:07:38.156Z",
+          "atKst": "2026-10-22T13:07:38.156+09:00",
+          "role": "assistant",
+          "sha256": "8cdf680d9f1aa19f1b4b4351a9066b9cc1be219e67865900c4a356c9eb53d787",
+          "hashKind": "message-text",
+          "scope": "AI reports official repository transition and declares security-update installation scope."
+        },
+        {
+          "line": 671,
+          "atUtc": "2026-10-22T04:11:30.055Z",
+          "atKst": "2026-10-22T13:11:30.055+09:00",
+          "role": "user",
+          "sha256": "ae0b472e631ddef724071fd6dbc8c89351d9ed5e6536d7054e03a96a275b654c",
+          "hashKind": "message-text",
+          "scope": "Developer approves the declared security-update installation."
+        },
+        {
+          "line": 1046,
+          "atUtc": "2026-10-22T04:35:30.875Z",
+          "atKst": "2026-10-22T13:35:30.875+09:00",
+          "role": "assistant",
+          "sha256": "9f893a0b01f6c266645f9024d5e991b20a61ddee80b55c7da6d91197b87f598d",
+          "hashKind": "message-text",
+          "scope": "AI reports 246 security packages installed, 2.90GiB free and 2.44GiB observed minimum."
+        },
+        {
+          "line": 1174,
+          "atUtc": "2026-10-22T04:47:46.928Z",
+          "atKst": "2026-10-22T13:47:46.928+09:00",
+          "role": "custom_tool_call_output",
+          "sha256": "f547664ea25df0e7684bf2a6853b32f7781d89b93ddb22da5320d9fc6af81bf4",
+          "hashKind": "stored-tool-output",
+          "scope": "Tool records post-update/reboot filesystem availability of 3.0G."
+        },
+        {
+          "line": 1293,
+          "atUtc": "2026-10-22T05:01:14.138Z",
+          "atKst": "2026-10-22T14:01:14.138+09:00",
+          "role": "custom_tool_call_output",
+          "sha256": "dbcd2f0947694c65fb6e05db54aeb0bb18f314ba05d77985e0a80aa3ab805420",
+          "hashKind": "stored-tool-output",
+          "scope": "Tool records available 3148894208 bytes before runtime setup/cache cleanup."
+        },
+        {
+          "line": 1372,
+          "atUtc": "2026-10-22T05:06:56.302Z",
+          "atKst": "2026-10-22T14:06:56.302+09:00",
+          "role": "assistant",
+          "sha256": "5db43bbcf5b04fde4d3ceb6e26bd8bdb600cdee27906158bb43253ccd116d12d",
+          "hashKind": "message-text",
+          "scope": "AI proposes Windows build with separate Linux production dependencies and ignore-scripts."
+        },
+        {
+          "line": 1379,
+          "atUtc": "2026-10-22T05:14:09.781Z",
+          "atKst": "2026-10-22T14:14:09.781+09:00",
+          "role": "user",
+          "sha256": "0213f66cd4514c9eb12498affe776bb138deb8630c7771d720d74c226625c2d8",
+          "hashKind": "message-text",
+          "scope": "Developer requires no Windows node_modules copy and separate Linux dependencies."
+        },
+        {
+          "line": 1409,
+          "atUtc": "2026-10-22T05:15:58.713Z",
+          "atKst": "2026-10-22T14:15:58.713+09:00",
+          "role": "user",
+          "sha256": "ae0b472e631ddef724071fd6dbc8c89351d9ed5e6536d7054e03a96a275b654c",
+          "hashKind": "message-text",
+          "scope": "Developer approves the refined setup/deployment scope."
+        },
+        {
+          "line": 1569,
+          "atUtc": "2026-10-22T05:27:56.360Z",
+          "atKst": "2026-10-22T14:27:56.360+09:00",
+          "role": "custom_tool_call_output",
+          "sha256": "9d87ff571f97ba35b85d073c28b2dd81c963ed8d345c9fa5f7accaaad6262d56",
+          "hashKind": "stored-tool-output",
+          "scope": "Tool records available 3740782592 bytes after setup."
+        },
+        {
+          "line": 1595,
+          "atUtc": "2026-10-22T05:30:30.300Z",
+          "atKst": "2026-10-22T14:30:30.300+09:00",
+          "role": "assistant",
+          "sha256": "2573b8eed32dd58a1916a022eaf3b1f8f93d64b1186e96be75f04e0ea0289f24",
+          "hashKind": "message-text",
+          "scope": "AI completion report: cache cleanup, separate Linux dependencies, current 373-chunk index and loopback verification."
+        }
+      ]
+    },
+    {
+      "id": "C07-S03",
+      "sessionId": "01a176a3-862a-7e82-adc0-b4aeda57dd12",
+      "artifact": "rollout-2026-10-26T14-16-30-01a176a3-862a-7e82-adc0-b4aeda57dd12.jsonl",
+      "format": "JSONL",
+      "storedSha256": "fe908dee6f67c003c1dee4828acfde3a85f8c4c3b7eb48cad106b1e4b528082a",
+      "jsonlSha256": "fe908dee6f67c003c1dee4828acfde3a85f8c4c3b7eb48cad106b1e4b528082a",
+      "previousResearchRegistration": "OS05",
+      "relationship": "Same JSONL content hash as the existing private research registration; earlier development events selected for case 07.",
+      "messageHashMethod": "SHA-256 of UTF-8 input_text/output_text content blocks joined by newline.",
+      "toolOutputHashMethod": "SHA-256 of UTF-8 payload.output text; non-string values use compact JSON.stringify serialization, including stored result wrappers.",
+      "records": [
+        {
+          "line": 468,
+          "atUtc": "2026-10-26T05:42:38.398Z",
+          "atKst": "2026-10-26T14:42:38.398+09:00",
+          "role": "assistant",
+          "sha256": "0296903edb187b9faf95edcdfcc4c488ae602b67952f6a9e623022699779be37",
+          "hashKind": "message-text",
+          "scope": "AI revised deployment declaration: internal verification, previous-release recovery, preserved operating configuration."
+        },
+        {
+          "line": 475,
+          "atUtc": "2026-10-26T05:42:49.628Z",
+          "atKst": "2026-10-26T14:42:49.628+09:00",
+          "role": "user",
+          "sha256": "9f75c996faf231a07a5b764660002a640ac917a14cc39d83ec683524f8d2c60e",
+          "hashKind": "message-text",
+          "scope": "Developer approves that deployment scope."
+        },
+        {
+          "line": 509,
+          "atUtc": "2026-10-26T05:44:51.004Z",
+          "atKst": "2026-10-26T14:44:51.004+09:00",
+          "role": "assistant",
+          "sha256": "609853c42c1f0d0c34f4cb7e06255036a7fd08bee995c40e5a07bdcb976e3c34",
+          "hashKind": "message-text",
+          "scope": "AI detects project root pinned to the old release and proposes current-root correction."
+        },
+        {
+          "line": 553,
+          "atUtc": "2026-10-26T05:46:36.116Z",
+          "atKst": "2026-10-26T14:46:36.116+09:00",
+          "role": "assistant",
+          "sha256": "458038f621ff31cc01f2cd94a370f8f9f85a20acfab3e895136eef281fc91895",
+          "hashKind": "message-text",
+          "scope": "AI explains preserving the relative index directory while changing project root to current."
+        },
+        {
+          "line": 585,
+          "atUtc": "2026-10-26T05:47:50.309Z",
+          "atKst": "2026-10-26T14:47:50.309+09:00",
+          "role": "custom_tool_call_output",
+          "sha256": "c31976d15bd17394512c6295564b4feebd4bf45c1610b19c1c98a92be124211e",
+          "hashKind": "stored-tool-output",
+          "scope": "Actual failed activation output: rollback true, previous release restored, health true."
+        },
+        {
+          "line": 590,
+          "atUtc": "2026-10-26T05:48:01.687Z",
+          "atKst": "2026-10-26T14:48:01.687+09:00",
+          "role": "assistant",
+          "sha256": "c2c5b44fd792fbd0db961c83e06ec9e7fa00c9c6abca7b0194db5b70179b5c48",
+          "hashKind": "message-text",
+          "scope": "AI reports failed health and recovery of the previous release and environment file."
+        },
+        {
+          "line": 595,
+          "atUtc": "2026-10-26T05:48:18.359Z",
+          "atKst": "2026-10-26T14:48:18.359+09:00",
+          "role": "custom_tool_call_output",
+          "sha256": "80fcf19f69b4423dd85c4dd4298a20ac8d3bb372f9c756ca08a5170e3fe099b7",
+          "hashKind": "stored-tool-output",
+          "scope": "Historical journal output: ERR_MODULE_NOT_FOUND for dotenv."
+        },
+        {
+          "line": 605,
+          "atUtc": "2026-10-26T05:49:08.659Z",
+          "atKst": "2026-10-26T14:49:08.659+09:00",
+          "role": "custom_tool_call_output",
+          "sha256": "51453f1573c5e7ea9ee1d5f7f34afc3da7e3bf2e3b5ee8b09f28d43fffd42ab0",
+          "hashKind": "stored-tool-output",
+          "scope": "Tool shows root-owned 0700 node_modules/dotenv directories and 0600 dotenv/package.json."
+        },
+        {
+          "line": 610,
+          "atUtc": "2026-10-26T05:49:16.271Z",
+          "atKst": "2026-10-26T14:49:16.271+09:00",
+          "role": "assistant",
+          "sha256": "79d33158135baa47ed8c877ca0451db04579dad6e9faa3def94e1fc694d9513b",
+          "hashKind": "message-text",
+          "scope": "AI reports permission correction and service-account import preflight."
+        },
+        {
+          "line": 620,
+          "atUtc": "2026-10-26T05:49:41.433Z",
+          "atKst": "2026-10-26T14:49:41.433+09:00",
+          "role": "custom_tool_call_output",
+          "sha256": "32e1edf0eabd7a694bb94ec41693a91bfc64e39aeb1a6fe17addd4defa8a1cb6",
+          "hashKind": "stored-tool-output",
+          "scope": "Successful redeployment result: active new release and project root through current."
+        },
+        {
+          "line": 630,
+          "atUtc": "2026-10-26T05:50:27.509Z",
+          "atKst": "2026-10-26T14:50:27.509+09:00",
+          "role": "custom_tool_call_output",
+          "sha256": "ed4bf25bfb841c6e3a728eb5451a2ec79b00c94272881340b631c2d3e7d346ef",
+          "hashKind": "stored-tool-output",
+          "scope": "Follow-up tool verification: 111 files, health true, active services and process state."
+        },
+        {
+          "line": 648,
+          "atUtc": "2026-10-26T05:50:51.474Z",
+          "atKst": "2026-10-26T14:50:51.474+09:00",
+          "role": "user",
+          "sha256": "2c29c59fb77060cd51a5e336fd566de292de995ef64ead8a1f12b2982dbeb4a4",
+          "hashKind": "message-text",
+          "scope": "Developer requests disk/retention comparison."
+        },
+        {
+          "line": 668,
+          "atUtc": "2026-10-26T05:51:56.708Z",
+          "atKst": "2026-10-26T14:51:56.708+09:00",
+          "role": "assistant",
+          "sha256": "708ea3dfe7a9615bcbbd223ea5e0b25c8ef7e0dcf472f09ce81a2abfbc319d74",
+          "hashKind": "message-text",
+          "scope": "AI recommends active plus previous release after comparing storage/restore options."
+        },
+        {
+          "line": 675,
+          "atUtc": "2026-10-26T05:52:21.066Z",
+          "atKst": "2026-10-26T14:52:21.066+09:00",
+          "role": "user",
+          "sha256": "e4024428a9060bb44e10388758cf9c30bc25e48508d17c2f7338107201bb6671",
+          "hashKind": "message-text",
+          "scope": "Developer adopts total two-release retention."
+        },
+        {
+          "line": 693,
+          "atUtc": "2026-10-26T05:53:15.017Z",
+          "atKst": "2026-10-26T14:53:15.017+09:00",
+          "role": "assistant",
+          "sha256": "249e6d1ffecfdbef32e3316e8c39288dfef8d26774cfb16df19773dffaa53fad",
+          "hashKind": "message-text",
+          "scope": "AI reports documenting two-release retention without deleting server files."
+        },
+        {
+          "line": 1018,
+          "atUtc": "2026-10-26T06:11:50.447Z",
+          "atKst": "2026-10-26T15:11:50.447+09:00",
+          "role": "user",
+          "sha256": "c9eef0836ac4a689dfb014c3dd65605ecb36c0d5660b3920b241b91bc9f5620c",
+          "hashKind": "message-text",
+          "scope": "Developer requests one more retained version, total three."
+        },
+        {
+          "line": 1038,
+          "atUtc": "2026-10-26T06:12:43.106Z",
+          "atKst": "2026-10-26T15:12:43.106+09:00",
+          "role": "assistant",
+          "sha256": "da7ee9a3c5d5feae91f14ed7a6920d09af147f504458bfb4e2a4307a9dfd0f73",
+          "hashKind": "message-text",
+          "scope": "AI reports documenting three-release retention for subsequent deployments."
+        }
+      ]
+    }
+  ],
+  "existingArtifactAvailabilityAtOffice": {
+    "checkedOn": "2026-10-30",
+    "unavailableAtRecordedRelativePaths": [
+      "C07-L01",
+      "C07-L02",
+      "C07-L03",
+      "C07-L04",
+      "C07-L05",
+      "C07-L06",
+      "C07-L07",
+      "C07-L08"
+    ],
+    "scope": "Checkout-specific availability observation. Original October 29 verification remains in publicationVerification; earlier verified artifacts are not reclassified as lost."
+  },
+  "additionalEvidenceLineage": {
+    "initialDeployment": {
+      "release": "20261022-033e02f-01",
+      "sourceCommit": "033e02fabe868a14cd8a4a932b50fbdba9a064fa",
+      "source": "C07-S02 and C07-L09/L10/L11"
+    },
+    "failedThenRecoveredDeployment": {
+      "release": "20261026-8fa463e-01",
+      "sourceCommit": "8fa463e6df0600a237c2b94ed8b726a2999c71c4",
+      "source": "C07-S03 and C07-L12/L13/L14"
+    },
+    "existingReusableDeployment": {
+      "release": "20261026-4fddd61-01",
+      "source": "C07-S01 and original C07-L01–L08",
+      "result": "Successful activation; no production rollback in that later execution."
+    }
+  },
+  "resolvedGaps": [
+    {
+      "previousGap": "Original two-to-three retention conversation",
+      "sources": [
+        "C07-S03:668",
+        "C07-S03:675",
+        "C07-S03:1018"
+      ],
+      "result": "AI recommended two, developer adopted two, then developer requested total three."
+    },
+    {
+      "previousGap": "Exact first Linux dependency/active-root issue and approval sequence",
+      "sources": [
+        "C07-S03:468",
+        "C07-S03:475",
+        "C07-S03:509",
+        "C07-S03:585",
+        "C07-S03:595",
+        "C07-S03:605",
+        "C07-S03:610",
+        "C07-S03:630"
+      ],
+      "result": "Deployment-scope approval, old-root diagnosis, failed health/actual recovery, inaccessible dotenv, AI permission/import correction and successful redeployment recovered. The failure/correction interval has no separate developer approval message."
+    },
+    {
+      "previousGap": "Early Windows-copy prohibition",
+      "sources": [
+        "C07-S02:1372",
+        "C07-S02:1379",
+        "C07-S02:1409",
+        "C07-S02:1595"
+      ],
+      "result": "AI recommendation, developer requirement, scoped approval and reported Linux application linked."
+    }
+  ],
+  "additionalVerification": {
+    "performedOn": "2026-10-30",
+    "scope": "Additional session identities and selected record hashes, six retained artifact hashes, projections, bilingual correspondence and links; no new server access, application test, deployment or model call.",
+    "additionalSessionFilesMatched": 2,
+    "selectedRecordHashesMatched": 34,
+    "retainedArtifactHashesMatched": 6,
+    "evidenceJsonParsed": 3,
+    "localMarkdownLinksChecked": 694,
+    "bilingualFileAndExternalLinksMatched": true,
+    "bilingualSha256SetsMatched": true,
+    "preservedFilesMatched": 139,
+    "preservedScope": "All case code/tests and non-target evidence files, README files and local AGENTS.md; cases 01–06 document prefixes matched byte hashes.",
+    "earlierPublicationEvidencePreserved": true,
+    "privacyReview": "New projections and case 07 prose reviewed for credentials, private Knowledge/QB payloads, server access details and local user/operating paths; publication retains identifiers, hashes, modes and aggregate observations."
   }
 }
