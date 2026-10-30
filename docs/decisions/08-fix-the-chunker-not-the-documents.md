@@ -4,11 +4,11 @@
 
 **Evidence:** Code confirmed identifies historical source; reported at the time retains recorded observation conditions; unconfirmed marks unresolved facts or causal links. Tests are historical source evidence. Times are KST (UTC+09:00); development events and evidence-inspection dates retain their own labels.
 
-**Document revision:** Split on 2026-10-30 from `2fc5094`. Historical publication checks below retain their dates and scope. On 2026-10-31, redundant explanations and verification-limit wording were revised from `f7fb082`.
+**Document revision:** Split on 2026-10-30 from `2fc5094`. Historical publication checks below retain their dates and scope. On 2026-10-31, redundant explanations and verification-limit wording were revised from `f7fb082`; follow-up lists were then revised from `0228ffe` to describe the sources and verification scope of the available materials.
 
 **Development period:** 2026-09-29 ~ 2026-10-02.
 
-**Code classification:** Excerpt — four whole original files and four selected test extracts. Four Reconstructed evidence records connect the originals, historical reports and remaining questions.
+**Code classification:** Excerpt — four whole original files and four selected test extracts. Four Reconstructed evidence records connect the originals, historical reports and verification scope.
 
 **Outcome:** The developer rejected a document workaround and chose a general chunker correction that preserved normal Markdown hierarchy and the distinct work/tools sections of career records. Later offline lexical/hybrid candidates improved some coverage measures while losing valid support, and the recovered original reports record all candidates as unadopted.
 
@@ -114,17 +114,19 @@ The [original scoring code](../../cases/fix-the-chunker/research/rules.mjs#L1-L1
 | B2 λ=.04 | 39/49 | 29/36 | 21 | 4 |
 | B2 λ=.10 | 41/49 | 30/36 | 20 | 4 |
 
-Coverage-best B1(.10) rescued three required groups and lost one. All four candidates pushed QB32's direct supporting evidence from rank 5 to 6, outside Top5. Stored per-question comparisons were checked against historical manual ratings; the original report judged this a genuine loss of answerability. Every candidate also increased irrelevant evidence over baseline. The AI rejected all four and recommended ending this tuning round while retaining production. A separate final user approval accepting that recommendation remains unrecovered.
+Coverage-best B1(.10) rescued three required groups and lost one. All four candidates pushed QB32's direct supporting evidence from rank 5 to 6, outside Top5. Stored per-question comparisons were checked against historical manual ratings; the original report judged this a genuine loss of answerability. Every candidate also increased irrelevant evidence over baseline. The AI rejected all four and recommended ending this tuning round while retaining production.
 
 The [reranking research summary](../../cases/fix-the-chunker/evidence/reranking-research-summary.json#L1-L172) adds direct original comparisons to the earlier research-report evidence. The original report.md SHA-256 matches its registered value, 9d303908…de8b55. Current recounts confirm 199 evidence records for baseline and every candidate, with exact equality for all five derived questions. Semantic labels for 21 newly selected question/chunk combinations retain their historical manual-review status.
 
 Original verification records report zero external calls and zero source changes. Preservation records also match all 188 tracked-file hashes and 542 baseline-artifact hashes before and after the experiment. Publication preparation compared stored results and hashes without rerunning scoring or experiments. The inspected bbac3a6 production path used cosine ranking, threshold/TopK and the derived-intent branch. Generation effects of the three experiments and matched retrieval-quality effects before/after the chunker correction remain unmeasured.
 
-## Evidence boundaries and follow-up
+<a id="evidence-boundaries-and-follow-up"></a>
+
+## Evidence boundaries
 
 The [source register](../../cases/fix-the-chunker/evidence/source-register.json#L1-L882) preserves the compressed/decompressed hashes and 32 selected message hashes for original session 01a0ea78-071a-7243-ac8e-1e5d7ee57aae, three Git research snapshots and six earlier local artifacts. Its homeRecovery adds identities, hashes and UTC/KST timestamps for 38 directly inspected October 2 originals and three user-input records. Input history confirms developer requests and contains no complete AI replies or execution transcript.
 
-The September 30 original user request establishes the audit's immediate maintenance/rebuild context. Remaining questions cover matched retrieval-quality runs before/after chunker v2, the complete October 2 proposal/completion conversation, and separate final user approval for ending hybrid tuning. The 527→505 count change and context-preservation tests establish structural correctness.
+The September 30 original user request establishes the audit's immediate maintenance/rebuild context. The 527→505 count change and context-preservation tests establish structural correctness. The October 2 alternatives are described through developer requirements, stored rankings/evaluation results, and the original report’s recommendation to reject the candidates.
 
 Published code and synthetic tests retain original imports and application references. Added rules.mjs is the complete retained local experiment file, with no Git-commit attribution. Evidence records publish identifiers, hashes and aggregate observations while keeping Knowledge, QB question/answer text, manual-rating rationales, complete conversations, credentials and server access material private.
 

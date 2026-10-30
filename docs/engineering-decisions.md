@@ -8,13 +8,15 @@ Detailed records are now individual case documents. Each summary links to its fu
 
 ## Reading the evidence
 
+These development records draw on retained materials compared and supplemented through Codex at home and in the office, together with context restored as far as available through ChatGPT and supplied by the developer. Code, historical observations, and developer decisions are described according to their sources and execution conditions.
+
 - **Code confirmed:** behavior visible in the identified historical source snapshot, or the byte-for-byte source comparison used to prepare these excerpts.
 - **Reported at the time:** a retained development request, experiment artifact, or verification report describes the observation. These observations retain their original execution conditions and verification scope.
 - **Unconfirmed:** the available records do not establish the cause, correspondence, or broader effect.
 
 Each case includes a source ledger identifying its code snapshots and retained evidence. Historical tests are published as implementation evidence; this repository does not provide their dependencies or a test runner.
 
-Retained originals on the home PC were additionally inspected on October 29, 2026. The [recovered-source register](evidence/recovered-source-register.json) preserves original file hashes, session/message times, observation conditions, and remaining questions for cases 01–06. User-input history identifies original requests and decisions; experiment results and completion reports retain their historical execution conditions.
+Retained originals on the home PC were additionally inspected on October 29, 2026. The [recovered-source register](evidence/recovered-source-register.json) preserves original file hashes, session/message times, observation conditions, and the verification scope of each source for cases 01–06. User-input history identifies original requests and decisions; experiment results and completion reports retain their historical execution conditions.
 
 ## 01 — From Local Qwen/Ollama Inference to the Gemini API
 

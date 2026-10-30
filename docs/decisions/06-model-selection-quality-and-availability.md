@@ -4,7 +4,7 @@
 
 **Evidence:** Code confirmed identifies historical source; reported at the time retains recorded observation conditions; unconfirmed marks unresolved facts or causal links. Tests are historical source evidence. Times are KST (UTC+09:00); development events and evidence-inspection dates retain their own labels.
 
-**Document revision:** Split on 2026-10-30 from `2fc5094`. Historical publication checks below retain their dates and scope. On 2026-10-31, redundant explanations and verification-limit wording were revised from `f7fb082`.
+**Document revision:** Split on 2026-10-30 from `2fc5094`. Historical publication checks below retain their dates and scope. On 2026-10-31, redundant explanations and verification-limit wording were revised from `f7fb082`; follow-up lists were then revised from `0228ffe` to describe the sources and verification scope of the available materials.
 
 **Development period:** 2026-09-26 ~ 2026-10-16
 
@@ -16,7 +16,7 @@
 
 The Gemini API transition in 9a3df61 initially configured gemini-3.8-flash. At 14:14:51, 2e02e71 changed the lineup to gemini-3.5-flash-lite followed by gemini-3.1-flash-lite, both with the configured 1200-token output cap. The [configuration history](../../cases/model-selection-quality-availability/evidence/model-selection-history.json#L1-L242) preserves successive model identities, options, and runtime order.
 
-**Initial-switch rationale from user-supplied ChatGPT history search:** on September 26 at approximately 13:39 KST, the developer judged the 20-call daily free-tier allowance unsuitable for a public service. At approximately 13:43, the developer requested switching to Gemini 3.5 Flash-Lite; at approximately 13:50, five successful live tests of 3.5 Flash-Lite were reported. These entries retain their search-report level, with the original conversation URL and full messages unavailable. The [clarification record](../../cases/model-selection-quality-availability/evidence/developer-clarification-20261029.json#L1-L184) identifies the three approximate times and source scope. The 14:14:51 configuration commit records the resulting lineup. October 3's 3.8 re-evaluation remains a separate later event.
+**Initial-switch rationale from user-supplied ChatGPT history search:** on September 26 at approximately 13:39 KST, the developer judged the 20-call daily free-tier allowance unsuitable for a public service. At approximately 13:43, the developer requested switching to Gemini 3.5 Flash-Lite; at approximately 13:50, five successful live tests of 3.5 Flash-Lite were reported. These entries are sourced to the ChatGPT history-search records supplied by the developer. The [clarification record](../../cases/model-selection-quality-availability/evidence/developer-clarification-20261029.json#L1-L184) identifies the three approximate times and source scope. The 14:14:51 configuration commit records the resulting lineup. October 3's 3.8 re-evaluation remains a separate later event.
 
 The [initial Generation implementation](../../cases/model-selection-quality-availability/baseline/generation.ts#L18-L126) constructed the prompt once, visited configured models in order, and advanced only on confirmed quota exhaustion. Same-model HTTP 503 retry belonged to the SDK request configuration: four attempts, with the recorded backoff settings. [Failure classification](../../cases/model-selection-quality-availability/baseline/generation-fallback.ts#L23-L70) recognized machine-readable quota evidence and kept other 429 responses distinct. [Classification tests](../../cases/model-selection-quality-availability/baseline/generation-fallback.test.ts#L1-L52) and [Generation tests](../../cases/model-selection-quality-availability/baseline/generation.test.ts#L37-L162) preserve these early conditions, including response validation and safe diagnostics.
 
@@ -72,7 +72,7 @@ The developer also considered whether paid access could resolve the availability
 
 The original 03:20:37 developer request was directly read in history.jsonl; its message hash and time are preserved in the [recovered-source register](../evidence/recovered-source-register.json). It required immediate termination and candidate rejection on the agreed failure condition. At 03:35:46, the daily-quota response triggered that condition. Further requests after the 429 were zero; QB25’s A request and both QB11 requests were uncalled.
 
-**Contemporaneous discussion recovered through history search:** on October 29, the developer supplied the following ChatGPT past-conversation search results. Times are KST. These are user-provided search records; the original conversation URL, identifier, and full messages remain unavailable.
+**Contemporaneous discussion recovered through history search:** on October 29, the developer supplied the following ChatGPT past-conversation search results. Times are KST. The context of the historical discussion is described using these developer-provided search records.
 
 | October 3 time | Search-record content |
 |---|---|
@@ -86,7 +86,7 @@ The original 03:20:37 developer request was directly read in history.jsonl; its 
 
 The final counts agree with the directly inspected experiment originals. The condition in the 03:19:52 ChatGPT search record corresponds to the Codex 03:20:37 original user-input message; each source retains its own message time. AI Studio 17/20 remains the developer’s contemporaneous account-usage report.
 
-**Additional external context:** the developer recalls searching for similar complaints after the errors and quota depletion. The original ChatGPT conversation URL/identifier is unavailable. A [Google AI Developers Forum post](https://discuss.ai.google.dev/t/gemini-api-503/183913), published September 21 and directly inspected for this publication, reports recurring 503s on the free tier in Google Apps Script, including gemini-3.8-flash among three affected models. A reply describes temporary service overload. This supplies a similar external failure observation alongside the operating results that drove the decision.
+**Additional external context:** the developer recalls searching for similar complaints after the errors and quota depletion. A [Google AI Developers Forum post](https://discuss.ai.google.dev/t/gemini-api-503/183913), published September 21 and directly inspected for this publication, reports recurring 503s on the free tier in Google Apps Script, including gemini-3.8-flash among three affected models. A reply describes temporary service overload. This supplies a similar external failure observation alongside the operating results that drove the decision.
 
 The following public reports were also directly inspected for this publication:
 
@@ -187,13 +187,15 @@ The recorded product decision retained Gemini primary and accepted the result wi
 
 Groq semantic evaluation and failed-only resume were deferred after the incomplete comparison.
 
-**October 16 operating judgment, preserved through user-supplied ChatGPT history search:** the developer reviewed whether to retain Gemini+Groq for the free public service, considering the earlier full40 quality comparison and the October 15 rate-limit results. ChatGPT described call capacity, rather than model eligibility, as the free-operation concern and cited limits including 8K TPM. That value is retained as information discussed at the time; its exact account/model applicability was not independently established. The precise limiting quota behind the October 15 429 responses remains unconfirmed.
+**October 16 operating judgment, preserved through user-supplied ChatGPT history search:** the developer reviewed whether to retain Gemini+Groq for the free public service, considering the earlier full40 quality comparison and the October 15 rate-limit results. ChatGPT described call capacity, rather than model eligibility, as the free-operation concern and cited limits including 8K TPM. The 8K TPM value is recorded as part of ChatGPT’s explanation at the time. The failure classification directly established by the October 15 run is HTTP 429 rate_limit.
 
-The developer distinguished Groq calls after a Gemini primary failure from using Groq as the main generator. On that operating basis, the developer retained Gemini 3.5 primary → Groq GPT-OSS 120B fallback. The [clarification record](../../cases/model-selection-quality-availability/evidence/developer-clarification-20261029.json#L1-L184) separates this search-based operating judgment from both experiments and their original conditions. The original conversation URL and full messages remain unavailable.
+The developer distinguished Groq calls after a Gemini primary failure from using Groq as the main generator. On that operating basis, the developer retained Gemini 3.5 primary → Groq GPT-OSS 120B fallback. The [clarification record](../../cases/model-selection-quality-availability/evidence/developer-clarification-20261029.json#L1-L184) separates this search-based operating judgment from both experiments and their original conditions.
 
 On October 16 at 21:32:34, e700717 removed Cohere's evaluation/support paths while retaining the Gemini 3.5/Groq pair. [Case 03's retirement judgment](03-cohere-evaluation-and-retirement.md#retirement-decision-benefit-relative-to-scale-and-operating-cost) supplies the scale, substitutability, and cost context; Case 06 ends with the selected Generation lineup.
 
-## Source levels, publication choices, and remaining questions
+<a id="source-levels-publication-choices-and-remaining-questions"></a>
+
+## Source levels and publication choices
 
 Configuration changes and published historical source are code-confirmed. Original October 3 requests, responses, manual ratings, exact options, correspondence between both runs, and the additional reasoning comparison were directly checked. October 15 results and archive hashes were also directly inspected; semantic ratings and product acceptance remain preserved manual-review records.
 
@@ -201,7 +203,7 @@ Developer-provided ChatGPT search records retain the initial September 26 switch
 
 The October 29 capacity rationale, recalled quota depletion, and broader external-reaction memory remain attributed later statements.
 
-Remaining gaps are provider-side per-request quota deductions, the original Qwen failure ledger, the original ChatGPT conversation/AI Studio screenshot, and other external posts recalled by the developer. Groq’s October 15 semantic quality and exact limiting quota remain unconfirmed. Recovered October 3 responses, options, request correspondence, and historical limits retain their respective record dates.
+Operating judgments about call limits are described through recorded request outcomes and the developer’s observations at the time. The October 15 Groq results cover call successes/failures, structural checks, and latency; semantic quality was not evaluated. Recovered October 3 responses, options, request correspondence, and historical limits retain their respective record dates.
 
 Whole-file Excerpts keep small, coherent implementation/test units: baseline quota handling, canonical evidence/runner contracts, and transport/diagnostic behavior. Partial Excerpts isolate fixed-input comparison and the adopted runtime's regressions, preserving original statements, imports, and references. The common policy is retained whole because its fallback eligibility, header/body parsing, and safe projection work together.
 

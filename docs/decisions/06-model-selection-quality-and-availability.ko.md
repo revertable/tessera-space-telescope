@@ -4,7 +4,7 @@
 
 **근거 수준:** 코드 확인은 식별한 과거 소스, 당시 보고는 기록된 조건의 관측, 미확인은 해결되지 않은 사실·인과관계를 뜻합니다. 테스트는 당시 소스 근거로 수록합니다. 시각은 KST(UTC+09:00)이며 개발 사건과 근거 검증 날짜를 구분합니다.
 
-**문서 편집:** 2026-10-30, 기준 `2fc5094`. 아래 과거 공개 검증 기록의 날짜와 범위를 유지합니다. 2026-10-31에는 `f7fb082` 기준으로 중복 설명과 검증 한계 표현을 정리했습니다.
+**문서 편집:** 2026-10-30, 기준 `2fc5094`. 아래 과거 공개 검증 기록의 날짜와 범위를 유지합니다. 2026-10-31에는 `f7fb082` 기준으로 중복 설명과 검증 한계 표현을 정리했고, `0228ffe` 기준으로 확보한 자료의 출처·검증 범위를 중심으로 후속 확인 목록을 정리했습니다.
 
 **개발 기간:** 2026-09-26 ~ 2026-10-16
 
@@ -16,7 +16,7 @@
 
 Gemini API 전환 커밋 9a3df61의 최초 설정은 gemini-3.8-flash였다. 14:14:51의 2e02e71은 gemini-3.5-flash-lite 다음 gemini-3.1-flash-lite를 사용하는 구성으로 바꿨고 출력 상한은 1200이었다. [설정 이력](../../cases/model-selection-quality-availability/evidence/model-selection-history.json#L1-L242)에 이후 모델 identity·옵션·runtime 순서를 보존했다.
 
-**사용자 제공 ChatGPT 대화 검색에서 확인한 최초 전환 이유:** 9월 26일 13:39 KST경 사용자는 무료 티어 하루 20회 한도가 공개 서비스 운영에 부적합하다고 판단했다. 13:43경 Gemini 3.5 Flash-Lite 전환을 요청했고, 13:50경 3.5 Flash-Lite 실제 테스트 5건 성공이 보고됐다. 이 항목은 검색 보고 수준으로 보존하며 원본 대화 URL·전문은 확보되지 않았다. [보충 근거 기록](../../cases/model-selection-quality-availability/evidence/developer-clarification-20261029.json#L1-L184)에 세 시각의 근사성과 출처 범위를 표시했다. 14:14:51 설정 커밋에서 전환된 구성을 확인한다. 10월 3일의 3.8 재평가는 이후 별도 사건이다.
+**사용자 제공 ChatGPT 대화 검색에서 확인한 최초 전환 이유:** 9월 26일 13:39 KST경 사용자는 무료 티어 하루 20회 한도가 공개 서비스 운영에 부적합하다고 판단했다. 13:43경 Gemini 3.5 Flash-Lite 전환을 요청했고, 13:50경 3.5 Flash-Lite 실제 테스트 5건 성공이 보고됐다. 이 항목의 출처는 사용자가 제공한 ChatGPT 대화 재검색 기록이다. [보충 근거 기록](../../cases/model-selection-quality-availability/evidence/developer-clarification-20261029.json#L1-L184)에 세 시각의 근사성과 출처 범위를 표시했다. 14:14:51 설정 커밋에서 전환된 구성을 확인한다. 10월 3일의 3.8 재평가는 이후 별도 사건이다.
 
 [초기 Generation 구현](../../cases/model-selection-quality-availability/baseline/generation.ts#L18-L126)은 prompt를 한 번 구성하고 설정된 모델을 순서대로 방문하며 확인된 quota exhaustion에서만 다음 모델로 진행했다. 같은 모델의 HTTP 503 retry는 SDK 요청 설정이 맡았다.
 
@@ -74,7 +74,7 @@ Shared-evidence 비교는 target을 명시해 실행했으므로 후보 등록�
 
 03:20:37 사용자 요청 원문을 history.jsonl에서 직접 확인했고 [복구 근거 등록부](../evidence/recovered-source-register.json)에 메시지 hash와 시각을 보존했습니다. 요청은 합의한 실패 조건에서 즉시 중단하고 후보를 기각하도록 했습니다. 03:35:46 daily quota 응답으로 중단 조건에 도달했습니다. 해당 429 뒤 요청은 0회이며 QB25의 A 요청과 QB11 양쪽은 호출하지 않았습니다.
 
-**대화 재검색으로 확보한 당시 논의:** 10월 29일 사용자가 다음 ChatGPT 과거 대화 재검색 결과를 전달했다. 시각은 KST다. 사용자 제공 검색 기록이며 원본 대화 URL·식별자·전문은 아직 확보되지 않았다.
+**대화 재검색으로 확보한 당시 논의:** 10월 29일 사용자가 다음 ChatGPT 과거 대화 재검색 결과를 전달했다. 시각은 KST다. 당시 논의의 맥락은 이 사용자 제공 검색 기록을 기준으로 설명한다.
 
 | 10월 3일 시각 | 검색 기록 내용 |
 |---|---|
@@ -88,7 +88,7 @@ Shared-evidence 비교는 target을 명시해 실행했으므로 후보 등록�
 
 최종 집계는 직접 확인한 실험 원본과 일치한다. 03:19:52 ChatGPT 검색 기록의 조건과 사용자 입력 이력의 Codex 03:20:37 요청은 내용이 대응하며 각 출처의 메시지 시각을 유지한다. AI Studio 17/20은 계정 사용량에 대한 당시 사용자 보고다.
 
-**부차적인 외부 참고:** 사용자는 오류와 한도 소진 이후 비슷한 불만을 검색했던 것으로 기억한다. 원본 ChatGPT 대화 URL·식별자는 확보되지 않았다. [Google AI Developers Forum 게시글](https://discuss.ai.google.dev/t/gemini-api-503/183913)은 9월 21일 게시됐으며 이번 공개 준비 중 직접 확인했다. Google Apps Script·무료 티어에서 gemini-3.8-flash를 포함한 세 모델의 503이 반복됐다는 신고이며, 답글은 일시적 서비스 과부하를 설명한다. 이 자료는 의사결정의 중심인 운영 관측에 유사한 외부 실패 사례를 덧붙인다.
+**부차적인 외부 참고:** 사용자는 오류와 한도 소진 이후 비슷한 불만을 검색했던 것으로 기억한다. [Google AI Developers Forum 게시글](https://discuss.ai.google.dev/t/gemini-api-503/183913)은 9월 21일 게시됐으며 이번 공개 준비 중 직접 확인했다. Google Apps Script·무료 티어에서 gemini-3.8-flash를 포함한 세 모델의 503이 반복됐다는 신고이며, 답글은 일시적 서비스 과부하를 설명한다. 이 자료는 의사결정의 중심인 운영 관측에 유사한 외부 실패 사례를 덧붙인다.
 
 다음 공개 보고도 이번 공개 준비 중 직접 대조했다.
 
@@ -191,19 +191,21 @@ Question bank canonical-portfolio content version 2와 full-40 profile version 1
 
 불완전한 비교 이후 Groq 의미 평가와 failed-only resume은 보류했다.
 
-**사용자 제공 ChatGPT 대화 검색에 남은 10월 16일 운영 판단:** 사용자는 앞선 full40 품질 비교와 10월 15일 rate-limit 결과를 고려하며 무료 공개 서비스에서 Gemini+Groq 구성을 유지할지 검토했다. 당시 ChatGPT는 모델 사용 자격보다 호출 용량이 문제라고 설명하면서 8K TPM 등을 제시했다. 이 값은 당시 논의된 정보로 보존하며, 정확한 계정·모델별 적용 한도는 독립 확인하지 않았다. 10월 15일 429의 정확한 제한 종류는 미확인으로 유지한다.
+**사용자 제공 ChatGPT 대화 검색에 남은 10월 16일 운영 판단:** 사용자는 앞선 full40 품질 비교와 10월 15일 rate-limit 결과를 고려하며 무료 공개 서비스에서 Gemini+Groq 구성을 유지할지 검토했다. 당시 ChatGPT는 모델 사용 자격보다 호출 용량이 문제라고 설명하면서 8K TPM 등을 제시했다. 8K TPM은 당시 ChatGPT 설명의 내용으로 기록한다. 10월 15일 실행에서 직접 확인한 실패 분류는 HTTP 429 rate_limit이다.
 
 사용자는 Gemini primary가 실패할 때 Groq를 호출하는 구성과 Groq를 주력 generator로 사용하는 구성의 운영 조건을 구분했다.
 
-이 운영 판단에 따라 Gemini 3.5 primary → Groq GPT-OSS 120B fallback을 유지했다. [보충 근거 기록](../../cases/model-selection-quality-availability/evidence/developer-clarification-20261029.json#L1-L184)은 이 검색 기반 운영 판단과 두 실험의 원래 조건을 구분한다. 원본 대화 URL·전문은 확보되지 않았다.
+이 운영 판단에 따라 Gemini 3.5 primary → Groq GPT-OSS 120B fallback을 유지했다. [보충 근거 기록](../../cases/model-selection-quality-availability/evidence/developer-clarification-20261029.json#L1-L184)은 이 검색 기반 운영 판단과 두 실험의 원래 조건을 구분한다.
 
 10월 16일 21:32:34의 e700717은 Cohere 평가·지원 경로를 제거하면서 Gemini 3.5/Groq 조합을 유지했다. [사례 03의 제거 판단](03-cohere-evaluation-and-retirement.ko.md#제거-판단-규모운영-비용과-성능-이점의-비교)이 규모·대체 가능성·비용 맥락을 제공한다. 사례 06은 선택한 Generation 구성까지 다룬다.
 
-## 근거 수준·공개 방식·남은 확인 사항
+<a id="근거-수준공개-방식남은-확인-사항"></a>
+
+## 근거 수준과 공개 방식
 
 설정 변경과 공개한 당시 코드를 직접 확인했다. 10월 3일 원본 요청·응답·수동 판정·정확한 옵션·두 실행의 요청 대응과 reasoning 추가 비교를 직접 대조했다. 10월 15일 결과와 보관 해시도 직접 대조했으며 의미 판정·제품 수용은 보존된 수동 검토 기록이다. 사용자 제공 ChatGPT 검색 기록은 9월 26일 최초 전환 이유·5건 테스트 보고, 10월 3일 논의·사용량 보고, 10월 16일 fallback 유지 판단을 검색 근거 수준으로 보존한다. 10월 3일 Codex 중단 조건·설정 유지 결정은 별도로 사용자 입력 원문을 확인했다. 10월 29일 호출 용량 판단·한도 소진 회고·더 넓은 외부 반응에 대한 기억은 후속 사용자 진술로 구분했다.
 
-남은 사항은 Provider 측 요청별 quota 차감 내역, 초기 Qwen 실패 ledger, 원본 ChatGPT 대화·AI Studio 화면과 사용자가 기억하는 다른 외부 게시글이다. Groq의 10월 15일 의미 품질·정확한 quota 종류도 미확인이다. 10월 3일 원본 응답·옵션·요청 대응의 확인 결과와 역사적 한도는 각각의 기록 시점을 유지한다.
+호출 한도에 대한 운영 판단은 기록된 요청 결과와 당시 사용자 관측을 근거로 설명한다. 10월 15일 Groq 결과는 호출 성공·실패·구조 검사·지연 관측이며, 의미 품질 평가는 수행하지 않았다. 10월 3일 원본 응답·옵션·요청 대응의 확인 결과와 역사적 한도는 각각의 기록 시점을 유지한다.
 
 전체 파일 Excerpt는 초기 quota 처리·canonical evidence/runner 계약·transport/diagnostic 동작처럼 작은 구현·테스트 단위를 보존한다. 부분 Excerpt는 고정 입력 비교와 채택한 runtime의 회귀를 선택하고 원래 문장·import·참조를 유지한다. 공통 정책은 fallback 조건·header/body 파싱·안전한 projection이 함께 동작해 전체를 보존했다.
 

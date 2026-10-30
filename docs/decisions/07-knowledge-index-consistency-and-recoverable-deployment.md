@@ -4,7 +4,7 @@
 
 **Evidence:** Code confirmed identifies historical source; reported at the time retains recorded observation conditions; unconfirmed marks unresolved facts or causal links. Tests are historical source evidence. Times are KST (UTC+09:00); development events and evidence-inspection dates retain their own labels.
 
-**Document revision:** Split on 2026-10-30 from `2fc5094`. Historical publication checks below retain their dates and scope. On 2026-10-31, redundant explanations and verification-limit wording were revised from `f7fb082`.
+**Document revision:** Split on 2026-10-30 from `2fc5094`. Historical publication checks below retain their dates and scope. On 2026-10-31, redundant explanations and verification-limit wording were revised from `f7fb082`; follow-up lists were then revised from `0228ffe` to describe the sources and verification scope of the available materials.
 
 **Development period:** 2026-10-22 ~ 2026-10-26. The developer directly clarified operating constraints, retention choice, and design delegation on 2026-10-29.
 
@@ -138,11 +138,13 @@ The 4fddd61 production execution succeeded, so automatic rollback was unnecessar
 
 During the October 26 deployment, Cloudflare returned HTTP 403 for default Python urllib User-Agent requests. The same health checks returned 200 with an explicit deployment client identity. Existing security settings, health checks, and the approved archive/manifest/deployment-script hashes were preserved.
 
-## Evidence scope and remaining questions
+<a id="evidence-scope-and-remaining-questions"></a>
+
+## Evidence scope
 
 The October 29 direct developer account supplies operating experience and design delegation. Original October 22 messages now connect the AI platform proposal, developer requirement and scoped approval. Original October 26 messages establish the AI's two-release recommendation, the developer's adoption and later choice of three, and the later reusable-deployment approvals. Initial module/root findings, actual failed-activation recovery and corrected execution are identified through historical tool output, AI reports, retained scripts and verification JSON.
 
-Source types remain distinct: tool measurements and journal/access-mode output; developer instructions/approvals; AI proposals/diagnoses/completion reports; retained operating reports; and the later developer account. The original October 29 verification of the 4fddd61 archive/session remains in the register. Its eight private artifact paths are unavailable in this checkout; the October 30 supplement verifies the earlier sessions and six retained earlier artifacts.
+Source types remain distinct: tool measurements and journal/access-mode output; developer instructions/approvals; AI proposals/diagnoses/completion reports; retained operating reports; and the later developer account. The original October 29 verification of the 4fddd61 archive/session remains in the register. Verification of its eight private artifact paths is sourced to the registered October 29 results; the October 30 supplement records comparisons of the earlier sessions and six retained earlier artifacts.
 
 Whether public answers actually used old Knowledge before the root correction remains unconfirmed. The original policy-choice conversation, early Windows-copy requirement and initial Linux failure/recovery sequence are now linked.
 

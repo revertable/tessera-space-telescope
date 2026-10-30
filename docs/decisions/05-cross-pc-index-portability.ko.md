@@ -4,7 +4,7 @@
 
 **근거 수준:** 코드 확인은 식별한 과거 소스, 당시 보고는 기록된 조건의 관측, 미확인은 해결되지 않은 사실·인과관계를 뜻합니다. 테스트는 당시 소스 근거로 수록합니다. 시각은 KST(UTC+09:00)이며 개발 사건과 근거 검증 날짜를 구분합니다.
 
-**문서 편집:** 2026-10-30, 기준 `2fc5094`. 아래 과거 공개 검증 기록의 날짜와 범위를 유지합니다. 2026-10-31에는 `f7fb082` 기준으로 중복 설명과 검증 한계 표현을 정리했습니다.
+**문서 편집:** 2026-10-30, 기준 `2fc5094`. 아래 과거 공개 검증 기록의 날짜와 범위를 유지합니다. 2026-10-31에는 `f7fb082` 기준으로 중복 설명과 검증 한계 표현을 정리했고, `0228ffe` 기준으로 확보한 자료의 출처·검증 범위를 중심으로 후속 확인 목록을 정리했습니다.
 
 **개발 기간:** 2026-09-28 ~ 2026-10-26
 
@@ -91,11 +91,13 @@ Document embedding·index build·migration·live fetch 호출은 없어야 한�
 
 10월 26일 21:49:10의 4fddd61로 커밋한 배포 도구는 검증을 코드화했다. [Manifest 검증](../../cases/cross-pc-index-portability/production/verify-manifest.excerpt.py#L23-L56)은 commit·파일 크기/해시·인덱스 identity/수량·package version을 묶는다. [Offline 테스트](../../cases/cross-pc-index-portability/production/manifest-contract.excerpt.test.py#L19-L69)는 identity/수량·변조·미등록 payload·draft 거부를 다룬다. [Runtime probe](../../cases/cross-pc-index-portability/production/probe.mjs#L1-L43)는 활성 릴리스의 config·Knowledge·인덱스를 구하고 읽은 CURRENT 산출물을 manifest와 비교한다. 이 후속 probe는 로컬 검증과 의존성 import를 수행한다. 10월 22일 운영 진단에는 별도의 API 연결 확인도 포함됐다.
 
-## 근거 수준과 남은 확인 사항
+<a id="근거-수준과-남은-확인-사항"></a>
+
+## 근거 수준과 검증 범위
 
 **코드 확인:** 식별한 구현·assertion, 커밋된 505-vector 산출물 두 개의 보존, 릴리스별 Git/manifest/stage 대조. **당시 보고:** 공유 요청·false-stale 진단·보존된 Ubuntu runtime/health 결과. 사용자가 10월 29일 밝힌 운영 설명에는 해당 후속 날짜를 유지했다.
 
-다른 PC의 정확한 수정 전후 실행 로그는 확보되지 않았다. 기존에 인용된 “6 batches / 10.22 MiB” 실행과 검색 시각도 대응하는 원시 run ledger가 없다. 식별된 Git object는 벡터·내용 보존을 확인하며, 추가적인 과거 실행의 대응 관계는 미확인으로 남긴다.
+PC 간 이식성은 개행별 CURRENT·재사용 계약을 표현한 당시 테스트와 커밋된 산출물의 벡터·내용 보존으로 설명한다. 기존 “6 batches / 10.22 MiB” 실행·검색 시각은 당시 보고 수준의 기록이며, 운영 적용은 위의 릴리스별 manifest·stage·runtime/health 결과로 설명한다.
 
 ## 출처와 공개 방식
 
@@ -103,7 +105,7 @@ Document embedding·index build·migration·live fetch 호출은 없어야 한�
 
 Session ID는 01a0e775-78b0-73b0-ad5a-902cc720edc7·01a0e862-09ff-7d42-bd7e-6195ccaaa1a7·01a0f218-3b96-73e1-a0b9-a1696608e74f이며 전체 부모 세션은 확보되지 않았다. [복구 근거 등록부](../evidence/recovered-source-register.json)에 메시지 시각·원문 hash를 보존했다. 21:18:24 요구는 같은 Git 산출물이 CRLF/LF 환경에서 CURRENT가 되고 추가 embedding/build 없이 즉시 사용되는 것을 완료 기준으로 명시했다. 10월 22일 원본 session 01a1613d-e5c6-76f2-9e3d-42c9eeca696b의 SHA-256은 37823ca6529dfca51f56283ca715ad80e733df9ce371251e261692d25527baef다.
 
-비공개 통합 개발사·근거 등록부에서 연표와 미확인 항목을 가져왔으며 공개 준비 중 대조한 결과는 위에 구분했다.
+비공개 통합 개발사·근거 등록부에서 연표와 자료별 검증 범위를 가져왔으며 공개 준비 중 대조한 결과는 위에 구분했다.
 
 전체 파일 Excerpt는 선택한 snapshot을 완전하게 보존한다. 부분 Excerpt는 아래 원본 범위와 구간 사이 빈 줄을 사용하고 import·식별자·애플리케이션 참조를 유지한다. Storage/status/menu는 재사용 동작을, 테스트는 관련 assertion을, 운영 발췌는 패키징·검증을 선택하고 운영 접근 정보는 비공개로 유지한다. Reconstructed JSON은 기록의 필드를 선택하고 digest 계산·편집상 그룹화를 표시한다. Knowledge·벡터 전체 payload는 비공개로 유지한다.
 

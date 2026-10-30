@@ -4,7 +4,7 @@
 
 **Evidence:** Code confirmed identifies historical source; reported at the time retains recorded observation conditions; unconfirmed marks unresolved facts or causal links. Tests are historical source evidence. Times are KST (UTC+09:00); development events and evidence-inspection dates retain their own labels.
 
-**Document revision:** Split on 2026-10-30 from `2fc5094`. Historical publication checks below retain their dates and scope. On 2026-10-31, redundant explanations and verification-limit wording were revised from `f7fb082`.
+**Document revision:** Split on 2026-10-30 from `2fc5094`. Historical publication checks below retain their dates and scope. On 2026-10-31, redundant explanations and verification-limit wording were revised from `f7fb082`; follow-up lists were then revised from `0228ffe` to describe the sources and verification scope of the available materials.
 
 **Development period:** 2026-09-26 ~ 2026-10-17
 
@@ -171,7 +171,7 @@ This artifact confirms the completed stored vector structure. The per-attempt wi
 
 Code and commit differences, published test assertions, historical tracked development reports, and the final committed index were directly inspected. October 16/17 user observations and implementation checkpoints were directly read in the recovered archived session. Original failed/completed build ledgers remain unavailable. Arithmetic retains its historical assumptions; next-day completion is attributed to the developer’s successful-rebuild/CURRENT report.
 
-The publication-preparation comparison records that the core embedding orchestration, Gemini adapter, and common embedding failure implementation at `e700717` matched the then-current private HEAD for those paths. This publication reads retained records and source objects; it executes no model request, index build, or historical application test.
+The core embedding orchestration, Gemini adapter, and common embedding failure implementation are described using the `e700717` snapshot identified in the source ledger below. This publication reads retained records and source objects; it executes no model request, index build, or historical application test.
 
 ## Source traceability and publication form
 

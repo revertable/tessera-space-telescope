@@ -4,7 +4,7 @@
 
 **Evidence:** Code confirmed identifies historical source; reported at the time retains recorded observation conditions; unconfirmed marks unresolved facts or causal links. Tests are historical source evidence. Times are KST (UTC+09:00); development events and evidence-inspection dates retain their own labels.
 
-**Document revision:** Split on 2026-10-30 from `2fc5094`. Historical publication checks below retain their dates and scope. On 2026-10-31, redundant explanations and verification-limit wording were revised from `f7fb082`.
+**Document revision:** Split on 2026-10-30 from `2fc5094`. Historical publication checks below retain their dates and scope. On 2026-10-31, redundant explanations and verification-limit wording were revised from `f7fb082`; follow-up lists were then revised from `0228ffe` to describe the sources and verification scope of the available materials.
 
 **Development period:** 2026-09-28 ~ 2026-10-26
 
@@ -91,11 +91,13 @@ Deployment tooling committed as 4fddd61 on October 26 at 21:49:10 formalized the
 
 The [runtime probe](../../cases/cross-pc-index-portability/production/probe.mjs#L1-L43) resolves the active release's config/knowledge/index and compares its loaded CURRENT artifact with the manifest. This later probe performs local checks and dependency imports. October 22 operating diagnostics also included separate API connectivity checks.
 
-## Evidence level and remaining questions
+<a id="evidence-level-and-remaining-questions"></a>
+
+## Evidence level and verification scope
 
 **Code confirmed:** identified implementations/assertions, preservation of the two committed 505-vector artifacts, and release-specific Git/manifest/stage comparisons. **Reported at the time:** sharing requests, the false-stale diagnosis, and retained Ubuntu runtime/health results. The developer's October 29 operating clarification retains that later date.
 
-Exact before/after execution logs from the second PC remain unavailable. A previously cited “6 batches / 10.22 MiB” run and search timestamp still lack a matched raw run ledger. The identified Git objects establish vector/content preservation; those additional historical run correspondences remain unconfirmed.
+Cross-PC portability is described through historical tests expressing CURRENT/reuse contracts across line endings and vector/content preservation in committed artifacts. The previously cited “6 batches / 10.22 MiB” run and search timestamp are retained as historical reports; production use is described through the release-specific manifest, stage, and runtime/health results above.
 
 ## Sources and publication choices
 
@@ -103,7 +105,7 @@ The September 28 09:27:40 request was directly inspected in session 01a0e55f-fed
 
 Their session IDs are 01a0e775-78b0-73b0-ad5a-902cc720edc7, 01a0e862-09ff-7d42-bd7e-6195ccaaa1a7, and 01a0f218-3b96-73e1-a0b9-a1696608e74f; complete parent sessions remain unavailable. The [recovered-source register](../evidence/recovered-source-register.json) retains message times and original-text hashes.
 
-The 21:18:24 request explicitly required the same Git artifact to be CURRENT and immediately usable in CRLF/LF checkouts without additional embedding/build. The original October 22 session 01a1613d-e5c6-76f2-9e3d-42c9eeca696b has SHA-256 37823ca6529dfca51f56283ca715ad80e733df9ce371251e261692d25527baef. The private consolidated development history and evidence register supplied the chronology and unresolved questions.
+The 21:18:24 request explicitly required the same Git artifact to be CURRENT and immediately usable in CRLF/LF checkouts without additional embedding/build. The original October 22 session 01a1613d-e5c6-76f2-9e3d-42c9eeca696b has SHA-256 37823ca6529dfca51f56283ca715ad80e733df9ce371251e261692d25527baef. The private consolidated development history and evidence register supplied the chronology and source-specific verification scope.
 
 Publication-time comparisons are identified above.
 

@@ -4,7 +4,7 @@
 
 **Evidence:** Code confirmed identifies historical source; reported at the time retains recorded observation conditions; unconfirmed marks unresolved facts or causal links. Tests are historical source evidence. Times are KST (UTC+09:00); development events and evidence-inspection dates retain their own labels.
 
-**Document revision:** Split on 2026-10-30 from `2fc5094`. Historical publication checks below retain their dates and scope. On 2026-10-31, redundant explanations and verification-limit wording were revised from `f7fb082`.
+**Document revision:** Split on 2026-10-30 from `2fc5094`. Historical publication checks below retain their dates and scope. On 2026-10-31, redundant explanations and verification-limit wording were revised from `f7fb082`; follow-up lists were then revised from `0228ffe` to describe the sources and verification scope of the available materials.
 
 **Development period:** 2026-09-28 ~ 2026-10-17
 
@@ -68,7 +68,7 @@ A common prompt contained `Describe yourself as Synethos`, while retrieved recor
 | Follow-up in that report | Twelve additional checks of the problematic career question after wording revision. Across these two stages: Cohere 54/54 and Gemini 42/54 subject retention. |
 | 17:04:10.538 | Local Cohere-only generation, two contexts × ten questions × three repetitions: 60 HTTP 200 responses. Subject changes and speaker confusion: zero observed. Name-format violations: 22/60; semantic citation omissions and grounding errors remained. New embedding and Gemini generation calls: zero. |
 
-These figures are reported subject-retention and output-quality observations from their own prompt revisions. The session says the 60-response run created no result files, so response-level independent review is unavailable. At 17:13:29 the routing remained uncommitted, and the 17:32:44 Git declaration excluded its four files. `496e95e` committed the question-target simplification at 17:34:31. The local routing observation and that committed prompt change retain separate scopes.
+These figures are reported subject-retention and output-quality observations from their own prompt revisions. The observations from the 60-response run are sourced to the retained session report. At 17:13:29 the routing remained uncommitted, and the 17:32:44 Git declaration excluded its four files. `496e95e` committed the question-target simplification at 17:34:31. The local routing observation and that committed prompt change retain separate scopes.
 
 ## October 3: fixed-input generation results and fallback selection
 
@@ -103,7 +103,7 @@ The [classifier contract](../../cases/cohere-lifecycle/evaluation/classifier-con
 
 L2/L3/S4 contained explanatory text or duplicated JSON and failed strict parsing. S1 was classified as compare; A4 as lookup/false. Raw provider blocks were not saved, leaving the contribution of model output versus adapter text-block handling unconfirmed. The gate failed and the planned dynamic retrieval and two answer-generation calls were skipped.
 
-The broader comparison retained in the research records Groq and Gemini 3.1 at 18/18 intent, 18/18 complete-set, and 20/20 JSON, with successful-response latency medians of 927ms and 2327ms. Their first runs stopped after 16 and 15 successes on 429; subsequent runs reused those successes and completed only the remaining questions. A 19:17:35 handoff recorded the developer’s decision to retain Cohere for fallback/evaluation. The precise scope of a separate “no additional cost” statement remains unconfirmed.
+The broader comparison retained in the research records Groq and Gemini 3.1 at 18/18 intent, 18/18 complete-set, and 20/20 JSON, with successful-response latency medians of 927ms and 2327ms. Their first runs stopped after 16 and 15 successes on 429; subsequent runs reused those successes and completed only the remaining questions. A 19:17:35 handoff recorded the developer’s decision to retain Cohere for fallback/evaluation.
 
 ## October 15: retrieval retained measurable advantages
 
@@ -141,11 +141,13 @@ Provider abstraction, historical comparison artifacts, common document-build pro
 
 On October 17 at 22:19:07.357 the developer reported a successful rebuild and CURRENT status. Commit `033e02f` at 22:20:44 added the new Gemini artifact and removed the old Gemini and retired Cohere artifacts. This separates code integration, index rebuild reporting, and artifact publication. Post-removal production behavior remains outside the independently verified evidence for this case.
 
-## Verification scope and remaining questions
+<a id="verification-scope-and-remaining-questions"></a>
+
+## Verification scope
 
 The October 1 quality results are contemporaneous reports in a directly inspected session. Original October 3 generation artifacts and October 6 classifier/October 15 retrieval files were directly compared. The original October 16/17 session was read for the removal decision, agent completion report, and developer CURRENT observation. Execution results retain each historical report’s conditions. The October 29 rationale is the developer’s later clarification in this publication task.
 
-Remaining questions are the scope of the October 6 cost statement, independent historical key/terms evidence, the classifier output/block-handling cause, build-attempt ledgers, and post-removal production verification. No model request, index build, or historical application test was executed for this publication.
+The removal decision is described through the developer’s historical judgment about service scale and operating cost, together with the stated performance observations. Classifier findings use the observed output and gate results; index handoff uses the successful-rebuild/CURRENT reports and committed artifacts. No model request, index build, or historical application test was executed for this publication.
 
 ## Source traceability and publication form
 
