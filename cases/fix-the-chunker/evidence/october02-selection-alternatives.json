@@ -1,0 +1,277 @@
+{
+  "classification": "Reconstructed",
+  "preparedOn": "2026-10-30",
+  "sourceRegister": "source-register.json",
+  "evidenceLevel": "retained-original-results-and-selected-user-inputs",
+  "conditions": {
+    "head": "bbac3a6d11993f3c3e3d80eec44df86e7779073d",
+    "chunks": 505,
+    "questionBank": "canonical-portfolio v1",
+    "ranking": "Stored Gemini embedding-2 / 768 Full40",
+    "originalQuestions": 35,
+    "derivedQuestions": 5,
+    "minimumScore": 0.25,
+    "generationEffect": "Unmeasured in all three selection experiments."
+  },
+  "requestOrder": [
+    {
+      "source": "C08-H01",
+      "atKst": "2026-10-02T20:59:38.000+09:00",
+      "event": "Request offline original-only Top5/Top6 comparison; retain derived path, assess contamination and refuse adoption without clear net benefit."
+    },
+    {
+      "source": "C08-H02",
+      "atKst": "2026-10-02T21:12:22.000+09:00",
+      "event": "Request KR-preferred/rank-preferred collapse of verified selected bilingual pairs without backfill; direct support and important details must be preserved."
+    },
+    {
+      "source": "C08-H03",
+      "atKst": "2026-10-02T22:32:15.000+09:00",
+      "event": "Request generic lexical/hybrid comparison from stored rankings; scoring uses original question/candidates only; require coverage gain, preserved derived path and no irrelevant-evidence increase."
+    }
+  ],
+  "experiments": {
+    "originalTop6": {
+      "directory": "tmp/evaluation/original-top6-calibration/2026-10-02-1/",
+      "request": "C08-H01",
+      "selection": "Original-only Top5 versus Top6; derived production selection unchanged.",
+      "metrics": {
+        "A": {
+          "requiredGroups": 49,
+          "selectedRequiredGroups": 40,
+          "questionsWithRequired": 36,
+          "allRequiredQuestions": 30,
+          "evidenceCount": 199,
+          "semanticCounts": {
+            "D": 51,
+            "P": 117,
+            "W": 20,
+            "U": 3,
+            "E": 8
+          },
+          "bilingualDuplicatePairs": 12,
+          "promptUnicodeChars": 105874
+        },
+        "B": {
+          "requiredGroups": 49,
+          "selectedRequiredGroups": 42,
+          "questionsWithRequired": 36,
+          "allRequiredQuestions": 31,
+          "evidenceCount": 234,
+          "semanticCounts": {
+            "D": 56,
+            "P": 137,
+            "W": 27,
+            "U": 5,
+            "E": 9
+          },
+          "bilingualDuplicatePairs": 15,
+          "promptUnicodeChars": 121993
+        }
+      },
+      "addedEvidence": 35,
+      "addedSemanticCounts": {
+        "D": 5,
+        "P": 20,
+        "W": 7,
+        "U": 2,
+        "E": 1
+      },
+      "onlyBackgroundOrDistractor": 30,
+      "promptIncreasePercent": 15.224701059750267,
+      "strictRequiredGains": 2,
+      "strictRequiredLosses": 0,
+      "allRequiredGains": 1,
+      "decision": "do not adopt global original-only Top6",
+      "meaning": "Higher coverage was weighed against 35 added records, contamination and larger context; production candidate rejected before generation."
+    },
+    "bilingualCollapse": {
+      "directory": "tmp/evaluation/bilingual-collapse-calibration/2026-10-02-1/",
+      "request": "C08-H02",
+      "selection": "Collapse only validated EN/KR pairs already selected in original Top5; no backfill; derived path unchanged.",
+      "metrics": {
+        "A": {
+          "requiredGroups": 49,
+          "selectedRequiredGroups": 40,
+          "questionsWithRequired": 36,
+          "allRequiredQuestions": 30,
+          "evidenceCount": 199,
+          "semanticCounts": {
+            "D": 51,
+            "P": 117,
+            "W": 20,
+            "U": 3,
+            "E": 8
+          },
+          "bilingualDuplicatePairs": 12,
+          "promptUnicodeChars": 105874,
+          "logicalDirectSections": 46
+        },
+        "B1": {
+          "requiredGroups": 49,
+          "selectedRequiredGroups": 40,
+          "questionsWithRequired": 36,
+          "allRequiredQuestions": 30,
+          "evidenceCount": 191,
+          "semanticCounts": {
+            "D": 47,
+            "P": 115,
+            "W": 19,
+            "U": 3,
+            "E": 7
+          },
+          "bilingualDuplicatePairs": 4,
+          "promptUnicodeChars": 97422,
+          "logicalDirectSections": 46
+        },
+        "B2": {
+          "requiredGroups": 49,
+          "selectedRequiredGroups": 38,
+          "questionsWithRequired": 36,
+          "allRequiredQuestions": 29,
+          "evidenceCount": 191,
+          "semanticCounts": {
+            "D": 47,
+            "P": 115,
+            "W": 19,
+            "U": 3,
+            "E": 7
+          },
+          "bilingualDuplicatePairs": 4,
+          "promptUnicodeChars": 99148,
+          "logicalDirectSections": 46
+        }
+      },
+      "strategies": {
+        "B1": "KR preferred",
+        "B2": "Higher vector rank preferred"
+      },
+      "meaningfulReviewedClaimOrDetailLoss": false,
+      "logicalDirectSections": 46,
+      "decision": "do not adopt bilingual collapse under this experiment’s criteria",
+      "meaning": "Raw direct-support records decrease from 51 to 47 through duplicate removal while logical direct sections remain 46. KR-preferred retains strict coverage; rank-preferred loses two strict groups. Neither strategy was adopted under the stated criteria; generic runtime correspondence and generation benefit remain unverified."
+    },
+    "hybrid": {
+      "directory": "tmp/evaluation/hybrid-selection-calibration/2026-10-02-1/",
+      "request": "C08-H03",
+      "selection": "Original Top30 candidates, eligible by raw cosine >=0.25; final Top5; derived path unchanged.",
+      "metrics": {
+        "A": {
+          "requiredGroups": 49,
+          "selectedRequiredGroups": 40,
+          "questionsWithRequired": 36,
+          "allRequiredQuestions": 30,
+          "evidenceCount": 199,
+          "semanticCounts": {
+            "D": 51,
+            "P": 117,
+            "W": 20,
+            "U": 3,
+            "E": 8
+          },
+          "bilingualDuplicatePairs": 12,
+          "promptUnicodeChars": 105874
+        },
+        "B1_0.04": {
+          "requiredGroups": 49,
+          "selectedRequiredGroups": 40,
+          "questionsWithRequired": 36,
+          "allRequiredQuestions": 30,
+          "evidenceCount": 199,
+          "semanticCounts": {
+            "D": 53,
+            "P": 117,
+            "W": 19,
+            "U": 4,
+            "E": 6
+          },
+          "bilingualDuplicatePairs": 10,
+          "promptUnicodeChars": 103979
+        },
+        "B1_0.10": {
+          "requiredGroups": 49,
+          "selectedRequiredGroups": 42,
+          "questionsWithRequired": 36,
+          "allRequiredQuestions": 31,
+          "evidenceCount": 199,
+          "semanticCounts": {
+            "D": 55,
+            "P": 117,
+            "W": 17,
+            "U": 6,
+            "E": 4
+          },
+          "bilingualDuplicatePairs": 7,
+          "promptUnicodeChars": 105783
+        },
+        "B2_0.04": {
+          "requiredGroups": 49,
+          "selectedRequiredGroups": 39,
+          "questionsWithRequired": 36,
+          "allRequiredQuestions": 29,
+          "evidenceCount": 199,
+          "semanticCounts": {
+            "D": 51,
+            "P": 117,
+            "W": 21,
+            "U": 4,
+            "E": 6
+          },
+          "bilingualDuplicatePairs": 12,
+          "promptUnicodeChars": 105669
+        },
+        "B2_0.10": {
+          "requiredGroups": 49,
+          "selectedRequiredGroups": 41,
+          "questionsWithRequired": 36,
+          "allRequiredQuestions": 30,
+          "evidenceCount": 199,
+          "semanticCounts": {
+            "D": 53,
+            "P": 116,
+            "W": 20,
+            "U": 4,
+            "E": 6
+          },
+          "bilingualDuplicatePairs": 11,
+          "promptUnicodeChars": 103972
+        }
+      },
+      "decision": "Reject all 4 tested global rules; retain production retrieval and recommend ending current tuning round; no implementation snapshot",
+      "regression": {
+        "questionId": "QB32",
+        "groupId": "e1",
+        "baselineCovered": true,
+        "candidatesCovered": {
+          "B1_0.04": false,
+          "B1_0.10": false,
+          "B2_0.04": false,
+          "B2_0.10": false
+        },
+        "requiredEvidenceRankBefore": 5,
+        "requiredEvidenceRankAfter": 6,
+        "scope": "All four stored candidate comparisons lose direct required support; exact source content and question/answer text remain private."
+      },
+      "meaning": "Coverage-best B1_0.10 gains three required groups and loses one; irrelevant evidence increases from 3 to 6. All four candidates fail the adoption conditions."
+    }
+  },
+  "decisionAttribution": {
+    "user": "Set experiment boundaries and adoption criteria; later hybrid request explicitly describes Top6 and bilingual collapse as already unadopted.",
+    "ai": "Recorded candidate comparisons and rejection recommendations in retained reports/decision artifacts.",
+    "remaining": "A separate final user approval accepting the hybrid round-termination recommendation has not been recovered."
+  },
+  "verification": {
+    "hybridQuestionsRecounted": 40,
+    "hybridCandidateSetsIncludingBaseline": 5,
+    "derivedEvidenceIdenticalQuestions": 5,
+    "newHybridManualLabels": 21,
+    "hybridPlanAndRulesMatchSelectionHashes": true,
+    "historicalTrackedHashesBeforeAfterMatched": 188,
+    "historicalParentArtifactHashesBeforeAfterMatched": 542,
+    "historicalVerificationRecords": "Retained verification JSON reports zero API calls and tracked-source changes for each experiment; these experiments were not rerun during publication.",
+    "alternativeExperimentsQuestionsRecounted": 80,
+    "alternativeCandidateSetsIncludingBaselines": 5,
+    "bilingualLogicalDirectSectionsRecounted": true
+  },
+  "privacy": "Aggregate metrics and selected identifiers only; original Knowledge, question/answer text and manual-rating rationales remain private."
+}

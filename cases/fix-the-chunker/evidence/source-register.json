@@ -197,6 +197,28 @@
       "originalSha256": "1bc8e67aa4bfafa1b4b600d52ff7aceb6a2439f00c1708fb2bad4f2160ee3aab",
       "publicSha256": "9752be9d33d1e03ea302e16ed01516b426c20fca12104d158334c5ac01fa7ef4",
       "publicLines": 16
+    },
+    {
+      "publicPath": "research/rules.mjs",
+      "classification": "Excerpt",
+      "sourceKind": "Retained local artifact; no Git commit attributed.",
+      "sourcePath": "tmp/evaluation/hybrid-selection-calibration/2026-10-02-1/rules.mjs",
+      "selection": "whole original file",
+      "ranges": [
+        {
+          "original": [
+            1,
+            11
+          ],
+          "public": [
+            1,
+            11
+          ]
+        }
+      ],
+      "originalSha256": "bdf4eb67fd7a9205d600e89e4e18ccd399f6d569271546e16d766fafec01300d",
+      "publicSha256": "bdf4eb67fd7a9205d600e89e4e18ccd399f6d569271546e16d766fafec01300d",
+      "publicLines": 11
     }
   ],
   "commits": {
@@ -443,13 +465,13 @@
       "path": "docs/research/classification-retrieval-history.md",
       "commit": "3a6e2e477fa5a66fe67656b802c4bf9bdaf59218",
       "gitBlobSha256": "a163e88ad9dc8b613c39ab9bd36b7fd394cc73c5e53ff580f9c28522fe4ac592",
-      "scope": "Historical calibration observations and non-adoption summary; October 2 raw artifacts unavailable in this checkout."
+      "scope": "Historical calibration observations and non-adoption summary; Original publication used research-report evidence; October 30 home recovery below directly checks raw artifacts."
     },
     {
       "path": "docs/research/synethos-development-history.md",
       "commit": "3a6e2e477fa5a66fe67656b802c4bf9bdaf59218",
       "gitBlobSha256": "31c98a7c6b2fe222ca9b116130a857c316008b8cb79550425aba50e491ebd2a3",
-      "scope": "Historical calibration observations and non-adoption summary; October 2 raw artifacts unavailable in this checkout."
+      "scope": "Historical calibration observations and non-adoption summary; Original publication used research-report evidence; October 30 home recovery below directly checks raw artifacts."
     },
     {
       "path": "docs/research/synethos-evidence-register.md",
@@ -493,8 +515,8 @@
   "evidenceLevels": {
     "codeConfirmed": "Historical Git implementation/test text and selected original bytes directly inspected.",
     "originalMessageConfirmed": "Original user or assistant message text, timestamp and role directly inspected; reported results retain the scope of that report.",
-    "retainedArtifactConfirmed": "Historical stored result inspected; arithmetic over stored results is distinct from rerunning an experiment.",
-    "researchReportOnly": "Result retained in the identified private research snapshot; October 2 original report, harness, rankings and manual ratings not directly compared here.",
+    "retainedArtifactConfirmed": "Historical stored results directly inspected; arithmetic over stored results is distinct from rerunning an experiment. October 2 manual labels retain their historical judgment status.",
+    "researchReportOnly": "Historical first-publication evidence level for October 2; original home artifacts now independently hash-checked and recounted in homeRecovery.",
     "developerRecollection": "Initial recollection is a search hypothesis; narrative events use the linked historical records.",
     "unconfirmed": "No direct causal message linking reranking review to the September 30 audit, or controlled retrieval-quality before/after comparison, recovered."
   },
@@ -516,6 +538,345 @@
     "careerDocumentPreservedAcrossImplementationCommit": true,
     "privacyReview": "New code, evidence projections and case 08 prose reviewed for credential values, private Knowledge/QB payloads, private repository URLs, local user paths and server access details. Original references and synthetic fixtures retained.",
     "historicalTestExecution": "Not rerun; 67 passed is the September 30 completion report.",
-    "october02RawArtifactVerification": "Not performed: original unavailable; historical research hashes and reported results retain their distinct scope."
+    "october02RawArtifactVerification": "Initial publication did not inspect raw October 2 artifacts; homeRecovery records the subsequent direct comparisons."
+  },
+  "homeRecovery": {
+    "performedOn": "2026-10-30",
+    "tesseraBaseline": "e928ba945a038489aa4a65e1eb98880e616b90f8",
+    "synethosReadOnlyHead": "6858512366fd80285445dcf9e10453be66d9db62",
+    "scope": "Recover October 2 originals; retain earlier publication/source-register verification as its original snapshot.",
+    "artifacts": [
+      {
+        "experiment": "hybrid",
+        "path": "tmp/evaluation/hybrid-selection-calibration/2026-10-02-1/calibrate.mjs",
+        "bytes": 12069,
+        "sha256": "8868b8bee2185e48b5174819559010c3f6da3587b4498e2052b791921d25b1f5",
+        "scope": "Private original inspected read-only; public records select code or aggregate observations."
+      },
+      {
+        "experiment": "hybrid",
+        "path": "tmp/evaluation/hybrid-selection-calibration/2026-10-02-1/diagnostics.json",
+        "bytes": 2808,
+        "sha256": "8c05be75d7a6a1a1a5be3777f5e980d5aa37391a151efe2905954a1e3f2cf019",
+        "scope": "Private original inspected read-only; public records select code or aggregate observations."
+      },
+      {
+        "experiment": "hybrid",
+        "path": "tmp/evaluation/hybrid-selection-calibration/2026-10-02-1/manual-semantic-review.json",
+        "bytes": 5112,
+        "sha256": "11279dfed1ad97bcdd64e3e9426766d755e41637b31ce3b462425e4a54541d72",
+        "scope": "Private original inspected read-only; public records select code or aggregate observations."
+      },
+      {
+        "experiment": "hybrid",
+        "path": "tmp/evaluation/hybrid-selection-calibration/2026-10-02-1/needs-semantic-review.json",
+        "bytes": 58916,
+        "sha256": "4f67b11f55a7e4722821681eb4d1b96c4f5a3ab87808df2b5916a4b758a49331",
+        "scope": "Private original inspected read-only; public records select code or aggregate observations."
+      },
+      {
+        "experiment": "hybrid",
+        "path": "tmp/evaluation/hybrid-selection-calibration/2026-10-02-1/per-question-comparison.json",
+        "bytes": 8265751,
+        "sha256": "a8902a6b85a4c28d218f33546d94dbfae415e1625ac483d8516dcca86f9e609a",
+        "scope": "Private original inspected read-only; public records select code or aggregate observations."
+      },
+      {
+        "experiment": "hybrid",
+        "path": "tmp/evaluation/hybrid-selection-calibration/2026-10-02-1/plan.json",
+        "bytes": 1677,
+        "sha256": "86e4ad1bd5c9ed109ec858bda4ee59703ed50cc19aaa9a43d4bf54f8e54965db",
+        "scope": "Private original inspected read-only; public records select code or aggregate observations."
+      },
+      {
+        "experiment": "hybrid",
+        "path": "tmp/evaluation/hybrid-selection-calibration/2026-10-02-1/preservation-after.json",
+        "bytes": 99300,
+        "sha256": "c153d41d5dfb6792bd9782d8b2e6a43d6d9115aa0bdc4b719555e291184b2a12",
+        "scope": "Private original inspected read-only; public records select code or aggregate observations."
+      },
+      {
+        "experiment": "hybrid",
+        "path": "tmp/evaluation/hybrid-selection-calibration/2026-10-02-1/preservation-before.json",
+        "bytes": 99215,
+        "sha256": "fa5aa6187dcbd4ab44b4d1c8ce3f2c7396602b1c1b444e63d4c73d015f3d5e8d",
+        "scope": "Private original inspected read-only; public records select code or aggregate observations."
+      },
+      {
+        "experiment": "hybrid",
+        "path": "tmp/evaluation/hybrid-selection-calibration/2026-10-02-1/report.md",
+        "bytes": 18475,
+        "sha256": "9d303908e9ec6eff52245f4634c8a5c489abe8a5c866bc7a6a10419767de8b55",
+        "scope": "Private original inspected read-only; public records select code or aggregate observations."
+      },
+      {
+        "experiment": "hybrid",
+        "path": "tmp/evaluation/hybrid-selection-calibration/2026-10-02-1/rules.mjs",
+        "bytes": 3247,
+        "sha256": "bdf4eb67fd7a9205d600e89e4e18ccd399f6d569271546e16d766fafec01300d",
+        "scope": "Private original inspected read-only; public records select code or aggregate observations."
+      },
+      {
+        "experiment": "hybrid",
+        "path": "tmp/evaluation/hybrid-selection-calibration/2026-10-02-1/selection.json",
+        "bytes": 7864505,
+        "sha256": "d779b96102cac0814c53f5094bd1ec2395f0937a4a32827f988ec397d0c6af30",
+        "scope": "Private original inspected read-only; public records select code or aggregate observations."
+      },
+      {
+        "experiment": "hybrid",
+        "path": "tmp/evaluation/hybrid-selection-calibration/2026-10-02-1/strict-preview.json",
+        "bytes": 380,
+        "sha256": "9d110c7fb133ef988369516b4996abbe3267b130a043bc278adb57e738ca44ef",
+        "scope": "Private original inspected read-only; public records select code or aggregate observations."
+      },
+      {
+        "experiment": "hybrid",
+        "path": "tmp/evaluation/hybrid-selection-calibration/2026-10-02-1/summary.json",
+        "bytes": 8350,
+        "sha256": "d6e885cc7c7ede5fb00901f200bb8cfa907b9d7ad35322d87194cc8a0ff8ef95",
+        "scope": "Private original inspected read-only; public records select code or aggregate observations."
+      },
+      {
+        "experiment": "hybrid",
+        "path": "tmp/evaluation/hybrid-selection-calibration/2026-10-02-1/verification.json",
+        "bytes": 753,
+        "sha256": "df3a907d6630f865b1ae5c174f59d18317bdd366e6285ad479a4348e3d6c6381",
+        "scope": "Private original inspected read-only; public records select code or aggregate observations."
+      },
+      {
+        "experiment": "original-top6",
+        "path": "tmp/evaluation/original-top6-calibration/2026-10-02-1/added-semantic-review.json",
+        "bytes": 10381,
+        "sha256": "4154c7042f6bd14ac58feb7601c644997d2db06125bb4a01ef0c622e94cbcbe3",
+        "scope": "Private original inspected read-only; public records select code or aggregate observations."
+      },
+      {
+        "experiment": "original-top6",
+        "path": "tmp/evaluation/original-top6-calibration/2026-10-02-1/calibrate.mjs",
+        "bytes": 12988,
+        "sha256": "af8747bbe1e16d9dfafaccd5dcddd552663678ab4a08c905d4bf1fee2aaac510",
+        "scope": "Private original inspected read-only; public records select code or aggregate observations."
+      },
+      {
+        "experiment": "original-top6",
+        "path": "tmp/evaluation/original-top6-calibration/2026-10-02-1/decision.json",
+        "bytes": 3423,
+        "sha256": "87c1b9c612cbcedc35c54b42f788e76a1e7253cc5cd53a204dfb01c30cdf3c0e",
+        "scope": "Private original inspected read-only; public records select code or aggregate observations."
+      },
+      {
+        "experiment": "original-top6",
+        "path": "tmp/evaluation/original-top6-calibration/2026-10-02-1/per-question-comparison.json",
+        "bytes": 879752,
+        "sha256": "b49b5317ebd174f1adc09385856404557425373df54a5213425e61e9c45535f3",
+        "scope": "Private original inspected read-only; public records select code or aggregate observations."
+      },
+      {
+        "experiment": "original-top6",
+        "path": "tmp/evaluation/original-top6-calibration/2026-10-02-1/per-question-review.md",
+        "bytes": 17542,
+        "sha256": "abda51ca2e40e64451a27ee24527fee4cbe533a485735ccfa6cf8c72e1882886",
+        "scope": "Private original inspected read-only; public records select code or aggregate observations."
+      },
+      {
+        "experiment": "original-top6",
+        "path": "tmp/evaluation/original-top6-calibration/2026-10-02-1/preservation-after.json",
+        "bytes": 99386,
+        "sha256": "a9d689e606b7b56ad91cb3d5b835e4f024db2576ac72082552759e0c1f7b51c8",
+        "scope": "Private original inspected read-only; public records select code or aggregate observations."
+      },
+      {
+        "experiment": "original-top6",
+        "path": "tmp/evaluation/original-top6-calibration/2026-10-02-1/preservation-before.json",
+        "bytes": 99307,
+        "sha256": "f815d6128e1a7e775c75e991aa53cb36d71083b9266cbcfcbda845e54da53781",
+        "scope": "Private original inspected read-only; public records select code or aggregate observations."
+      },
+      {
+        "experiment": "original-top6",
+        "path": "tmp/evaluation/original-top6-calibration/2026-10-02-1/review.md",
+        "bytes": 10576,
+        "sha256": "3455a5b6ba3f7eb4f50b90a316c004188f2a55bd5afde57cc9da9a2d355d3b49",
+        "scope": "Private original inspected read-only; public records select code or aggregate observations."
+      },
+      {
+        "experiment": "original-top6",
+        "path": "tmp/evaluation/original-top6-calibration/2026-10-02-1/summary.json",
+        "bytes": 7244,
+        "sha256": "52440ce58303b62e39f662897ce55f619814fc9c1aa9eba889fb8214525eef1f",
+        "scope": "Private original inspected read-only; public records select code or aggregate observations."
+      },
+      {
+        "experiment": "original-top6",
+        "path": "tmp/evaluation/original-top6-calibration/2026-10-02-1/verification.json",
+        "bytes": 663,
+        "sha256": "3d61572d678e719727b26666360b58159a4b67c7d10708a5af5e8c9f770bfec1",
+        "scope": "Private original inspected read-only; public records select code or aggregate observations."
+      },
+      {
+        "experiment": "bilingual-collapse",
+        "path": "tmp/evaluation/bilingual-collapse-calibration/2026-10-02-1/all-selected-pair-audit.json",
+        "bytes": 3784,
+        "sha256": "3c02d8cdfba21342412b3677e74704ae36843a1cfa6e0782160e3ad8f295c95f",
+        "scope": "Private original inspected read-only; public records select code or aggregate observations."
+      },
+      {
+        "experiment": "bilingual-collapse",
+        "path": "tmp/evaluation/bilingual-collapse-calibration/2026-10-02-1/calibrate.mjs",
+        "bytes": 13873,
+        "sha256": "323af68bc3f5474ccd7cf12a99b851948806288f09d7136ab1dcc6e16f682963",
+        "scope": "Private original inspected read-only; public records select code or aggregate observations."
+      },
+      {
+        "experiment": "bilingual-collapse",
+        "path": "tmp/evaluation/bilingual-collapse-calibration/2026-10-02-1/decision.json",
+        "bytes": 1746,
+        "sha256": "696ebe18720ceae3b931b14f672495361900f5ca427a29bc0ad93fc43b92707b",
+        "scope": "Private original inspected read-only; public records select code or aggregate observations."
+      },
+      {
+        "experiment": "bilingual-collapse",
+        "path": "tmp/evaluation/bilingual-collapse-calibration/2026-10-02-1/pair-content-review.json",
+        "bytes": 14215,
+        "sha256": "a8df3b676d8d803e72ee6f38203b70b7d8e91f022243ca4c2950379d74883ee3",
+        "scope": "Private original inspected read-only; public records select code or aggregate observations."
+      },
+      {
+        "experiment": "bilingual-collapse",
+        "path": "tmp/evaluation/bilingual-collapse-calibration/2026-10-02-1/per-question-comparison.json",
+        "bytes": 1006831,
+        "sha256": "d850767c4db9433348884cb2e986178ad01c90dba462aee301e6892a4aa41c17",
+        "scope": "Private original inspected read-only; public records select code or aggregate observations."
+      },
+      {
+        "experiment": "bilingual-collapse",
+        "path": "tmp/evaluation/bilingual-collapse-calibration/2026-10-02-1/per-question-review.md",
+        "bytes": 5069,
+        "sha256": "3c968f6d9c838df1fd7b35586fc24f8e2c28bdd57718b7475c0d863ddd7e7d26",
+        "scope": "Private original inspected read-only; public records select code or aggregate observations."
+      },
+      {
+        "experiment": "bilingual-collapse",
+        "path": "tmp/evaluation/bilingual-collapse-calibration/2026-10-02-1/preservation-after.json",
+        "bytes": 99503,
+        "sha256": "e727f52d653428c9c6140b4b6a9c3892166ca7c35b7b6a5e5b4630704106225c",
+        "scope": "Private original inspected read-only; public records select code or aggregate observations."
+      },
+      {
+        "experiment": "bilingual-collapse",
+        "path": "tmp/evaluation/bilingual-collapse-calibration/2026-10-02-1/preservation-before.json",
+        "bytes": 99391,
+        "sha256": "1e1a94dca4005b1bbe289ef99b23efcff47eec7fd8686691c1ed49d6d1da1dde",
+        "scope": "Private original inspected read-only; public records select code or aggregate observations."
+      },
+      {
+        "experiment": "bilingual-collapse",
+        "path": "tmp/evaluation/bilingual-collapse-calibration/2026-10-02-1/review.md",
+        "bytes": 10790,
+        "sha256": "9687f029ccb95913f4b9efb6ddf23d0cefa8fcd09dbd3221c7281a4760276434",
+        "scope": "Private original inspected read-only; public records select code or aggregate observations."
+      },
+      {
+        "experiment": "bilingual-collapse",
+        "path": "tmp/evaluation/bilingual-collapse-calibration/2026-10-02-1/selected-pair-list.json",
+        "bytes": 8007,
+        "sha256": "646099bf008e1833274cd5d5903cd1eaa659949e46c14236b3c11fcb719f7881",
+        "scope": "Private original inspected read-only; public records select code or aggregate observations."
+      },
+      {
+        "experiment": "bilingual-collapse",
+        "path": "tmp/evaluation/bilingual-collapse-calibration/2026-10-02-1/selected-pairs.md",
+        "bytes": 4857,
+        "sha256": "9e57e046917fa732a0ef357551ba41e91a27762a2190428ac69e20a8e03246fc",
+        "scope": "Private original inspected read-only; public records select code or aggregate observations."
+      },
+      {
+        "experiment": "bilingual-collapse",
+        "path": "tmp/evaluation/bilingual-collapse-calibration/2026-10-02-1/summary.json",
+        "bytes": 4314,
+        "sha256": "99e802698446f60e4c2dc6e779a4e31eaa55cb62da5a7aa9fc0e9e454ca8e56b",
+        "scope": "Private original inspected read-only; public records select code or aggregate observations."
+      },
+      {
+        "experiment": "bilingual-collapse",
+        "path": "tmp/evaluation/bilingual-collapse-calibration/2026-10-02-1/validated-pair-review.json",
+        "bytes": 39871,
+        "sha256": "7427eb52095617a8dbce2e7b63a11cd3f855ae2f6a04b74e75f5f2f1894037eb",
+        "scope": "Private original inspected read-only; public records select code or aggregate observations."
+      },
+      {
+        "experiment": "bilingual-collapse",
+        "path": "tmp/evaluation/bilingual-collapse-calibration/2026-10-02-1/verification.json",
+        "bytes": 680,
+        "sha256": "c98a76655dded7f19865983a0cda21039812d49fe417051711077994c67c4d1b",
+        "scope": "Private original inspected read-only; public records select code or aggregate observations."
+      }
+    ],
+    "userInputs": {
+      "artifact": "history.jsonl",
+      "scope": "Selected original user inputs; per-message hashes protect a growing file. History contains user input only, not full execution context or assistant replies.",
+      "records": [
+        {
+          "id": "C08-H01",
+          "artifact": "history.jsonl",
+          "line": 1729,
+          "sessionId": "01a0fc21-8175-77b2-9d49-087fa07ff6b8",
+          "atUtc": "2026-10-02T11:59:38.000Z",
+          "atKst": "2026-10-02T20:59:38.000+09:00",
+          "textSha256": "478dee84f5fc3ce601e8cc0586f008db47172374474203cdf7ada7daf1bc6b58",
+          "scope": "Request offline original-only Top5/Top6 comparison; retain derived path, assess contamination and refuse adoption without clear net benefit."
+        },
+        {
+          "id": "C08-H02",
+          "artifact": "history.jsonl",
+          "line": 1730,
+          "sessionId": "01a0fc21-8175-77b2-9d49-087fa07ff6b8",
+          "atUtc": "2026-10-02T12:12:22.000Z",
+          "atKst": "2026-10-02T21:12:22.000+09:00",
+          "textSha256": "1b2de49e185cd4e4a384d4c70eb8e8adad6343e65423f6013381a578030cbd17",
+          "scope": "Request KR-preferred/rank-preferred collapse of verified selected bilingual pairs without backfill; direct support and important details must be preserved."
+        },
+        {
+          "id": "C08-H03",
+          "artifact": "history.jsonl",
+          "line": 1731,
+          "sessionId": "01a0fc21-8175-77b2-9d49-087fa07ff6b8",
+          "atUtc": "2026-10-02T13:32:15.000Z",
+          "atKst": "2026-10-02T22:32:15.000+09:00",
+          "textSha256": "e89659502ab7fd866b285be99d6b18f8586c5359a94b6f36a6973682c912e6ca",
+          "scope": "Request generic lexical/hybrid comparison from stored rankings; scoring uses original question/candidates only; require coverage gain, preserved derived path and no irrelevant-evidence increase."
+        }
+      ]
+    },
+    "remainingQuestions": [
+      "Direct causal message linking the September 29 reranker review to the September 30 corpus audit.",
+      "Controlled retrieval-quality before/after chunker change with aligned corpus, model, questions and evaluation criteria.",
+      "Full October 2 original proposal/completion conversation and a separate final user approval for ending the hybrid tuning round."
+    ],
+    "verification": {
+      "performedOn": "2026-10-30",
+      "wholeAndSelectedCodeOriginalsMatched": 8,
+      "typeScriptSyntaxParsed": 7,
+      "javascriptSyntaxParsed": 1,
+      "evidenceJsonParsed": 4,
+      "recoveredArtifactHashesMatched": 38,
+      "selectedUserInputHashesMatched": 3,
+      "storedFortyQuestionExperimentSetsRecounted": 3,
+      "candidateSetsIncludingBaselines": 10,
+      "hybridDerivedQuestionsExactlyPreserved": 5,
+      "hybridPlanAndRulesMatchRecordedSelectionHashes": true,
+      "historicalTrackedHashesBeforeAfterMatched": 188,
+      "historicalParentArtifactHashesBeforeAfterMatched": 542,
+      "priorCasePublicFilesPreserved": 139,
+      "priorCaseProseAndIndexDocsPreserved": true,
+      "existingChunkerNarrativeAndSevenCodeFilesPreserved": true,
+      "localMarkdownLinksChecked": 834,
+      "linkScope": "Both READMEs and all Markdown files under docs/",
+      "bilingualCase08FileAndExternalLinksMatched": true,
+      "bilingualCase08Sha256SetsMatched": true,
+      "privacyReview": "Selected code, evidence projections and case 08 prose checked for credential values, private Knowledge/QB payloads, private repository URLs, local user paths and server access information.",
+      "execution": "Original read-only inspection, syntax parsing, stored-result arithmetic and hash comparisons; no original scoring, historical tests, model/API calls, index build, server access or deployment executed."
+    }
   }
 }

@@ -116,10 +116,28 @@
       "event": "Publish index artifacts and release metadata; historical Gemini artifact retained separately from current Cohere."
     },
     {
+      "atKst": "2026-10-02T20:59:38.000+09:00",
+      "actor": "user-request",
+      "source": "C08-H01",
+      "event": "Request offline original-only Top5/Top6 comparison; retain derived path, assess contamination and refuse adoption without clear net benefit."
+    },
+    {
+      "atKst": "2026-10-02T21:12:22.000+09:00",
+      "actor": "user-request",
+      "source": "C08-H02",
+      "event": "Request KR-preferred/rank-preferred collapse of verified selected bilingual pairs without backfill; direct support and important details must be preserved."
+    },
+    {
+      "atKst": "2026-10-02T22:32:15.000+09:00",
+      "actor": "user-request",
+      "source": "C08-H03",
+      "event": "Request generic lexical/hybrid comparison from stored rankings; scoring uses original question/candidates only; require coverage gain, preserved derived path and no irrelevant-evidence increase."
+    },
+    {
       "atKst": "2026-10-02",
-      "actor": "historical-research-summary",
-      "source": "reranking-research-summary.json",
-      "event": "Four offline lexical/hybrid candidates show coverage gains with support loss; all recorded as unadopted."
+      "actor": "retained-ai-experiment-report",
+      "source": "october02-selection-alternatives.json",
+      "event": "Top6 and bilingual-collapse decision records reject production adoption. Later hybrid report rejects all four candidates and recommends ending tuning; reports carry no precise completion timestamp here."
     }
   ],
   "decision": {
@@ -221,8 +239,15 @@
     "scope": "Same questions and ground truth on the pre-chunker-change corpus; provider comparison, separate from chunker before/after quality."
   },
   "remainingQuestions": [
-    "Direct causal link from reranker review to the later corpus audit.",
+    "Direct causal message linking the September 29 reranker review to the September 30 corpus audit.",
     "Controlled retrieval-quality before/after chunker change with aligned corpus, model, questions and evaluation criteria.",
-    "Original October 2 candidate rules, rankings, manual ratings and user decision messages; see reranking-research-summary.json."
-  ]
+    "Full October 2 original proposal/completion conversation and a separate final user approval for ending the hybrid tuning round."
+  ],
+  "followUpSelection": {
+    "source": "october02-selection-alternatives.json",
+    "evidenceLevel": "retained-original-artifacts-and-selected-history-inputs",
+    "user": "Set generic experimental boundaries, preserve existing support and derived policy, judge contamination alongside coverage.",
+    "ai": "Chose Top30 and predeclared scoring variants, implemented offline calibration and recorded rejection recommendations.",
+    "chronology": "October 2 selection experiments follow the September 30 chunker correction; they do not measure its controlled before/after quality effect."
+  }
 }

@@ -2,24 +2,28 @@
   "classification": "Reconstructed",
   "preparedOn": "2026-10-30",
   "sourceRegister": "source-register.json",
-  "evidenceLevel": "research-report-only-for-october02",
+  "evidenceLevel": "retained-original-artifacts-and-current-offline-recount",
   "eventDate": "2026-10-02",
   "originalAvailability": {
-    "directlyInspectedHere": false,
-    "state": "Not found in the current office checkout.",
+    "directlyInspectedHere": true,
+    "state": "Recovered and inspected in the home checkout on 2026-10-30.",
     "expectedHomeRepository": "mosaic-space-telescope",
     "relativeDirectory": "tmp/evaluation/hybrid-selection-calibration/2026-10-02-1/",
     "registeredReportSha256": "9d303908e9ec6eff52245f4634c8a5c489abe8a5c866bc7a6a10419767de8b55",
-    "hashStatus": "Copied from the historical research register; raw report not rehashed here."
+    "hashStatus": "Original report rehashed; matches the historical research-register value.",
+    "previousState": "Original publication used the office research snapshot; the raw artifacts were then unavailable."
   },
   "conditions": {
-    "head": "bbac3a6",
+    "head": "bbac3a6d11993f3c3e3d80eec44df86e7779073d",
     "chunks": 505,
     "questionBank": "canonical-portfolio v1",
     "input": "Stored Full40 rankings; original 35 and derived 5 paths retain their selection conditions.",
     "mode": "Offline lexical/hybrid selection comparison",
     "candidatesReported": 4,
-    "generationEffect": "Unmeasured."
+    "generationEffect": "Unmeasured.",
+    "candidatePool": 30,
+    "topK": 5,
+    "minimumScore": 0.25
   },
   "reportedResults": {
     "baseline": {
@@ -38,8 +42,8 @@
       "questionsInAllRequiredMetric": 36,
       "irrelevantEvidence": 6
     },
-    "regression": "QB32 direct supporting evidence lost; research record reports this support loss across all four candidates.",
-    "outcome": "All candidates unadopted; ending the tuning round and retaining production recommended in the historical record."
+    "regression": "Stored per-question results confirm QB32/e1 loses direct support in all four candidates; original report records required evidence rank 5 to 6.",
+    "outcome": "Original AI report rejects all four candidates and recommends ending the tuning round while retaining production; separate final user approval remains unrecovered."
   },
   "productionCrossCheck": {
     "commit": "bbac3a6",
@@ -48,45 +52,121 @@
       "sveltekit/src/lib/server/answering/answer.ts"
     ],
     "observed": "Cosine-ranked candidates with threshold/TopK selection and derived-intent branch; no lexical/hybrid reranking stage in the inspected production path.",
-    "offlineImplementation": "Exact October 2 harness and score-combination formula await original recovery."
+    "offlineImplementation": "Retained rules.mjs and plan.json directly inspected; their hashes match the stored selection record."
   },
   "followUp": [
     {
-      "directory": "tmp/evaluation/hybrid-selection-calibration/2026-10-02-1/",
-      "files": [
-        "report.md",
-        "plan.json",
-        "manual-semantic-review.json",
-        "per-question-comparison.json"
-      ],
-      "purpose": "Recover rules/formula, candidate changes, QB32 loss, ratings and final decision; compare the registered report hash."
+      "source": "Historical user inputs identify session 01a0fc21-8175-77b2-9d49-087fa07ff6b8; full original implementation conversation not recovered here.",
+      "purpose": "Recover exact assistant proposals and any separate final user approval for hybrid round termination."
     },
     {
-      "directory": "tmp/evaluation/bilingual-collapse-calibration/2026-10-02-1/",
-      "files": [
-        "review.md",
-        "validated-pair-review.json",
-        "decision.json"
-      ],
-      "purpose": "Recover EN/KR alternative-support criteria and support-loss checks separately from lexical/hybrid tuning."
-    },
-    {
-      "directory": "tmp/evaluation/original-top6-calibration/2026-10-02-1/",
-      "files": [
-        "review.md",
-        "decision.json",
-        "summary.json"
-      ],
-      "purpose": "Recover candidate-width gains and contamination separately from reranking."
-    },
-    {
-      "source": "Home Codex sessions and user-input history around 2026-10-02; session ID not recovered.",
-      "purpose": "Identify proposal, approval and final user decision, and any explicit link to Knowledge restructuring."
-    },
-    {
-      "source": "Historical comparable runs before/after chunker v2, if retained.",
-      "purpose": "Assess retrieval effect with matched questions, model, policy and evidence criteria."
+      "source": "Comparable historical runs before/after chunker v2, if retained.",
+      "purpose": "Assess retrieval effect under matched corpus, model, question and evaluation conditions."
     }
   ],
-  "causality": "September 30 chunker correction precedes these experiments. Original September 30 audit instructions give its immediate operational/corpus-maintenance context."
+  "causality": "September 30 chunker correction precedes these experiments. Original September 30 audit instructions give its immediate operational/corpus-maintenance context.",
+  "scoring": {
+    "publicCode": "../research/rules.mjs",
+    "originalCodeSha256": "bdf4eb67fd7a9205d600e89e4e18ccd399f6d569271546e16d766fafec01300d",
+    "planSha256": "86e4ad1bd5c9ed109ec858bda4ee59703ed50cc19aaa9a43d4bf54f8e54965db",
+    "formula": "H = raw cosine + lambda * lexical",
+    "weights": [
+      0.04,
+      0.1
+    ],
+    "normalization": "NFKC; lowercase; curly apostrophe normalization; ASCII alphanumeric and Hangul tokens; generic stopwords; no stemming or name dictionary.",
+    "featureMix": "Exact query-token recall .60 + Hangul within-token bigram recall .40; normalize active channels.",
+    "B1": "Query coverage over concatenated content, section, title and source metadata.",
+    "B2": "Pool-IDF feature weighting; body .65 + section .20 + title .10 + source .05.",
+    "eligibility": "Use original cosine threshold before hybrid scoring; ties resolve by cosine then original rank.",
+    "scoringInputs": "Original question, candidate fields, source metadata and raw cosine; expected evidence and question IDs are evaluation-only."
+  },
+  "currentVerification": {
+    "source": "october02-selection-alternatives.json",
+    "candidateMetrics": {
+      "A": {
+        "requiredGroups": 49,
+        "selectedRequiredGroups": 40,
+        "questionsWithRequired": 36,
+        "allRequiredQuestions": 30,
+        "evidenceCount": 199,
+        "semanticCounts": {
+          "D": 51,
+          "P": 117,
+          "W": 20,
+          "U": 3,
+          "E": 8
+        },
+        "bilingualDuplicatePairs": 12,
+        "promptUnicodeChars": 105874
+      },
+      "B1_0.04": {
+        "requiredGroups": 49,
+        "selectedRequiredGroups": 40,
+        "questionsWithRequired": 36,
+        "allRequiredQuestions": 30,
+        "evidenceCount": 199,
+        "semanticCounts": {
+          "D": 53,
+          "P": 117,
+          "W": 19,
+          "U": 4,
+          "E": 6
+        },
+        "bilingualDuplicatePairs": 10,
+        "promptUnicodeChars": 103979
+      },
+      "B1_0.10": {
+        "requiredGroups": 49,
+        "selectedRequiredGroups": 42,
+        "questionsWithRequired": 36,
+        "allRequiredQuestions": 31,
+        "evidenceCount": 199,
+        "semanticCounts": {
+          "D": 55,
+          "P": 117,
+          "W": 17,
+          "U": 6,
+          "E": 4
+        },
+        "bilingualDuplicatePairs": 7,
+        "promptUnicodeChars": 105783
+      },
+      "B2_0.04": {
+        "requiredGroups": 49,
+        "selectedRequiredGroups": 39,
+        "questionsWithRequired": 36,
+        "allRequiredQuestions": 29,
+        "evidenceCount": 199,
+        "semanticCounts": {
+          "D": 51,
+          "P": 117,
+          "W": 21,
+          "U": 4,
+          "E": 6
+        },
+        "bilingualDuplicatePairs": 12,
+        "promptUnicodeChars": 105669
+      },
+      "B2_0.10": {
+        "requiredGroups": 49,
+        "selectedRequiredGroups": 41,
+        "questionsWithRequired": 36,
+        "allRequiredQuestions": 30,
+        "evidenceCount": 199,
+        "semanticCounts": {
+          "D": 53,
+          "P": 116,
+          "W": 20,
+          "U": 4,
+          "E": 6
+        },
+        "bilingualDuplicatePairs": 11,
+        "promptUnicodeChars": 103972
+      }
+    },
+    "recount": "Recomputed counts from stored per-question groups, evidence and semantic labels; no scoring or experiment rerun.",
+    "manualReview": "21 new question/chunk labels retained; content-based judgments are historical manual ratings.",
+    "generation": "Unmeasured."
+  }
 }

@@ -8,9 +8,9 @@
 
 **Development period:** 2026-09-29 ~ 2026-10-02.
 
-**Code classification:** Excerpt — three whole original files and four selected test extracts. Three Reconstructed evidence records connect the originals, historical reports and remaining questions.
+**Code classification:** Excerpt — four whole original files and four selected test extracts. Four Reconstructed evidence records connect the originals, historical reports and remaining questions.
 
-**Outcome:** The developer rejected a document workaround and chose a general chunker correction that preserved normal Markdown hierarchy and the distinct work/tools sections of career records. Later offline lexical/hybrid candidates improved some coverage measures while losing valid support, and the research record reports all candidates as unadopted.
+**Outcome:** The developer rejected a document workaround and chose a general chunker correction that preserved normal Markdown hierarchy and the distinct work/tools sections of career records. Later offline lexical/hybrid candidates improved some coverage measures while losing valid support, and the recovered original reports record all candidates as unadopted.
 
 ## Diagnose the failure before choosing a ranking technique
 
@@ -25,7 +25,7 @@ A separate September 30 retrieval-only comparison used the same 38 questions, gr
 | Supported claims covered in production Top5 | 29/32 | 31/32 |
 | Questions with all supported claims covered | 24/27 | 26/27 |
 
-The denominators cover supported claims and supportable questions in this calibration. The corpus fingerprint was d047a7dc…52bdbf. These observations belong to the provider comparison before chunker v2; the earlier September 29 ranking used another fingerprint. The [decision and observation record](../../cases/fix-the-chunker/evidence/decisions-and-observations.json#L1-L228) identifies both scopes and the stored artifacts.
+The denominators cover supported claims and supportable questions in this calibration. The corpus fingerprint was d047a7dc…52bdbf. These observations belong to the provider comparison before chunker v2; the earlier September 29 ranking used another fingerprint. The [decision and observation record](../../cases/fix-the-chunker/evidence/decisions-and-observations.json#L1-L253) identifies both scopes and the stored artifacts.
 
 ## The corpus audit exposed a hierarchy problem
 
@@ -77,29 +77,56 @@ The remaining extracts connect the same context to [document embedding](../../ca
 
 Commit fce18cee958785252a7f07259c13dafb536086c3 at 15:07:49 records the implementation and tests. Commit 29d2b21d8c0331575478ec5e9d13470729d30b0d at 15:08:38 records subsequent index publication. Code integration and artifact publication retain their own evidence; production-server deployment at this date is outside the recovered verification.
 
-## Later lexical/hybrid tuning improved coverage and lost support
+## Later selection experiments: developer criteria and AI comparisons
 
-The October 2 comparison used stored Full40 rankings at HEAD bbac3a6, 505 chunks and canonical-portfolio v1. Original 35 and derived 5 question paths retained their selection conditions. The existing research record describes four offline lexical/hybrid rules.
+The October 2 comparisons followed the chunker correction and used stored Full40 rankings at HEAD bbac3a6, 505 chunks and canonical-portfolio v1. The developer kept production unchanged, varied one axis at a time, and weighed coverage against preserved support and wrong-project evidence. Original user-input history establishes this sequence:
 
-| Research-reported measure | Baseline | Best coverage candidate B1, λ=0.10 |
-|---|---:|---:|
-| Required groups | 40/49 | 42/49 |
-| All-required questions | 30/36 | 31/36 |
-| Irrelevant evidence | 3 | 6 |
+| Time KST | Developer-requested comparison and constraints |
+|---|---|
+| 20:59:38 | Compare original-only Top5→Top6 from saved rankings; preserve the derived path; evaluate coverage alongside contamination and context cost |
+| 21:12:22 | Collapse only selected EN/KR pairs for the same logical section; compare KR preference with higher-rank preference; preserve direct support and important details without backfill |
+| 22:32:15 | Compare generic lexical/hybrid selection within Top5; score only question/candidate information; include irrelevant-evidence growth and existing support loss in adoption decisions |
 
-QB32 lost direct supporting evidence, and the record reports that loss across all four candidates. All were recorded as unadopted; ending this tuning round and keeping production was recommended. The inspected bbac3a6 production path uses cosine ranking, threshold/TopK selection and the derived-intent branch. It contains no lexical/hybrid reranking stage.
+The last request describes Top6 and bilingual collapse as already unadopted. The developer set the evaluation boundaries and success criteria; the AI specified the Top30 pool, scoring formulas and weights and implemented the offline comparison. The [selection-alternatives record](../../cases/fix-the-chunker/evidence/october02-selection-alternatives.json#L1-L277) links original-request UTC/KST timestamps and text hashes to each experiment's retained results.
 
-The [reranking research summary](../../cases/fix-the-chunker/evidence/reranking-research-summary.json#L1-L92) preserves these reported numbers, conditions and the original report's registered hash. Its raw report, exact rule/formula, rankings and manual ratings are currently unavailable in this checkout. Generation effects were unmeasured.
+### Top6 expansion and bilingual collapse
+
+| Stored result | Required groups / all-required questions | Evidence / direct-support records |
+|---|---|---|
+| Shared baseline | 40/49 · 30/36 | 199 · 51 |
+| Original-only Top6 | 42/49 · 31/36 | 234 · 56 |
+| Bilingual collapse: KR preferred | 40/49 · 30/36 | 191 · 47 |
+| Bilingual collapse: higher rank preferred | 38/49 · 29/36 | 191 · 47 |
+
+Top6 rescued two required groups, but 30 of its 35 added evidence records were classified as background or distractors. Additions included seven wrong-project records, two irrelevant records and one image-only record; prompt-content character count grew by about 15.22%. The AI's decision.json rejects this global Top6 policy.
+
+KR-preferred bilingual collapse preserved strict coverage. Direct-support records fell from 51 to 47 through removal of four duplicates, while **logical direct-support sections remained 46**. The historical manual review found no substantive loss of important claims or details. The developer's criteria also excluded direct-support decreases; a generic runtime content-correspondence guarantee and generation benefit remained unverified, so both strategies were recorded as unadopted. Higher-rank preference additionally lost two strict required groups. These results retain their own conditions alongside the actual support loss in hybrid selection below.
+
+### Lexical/hybrid coverage gains and actual support loss
+
+The [original scoring code](../../cases/fix-the-chunker/research/rules.mjs#L1-L11) evaluates only candidates within vector Top30 whose raw cosine is at least 0.25. After NFKC, lowercase and apostrophe normalization, it combines exact-token recall .60 with within-token Hangul-bigram recall .40. B1 measures coverage over combined body, section, title and source metadata; B2 uses pool-IDF and field weights body .65, section .20, title .10 and source .05. H = raw cosine + λL, with λ=.04/.10 confirmed by the plan/rule hashes stored in selection. Ties resolve by cosine and original rank. Expected answers, required evidence and question IDs are excluded from scoring inputs.
+
+| Recount of stored 40-question results | Required groups | All-required questions | Wrong project/entity | Irrelevant |
+|---|---:|---:|---:|---:|
+| Baseline | 40/49 | 30/36 | 20 | 3 |
+| B1 λ=.04 | 40/49 | 30/36 | 19 | 4 |
+| B1 λ=.10 | 42/49 | 31/36 | 17 | 6 |
+| B2 λ=.04 | 39/49 | 29/36 | 21 | 4 |
+| B2 λ=.10 | 41/49 | 30/36 | 20 | 4 |
+
+Coverage-best B1(.10) rescued three required groups and lost one. All four candidates pushed QB32's direct supporting evidence from rank 5 to 6, outside Top5. Stored per-question comparisons were checked against historical manual ratings; the original report judged this a genuine loss of answerability. Every candidate also increased irrelevant evidence over baseline. The AI rejected all four and recommended ending this tuning round while retaining production. A separate final user approval accepting that recommendation remains unrecovered.
+
+The [reranking research summary](../../cases/fix-the-chunker/evidence/reranking-research-summary.json#L1-L172) adds direct original comparisons to the earlier research-report evidence. The original report.md SHA-256 matches its registered value, 9d303908…de8b55. Current recounts confirm 199 evidence records for baseline and every candidate, with exact equality for all five derived questions. Semantic labels for 21 newly selected question/chunk combinations retain their historical manual-review status.
+
+Original verification records report zero external calls and zero source changes. Preservation records also match all 188 tracked-file hashes and 542 baseline-artifact hashes before and after the experiment. Publication preparation compared stored results and hashes without rerunning scoring or experiments. The inspected bbac3a6 production path used cosine ranking, threshold/TopK and the derived-intent branch. Generation effects of the three experiments and matched retrieval-quality effects before/after the chunker correction remain unmeasured.
 
 ## Evidence boundaries and follow-up
 
-The [source register](../../cases/fix-the-chunker/evidence/source-register.json#L1-L521) identifies original session 01a0ea78-071a-7243-ac8e-1e5d7ee57aae, its compressed/decompressed hashes and 32 selected message hashes with roles and UTC/KST times. The developer's decisions are directly visible in historical messages. Test counts and execution outcomes retain their contemporary report status. Three private Git research snapshots support the October 2 summary, and six retained local artifacts support the earlier diagnostic/provider comparison.
+The [source register](../../cases/fix-the-chunker/evidence/source-register.json#L1-L882) preserves the compressed/decompressed hashes and 32 selected message hashes for original session 01a0ea78-071a-7243-ac8e-1e5d7ee57aae, three Git research snapshots and six earlier local artifacts. Its homeRecovery adds identities, hashes and UTC/KST timestamps for 38 directly inspected October 2 originals and three user-input records. Input history confirms developer requests and contains no complete AI replies or execution transcript.
 
-The September 30 audit request establishes its immediate maintenance and rebuild context. A direct causal message tying that audit to the earlier reranker review remains unrecovered. The initial recollection guided the search; the dated originals determine this sequence.
+The September 30 original user request establishes the audit's immediate maintenance/rebuild context. Remaining questions cover a direct causal message connecting it to the earlier reranker review, matched retrieval-quality runs before/after chunker v2, the complete October 2 proposal/completion conversation, and separate final user approval for ending hybrid tuning. The 527→505 count change and context-preservation tests establish structural correctness.
 
-Home follow-up targets the registered hybrid-selection-calibration/2026-10-02-1 report, plan, per-question comparison and manual semantic review; bilingual-collapse and original-top6 runs retain separate scopes. The register also requests the October 2 proposal/approval/decision messages and any matched retrieval-quality runs before/after chunker v2. The 527→505 count change and context-preservation tests describe structural correctness.
-
-The published code and synthetic tests retain original imports and application references. Evidence records expose identifiers, hashes and selected observations while keeping source Knowledge, complete conversations, credentials and server access material private.
+Published code and synthetic tests retain original imports and application references. Added rules.mjs is the complete retained local experiment file, with no Git-commit attribution. Evidence records publish identifiers, hashes and aggregate observations while keeping Knowledge, QB question/answer text, manual-rating rationales, complete conversations, credentials and server access material private.
 
 <details>
 <summary>Original excerpts, ranges and SHA-256</summary>
@@ -113,14 +140,16 @@ The published code and synthetic tests retain original imports and application r
 | [verification/embedding-context.excerpt.test.ts](../../cases/fix-the-chunker/verification/embedding-context.excerpt.test.ts#L1-L36) | fce18cee958785252a7f07259c13dafb536086c3<br>sveltekit/src/lib/server/embedding/embeddings.test.ts<br>1–15 → 1–15; 258–277 → 17–36 | b8a5c207e4811c8789ad50d15b6d285e743fd8cb3b0376608dcfa5ee26b2d24f → 6ba9ca851d69b45d0717a4aa760749b5591bbff0cac4449b0bcd8e4bff4ad25f |
 | [verification/search-context.excerpt.test.ts](../../cases/fix-the-chunker/verification/search-context.excerpt.test.ts#L1-L36) | fce18cee958785252a7f07259c13dafb536086c3<br>sveltekit/src/lib/server/retrieval/search.test.ts<br>1–22 → 1–22; 112–124 → 24–36 | cab05bd9679702bd2c5505d4dade1430c1ab86fadf5dc707fa9ac02f8f497905 → 3d65fea226f76d9761229bea0df2a3eaf721de3011e68dcf7d3b1a08011db7cc |
 | [verification/generation-context.excerpt.test.ts](../../cases/fix-the-chunker/verification/generation-context.excerpt.test.ts#L1-L16) | fce18cee958785252a7f07259c13dafb536086c3<br>sveltekit/src/lib/server/generation/answer-prompt.test.ts<br>1–3 → 1–3; 55–66 → 5–16 | 1bc8e67aa4bfafa1b4b600d52ff7aceb6a2439f00c1708fb2bad4f2160ee3aab → 9752be9d33d1e03ea302e16ed01516b426c20fca12104d158334c5ac01fa7ef4 |
+| [research/rules.mjs](../../cases/fix-the-chunker/research/rules.mjs#L1-L11) | Retained local experiment original; no Git commit attributed<br>tmp/evaluation/hybrid-selection-calibration/2026-10-02-1/rules.mjs<br>1–11 → 1–11 | bdf4eb67fd7a9205d600e89e4e18ccd399f6d569271546e16d766fafec01300d → bdf4eb67fd7a9205d600e89e4e18ccd399f6d569271546e16d766fafec01300d |
 
 Selected extracts join original ranges in order with one blank line. Source paths are relative to the private Synethos repository.
 
 | Public evidence | Classification | SHA-256 |
 |---|---|---|
-| [evidence/decisions-and-observations.json](../../cases/fix-the-chunker/evidence/decisions-and-observations.json#L1-L228) | Reconstructed | 0768365d0864cd47e3bfd976ba275265e74d7e6323d5947b50d00966e9709d82 |
-| [evidence/reranking-research-summary.json](../../cases/fix-the-chunker/evidence/reranking-research-summary.json#L1-L92) | Reconstructed | 509793479306f9a1c0daf3854b1503c2b5f7c03c2b1d15ffc6f93e331ba65227 |
-| [evidence/source-register.json](../../cases/fix-the-chunker/evidence/source-register.json#L1-L521) | Reconstructed | 337c58ddd11659a16e03a0c952742a15f59c00e7f454053a71c987b90343961d |
+| [evidence/decisions-and-observations.json](../../cases/fix-the-chunker/evidence/decisions-and-observations.json#L1-L253) | Reconstructed | 992511919fc921b0830a4282ee1fc3c332d8ada4fbf311a2bd14c68a88bfe33d |
+| [evidence/reranking-research-summary.json](../../cases/fix-the-chunker/evidence/reranking-research-summary.json#L1-L172) | Reconstructed | 6dbd754fe350a551721dd9b1f7b001a3bf27e8505c5e96ccee0f622d1e7dd846 |
+| [evidence/source-register.json](../../cases/fix-the-chunker/evidence/source-register.json#L1-L882) | Reconstructed | 51bc5d77cba4da3cb5b550b9f7ba1c5a10c754ff8132f5edb0953da383da8b23 |
+| [evidence/october02-selection-alternatives.json](../../cases/fix-the-chunker/evidence/october02-selection-alternatives.json#L1-L277) | Reconstructed | b071496d650366f5086f3ca7ce99e214273b09e9c5607df17cbcea64fedbebac |
 
 </details>
 
@@ -130,6 +159,14 @@ All seven code files matched the declared historical Git ranges and hashes; seve
 
 The two READMEs and two engineering records passed 746 local file, heading and line-range links. English/Korean file and external-link targets and SHA-256 sets matched. Existing public files 140 and case 01–07 prose were preserved; README introduction/copyright and common evidence guidance were preserved. New code, evidence projections and case 08 prose were reviewed for private payloads, credentials and operating access details.
 
-Verification used original reads, local parsing and hash/count calculations. Historical tests, model calls, index builds and deployment were not executed. Synethos remained unchanged. October 2 raw-artifact verification remains pending.
+Verification used original reads, local parsing and hash/count calculations. Historical tests, model calls, index builds and deployment were not executed. Synethos remained unchanged. That paragraph records the initial publication scope; October 2 original recovery and comparisons are recorded in the additional verification below.
+
+## October 30 home-original recovery and additional verification
+
+Eight complete/selected code originals matched; seven TypeScript and one JavaScript syntax checks and four public JSON parses passed. Hashes matched for 38 recovered originals and three user inputs. Three stored 40-question experiments were recounted, matching required groups, all-required questions, evidence and semantic-label totals for ten candidate sets including baselines; logical direct-support sections in bilingual collapse were also checked. All five hybrid derived questions matched exactly, together with recorded plan/rule hashes and before/after preservation maps for 188 tracked files and 542 baseline artifacts.
+
+The READMEs and docs Markdown passed 834 local file, heading and line-range checks. Case 08 English/Korean file and external-link targets and SHA-256 sets match. The 139 public files and prose for cases 01–07, common index documents, and the original chunker decision/implementation account and seven code files were preserved. File comparisons normalized Windows checkout line endings.
+
+Published material was reviewed for private payloads, credentials, local user paths, private repository URLs and server access information. Verification used original reads, syntax parsing, stored-result arithmetic and hash calculations. Original scoring, experiments, tests, model/API calls, index builds, server access and deployment were not executed; the Synethos working tree remains clean.
 
 [Back to all cases](../../README.md)
