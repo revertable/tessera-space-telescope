@@ -1,0 +1,92 @@
+{
+  "classification": "Reconstructed",
+  "preparedOn": "2026-10-30",
+  "sourceRegister": "source-register.json",
+  "evidenceLevel": "research-report-only-for-october02",
+  "eventDate": "2026-10-02",
+  "originalAvailability": {
+    "directlyInspectedHere": false,
+    "state": "Not found in the current office checkout.",
+    "expectedHomeRepository": "mosaic-space-telescope",
+    "relativeDirectory": "tmp/evaluation/hybrid-selection-calibration/2026-10-02-1/",
+    "registeredReportSha256": "9d303908e9ec6eff52245f4634c8a5c489abe8a5c866bc7a6a10419767de8b55",
+    "hashStatus": "Copied from the historical research register; raw report not rehashed here."
+  },
+  "conditions": {
+    "head": "bbac3a6",
+    "chunks": 505,
+    "questionBank": "canonical-portfolio v1",
+    "input": "Stored Full40 rankings; original 35 and derived 5 paths retain their selection conditions.",
+    "mode": "Offline lexical/hybrid selection comparison",
+    "candidatesReported": 4,
+    "generationEffect": "Unmeasured."
+  },
+  "reportedResults": {
+    "baseline": {
+      "requiredGroups": 40,
+      "totalRequiredGroups": 49,
+      "allRequiredQuestions": 30,
+      "questionsInAllRequiredMetric": 36,
+      "irrelevantEvidence": 3
+    },
+    "bestCoverageCandidate": {
+      "id": "B1",
+      "lambda": 0.1,
+      "requiredGroups": 42,
+      "totalRequiredGroups": 49,
+      "allRequiredQuestions": 31,
+      "questionsInAllRequiredMetric": 36,
+      "irrelevantEvidence": 6
+    },
+    "regression": "QB32 direct supporting evidence lost; research record reports this support loss across all four candidates.",
+    "outcome": "All candidates unadopted; ending the tuning round and retaining production recommended in the historical record."
+  },
+  "productionCrossCheck": {
+    "commit": "bbac3a6",
+    "paths": [
+      "sveltekit/src/lib/server/retrieval/search.ts",
+      "sveltekit/src/lib/server/answering/answer.ts"
+    ],
+    "observed": "Cosine-ranked candidates with threshold/TopK selection and derived-intent branch; no lexical/hybrid reranking stage in the inspected production path.",
+    "offlineImplementation": "Exact October 2 harness and score-combination formula await original recovery."
+  },
+  "followUp": [
+    {
+      "directory": "tmp/evaluation/hybrid-selection-calibration/2026-10-02-1/",
+      "files": [
+        "report.md",
+        "plan.json",
+        "manual-semantic-review.json",
+        "per-question-comparison.json"
+      ],
+      "purpose": "Recover rules/formula, candidate changes, QB32 loss, ratings and final decision; compare the registered report hash."
+    },
+    {
+      "directory": "tmp/evaluation/bilingual-collapse-calibration/2026-10-02-1/",
+      "files": [
+        "review.md",
+        "validated-pair-review.json",
+        "decision.json"
+      ],
+      "purpose": "Recover EN/KR alternative-support criteria and support-loss checks separately from lexical/hybrid tuning."
+    },
+    {
+      "directory": "tmp/evaluation/original-top6-calibration/2026-10-02-1/",
+      "files": [
+        "review.md",
+        "decision.json",
+        "summary.json"
+      ],
+      "purpose": "Recover candidate-width gains and contamination separately from reranking."
+    },
+    {
+      "source": "Home Codex sessions and user-input history around 2026-10-02; session ID not recovered.",
+      "purpose": "Identify proposal, approval and final user decision, and any explicit link to Knowledge restructuring."
+    },
+    {
+      "source": "Historical comparable runs before/after chunker v2, if retained.",
+      "purpose": "Assess retrieval effect with matched questions, model, policy and evidence criteria."
+    }
+  ],
+  "causality": "September 30 chunker correction precedes these experiments. Original September 30 audit instructions give its immediate operational/corpus-maintenance context."
+}

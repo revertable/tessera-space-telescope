@@ -1,0 +1,228 @@
+{
+  "classification": "Reconstructed",
+  "preparedOn": "2026-10-30",
+  "sourceRegister": "source-register.json",
+  "developmentPeriod": [
+    "2026-09-29",
+    "2026-10-02"
+  ],
+  "chronology": [
+    {
+      "atKst": "2026-09-29T11:47:50.667+09:00",
+      "actor": "user",
+      "source": "session:2430",
+      "event": "Investigate fixed Top5 and full score distributions; exclude reranker/BM25/hybrid in this initial scope."
+    },
+    {
+      "atKst": "2026-09-29T16:21:16.121+09:00",
+      "actor": "user",
+      "source": "session:3882",
+      "event": "Review reranking as a hypothesis; separate candidate loss, query representation, evidence sufficiency and generation failure."
+    },
+    {
+      "atKst": "2026-09-29T16:23:29.303+09:00",
+      "actor": "assistant-proposal",
+      "source": "session:3948",
+      "event": "Distinguish support at ranks 8/125 from already-top-ranked generation failures; no measured reranker result."
+    },
+    {
+      "atKst": "2026-09-29T16:39:40.627+09:00",
+      "actor": "user",
+      "source": "session:4285",
+      "event": "Select MVP changes by demonstrated cost/benefit; allow non-adoption of reranking and adaptive policies."
+    },
+    {
+      "atKst": "2026-09-30T11:51:19.568+09:00",
+      "actor": "user",
+      "source": "session:6262",
+      "event": "Audit volatile operational facts in approved corpus while removing Voyage; preserve historical calibration and defer provider execution."
+    },
+    {
+      "atKst": "2026-09-30T12:17:51.973+09:00",
+      "actor": "user",
+      "source": "session:6389",
+      "event": "Inspect complete corpus before rebuilding, including document structure and actual chunk boundaries."
+    },
+    {
+      "atKst": "2026-09-30T12:43:07.931+09:00",
+      "actor": "assistant-proposal",
+      "source": "session:6654",
+      "event": "Identify lost parent metadata in 24 career child chunks; propose replacing child headings with bold labels, 38 to 14 chunks."
+    },
+    {
+      "atKst": "2026-09-30T12:46:37.586+09:00",
+      "actor": "user",
+      "source": "session:6661",
+      "event": "Withhold document workaround; request a general hierarchy-preserving chunker and impact analysis."
+    },
+    {
+      "atKst": "2026-09-30T13:01:32.183+09:00",
+      "actor": "user",
+      "source": "session:6763",
+      "event": "Include fence-aware parsing and minimal ancestry without duplicate document title."
+    },
+    {
+      "atKst": "2026-09-30T13:18:30.643+09:00",
+      "actor": "user",
+      "source": "session:6877",
+      "event": "Withhold approval after contradictory source-count table; independently isolate ancestry, fence and title changes."
+    },
+    {
+      "atKst": "2026-09-30T13:32:36.808+09:00",
+      "actor": "user",
+      "source": "session:6932",
+      "event": "Require independent implementation checks against declared counts, identity and preservation invariants; stop at discrepancies."
+    },
+    {
+      "atKst": "2026-09-30T13:33:38.322+09:00",
+      "actor": "user-approval",
+      "source": "session:6946",
+      "event": "Approve implementation under the revised scope."
+    },
+    {
+      "atKst": "2026-09-30T13:47:20.769+09:00",
+      "actor": "assistant-report",
+      "source": "session:7027",
+      "event": "Stop after an independent body-comparison assertion fails."
+    },
+    {
+      "atKst": "2026-09-30T13:48:35.725+09:00",
+      "actor": "assistant-report",
+      "source": "session:7036",
+      "event": "Diagnose missing CRLF normalization in the checker; chunker output matches the normalized baseline."
+    },
+    {
+      "atKst": "2026-09-30T13:49:13.663+09:00",
+      "actor": "user",
+      "source": "session:7043",
+      "event": "Continue verification."
+    },
+    {
+      "atKst": "2026-09-30T14:09:45.154+09:00",
+      "actor": "assistant-completion-report",
+      "source": "session:7207",
+      "event": "Report 44 sources/505 chunks, preserved 38 career chunks and 24 child contexts, 67 non-live tests passed and clean type check."
+    },
+    {
+      "atKst": "2026-09-30T15:07:49+09:00",
+      "actor": "git-implementation",
+      "source": "commit:fce18cee958785252a7f07259c13dafb536086c3",
+      "event": "Commit chunker v2, regression tests and corpus corrections."
+    },
+    {
+      "atKst": "2026-09-30T15:08:38+09:00",
+      "actor": "git-index-publication",
+      "source": "commit:29d2b21d8c0331575478ec5e9d13470729d30b0d",
+      "event": "Publish index artifacts and release metadata; historical Gemini artifact retained separately from current Cohere."
+    },
+    {
+      "atKst": "2026-10-02",
+      "actor": "historical-research-summary",
+      "source": "reranking-research-summary.json",
+      "event": "Four offline lexical/hybrid candidates show coverage gains with support loss; all recorded as unadopted."
+    }
+  ],
+  "decision": {
+    "aiAlternative": {
+      "source": "session:6654",
+      "change": "Replace 24 repeated child Markdown headings with bold labels and combine each career group.",
+      "predictedCareerChunks": [
+        38,
+        14
+      ],
+      "predictedCorpusChunks": [
+        527,
+        503
+      ],
+      "status": "Proposed; rejected before implementation."
+    },
+    "developerChoice": {
+      "sources": [
+        "session:6661",
+        "session:6763"
+      ],
+      "reason": "The observed fault was heading hierarchy loss in the chunker. Preserve normal Markdown and distinct work/tools units while inheriting identifying parent context.",
+      "requirements": [
+        "General heading ancestry",
+        "Fenced examples remain section content",
+        "First document H1 remains a boundary; title repetition removed from content",
+        "Explicit identity and corpus impact analysis"
+      ]
+    }
+  },
+  "observedDefects": {
+    "source": "session:6654",
+    "childChunksMissingParentMetadata": 24,
+    "technologyChunksWithoutProjectIdentifierInBody": 12,
+    "scope": "Parent metadata loss affects all 24 children; severity of identifying clues in their bodies differs.",
+    "fences": "Example headings in Blueprint incorrectly changed section boundaries/heading state.",
+    "wholeParagraphLoss": "Not established as a general dropped-paragraph defect."
+  },
+  "historicalVerification": {
+    "source": "session:7207",
+    "evidenceLevel": "contemporaneous-completion-report",
+    "sources": 44,
+    "chunksBefore": 527,
+    "chunksAfter": 505,
+    "careerChunksBefore": 38,
+    "careerChunksAfter": 38,
+    "careerChildContexts": 24,
+    "blueprintSources": 2,
+    "blueprintChunksEachBefore": 24,
+    "blueprintChunksEachAfter": 13,
+    "otherSourcesWithPreservedIdsAndLeafSections": 42,
+    "nonLiveTestsPassed": 67,
+    "typeCheck": {
+      "errors": 0,
+      "warnings": 0
+    },
+    "indexStateImmediatelyAfterChange": {
+      "cohere1536": "STALE",
+      "gemini768": "STALE",
+      "gemini1536": "MISSING"
+    },
+    "scope": "Structure, identity, preserved source bodies and input propagation; no retrieval run in this implementation verification."
+  },
+  "providerComparison": {
+    "sources": [
+      "tmp/calibration/retrieval-compare-d047a7dc/summary.json",
+      "tmp/calibration/retrieval-compare-d047a7dc/ground-truth-current.json",
+      "tmp/calibration/retrieval-compare-d047a7dc/cohere-embed-v4.json",
+      "tmp/calibration/retrieval-compare-d047a7dc/gemini-primary.json"
+    ],
+    "evidenceLevel": "retained-artifacts-and-current-offline-recount",
+    "corpusFingerprint": "d047a7dc4c4e84a5613523d6766fd16c59e18e7e74d6fbbb71065a1bdb52bdbf",
+    "candidateChunks": 525,
+    "cases": 38,
+    "caseSetHash": "8417a7da32b0442fe155fa0a68e36cc8faf77667c8d4d1270c70f73c1d5ea435",
+    "topK": 5,
+    "minimumScore": 0.25,
+    "generationCalls": 0,
+    "rows": [
+      {
+        "provider": "Cohere embed-v4.0",
+        "dimensions": 1536,
+        "queryEmbeddingAttempts": 38,
+        "supportedClaimsInTop5": 29,
+        "supportedClaims": 32,
+        "allSupportedClaimsCoveredCases": 24,
+        "supportableCases": 27
+      },
+      {
+        "provider": "Gemini embedding-2",
+        "dimensions": 768,
+        "queryEmbeddingAttempts": 38,
+        "supportedClaimsInTop5": 31,
+        "supportedClaims": 32,
+        "allSupportedClaimsCoveredCases": 26,
+        "supportableCases": 27
+      }
+    ],
+    "scope": "Same questions and ground truth on the pre-chunker-change corpus; provider comparison, separate from chunker before/after quality."
+  },
+  "remainingQuestions": [
+    "Direct causal link from reranker review to the later corpus audit.",
+    "Controlled retrieval-quality before/after chunker change with aligned corpus, model, questions and evaluation criteria.",
+    "Original October 2 candidate rules, rankings, manual ratings and user decision messages; see reranking-research-summary.json."
+  ]
+}

@@ -29,6 +29,7 @@ Read the [engineering development records](docs/engineering-decisions.md) for ea
 | 05 | [Cross-PC Index Portability](docs/engineering-decisions.md#05--cross-pc-index-portability) | 2026-09-28 ~ 2026-10-26 |
 | 06 | [Model Selection: Quality and Availability](docs/engineering-decisions.md#06--model-selection-quality-and-availability) | 2026-09-26 ~ 2026-10-16 |
 | 07 | [Knowledge–Index Consistency and Recoverable Deployment](docs/engineering-decisions.md#07--knowledgeindex-consistency-and-recoverable-deployment) | 2026-10-22 ~ 2026-10-26 |
+| 08 | [Fix the Chunker, Not the Documents](docs/engineering-decisions.md#08--fix-the-chunker-not-the-documents) | 2026-09-29 ~ 2026-10-02 |
 
 ## Copyright
 

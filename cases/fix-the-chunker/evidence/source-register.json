@@ -1,0 +1,521 @@
+{
+  "classification": "Reconstructed",
+  "preparedOn": "2026-10-30",
+  "tesseraBaseline": "3ebd605400106dc00734307e1e9c8d2e71a0db5b",
+  "synethosReadOnlyHead": "3a6e2e477fa5a66fe67656b802c4bf9bdaf59218",
+  "code": [
+    {
+      "publicPath": "before/chunker.ts",
+      "classification": "Excerpt",
+      "commit": "da1dfe04192658973f12596fcad29cbf11ea9d71",
+      "sourcePath": "sveltekit/src/lib/server/knowledge/chunker.ts",
+      "selection": "whole original file",
+      "ranges": [
+        {
+          "original": [
+            1,
+            60
+          ],
+          "public": [
+            1,
+            60
+          ]
+        }
+      ],
+      "originalSha256": "9e0337d881286d99d9fbd25cfd8fea68605726b7a18e0b8752ae63c97d61a1fd",
+      "publicSha256": "9e0337d881286d99d9fbd25cfd8fea68605726b7a18e0b8752ae63c97d61a1fd",
+      "publicLines": 60
+    },
+    {
+      "publicPath": "after/chunker.ts",
+      "classification": "Excerpt",
+      "commit": "fce18cee958785252a7f07259c13dafb536086c3",
+      "sourcePath": "sveltekit/src/lib/server/knowledge/chunker.ts",
+      "selection": "whole original file",
+      "ranges": [
+        {
+          "original": [
+            1,
+            109
+          ],
+          "public": [
+            1,
+            109
+          ]
+        }
+      ],
+      "originalSha256": "db887b35a4da9d07d4095f2347782c57123d902508536eff79574b1e9e9b5bfa",
+      "publicSha256": "db887b35a4da9d07d4095f2347782c57123d902508536eff79574b1e9e9b5bfa",
+      "publicLines": 109
+    },
+    {
+      "publicPath": "verification/chunker.test.ts",
+      "classification": "Excerpt",
+      "commit": "fce18cee958785252a7f07259c13dafb536086c3",
+      "sourcePath": "sveltekit/src/lib/server/knowledge/chunker.test.ts",
+      "selection": "whole original file",
+      "ranges": [
+        {
+          "original": [
+            1,
+            123
+          ],
+          "public": [
+            1,
+            123
+          ]
+        }
+      ],
+      "originalSha256": "c1fc3e368b54d3f4985244ba7dd25c152cd1b02fc825721f3b7bcfd944fc6f3f",
+      "publicSha256": "c1fc3e368b54d3f4985244ba7dd25c152cd1b02fc825721f3b7bcfd944fc6f3f",
+      "publicLines": 123
+    },
+    {
+      "publicPath": "verification/corpus-context.excerpt.test.ts",
+      "classification": "Excerpt",
+      "commit": "fce18cee958785252a7f07259c13dafb536086c3",
+      "sourcePath": "sveltekit/src/lib/server/indexing/corpus.test.ts",
+      "selection": "selected original ranges joined with one blank line",
+      "ranges": [
+        {
+          "original": [
+            1,
+            12
+          ],
+          "public": [
+            1,
+            12
+          ]
+        },
+        {
+          "original": [
+            249,
+            311
+          ],
+          "public": [
+            14,
+            76
+          ]
+        }
+      ],
+      "originalSha256": "709c64f845c49e627fab702a6bcf4bed0ad60c52a6c7b418136cc7507c3385e0",
+      "publicSha256": "094f04dc22c65c836f0b5430ead4947e62a91e802fa4e2a12ddfe39f00502102",
+      "publicLines": 76
+    },
+    {
+      "publicPath": "verification/embedding-context.excerpt.test.ts",
+      "classification": "Excerpt",
+      "commit": "fce18cee958785252a7f07259c13dafb536086c3",
+      "sourcePath": "sveltekit/src/lib/server/embedding/embeddings.test.ts",
+      "selection": "selected original ranges joined with one blank line",
+      "ranges": [
+        {
+          "original": [
+            1,
+            15
+          ],
+          "public": [
+            1,
+            15
+          ]
+        },
+        {
+          "original": [
+            258,
+            277
+          ],
+          "public": [
+            17,
+            36
+          ]
+        }
+      ],
+      "originalSha256": "b8a5c207e4811c8789ad50d15b6d285e743fd8cb3b0376608dcfa5ee26b2d24f",
+      "publicSha256": "6ba9ca851d69b45d0717a4aa760749b5591bbff0cac4449b0bcd8e4bff4ad25f",
+      "publicLines": 36
+    },
+    {
+      "publicPath": "verification/search-context.excerpt.test.ts",
+      "classification": "Excerpt",
+      "commit": "fce18cee958785252a7f07259c13dafb536086c3",
+      "sourcePath": "sveltekit/src/lib/server/retrieval/search.test.ts",
+      "selection": "selected original ranges joined with one blank line",
+      "ranges": [
+        {
+          "original": [
+            1,
+            22
+          ],
+          "public": [
+            1,
+            22
+          ]
+        },
+        {
+          "original": [
+            112,
+            124
+          ],
+          "public": [
+            24,
+            36
+          ]
+        }
+      ],
+      "originalSha256": "cab05bd9679702bd2c5505d4dade1430c1ab86fadf5dc707fa9ac02f8f497905",
+      "publicSha256": "3d65fea226f76d9761229bea0df2a3eaf721de3011e68dcf7d3b1a08011db7cc",
+      "publicLines": 36
+    },
+    {
+      "publicPath": "verification/generation-context.excerpt.test.ts",
+      "classification": "Excerpt",
+      "commit": "fce18cee958785252a7f07259c13dafb536086c3",
+      "sourcePath": "sveltekit/src/lib/server/generation/answer-prompt.test.ts",
+      "selection": "selected original ranges joined with one blank line",
+      "ranges": [
+        {
+          "original": [
+            1,
+            3
+          ],
+          "public": [
+            1,
+            3
+          ]
+        },
+        {
+          "original": [
+            55,
+            66
+          ],
+          "public": [
+            5,
+            16
+          ]
+        }
+      ],
+      "originalSha256": "1bc8e67aa4bfafa1b4b600d52ff7aceb6a2439f00c1708fb2bad4f2160ee3aab",
+      "publicSha256": "9752be9d33d1e03ea302e16ed01516b426c20fca12104d158334c5ac01fa7ef4",
+      "publicLines": 16
+    }
+  ],
+  "commits": {
+    "before": "da1dfe04192658973f12596fcad29cbf11ea9d71",
+    "after": "fce18cee958785252a7f07259c13dafb536086c3",
+    "indexPublication": "29d2b21d8c0331575478ec5e9d13470729d30b0d",
+    "candidateSeparation": "97114bfaeb67fea0d62d5a9ad114524c16d965d5"
+  },
+  "session": {
+    "id": "01a0ea78-071a-7243-ac8e-1e5d7ee57aae",
+    "artifact": "rollout-2026-09-29T09-02-11-01a0ea78-071a-7243-ac8e-1e5d7ee57aae.jsonl.zst",
+    "storedSha256": "11a7bdb636121326a00d756cf50b244c2a84d1bf27d23e684781108b116532fe",
+    "jsonlSha256": "bd823128fdddb833aba7faf6c935b7f83631e97488629cb97948fc9f0f6aad9e",
+    "hashMethod": "SHA-256 of stored compressed bytes and decompressed JSONL bytes; message text hashes use UTF-8 input_text/output_text blocks joined by newline.",
+    "records": [
+      {
+        "line": 2430,
+        "atUtc": "2026-09-29T02:47:50.667Z",
+        "atKst": "2026-09-29T11:47:50.667+09:00",
+        "role": "user",
+        "textSha256": "a71bc7c6799a7c4fd5cbf0fbaa7785adef27175035afd17ee5100333de5b7c51"
+      },
+      {
+        "line": 3882,
+        "atUtc": "2026-09-29T07:21:16.121Z",
+        "atKst": "2026-09-29T16:21:16.121+09:00",
+        "role": "user",
+        "textSha256": "0422069f7fe46a0ea89ea77a41dd482ad03247f2bbb2f5d9a942387561b0e3aa"
+      },
+      {
+        "line": 3948,
+        "atUtc": "2026-09-29T07:23:29.303Z",
+        "atKst": "2026-09-29T16:23:29.303+09:00",
+        "role": "assistant",
+        "textSha256": "cbbcbd6c4e5288ffa2ac566669cd9e6acf76d3d24bcf64f7b0cfdaf8665495aa"
+      },
+      {
+        "line": 4285,
+        "atUtc": "2026-09-29T07:39:40.627Z",
+        "atKst": "2026-09-29T16:39:40.627+09:00",
+        "role": "user",
+        "textSha256": "32fc94581aca7bf2c98f3e07bc97134c51ea171d51e7ec45c851c98c61016b19"
+      },
+      {
+        "line": 4370,
+        "atUtc": "2026-09-29T07:42:59.901Z",
+        "atKst": "2026-09-29T16:42:59.901+09:00",
+        "role": "assistant",
+        "textSha256": "eea1baa9b3f26573e7b691dfe74a65db4f3a9ae3aebbe2710e94138d9fad91fa"
+      },
+      {
+        "line": 5660,
+        "atUtc": "2026-09-30T01:26:20.783Z",
+        "atKst": "2026-09-30T10:26:20.783+09:00",
+        "role": "user",
+        "textSha256": "5689de9dd205ffcec4ed3d5b57764028e0bf3ed7a65c3d7598155e6c232dcf37"
+      },
+      {
+        "line": 5799,
+        "atUtc": "2026-09-30T01:49:20.350Z",
+        "atKst": "2026-09-30T10:49:20.350+09:00",
+        "role": "user",
+        "textSha256": "c6c2daa2eaeb3a04ee2ac828649f6b71ab91a0e74fbb591e5847d4b774fc9bad"
+      },
+      {
+        "line": 5837,
+        "atUtc": "2026-09-30T01:52:47.838Z",
+        "atKst": "2026-09-30T10:52:47.838+09:00",
+        "role": "user",
+        "textSha256": "7e0019a3769b3e37d8a83d04a70720b100041b63e8000b03eafc85071a7a67bf"
+      },
+      {
+        "line": 5964,
+        "atUtc": "2026-09-30T02:01:18.724Z",
+        "atKst": "2026-09-30T11:01:18.724+09:00",
+        "role": "assistant",
+        "textSha256": "164a34eef8d8fc8f5d99384eb8a020ab8036593c3a7380992e6df7267c03578b"
+      },
+      {
+        "line": 5976,
+        "atUtc": "2026-09-30T02:14:20.275Z",
+        "atKst": "2026-09-30T11:14:20.275+09:00",
+        "role": "user",
+        "textSha256": "dd5f23e89d327d03323caa184b451a22b0d1fa7cc2cf577ab76c7c830087e3be"
+      },
+      {
+        "line": 6262,
+        "atUtc": "2026-09-30T02:51:19.568Z",
+        "atKst": "2026-09-30T11:51:19.568+09:00",
+        "role": "user",
+        "textSha256": "324b60098b331f105f43a94fcdf30b784a64c18ee2aaf9337a0f40ccc27c058b"
+      },
+      {
+        "line": 6389,
+        "atUtc": "2026-09-30T03:17:51.973Z",
+        "atKst": "2026-09-30T12:17:51.973+09:00",
+        "role": "user",
+        "textSha256": "f873bab4c70b27ab4e90baa25bfe39d48ef6be21229bc99dd20808fef75b5987"
+      },
+      {
+        "line": 6599,
+        "atUtc": "2026-09-30T03:35:26.511Z",
+        "atKst": "2026-09-30T12:35:26.511+09:00",
+        "role": "assistant",
+        "textSha256": "57f47788abbc4b8ed86c74130ce758e3345ff9d98bf40febc9839d78d362fa5c"
+      },
+      {
+        "line": 6606,
+        "atUtc": "2026-09-30T03:36:58.071Z",
+        "atKst": "2026-09-30T12:36:58.071+09:00",
+        "role": "user",
+        "textSha256": "c3069ada194eeb3a417c4f31ef3702fdc32785fff7a600fa01bfefcf4b95d283"
+      },
+      {
+        "line": 6654,
+        "atUtc": "2026-09-30T03:43:07.931Z",
+        "atKst": "2026-09-30T12:43:07.931+09:00",
+        "role": "assistant",
+        "textSha256": "18a5915968d7aad98d5ec91f974c73ecee974f0e109f5bfedd2fe6fa5a03eaf8"
+      },
+      {
+        "line": 6661,
+        "atUtc": "2026-09-30T03:46:37.586Z",
+        "atKst": "2026-09-30T12:46:37.586+09:00",
+        "role": "user",
+        "textSha256": "eae77db2e6d3fc5e534888668c2fc6ed2d59ee59ab1fe4a10e74b6ae992f548b"
+      },
+      {
+        "line": 6763,
+        "atUtc": "2026-09-30T04:01:32.183Z",
+        "atKst": "2026-09-30T13:01:32.183+09:00",
+        "role": "user",
+        "textSha256": "2bc848bccdad66b0331330c82e3b239a150592a913a1be3dd53439f664c39e07"
+      },
+      {
+        "line": 6877,
+        "atUtc": "2026-09-30T04:18:30.643Z",
+        "atKst": "2026-09-30T13:18:30.643+09:00",
+        "role": "user",
+        "textSha256": "dee50e75898d10358b0b15e3c08c135bcd2c15ed776dd82268a549aabc2ffaa7"
+      },
+      {
+        "line": 6910,
+        "atUtc": "2026-09-30T04:26:03.769Z",
+        "atKst": "2026-09-30T13:26:03.769+09:00",
+        "role": "assistant",
+        "textSha256": "dabf130fc865806a358a95f6d6bd10a89b63aea3596bd8e5eeb4551123cc0867"
+      },
+      {
+        "line": 6925,
+        "atUtc": "2026-09-30T04:31:08.432Z",
+        "atKst": "2026-09-30T13:31:08.432+09:00",
+        "role": "assistant",
+        "textSha256": "87480100b7ec5cecfa3b73dbc34cf4ed9d5eb5f7e5f9704371eeedfdb930797b"
+      },
+      {
+        "line": 6932,
+        "atUtc": "2026-09-30T04:32:36.808Z",
+        "atKst": "2026-09-30T13:32:36.808+09:00",
+        "role": "user",
+        "textSha256": "e9aef28ba8d56d597d06035118ffa291e98cbda6eb821a070961f2e683da6314"
+      },
+      {
+        "line": 6946,
+        "atUtc": "2026-09-30T04:33:38.322Z",
+        "atKst": "2026-09-30T13:33:38.322+09:00",
+        "role": "user",
+        "textSha256": "7e0019a3769b3e37d8a83d04a70720b100041b63e8000b03eafc85071a7a67bf"
+      },
+      {
+        "line": 6981,
+        "atUtc": "2026-09-30T04:37:44.035Z",
+        "atKst": "2026-09-30T13:37:44.035+09:00",
+        "role": "assistant",
+        "textSha256": "6937e4c3d499e69ef2dab028620cd8e7ac2e0fab9b3b475ee04b5a191bd9cc91"
+      },
+      {
+        "line": 7027,
+        "atUtc": "2026-09-30T04:47:20.769Z",
+        "atKst": "2026-09-30T13:47:20.769+09:00",
+        "role": "assistant",
+        "textSha256": "072c488a14825067e59bcb7cfcea95b6dd78f9b71fd856d3ca79d431a032461b"
+      },
+      {
+        "line": 7036,
+        "atUtc": "2026-09-30T04:48:35.725Z",
+        "atKst": "2026-09-30T13:48:35.725+09:00",
+        "role": "assistant",
+        "textSha256": "9cfddc983081ace912c95530cc2bd5163fb1421615f35f7082794e12248aad01"
+      },
+      {
+        "line": 7043,
+        "atUtc": "2026-09-30T04:49:13.663Z",
+        "atKst": "2026-09-30T13:49:13.663+09:00",
+        "role": "user",
+        "textSha256": "a9c45ba8dd93b1b720c9e2c8230b93fbf817f5556a7e423f352ac65404f9828f"
+      },
+      {
+        "line": 7074,
+        "atUtc": "2026-09-30T04:54:25.546Z",
+        "atKst": "2026-09-30T13:54:25.546+09:00",
+        "role": "assistant",
+        "textSha256": "318ab24b723187aac74fe57e54e55e1f1e701fb8b266d7fc90d139bece69ca2b"
+      },
+      {
+        "line": 7152,
+        "atUtc": "2026-09-30T05:06:48.048Z",
+        "atKst": "2026-09-30T14:06:48.048+09:00",
+        "role": "assistant",
+        "textSha256": "c73d54199769fe586326d66ddc8b983bdb9aa2a2f812ce0721b2ca4c55f2cc02"
+      },
+      {
+        "line": 7207,
+        "atUtc": "2026-09-30T05:09:45.154Z",
+        "atKst": "2026-09-30T14:09:45.154+09:00",
+        "role": "assistant",
+        "textSha256": "9507f1495f90f65c1a47ecbd724e11b2d2feb37d3a398319df5f7d46ab155840"
+      },
+      {
+        "line": 7355,
+        "atUtc": "2026-09-30T05:45:43.823Z",
+        "atKst": "2026-09-30T14:45:43.823+09:00",
+        "role": "user",
+        "textSha256": "bd05c55cfd30a3adde515588faf81a0f452768505b05a918d5bd5c8e744f27f8"
+      },
+      {
+        "line": 7444,
+        "atUtc": "2026-09-30T05:54:55.737Z",
+        "atKst": "2026-09-30T14:54:55.737+09:00",
+        "role": "assistant",
+        "textSha256": "459fbae14642d519bea4dfc6fdc5f848e760564f1da1ba073c3151c0acf40833"
+      },
+      {
+        "line": 7506,
+        "atUtc": "2026-09-30T06:02:43.524Z",
+        "atKst": "2026-09-30T15:02:43.524+09:00",
+        "role": "assistant",
+        "textSha256": "582c2e4941679474c0161ba321965016407c8ef166b5dca0ccd079101fe89e0b"
+      }
+    ]
+  },
+  "research": [
+    {
+      "path": "docs/research/classification-retrieval-history.md",
+      "commit": "3a6e2e477fa5a66fe67656b802c4bf9bdaf59218",
+      "gitBlobSha256": "a163e88ad9dc8b613c39ab9bd36b7fd394cc73c5e53ff580f9c28522fe4ac592",
+      "scope": "Historical calibration observations and non-adoption summary; October 2 raw artifacts unavailable in this checkout."
+    },
+    {
+      "path": "docs/research/synethos-development-history.md",
+      "commit": "3a6e2e477fa5a66fe67656b802c4bf9bdaf59218",
+      "gitBlobSha256": "31c98a7c6b2fe222ca9b116130a857c316008b8cb79550425aba50e491ebd2a3",
+      "scope": "Historical calibration observations and non-adoption summary; October 2 raw artifacts unavailable in this checkout."
+    },
+    {
+      "path": "docs/research/synethos-evidence-register.md",
+      "commit": "3a6e2e477fa5a66fe67656b802c4bf9bdaf59218",
+      "gitBlobSha256": "6f173ba83687e68daaa115623404e159af8efa37fc454c0e42559e761303bdf7",
+      "scope": "H-L03 through H-L06 identities and historical report hashes."
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "tmp/calibration/cohere-current.json",
+      "sha256": "0097ee466a4b09232b3f0e1514d7118ce325fbc34e33117a1e8da04f2bffc9bd",
+      "scope": "Retained historical local artifact, not a Git blob; inspected without execution."
+    },
+    {
+      "path": "tmp/calibration/retrieval-compare-d047a7dc/summary.json",
+      "sha256": "e473a3a7ebd2b8e465cd9b87fff3898cf5ae5abcbee009fef6b8ffc8b506dc46",
+      "scope": "Retained historical local artifact, not a Git blob; inspected without execution."
+    },
+    {
+      "path": "tmp/calibration/retrieval-compare-d047a7dc/ground-truth-current.json",
+      "sha256": "8e494edb90605bb826def737898e2e2349708d6225592abbb310a66a4c0c6a86",
+      "scope": "Retained historical local artifact, not a Git blob; inspected without execution."
+    },
+    {
+      "path": "tmp/calibration/retrieval-compare-d047a7dc/cohere-embed-v4.json",
+      "sha256": "f1feea44d8f5a5a8578b703a8b89c0aa84ec7172643b0bd49286e20fe6033f6e",
+      "scope": "Retained historical local artifact, not a Git blob; inspected without execution."
+    },
+    {
+      "path": "tmp/calibration/retrieval-compare-d047a7dc/gemini-primary.json",
+      "sha256": "f6e480038327529360194c66f5c56d980f333639f6918810c8828f0ad420822d",
+      "scope": "Retained historical local artifact, not a Git blob; inspected without execution."
+    },
+    {
+      "path": "tmp/calibration/retrieval-compare-d047a7dc/run.ts",
+      "sha256": "2404a6a590a5e0dd01db465e7102bbef9d7ad184ad44546974bb7fcc1e3bb2b8",
+      "scope": "Retained historical local artifact, not a Git blob; inspected without execution."
+    }
+  ],
+  "evidenceLevels": {
+    "codeConfirmed": "Historical Git implementation/test text and selected original bytes directly inspected.",
+    "originalMessageConfirmed": "Original user or assistant message text, timestamp and role directly inspected; reported results retain the scope of that report.",
+    "retainedArtifactConfirmed": "Historical stored result inspected; arithmetic over stored results is distinct from rerunning an experiment.",
+    "researchReportOnly": "Result retained in the identified private research snapshot; October 2 original report, harness, rankings and manual ratings not directly compared here.",
+    "developerRecollection": "Initial recollection is a search hypothesis; narrative events use the linked historical records.",
+    "unconfirmed": "No direct causal message linking reranking review to the September 30 audit, or controlled retrieval-quality before/after comparison, recovered."
+  },
+  "verification": {
+    "preparedOn": "2026-10-30",
+    "scope": "Original byte/range comparison, TypeScript syntax parsing, JSON and bilingual link/hash checks; historical tests and experiments are not rerun.",
+    "codeExcerptsMatched": 7,
+    "typeScriptSyntaxParsed": 7,
+    "evidenceJsonParsed": 3,
+    "sessionFilesMatched": 1,
+    "selectedMessageHashesMatched": 32,
+    "researchSnapshotHashesMatched": 3,
+    "retainedArtifactHashesMatched": 6,
+    "localMarkdownLinksChecked": 746,
+    "bilingualFileAndExternalLinksMatched": true,
+    "bilingualSha256SetsMatched": true,
+    "existingPublicFilesPreserved": 140,
+    "priorCaseBodiesPreserved": "01–07; README introduction/copyright and common reading guidance preserved.",
+    "careerDocumentPreservedAcrossImplementationCommit": true,
+    "privacyReview": "New code, evidence projections and case 08 prose reviewed for credential values, private Knowledge/QB payloads, private repository URLs, local user paths and server access details. Original references and synthetic fixtures retained.",
+    "historicalTestExecution": "Not rerun; 67 passed is the September 30 completion report.",
+    "october02RawArtifactVerification": "Not performed: original unavailable; historical research hashes and reported results retain their distinct scope."
+  }
+}
