@@ -4,7 +4,7 @@
 
 **근거 수준:** 코드 확인은 식별한 과거 소스, 당시 보고는 기록된 조건의 관측, 미확인은 해결되지 않은 사실·인과관계를 뜻합니다. 테스트는 당시 소스 근거로 수록합니다. 시각은 KST(UTC+09:00)이며 개발 사건과 근거 검증 날짜를 구분합니다.
 
-**문서 편집:** 2026-10-30, 기준 `2fc5094`. 아래 과거 공개 검증 기록의 날짜와 범위를 유지합니다.
+**문서 편집:** 2026-10-30, 기준 `2fc5094`. 아래 과거 공개 검증 기록의 날짜와 범위를 유지합니다. 2026-10-31에는 `f7fb082` 기준으로 중복 설명과 검증 한계 표현을 정리했습니다.
 
 **개발 시기:** 2026-09-28 ~ 2026-10-17
 
@@ -33,7 +33,7 @@
 
 ## 대체 embedding space 도입
 
-9월 28일 개발 보고서는 앞선 Gemini 문서 build에서 chunk embedding 50개 성공 뒤 daily quota에 도달했다고 기록합니다. Gemini의 `gemini-embedding-2` 768차원 뒤에 `embed-v4.0` 1536차원을 도입했습니다. 최초 도입 동기의 전체 우선순위를 확인할 대화 기록은 아직 불완전합니다.
+9월 28일 개발 보고서는 앞선 Gemini 문서 build에서 chunk embedding 50개 성공 뒤 daily quota에 도달했다고 기록합니다. Gemini의 `gemini-embedding-2` 768차원 뒤에 `embed-v4.0` 1536차원을 도입했습니다.
 
 [최초 HTTP client](../../cases/cohere-lifecycle/embedding/initial/client.ts#L22-L54)는 native `fetch`로 `/v2/embed`를 호출하고 target 출력 차원의 float vector를 요청합니다. [최초 adapter](../../cases/cohere-lifecycle/embedding/initial/embedding.ts#L19-L45)는 질문에 `search_query`, 제목·본문 문서에 `search_document`를 사용하고 반환 vector 개수를 검사합니다. 각 target은 자신의 embedding space에 맞는 index를 요구합니다.
 
@@ -47,7 +47,7 @@ Build 보고서에는 별도 실행들이 기록돼 있습니다. 한 과거 bui
 
 별도 9월 29일 525chunks 실행은 Cohere batch 5개 성공 뒤 6/6에서 HTTP 429를 받았고 미완성 target은 publish하지 않았습니다. `5615b4c` 보고의 새 bounded retry 정책 검증은 mock 기반이며 live retry 검증은 대기 상태였습니다.
 
-[Reconstructed 설정 이력](../../cases/cohere-lifecycle/configuration/target-history.json#L1-L227)은 커밋된 example 설정 5개의 generation·embedding 필드를 선택해 보존합니다. `1c0f28e`는 runtime embedding에 Cohere만 선택했고, 이후 `180cc30`은 Gemini 다음 Cohere를 선택했습니다. 최초 Cohere 단독 전환 이유는 미확인입니다.
+[Reconstructed 설정 이력](../../cases/cohere-lifecycle/configuration/target-history.json#L1-L227)은 커밋된 example 설정 5개의 generation·embedding 필드를 선택해 보존합니다. `1c0f28e`는 runtime embedding에 Cohere만 선택했고, 이후 `180cc30`은 Gemini 다음 Cohere를 선택했습니다.
 
 ## Generation으로 평가 확대
 
@@ -127,7 +127,7 @@ L2/L3/S4는 설명문·중복 JSON으로 엄격한 parsing에 실패했습니다
 
 **공개 준비 중 사용자가 직접 밝힌 판단 근거, 2026년 10월 29일:** Cohere는 일부 평가에서 Gemini보다 좋은 성능을 보였지만, Synethos 규모에서는 관측된 차이가 과금을 정당화할 만큼 크지 않았습니다. 성능 차이가 훨씬 크거나 서비스가 더 크고 복잡했다면 비용을 지불하는 도입도 고려했을 것입니다. 최종 판단은 실제 성능 차이, 서비스 규모, 대체 가능성과 운영 비용을 종합한 결정이었습니다.
 
-완전 제거는 credential·adapter·별도 index·평가 matrix·테스트 관리 범위를 줄였습니다. 동시에 실제 embedding fallback, 빠른 개발 인덱싱과 Cohere 비교 경로의 직접 재실행을 포기했습니다. 위 성능 관측은 이 tradeoff의 근거로 유지합니다. 실측 청구 총액과 수치화된 비용·편익 임계값은 기록에서 확인되지 않습니다.
+완전 제거는 credential·adapter·별도 index·평가 matrix·테스트 관리 범위를 줄였습니다. 동시에 실제 embedding fallback, 빠른 개발 인덱싱과 Cohere 비교 경로의 직접 재실행을 포기했습니다. 위 성능 관측은 이 tradeoff의 근거로 유지합니다.
 
 ## 제거 구현과 index 인계
 
@@ -143,7 +143,7 @@ Provider abstraction, 과거 비교 artifact, 공통 document-build 진행 로�
 
 10월 1일 품질 결과는 직접 읽은 원본 세션의 당시 보고입니다. 10월 3일 generation 원본과 10월 6일 classifier·10월 15일 검색 파일은 직접 대조했습니다. 10월 16~17일 원본 세션에서 제거 판단·agent 완료 보고·사용자의 CURRENT 확인을 직접 읽었습니다. 실행 결과는 각 당시 보고의 조건으로 유지합니다. 10월 29일 근거는 이 공개 작업에서 사용자가 직접 밝힌 후속 설명입니다.
 
-남은 사항은 최초 도입·Cohere 단독 전환의 전체 동기, 10월 6일 비용 발언의 적용 범위, 당시 key·약관의 독립 자료, classifier 출력·block 처리 원인, build 시도별 ledger와 제거 후 production 검증입니다. 이번 공개에서는 모델 요청·index build·당시 애플리케이션 테스트를 실행하지 않았습니다.
+남은 사항은 10월 6일 비용 발언의 적용 범위, 당시 key·약관의 독립 자료, classifier 출력·block 처리 원인, build 시도별 ledger와 제거 후 production 검증입니다. 이번 공개에서는 모델 요청·index build·당시 애플리케이션 테스트를 실행하지 않았습니다.
 
 ## 출처 추적과 공개 방식
 

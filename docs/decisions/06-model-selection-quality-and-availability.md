@@ -4,7 +4,7 @@
 
 **Evidence:** Code confirmed identifies historical source; reported at the time retains recorded observation conditions; unconfirmed marks unresolved facts or causal links. Tests are historical source evidence. Times are KST (UTC+09:00); development events and evidence-inspection dates retain their own labels.
 
-**Document revision:** Split on 2026-10-30 from `2fc5094`. Historical publication checks below retain their dates and scope.
+**Document revision:** Split on 2026-10-30 from `2fc5094`. Historical publication checks below retain their dates and scope. On 2026-10-31, redundant explanations and verification-limit wording were revised from `f7fb082`.
 
 **Development period:** 2026-09-26 ~ 2026-10-16
 
@@ -53,7 +53,7 @@ Commit 180cc30 on October 2 at 02:37:05 then established Gemini 3.5 primary and 
 
 One Gemini 3.5 success in the prior run and two in the retry run are separate from the 3.8 usage above. The twenty-first known 3.8 request returned an actual HTTP 429/RESOURCE_EXHAUSTED envelope specifying quotaId GenerateRequestsPerDayPerProjectPerModel-FreeTier and quotaValue 20. This establishes attempt-level correspondence between the previously separate 20-call history and the retry run.
 
-These observations and quota exhaustion grounded the developer’s conclusion that failed requests consumed daily budget. The retained records do not directly establish provider-side individual deductions, other account activity, or monetary billing.
+These observations and quota exhaustion grounded the developer’s conclusion that failed requests consumed daily budget. Provider-side per-request quota deduction records are unavailable.
 
 From this result, the developer concluded that 503 failures counted toward the call allowance: most of the day's capacity had been consumed while producing very few usable responses. Twenty calls per day was already insufficient for Synethos, and losing most of that allowance to failures removed the practical reason to select Gemini 3.8 for operation.
 
@@ -201,11 +201,11 @@ Developer-provided ChatGPT search records retain the initial September 26 switch
 
 The October 29 capacity rationale, recalled quota depletion, and broader external-reaction memory remain attributed later statements.
 
-Remaining gaps are provider-side individual request deductions, other account activity, monetary billing, the original Qwen failure ledger, the original ChatGPT conversation/AI Studio screenshot, and other external posts recalled by the developer. Groq’s October 15 semantic quality and exact limiting quota remain unconfirmed. Recovered October 3 responses, options, request correspondence, and historical limits retain their respective record dates.
+Remaining gaps are provider-side per-request quota deductions, the original Qwen failure ledger, the original ChatGPT conversation/AI Studio screenshot, and other external posts recalled by the developer. Groq’s October 15 semantic quality and exact limiting quota remain unconfirmed. Recovered October 3 responses, options, request correspondence, and historical limits retain their respective record dates.
 
 Whole-file Excerpts keep small, coherent implementation/test units: baseline quota handling, canonical evidence/runner contracts, and transport/diagnostic behavior. Partial Excerpts isolate fixed-input comparison and the adopted runtime's regressions, preserving original statements, imports, and references. The common policy is retained whole because its fallback eligibility, header/body parsing, and safe projection work together.
 
-Reconstructed JSON selects original settings/results and labels editorial grouping, aggregate calculations, earlier transcriptions, and later developer testimony. The two selected generated answers preserve actual failure evidence; full knowledge payloads and credentials remain private. No Mixed source was needed.
+Reconstructed JSON selects original settings/results and labels editorial grouping, aggregate calculations, earlier transcriptions, and later developer testimony. The two selected generated answers preserve actual failure evidence; full knowledge payloads and credentials remain private.
 
 Original commits, paths, excerpt ranges, full hashes and reconstruction inputs are preserved in the [complete source ledger](06-source-ledger.md).
 

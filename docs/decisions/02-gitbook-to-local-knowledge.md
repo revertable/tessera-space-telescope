@@ -4,7 +4,7 @@
 
 **Evidence:** Code confirmed identifies historical source; reported at the time retains recorded observation conditions; unconfirmed marks unresolved facts or causal links. Tests are historical source evidence. Times are KST (UTC+09:00); development events and evidence-inspection dates retain their own labels.
 
-**Document revision:** Split on 2026-10-30 from `2fc5094`. Historical publication checks below retain their dates and scope.
+**Document revision:** Split on 2026-10-30 from `2fc5094`. Historical publication checks below retain their dates and scope. On 2026-10-31, redundant explanations and verification-limit wording were revised from `f7fb082`.
 
 **Development period:** 2026-09-26 ~ 2026-09-28
 
@@ -71,7 +71,7 @@ At 10:38:04 on September 28, a retained developer message reported that derived 
 
 That message's UTC timestamp is 2026-09-28T01:38:04.008Z. The published snapshot contains the revised orchestration. Its retained merge policy used a holistic seed, top intent anchors, and an original-query backbone before derived tails.
 
-At 11:45:32, a further request recorded roughly six embedding calls and three GitBook searches for a two-intent question, along with a 100 RPM free-tier 429 observation. This prompted investigation of fan-out and duplicated embedding work. These observations come from contemporaneous reports. Their relative weight in the MCP retirement decision remains unconfirmed.
+At 11:45:32, a further request recorded roughly six embedding calls and three GitBook searches for a two-intent question, along with a 100 RPM free-tier 429 observation. This prompted investigation of fan-out and duplicated embedding work. These observations come from contemporaneous reports.
 
 The [collection test](../../cases/gitbook-mcp-to-local-knowledge/verification/source-candidates.test.ts#L6-L85) expresses provenance and original ranking-signal preservation with synthetic fixtures. The multi-source and intent work was exercised by evaluation; the production answer/search routes still used their existing single-query Local retrieval path.
 
@@ -81,7 +81,7 @@ At 12:07:16.238 on September 28, the developer explicitly chose to incorporate t
 
 At 12:45:49.898, the developer reported 42 documents/475 chunks imported but index rebuilding blocked by the daily embedding quota, and requested the MCP-removal scope analysis. At 13:50:33, a subsequent request described the import and MCP-removal changes as existing uncommitted work to preserve while beginning the next embedding-target task. The combined implementation was committed at 14:50:04 as5f71fbe.
 
-The source simplification and phased scope are recorded user choices. The records do not establish whether metadata limitations, duplicate corpus access, request cost, reproducibility, or manual approval boundaries were the dominant motivation.
+The source simplification and phased scope are recorded user choices.
 
 ## Implementation: approved local files with public citation provenance
 
@@ -95,7 +95,7 @@ The [Local search path](../../cases/gitbook-mcp-to-local-knowledge/local-knowled
 
 The [Local intent excerpt](../../cases/gitbook-mcp-to-local-knowledge/local-knowledge/intent-orchestration.excerpt.ts#L1-L25) retains planning and merge delegation while replacing remote-source collection/ranking with Local candidate searches. Its default path executes the query bundle on one embedding target, returning that target with the runs. Source identity becomes a Local chunk identity. The same transition also added embedding-provider fallback for query embeddings. Provider adapters and their broader implementation are outside this excerpt set.
 
-The [Local-query test excerpt](../../cases/gitbook-mcp-to-local-knowledge/verification/local-query-search.excerpt.test.ts#L13-L42) uses an injected search function to check one Local search per planned query. It does not exercise a real target index, provider fallback, or live answer quality.
+The [Local-query test excerpt](../../cases/gitbook-mcp-to-local-knowledge/verification/local-query-search.excerpt.test.ts#L13-L42) uses an injected search function to check one Local search per planned query. Integration checks using a real target index and provider fallback have a separate scope.
 
 ## Corpus readiness was not index readiness
 
@@ -115,9 +115,9 @@ The implementation and prepared corpus support the Local Knowledge direction, bu
 
 ## What changed, what stayed, and what remains unconfirmed
 
-The remote documentation source was removed, while approved document registration, vector retrieval, public citation provenance, deterministic intent planning, and evaluation of coverage were retained or adapted. The priorities behind retirement and full-index retrieval quality remain unconfirmed as listed below.
+The remote documentation source was removed, while approved document registration, vector retrieval, public citation provenance, deterministic intent planning, and evaluation of coverage were retained or adapted. The scope of full-index retrieval quality and probe-run correspondence is recorded below.
 
-Still unconfirmed are the relative weight of the final retirement motivations, the complete correspondence of earlier raw probe runs, and end-to-end retrieval quality with a finished full index at the transition point. The initial round-robin regression remains a reported failure, and the published code records the subsequent revision. No MCP probe, embedding request, index build, or application test was rerun for this publication.
+Still unconfirmed are the complete correspondence of earlier raw probe runs and end-to-end retrieval quality with a finished full index at the transition point. The initial round-robin regression remains a reported failure, and the published code records the subsequent revision. No MCP probe, embedding request, index build, or application test was rerun for this publication.
 
 ## Source traceability and publication form
 

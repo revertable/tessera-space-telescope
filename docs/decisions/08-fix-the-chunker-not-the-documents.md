@@ -4,7 +4,7 @@
 
 **Evidence:** Code confirmed identifies historical source; reported at the time retains recorded observation conditions; unconfirmed marks unresolved facts or causal links. Tests are historical source evidence. Times are KST (UTC+09:00); development events and evidence-inspection dates retain their own labels.
 
-**Document revision:** Split on 2026-10-30 from `2fc5094`. Historical publication checks below retain their dates and scope.
+**Document revision:** Split on 2026-10-30 from `2fc5094`. Historical publication checks below retain their dates and scope. On 2026-10-31, redundant explanations and verification-limit wording were revised from `f7fb082`.
 
 **Development period:** 2026-09-29 ~ 2026-10-02.
 
@@ -75,7 +75,7 @@ The [original chunker tests](../../cases/fix-the-chunker/verification/chunker.te
 
 The remaining extracts connect the same context to [document embedding](../../cases/fix-the-chunker/verification/embedding-context.excerpt.test.ts#L17-L36), [search evidence](../../cases/fix-the-chunker/verification/search-context.excerpt.test.ts#L24-L36) and [generation input](../../cases/fix-the-chunker/verification/generation-context.excerpt.test.ts#L5-L16). Their assertions describe input propagation. Search-quality before/after effects remain unmeasured in the recovered records.
 
-Commit fce18cee958785252a7f07259c13dafb536086c3 at 15:07:49 records the implementation and tests. Commit 29d2b21d8c0331575478ec5e9d13470729d30b0d at 15:08:38 records subsequent index publication. Code integration and artifact publication retain their own evidence; production-server deployment at this date is outside the recovered verification.
+Commit fce18cee958785252a7f07259c13dafb536086c3 at 15:07:49 records the implementation and tests. Commit 29d2b21d8c0331575478ec5e9d13470729d30b0d at 15:08:38 records subsequent index publication. Code integration and artifact publication retain their own evidence.
 
 ## Later selection experiments: developer criteria and AI comparisons
 
@@ -124,7 +124,7 @@ Original verification records report zero external calls and zero source changes
 
 The [source register](../../cases/fix-the-chunker/evidence/source-register.json#L1-L882) preserves the compressed/decompressed hashes and 32 selected message hashes for original session 01a0ea78-071a-7243-ac8e-1e5d7ee57aae, three Git research snapshots and six earlier local artifacts. Its homeRecovery adds identities, hashes and UTC/KST timestamps for 38 directly inspected October 2 originals and three user-input records. Input history confirms developer requests and contains no complete AI replies or execution transcript.
 
-The September 30 original user request establishes the audit's immediate maintenance/rebuild context. Remaining questions cover a direct causal message connecting it to the earlier reranker review, matched retrieval-quality runs before/after chunker v2, the complete October 2 proposal/completion conversation, and separate final user approval for ending hybrid tuning. The 527→505 count change and context-preservation tests establish structural correctness.
+The September 30 original user request establishes the audit's immediate maintenance/rebuild context. Remaining questions cover matched retrieval-quality runs before/after chunker v2, the complete October 2 proposal/completion conversation, and separate final user approval for ending hybrid tuning. The 527→505 count change and context-preservation tests establish structural correctness.
 
 Published code and synthetic tests retain original imports and application references. Added rules.mjs is the complete retained local experiment file, with no Git-commit attribution. Evidence records publish identifiers, hashes and aggregate observations while keeping Knowledge, QB question/answer text, manual-rating rationales, complete conversations, credentials and server access material private.
 

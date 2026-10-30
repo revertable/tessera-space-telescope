@@ -4,7 +4,7 @@
 
 **Evidence:** Code confirmed identifies historical source; reported at the time retains recorded observation conditions; unconfirmed marks unresolved facts or causal links. Tests are historical source evidence. Times are KST (UTC+09:00); development events and evidence-inspection dates retain their own labels.
 
-**Document revision:** Split on 2026-10-30 from `2fc5094`. Historical publication checks below retain their dates and scope.
+**Document revision:** Split on 2026-10-30 from `2fc5094`. Historical publication checks below retain their dates and scope. On 2026-10-31, redundant explanations and verification-limit wording were revised from `f7fb082`.
 
 **Development period:** 2026-09-28 ~ 2026-10-26
 
@@ -107,7 +107,7 @@ The 21:18:24 request explicitly required the same Git artifact to be CURRENT and
 
 Publication-time comparisons are identified above.
 
-Whole-file Excerpts preserve complete selected snapshots. Partial Excerpts retain the listed source ranges with blank separators, original imports, identifiers, and application references. Storage/status/menu select reuse behavior; test excerpts select relevant assertions; production excerpts select packaging and validation while operational access details remain private. Reconstructed JSON selects recorded fields and labels digest calculations/editorial grouping. Full knowledge/vector payload remains private. All source code uses Excerpt; no Mixed reconstruction was needed.
+Whole-file Excerpts preserve complete selected snapshots. Partial Excerpts retain the listed source ranges with blank separators, original imports, identifiers, and application references. Storage/status/menu select reuse behavior; test excerpts select relevant assertions; production excerpts select packaging and validation while operational access details remain private. Reconstructed JSON selects recorded fields and labels digest calculations/editorial grouping. Full knowledge/vector payload remains private. All source code uses Excerpt.
 
 <details>
 <summary>Source snapshots, excerpt ranges, and SHA-256</summary>

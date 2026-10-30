@@ -4,7 +4,7 @@
 
 **근거 수준:** 코드 확인은 식별한 과거 소스, 당시 보고는 기록된 조건의 관측, 미확인은 해결되지 않은 사실·인과관계를 뜻합니다. 테스트는 당시 소스 근거로 수록합니다. 시각은 KST(UTC+09:00)이며 개발 사건과 근거 검증 날짜를 구분합니다.
 
-**문서 편집:** 2026-10-30, 기준 `2fc5094`. 아래 과거 공개 검증 기록의 날짜와 범위를 유지합니다.
+**문서 편집:** 2026-10-30, 기준 `2fc5094`. 아래 과거 공개 검증 기록의 날짜와 범위를 유지합니다. 2026-10-31에는 `f7fb082` 기준으로 중복 설명과 검증 한계 표현을 정리했습니다.
 
 **개발 시기:** 2026-09-26 ~ 2026-09-28
 
@@ -73,7 +73,7 @@ GitBook client는 finally에서 닫으며, 최종 citation은 evidence 선택 �
 
 해당 메시지의 UTC는 2026-09-28T01:38:04.008Z입니다. 공개 기준본에는 이후 수정된 orchestration이 들어 있습니다. 당시 유지한 merge 정책은 holistic seed, 의도별 상위 anchor, derived tail보다 앞선 original-query backbone을 사용했습니다.
 
-11:45:32의 후속 요청은 2-intent 질문에서 약 6 embedding·3 GitBook search와 무료 티어 100 RPM의 429 관측을 기록합니다. 이를 바탕으로 fan-out과 중복 embedding 작업을 조사했습니다. 이 관측은 당시 보고에서 가져왔으며, MCP 철회 결정에서 차지한 상대적 비중은 미확인입니다.
+11:45:32의 후속 요청은 2-intent 질문에서 약 6 embedding·3 GitBook search와 무료 티어 100 RPM의 429 관측을 기록합니다. 이를 바탕으로 fan-out과 중복 embedding 작업을 조사했습니다. 이 관측은 당시 보고에서 가져왔습니다.
 
 [수집 테스트](../../cases/gitbook-mcp-to-local-knowledge/verification/source-candidates.test.ts#L6-L85)는 합성 fixture로 provenance와 원래 ranking signal 보존 계약을 표현합니다. 다중 source·intent 작업은 평가 경로에서 다뤘고, production answer/search route는 기존 Local 단일 query 검색을 사용했습니다.
 
@@ -83,7 +83,7 @@ GitBook client는 finally에서 닫으며, 최종 citation은 evidence 선택 �
 
 12:45:49.898에는 42문서·475 chunks 편입 완료와 daily embedding quota로 index rebuild가 막힌 상태를 구분해 MCP 제거 범위 분석을 요청했습니다. 13:50:33 후속 요청은 편입·MCP 제거를 이미 존재하는 미커밋 변경으로 보존하면서 다음 embedding-target 작업을 시작하도록 했습니다. 결합된 구현은 14:50:04에 5f71fbe로 커밋됐습니다.
 
-Source 단순화와 단계별 범위는 기록된 사용자 선택입니다. Metadata 한계, 중복 corpus 조회, 요청 비용, 재현성, 수동 승인 경계 중 무엇이 철회의 주된 동기였는지는 확인되지 않았습니다.
+Source 단순화와 단계별 범위는 기록된 사용자 선택입니다.
 
 ## 구현: 승인 Local 파일과 공개 인용 출처
 
@@ -99,7 +99,7 @@ Source 단순화와 단계별 범위는 기록된 사용자 선택입니다. Met
 
 Source identity는 Local chunk identity가 됩니다. 같은 전환에서 query embedding을 위한 embedding-provider fallback도 추가했습니다. Provider adapter의 상세 구현은 이번 발췌 범위 밖입니다.
 
-[Local query 테스트 발췌](../../cases/gitbook-mcp-to-local-knowledge/verification/local-query-search.excerpt.test.ts#L13-L42)는 주입한 검색 함수로 계획 query마다 Local 검색 1회를 확인합니다. 실제 target index, provider fallback, live 답변 품질을 검증하지 않습니다.
+[Local query 테스트 발췌](../../cases/gitbook-mcp-to-local-knowledge/verification/local-query-search.excerpt.test.ts#L13-L42)는 주입한 검색 함수로 계획 query마다 Local 검색 1회를 확인합니다. 실제 target index와 provider fallback을 사용하는 통합 검증은 별도 범위입니다.
 
 ## Corpus 준비와 index 준비는 다른 상태
 
@@ -119,9 +119,9 @@ Source identity는 Local chunk identity가 됩니다. 같은 전환에서 query 
 
 ## 달라진 점·유지한 점·미확인 사항
 
-원격 문서 source를 제거하면서 승인 문서 등록, vector retrieval, 공개 인용 출처, 규칙 기반 intent 계획과 coverage 평가는 유지하거나 조정했습니다. 전환 동기의 우선순위와 전체 index 검색 품질은 아래와 같이 미확인으로 남깁니다.
+원격 문서 source를 제거하면서 승인 문서 등록, vector retrieval, 공개 인용 출처, 규칙 기반 intent 계획과 coverage 평가는 유지하거나 조정했습니다. 전체 index 검색 품질과 probe 실행의 대응 범위는 아래에 기록합니다.
 
-최종 철회 동기들의 상대적 비중, 앞선 raw probe 실행의 전체 대응, 전환 시점에 완성된 전체 index를 사용한 end-to-end 검색 품질은 미확인입니다. 초기 round-robin 회귀는 당시 보고된 실패로 남기며, 공개 코드는 이후 수정본을 기록합니다. 이번 공개를 위해 MCP probe, embedding, index build, 애플리케이션 테스트를 재실행하지 않았습니다.
+앞선 raw probe 실행의 전체 대응과 전환 시점에 완성된 전체 index를 사용한 end-to-end 검색 품질은 미확인입니다. 초기 round-robin 회귀는 당시 보고된 실패로 남기며, 공개 코드는 이후 수정본을 기록합니다. 이번 공개를 위해 MCP probe, embedding, index build, 애플리케이션 테스트를 재실행하지 않았습니다.
 
 ## 출처 추적과 공개 방식
 

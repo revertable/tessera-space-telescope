@@ -4,7 +4,7 @@
 
 **Evidence:** Code confirmed identifies historical source; reported at the time retains recorded observation conditions; unconfirmed marks unresolved facts or causal links. Tests are historical source evidence. Times are KST (UTC+09:00); development events and evidence-inspection dates retain their own labels.
 
-**Document revision:** Split on 2026-10-30 from `2fc5094`. Historical publication checks below retain their dates and scope.
+**Document revision:** Split on 2026-10-30 from `2fc5094`. Historical publication checks below retain their dates and scope. On 2026-10-31, redundant explanations and verification-limit wording were revised from `f7fb082`.
 
 **Development date:** 2026-09-26
 
@@ -98,15 +98,15 @@ The transition commit's development report records a separate Gemini check:
 | Timing | Index creation approximately4.96seconds; complete `/api/ask` request approximately4.96seconds |
 | Further calls | No retry, fallback, or additional question used |
 
-The report records approximately4.96seconds for index creation and approximately4.96seconds for the complete answer request as separate operations. The Gemini check verified the index-and-answer path for one profile document and one Korean question. The Qwen low-load run used a different English question and execution conditions, so a controlled speed/quality comparison remains unavailable. Broader quality, quota sustainability, and production reliability remain unverified.
+The Gemini check verified the index-and-answer path for one profile document and one Korean question. The table's index creation and complete answer request timings measure separate operations. The Qwen low-load run used an English question and different execution conditions, limiting direct speed/quality comparison between the two runs.
 
-The evidence supports the following boundaries:
+The implementation and historical tests establish the following:
 
-| Established in the record | Still unconfirmed or outside the verification |
+| Item | Confirmed behavior |
 |---|---|
-| Local HTTP inference was replaced by direct Gemini integration, with grounding instructions and new index compatibility checks visible in code. | The technical cause of the power loss and the mapping of the final local requests to individual questions. |
-| A lower-load local run completed, and a separate Gemini Korean question succeeded according to retained records. | Sustained local stability, Korean quality improvement from the 8B change, or general Gemini superiority. |
-| Historical tests express request, vector-order, and fingerprint contracts. | A current full application test run or fresh model experiment in Tessera. |
+| Provider transition | Local HTTP inference was replaced by direct Gemini integration. |
+| Grounding and index | Grounding instructions and new index compatibility checks are visible in code. |
+| Historical tests | They express request, vector-order, and fingerprint contracts. |
 
 ## Source traceability
 

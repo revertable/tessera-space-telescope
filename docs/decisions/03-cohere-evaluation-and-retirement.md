@@ -4,7 +4,7 @@
 
 **Evidence:** Code confirmed identifies historical source; reported at the time retains recorded observation conditions; unconfirmed marks unresolved facts or causal links. Tests are historical source evidence. Times are KST (UTC+09:00); development events and evidence-inspection dates retain their own labels.
 
-**Document revision:** Split on 2026-10-30 from `2fc5094`. Historical publication checks below retain their dates and scope.
+**Document revision:** Split on 2026-10-30 from `2fc5094`. Historical publication checks below retain their dates and scope. On 2026-10-31, redundant explanations and verification-limit wording were revised from `f7fb082`.
 
 **Development period:** 2026-09-28 ~ 2026-10-17
 
@@ -33,7 +33,7 @@ The sequence below separates committed configurations, local runtime changes, an
 
 ## Introducing an alternative embedding space
 
-The September 28 development report records an earlier Gemini document build reaching its daily quota after 50 successful chunk embeddings. The developer introduced `embed-v4.0` at 1536 dimensions after Gemini’s `gemini-embedding-2` at 768 dimensions. The original conversations establishing the complete priority of introduction motives remain incomplete.
+The September 28 development report records an earlier Gemini document build reaching its daily quota after 50 successful chunk embeddings. The developer introduced `embed-v4.0` at 1536 dimensions after Gemini’s `gemini-embedding-2` at 768 dimensions.
 
 The [initial HTTP client](../../cases/cohere-lifecycle/embedding/initial/client.ts#L22-L54) sends native `fetch` requests to `/v2/embed`, asking for float vectors with the target’s output dimension. The [initial adapter](../../cases/cohere-lifecycle/embedding/initial/embedding.ts#L19-L45) uses `search_query` for a question and `search_document` for title-plus-content document inputs, and validates returned vector counts. Each target requires an index in its own embedding space.
 
@@ -43,7 +43,7 @@ The later [batching adapter](../../cases/cohere-lifecycle/embedding/batched/embe
 
 Build reports describe distinct runs: one historical build sent three successful 32-document Gemini requests before the fourth failed with insufficient retained diagnostics, while Cohere completed six requests and produced a then-current cache artifact. A separate September 29 attempt on 525 chunks completed five Cohere batches and received HTTP 429 on batch 6/6; the incomplete target was not published. The `5615b4c` report records mocked validation of the new bounded retry policy, with live retry verification still pending.
 
-The [Reconstructed configuration history](../../cases/cohere-lifecycle/configuration/target-history.json#L1-L227) preserves selected generation/embedding fields from five committed example configurations. `1c0f28e` selected only Cohere for runtime embedding; `180cc30` later selected Gemini then Cohere. The reason for the initial Cohere-only switch remains unconfirmed.
+The [Reconstructed configuration history](../../cases/cohere-lifecycle/configuration/target-history.json#L1-L227) preserves selected generation/embedding fields from five committed example configurations. `1c0f28e` selected only Cohere for runtime embedding; `180cc30` later selected Gemini then Cohere.
 
 ## Extending evaluation to generation
 
@@ -129,7 +129,7 @@ The [evidence-rank calculation](../../cases/cohere-lifecycle/evaluation/retrieva
 
 **Developer clarification during publication preparation, October 29, 2026:** the developer explicitly stated that Cohere outperformed Gemini in some evaluations, but the observed difference at Synethos’s scale was too small to justify payment. The developer would have considered paid adoption if the performance advantage had been much larger or the service larger and more complex. The final judgment weighed the actual performance difference, service scale, substitutability, and operating cost together.
 
-Complete removal reduced credential, adapter, separate-index, evaluation-matrix, and test maintenance. It also gave up live embedding fallback, faster development indexing, and direct reruns of the retained Cohere comparison paths. The performance observations above remain part of that tradeoff. The records contain no measured billing total or numerical cost/benefit threshold.
+Complete removal reduced credential, adapter, separate-index, evaluation-matrix, and test maintenance. It also gave up live embedding fallback, faster development indexing, and direct reruns of the retained Cohere comparison paths. The performance observations above remain part of that tradeoff.
 
 ## Removal implementation and index handover
 
@@ -145,7 +145,7 @@ On October 17 at 22:19:07.357 the developer reported a successful rebuild and CU
 
 The October 1 quality results are contemporaneous reports in a directly inspected session. Original October 3 generation artifacts and October 6 classifier/October 15 retrieval files were directly compared. The original October 16/17 session was read for the removal decision, agent completion report, and developer CURRENT observation. Execution results retain each historical report’s conditions. The October 29 rationale is the developer’s later clarification in this publication task.
 
-Remaining questions are the full introduction/Cohere-only-switch motives, the scope of the October 6 cost statement, independent historical key/terms evidence, the classifier output/block-handling cause, build-attempt ledgers, and post-removal production verification. No model request, index build, or historical application test was executed for this publication.
+Remaining questions are the scope of the October 6 cost statement, independent historical key/terms evidence, the classifier output/block-handling cause, build-attempt ledgers, and post-removal production verification. No model request, index build, or historical application test was executed for this publication.
 
 ## Source traceability and publication form
 

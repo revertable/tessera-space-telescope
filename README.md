@@ -6,7 +6,7 @@ Tessera presents selected implementation code and engineering decisions from **S
 
 The full Synethos source remains private, while Tessera publishes only selected code and the context needed to understand its engineering decisions.
 
-This repository is intended for reading code. It is not a runnable application or a standalone module, and it provides no execution environment, package, dependency setup, or build and test workflow. Published code retains its original language's file extensions and syntax.
+This repository presents implementation excerpts for reading and provides no execution, build, or test environment. Published code retains its original language's file extensions and syntax.
 
 Code is classified by its relationship to the private implementation:
 

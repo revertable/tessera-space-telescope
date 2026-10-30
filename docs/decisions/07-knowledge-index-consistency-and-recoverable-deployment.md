@@ -4,7 +4,7 @@
 
 **Evidence:** Code confirmed identifies historical source; reported at the time retains recorded observation conditions; unconfirmed marks unresolved facts or causal links. Tests are historical source evidence. Times are KST (UTC+09:00); development events and evidence-inspection dates retain their own labels.
 
-**Document revision:** Split on 2026-10-30 from `2fc5094`. Historical publication checks below retain their dates and scope.
+**Document revision:** Split on 2026-10-30 from `2fc5094`. Historical publication checks below retain their dates and scope. On 2026-10-31, redundant explanations and verification-limit wording were revised from `f7fb082`.
 
 **Development period:** 2026-10-22 ~ 2026-10-26. The developer directly clarified operating constraints, retention choice, and design delegation on 2026-10-29.
 
@@ -32,7 +32,7 @@ The original October 22 request supplied the 10GB constraint. Historical tool ou
 
 The 338 general update candidates in the initial inspection and the 246 approved security updates have separate scopes. The AI investigated the dry-run space reduction through existing APT/cache/installed-version records, then calculated an installation budget. The developer approved the declared security-update installation; the completion report preserves the installed count, monitored minimum, and held kernel packages. Later setup also removed approximately 850MiB of downloaded cache while installing the runtime and application.
 
-The [constraints and decisions evidence](../../cases/knowledge-index-release-consistency/evidence/decisions-and-constraints.json#L1-L289) separates direct tool measurements, contemporaneous reports, and the October 29 account. The sequence shows transient downloads and later cleanup as well as installation. Free space immediately after provider provisioning and a complete per-package attribution of filesystem use remain unavailable.
+The [constraints and decisions evidence](../../cases/knowledge-index-release-consistency/evidence/decisions-and-constraints.json#L1-L289) separates direct tool measurements, contemporaneous reports, and the October 29 account. The sequence shows transient downloads and later cleanup as well as installation. The storage conditions for the retention policy are described using the deployment-time free-space and release-size measurements above.
 
 ## Total three releases: developer choice and AI design
 
@@ -67,7 +67,7 @@ The contemporaneous messages now provide the two-to-three transition that was pr
 
 **October 26 actual activation failure:** at 14:47:50.309 the tool output reported rollback=true, restoration of the previous release and healthy recovery after the new release failed loopback health. The 14:48:18.359 journal output showed ERR_MODULE_NOT_FOUND for dotenv. At 14:49:08.659, node_modules and dotenv directories were root-owned 0700, and dotenv/package.json was root-owned 0600.
 
-The AI diagnosed missing read/traverse access after ownership changes and reported the correction at 14:49:16.271. The retained corrected script applies directory/read permissions while preserving executable bits and imports dotenv/@google/genai as the service account before activation. The failed-execution/correction interval contains no separate developer approval message; it follows the recorded deployment-scope approval.
+The AI diagnosed missing read/traverse access after ownership changes and reported the correction at 14:49:16.271. The retained corrected script applies directory/read permissions while preserving executable bits and imports dotenv/@google/genai as the service account before activation.
 
 The corrected redeployment passed: the 14:50:27.509 follow-up output verified 111 files and healthy services. Its verification report and script check process cwd, current and the changed environment root; its packaged index identifies 28 sources/382 chunks. The report's rollback=false belongs to that successful attempt. The earlier failed attempt's actual recovery remains a separate observation in the [deployment evidence](../../cases/knowledge-index-release-consistency/evidence/deployment-observed-results.json#L1-L138).
 
@@ -100,7 +100,7 @@ Index identity and loader contracts connect to case 05’s [manifest verificatio
 | 14:30:30.300 | AI loopback-deployment completion report; 373-chunk index reused |
 | October 26 14:42:49.628 → 14:44:51.004 | Developer deployment approval → AI old-root diagnosis |
 | 14:47:50.309 | Tool records failed activation and actual healthy recovery of previous release/environment |
-| 14:48:18.359 → 14:49:08.659 → 14:49:16.271 | Journal error → access-mode inspection → AI permission/import correction report |
+| 14:48:18.359 → 14:49:08.659 → 14:49:16.271 | Journal error → access-mode inspection → AI permission/import correction report. No separate approval message; the earlier deployment-scope approval is recorded. |
 | 14:50:27.509 | Tool verifies corrected deployment and 111 payload files |
 | 14:51:56.708 → 14:52:21.066 → 15:11:50.447 | AI recommends two → developer adopts two → developer chooses three |
 | Around 21:10 | Tool output reads the prior server script's permission checks, active-root checks and three-release policy |
@@ -130,7 +130,7 @@ The [observed-results projection](../../cases/knowledge-index-release-consistenc
 | Restoration readiness | Previous 189cf00 loader/import preflight and rollbackReady confirmed |
 | Production rollback/provider calls | Rollback unnecessary/zero calls |
 
-During the original October 29 publication preparation, the retained archive was read in memory and its archive/manifest hashes and all 112 payload file sizes/SHA-256 compared. All matched, with zero node_modules/evaluation-fixture entries. Ordinary 1033-pass/4-skip tests and passing static checks/build remain historical candidate-code verification. Health/loader success and semantic answer quality concern different verification targets.
+During the original October 29 publication preparation, the retained archive was read in memory and its archive/manifest hashes and all 112 payload file sizes/SHA-256 compared. All matched, with zero node_modules/evaluation-fixture entries. Ordinary 1033-pass/4-skip tests and passing static checks/build remain historical candidate-code verification.
 
 The [rollback/retention test excerpt](../../cases/knowledge-index-release-consistency/verification/rollback-retention.excerpt.test.py#L1-L65) injects failure while using an actual POSIX symlink and synthetic Knowledge/Index files, checking restoration of both old contents. Separate assertions check retention ordering. The historical eight-test Linux pass includes these checks.
 
@@ -144,7 +144,7 @@ The October 29 direct developer account supplies operating experience and design
 
 Source types remain distinct: tool measurements and journal/access-mode output; developer instructions/approvals; AI proposals/diagnoses/completion reports; retained operating reports; and the later developer account. The original October 29 verification of the 4fddd61 archive/session remains in the register. Its eight private artifact paths are unavailable in this checkout; the October 30 supplement verifies the earlier sessions and six retained earlier artifacts.
 
-Remaining gaps are exact free space immediately after provider provisioning, complete per-OS/package/update byte attribution, and evidence that public answers actually used old Knowledge before the root correction. The original policy-choice conversation, early Windows-copy requirement and initial Linux failure/recovery sequence are now linked.
+Whether public answers actually used old Knowledge before the root correction remains unconfirmed. The original policy-choice conversation, early Windows-copy requirement and initial Linux failure/recovery sequence are now linked.
 
 Code selections explain the mechanisms behind the constraints and results. Partial excerpts join declared ranges with one blank line, preserving original statements, identifiers and references. Original application references remain, including retention's ROOT and the tests' deploy.py import. Private Knowledge, question-bank text, credentials, access information, protected-setting contents, full operating commands and complete conversations remain private. New summaries publish counts/modes/results and original identifiers/hashes; literal operating paths and access data are omitted.
 
