@@ -180,3 +180,11 @@ Provider 계약·Factory·설정 선택을 분리해 Gemini·Cohere·Groq 변경
 검색 근거 누락과 생성 실패를 구분하고, 정상 Markdown을 parser에 맞춰 바꾸는 안을 거부했다. 청커를 일반적으로 수정했으며, 이후 lexical/hybrid 후보는 유효한 근거 손실로 미채택됐다.
 
 [전체 개발 기록 읽기](decisions/08-fix-the-chunker-not-the-documents.ko.md)
+
+## 09 — When Language Compliance Wasn't Enough
+
+**개발 날짜:** 2026-11-02.
+
+한국어 중심 RAG의 다국어 응답을 개선하려고 언어 분류·우선 문구 제거·지침 보강을 비교했다. 일부 언어 개선에도 내용·근거 분류·인용이 채택 기준을 함께 충족하지 못해 모든 후보를 폐기하고 기존 정책을 유지했다. 실험 후 관련 연구로 해석을 보강했으며, 관찰은 원본 삭제 후 대화에 남은 당시 보고 수준으로 기록한다.
+
+[전체 개발 기록 읽기](decisions/09-when-language-compliance-wasnt-enough.ko.md)

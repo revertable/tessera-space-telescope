@@ -1,6 +1,6 @@
 # 08 — Fix the Chunker, Not the Documents
 
-[All cases](../../README.md) · [한국어](08-fix-the-chunker-not-the-documents.ko.md) · [Previous: 07](07-knowledge-index-consistency-and-recoverable-deployment.md)
+[All cases](../../README.md) · [한국어](08-fix-the-chunker-not-the-documents.ko.md) · [Previous: 07](07-knowledge-index-consistency-and-recoverable-deployment.md) · [Next: 09](09-when-language-compliance-wasnt-enough.md)
 
 **Evidence:** Code confirmed identifies historical source; reported at the time retains recorded observation conditions; unconfirmed marks unresolved facts or causal links. Tests are historical source evidence. Times are KST (UTC+09:00); development events and evidence-inspection dates retain their own labels.
 

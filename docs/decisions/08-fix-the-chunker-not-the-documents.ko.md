@@ -1,6 +1,6 @@
 # 08 — Fix the Chunker, Not the Documents
 
-[전체 사례](../../README.ko.md) · [English](08-fix-the-chunker-not-the-documents.md) · [이전: 07](07-knowledge-index-consistency-and-recoverable-deployment.ko.md)
+[전체 사례](../../README.ko.md) · [English](08-fix-the-chunker-not-the-documents.md) · [이전: 07](07-knowledge-index-consistency-and-recoverable-deployment.ko.md) · [다음: 09](09-when-language-compliance-wasnt-enough.ko.md)
 
 **근거 수준:** 코드 확인은 식별한 과거 소스, 당시 보고는 기록된 조건의 관측, 미확인은 해결되지 않은 사실·인과관계를 뜻합니다. 테스트는 당시 소스 근거로 수록합니다. 시각은 KST(UTC+09:00)이며 개발 사건과 근거 검증 날짜를 구분합니다.
 

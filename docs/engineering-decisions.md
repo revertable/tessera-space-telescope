@@ -180,3 +180,11 @@ Limited Ubuntu disk space shaped a three-release retention choice. Deployment ti
 Retrieval diagnosis distinguished missing support from generation failures. The developer rejected reshaping normal Markdown around the parser, chose a general chunker correction, and later lexical/hybrid candidates remained unadopted after valid support was lost.
 
 [Read the full development record](decisions/08-fix-the-chunker-not-the-documents.md)
+
+## 09 — When Language Compliance Wasn't Enough
+
+**Development date:** 2026-11-02.
+
+Language classification, removal of a Korean-priority sentence and stronger instructions were compared to improve multilingual answers over a Korean-centered RAG knowledge base. Some language gains failed to preserve content, basis classification and citations together, so every candidate was discarded and the existing policy retained. Related research informed the retrospective interpretation; observations are recorded as contemporaneous conversation reports after the original artifacts were deleted.
+
+[Read the full development record](decisions/09-when-language-compliance-wasnt-enough.md)

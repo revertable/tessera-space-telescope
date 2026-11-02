@@ -30,6 +30,7 @@ Synethos 전체 소스는 비공개로 유지하며, Tessera에는 선택한 코
 | 06 | [Model Selection: Quality and Availability](docs/decisions/06-model-selection-quality-and-availability.ko.md) | 2026-09-26 ~ 2026-10-16 |
 | 07 | [Knowledge·Index 일관성과 복원 가능한 배포](docs/decisions/07-knowledge-index-consistency-and-recoverable-deployment.ko.md) | 2026-10-22 ~ 2026-10-26 |
 | 08 | [Fix the Chunker, Not the Documents](docs/decisions/08-fix-the-chunker-not-the-documents.ko.md) | 2026-09-29 ~ 2026-10-02 |
+| 09 | [When Language Compliance Wasn't Enough](docs/decisions/09-when-language-compliance-wasnt-enough.ko.md) | 2026-11-02 |
 
 ## Copyright
 

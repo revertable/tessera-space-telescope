@@ -30,6 +30,7 @@ Select a case for its problem, decision, implementation, verification and source
 | 06 | [Model Selection: Quality and Availability](docs/decisions/06-model-selection-quality-and-availability.md) | 2026-09-26 ~ 2026-10-16 |
 | 07 | [Knowledge–Index Consistency and Recoverable Deployment](docs/decisions/07-knowledge-index-consistency-and-recoverable-deployment.md) | 2026-10-22 ~ 2026-10-26 |
 | 08 | [Fix the Chunker, Not the Documents](docs/decisions/08-fix-the-chunker-not-the-documents.md) | 2026-09-29 ~ 2026-10-02 |
+| 09 | [When Language Compliance Wasn't Enough](docs/decisions/09-when-language-compliance-wasnt-enough.md) | 2026-11-02 |
 
 ## Copyright
 
