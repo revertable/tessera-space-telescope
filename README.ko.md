@@ -22,15 +22,15 @@ Synethos 전체 소스는 비공개로 유지하며, Tessera에는 선택한 코
 
 | 번호 | 사례 | 개발 날짜 |
 |---|---|---|
-| 01 | [From Local Qwen/Ollama Inference to the Gemini API](docs/decisions/01-local-inference-to-gemini.ko.md) | 2026-09-26 |
-| 02 | [From GitBook MCP to Local Knowledge](docs/decisions/02-gitbook-to-local-knowledge.ko.md) | 2026-09-26 ~ 2026-09-28 |
+| 01 | [로컬 Qwen/Ollama 추론에서 Gemini API로 전환](docs/decisions/01-local-inference-to-gemini.ko.md) | 2026-09-26 |
+| 02 | [GitBook MCP에서 로컬 지식베이스로 전환](docs/decisions/02-gitbook-to-local-knowledge.ko.md) | 2026-09-26 ~ 2026-09-28 |
 | 03 | [Cohere 도입·평가·제거](docs/decisions/03-cohere-evaluation-and-retirement.ko.md) | 2026-09-28 ~ 2026-10-17 |
-| 04 | [Provider 교체 설계와 Embedding 안정화](docs/decisions/04-provider-architecture-and-embedding-reliability.ko.md) | 2026-09-26 ~ 2026-10-17 |
-| 05 | [Cross-PC Index Portability](docs/decisions/05-cross-pc-index-portability.ko.md) | 2026-09-28 ~ 2026-10-26 |
-| 06 | [Model Selection: Quality and Availability](docs/decisions/06-model-selection-quality-and-availability.ko.md) | 2026-09-26 ~ 2026-10-16 |
-| 07 | [Knowledge·Index 일관성과 복원 가능한 배포](docs/decisions/07-knowledge-index-consistency-and-recoverable-deployment.ko.md) | 2026-10-22 ~ 2026-10-26 |
-| 08 | [Fix the Chunker, Not the Documents](docs/decisions/08-fix-the-chunker-not-the-documents.ko.md) | 2026-09-29 ~ 2026-10-02 |
-| 09 | [When Language Compliance Wasn't Enough](docs/decisions/09-when-language-compliance-wasnt-enough.ko.md) | 2026-11-02 |
+| 04 | [모델 제공자 교체 설계와 임베딩 안정화](docs/decisions/04-provider-architecture-and-embedding-reliability.ko.md) | 2026-09-26 ~ 2026-10-17 |
+| 05 | [PC 간 인덱스 이식성](docs/decisions/05-cross-pc-index-portability.ko.md) | 2026-09-28 ~ 2026-10-26 |
+| 06 | [품질과 가용성을 고려한 모델 선택](docs/decisions/06-model-selection-quality-and-availability.ko.md) | 2026-09-26 ~ 2026-10-16 |
+| 07 | [지식·인덱스 일관성과 복구 가능한 배포](docs/decisions/07-knowledge-index-consistency-and-recoverable-deployment.ko.md) | 2026-10-22 ~ 2026-10-26 |
+| 08 | [원본 문서를 보존하는 청커 개선](docs/decisions/08-fix-the-chunker-not-the-documents.ko.md) | 2026-09-29 ~ 2026-10-02 |
+| 09 | [답변 언어 준수만으로는 부족했던 이유](docs/decisions/09-when-language-compliance-wasnt-enough.ko.md) | 2026-11-02 |
 
 ## Copyright
 
